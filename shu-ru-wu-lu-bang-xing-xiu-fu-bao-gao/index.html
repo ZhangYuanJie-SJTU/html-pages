@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>输入物鲁棒性修复报告</title>
+<style>
+  :root {
+    --green: #16a34a; --green-bg: #f0fdf4; --green-border: #bbf7d0;
+    --blue: #2563eb; --blue-bg: #eff6ff;
+    --bg: #f8fafc; --card: #fff; --text: #1e293b; --text2: #64748b; --border: #e2e8f0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:24px; }
+  .container { max-width:1100px; margin:0 auto; }
+
+  .header { background:linear-gradient(135deg,#065f46,#047857); color:#fff; padding:28px 36px; border-radius:12px; margin-bottom:24px; }
+  .header h1 { font-size:22px; margin-bottom:6px; }
+  .header .sub { color:#a7f3d0; font-size:13px; }
+  .header .meta { display:flex; gap:20px; margin-top:12px; font-size:12px; color:#d1fae5; }
+
+  .summary { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+  .summary-card { background:var(--card); border-radius:10px; padding:18px 22px; border-left:4px solid var(--green); box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .summary-card .num { font-size:32px; font-weight:800; color:var(--green); }
+  .summary-card .lbl { font-size:12px; color:var(--text2); }
+
+  .fix-card { background:var(--card); border-radius:10px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,.06); border:1px solid var(--border); overflow:hidden; }
+  .fix-header { display:flex; align-items:center; padding:14px 20px; cursor:pointer; gap:10px; }
+  .fix-header:hover { background:var(--bg); }
+  .fix-id { display:inline-flex; align-items:center; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700; background:var(--green-bg); color:var(--green); border:1px solid var(--green-border); white-space:nowrap; }
+  .fix-title { flex:1; font-size:14px; font-weight:600; }
+  .fix-file { font-size:11px; color:var(--text2); font-family:"Cascadia Code","Consolas",monospace; }
+  .chevron { font-size:12px; color:var(--text2); transition:transform .2s; }
+  .fix-card.open .chevron { transform:rotate(90deg); }
+  .fix-body { display:none; padding:0 20px 20px; border-top:1px solid var(--border); }
+  .fix-card.open .fix-body { display:block; }
+
+  .section { margin-top:14px; }
+  .section-title { font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--text2); font-weight:600; margin-bottom:6px; }
+  .section-content { font-size:13px; }
+
+  .code-compare { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
+  .code-box { border-radius:8px; padding:12px 16px; font-family:"Cascadia Code","Fira Code","Consolas",monospace; font-size:11.5px; line-height:1.7; overflow-x:auto; white-space:pre-wrap; word-break:break-all; }
+  .code-before { background:#1e293b; color:#fca5a5; }
+  .code-after { background:#0f172a; color:#86efac; }
+  .code-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; display:block; }
+  .code-before .code-label { color:#f87171; }
+  .code-after .code-label { color:#4ade80; }
+
+  .benefit { background:var(--green-bg); border:1px solid var(--green-border); border-radius:8px; padding:10px 14px; font-size:13px; margin-top:8px; }
+
+  @media(max-width:768px) { .code-compare{grid-template-columns:1fr;} .summary{grid-template-columns:1fr;} body{padding:12px;} }
+
+  .footer { text-align:center; padding:20px; color:var(--text2); font-size:12px; margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>输入物鲁棒性修复报告</h1>
+  <div class="sub">CANoe 测试脚本自动生成流水线 &mdash; 输入物鲁棒性专项优化修复记录</div>
+  <div class="meta">
+    <span>修复日期: 2026-03-30</span>
+    <span>修复项: 9 / 23（用户审核选定）</span>
+    <span>涉及文件: 3</span>
+    <span>语法验证: 全部通过</span>
+  </div>
+</div>
+
+<div class="summary">
+  <div class="summary-card">
+    <div class="num">9</div>
+    <div class="lbl">修复项总计 (C1/C2/C3/H2/H5/M3/M7/M9/L1)</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">3</div>
+    <div class="lbl">涉及文件</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">0</div>
+    <div class="lbl">正常功能影响</div>
+  </div>
+</div>
+
+<!-- ===== C1 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">C1 Critical</span>
+    <span class="fix-title">input() 阻塞交互 &rarr; 自动检测软件阶段 (E2/E3)</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>MiSDB_Analysis_Tools/Scripts/SDB2Json_Tools/generate_CANMsgInfo.py</code> &mdash; <code>_read_CRR_Info()</code> 方法</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+episode = input("软件阶段(E2, E3): ").upper()
+while episode not in ["E2", "E3"]:
+    episode = input("软件阶段(E2, E3): ").upper()</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+json_files = [f for f in os.listdir(self._json_path)
+              if f.endswith(".json")]
+has_e3 = any(("MiETSDB" in f or "MiETDB" in f)
+             for f in json_files)
+has_e2 = any(("CRR" in f or "CRRRDB" in f)
+             for f in json_files)
+if has_e3:
+    episode = "E3"
+elif has_e2:
+    episode = "E2"
+else:
+    print("[警告] 未找到CRR/MiETSDB文件，跳过")
+    return
+print(f"[Info] 自动检测软件阶段: {episode}")</div>
+      </div>
+    </div>
+    <div class="benefit">自动扫描 03_DBC/ 目录中的 JSON 文件名来推断软件阶段，无需人工交互。E3 优先（更新版本）。CI/自动化场景下不再挂起。</div>
+  </div>
+</div>
+
+<!-- ===== C2 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">C2 Critical</span>
+    <span class="fix-title">CRR_path UnboundLocalError &rarr; 初始化 + 空值检查</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>_read_CRR_Info()</code> 方法 &mdash; CRR JSON 文件查找循环</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+for file in os.listdir(self._json_path):
+    if episode == 'E2':
+        if (...) and file.endswith(".json"):
+            CRR_path = self._json_path + file
+            break
+# CRR_path 可能未定义!
+with open(CRR_path, 'r', ...) as file:</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+CRR_path = None  # 初始化
+for file in os.listdir(self._json_path):
+    ...  # 同上逻辑
+if CRR_path is None:
+    print("[警告] 未找到匹配文件，跳过")
+    return
+with open(CRR_path, 'r', ...) as file:</div>
+      </div>
+    </div>
+    <div class="benefit">消除 UnboundLocalError 崩溃风险。当目录中无匹配文件时给出明确告警并安全跳过，而非让异常被外层 except 静默吞掉。</div>
+  </div>
+</div>
+
+<!-- ===== C3 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">C3 Critical</span>
+    <span class="fix-title">routing_table_path UnboundLocalError &rarr; 初始化 + 空值检查</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>Excel_reader._Read_CAN_CAN_RoutingTable()</code> &mdash; xlsx 文件查找循环</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+for file in os.listdir(self._Excel_path):
+    if file.__contains__("RoutingTable") ...:
+        routing_table_path = self._Excel_path + file
+        break
+# routing_table_path 可能未定义!
+RoutingExcel = load_workbook(routing_table_path)</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+routing_table_path = None  # 初始化
+for file in os.listdir(self._Excel_path):
+    ...  # 同上逻辑
+if routing_table_path is None:
+    print("[警告] 未找到RoutingTable xlsx，跳过")
+    return
+RoutingExcel = load_workbook(routing_table_path)</div>
+      </div>
+    </div>
+    <div class="benefit">与 C2 同模式修复。04_RoutingTable/ 中无匹配文件时安全退出，避免 UnboundLocalError。</div>
+  </div>
+</div>
+
+<!-- ===== H2 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">H2 High</span>
+    <span class="fix-title">send_type_map_nodbc 裸索引 &rarr; .get() 带 fallback</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>parse_NoDBCMsg_to_custom_json()</code> &mdash; 信号/报文发送类型映射（2 处）</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+# 信号级:
+"signal_send_type": signal_type_map_nodbc[
+    sig_original.get("signal_send_type", "")]
+# 报文级:
+"msg_send_type": send_type_map_nodbc[
+    msg_info["msg_send_type"]]
+# 未知枚举值 → KeyError!</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+# 信号级:
+"signal_send_type": signal_type_map_nodbc.get(
+    sig_original.get("signal_send_type", ""),
+    sig_original.get("signal_send_type", ""))
+# 报文级:
+"msg_send_type": send_type_map_nodbc.get(
+    msg_info.get("msg_send_type", ""),
+    msg_info.get("msg_send_type", ""))
+# 未知枚举值 → 保留原值透传</div>
+      </div>
+    </div>
+    <div class="benefit">新版本 SDB 引入新的发送类型枚举时不再崩溃。已知枚举正常映射，未知枚举保留原始值透传到下游，保证兼容性。</div>
+  </div>
+</div>
+
+<!-- ===== H5 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">H5 High</span>
+    <span class="fix-title">十六进制 ID 格式化统一 &rarr; f-string</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>_get_TxMsgID_Info()</code> &mdash; hex ID 生成</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+hex_id = '0x' + hex(decimal_id).upper().lstrip('0X')
+# lstrip 按字符集剥离，非前缀剥离!
+# hex(0) → '0X0' → lstrip('0X') → '' → '0x'
+# 与其他位置的 f"0x{id:X}" 格式不一致</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+hex_id = f"0x{decimal_id:X}"
+# 与 Get_ALL_Msg_channl (L362)
+# 和 parse_dbc_to_custom_json (L670) 一致
+# 所有 hex ID 使用统一格式</div>
+      </div>
+    </div>
+    <div class="benefit">消除 lstrip 字符集陷阱。三处 hex ID 生成逻辑完全统一，确保字典 key 匹配不再因格式差异丢失报文。</div>
+  </div>
+</div>
+
+<!-- ===== M3 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">M3 Medium</span>
+    <span class="fix-title">RoutingTable Sheet 名硬编码 &rarr; 模糊匹配 fallback（2 处）</span>
+    <span class="fix-file">generate_CANMsgInfo.py + generate_SignalRoute.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content">
+        &bull; <code>generate_CANMsgInfo.py</code> &mdash; <code>_Read_CAN_CAN_RoutingTable()</code><br>
+        &bull; <code>generate_SignalRoute.py</code> &mdash; <code>_parse_workbook()</code>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+worksheet = workbook["RoutingTable"]
+# Sheet 改名 → KeyError → 崩溃或静默为空</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+if "RoutingTable" in workbook.sheetnames:
+    worksheet = workbook["RoutingTable"]
+else:
+    matched = [s for s in workbook.sheetnames
+               if "routing" in s.lower()]
+    if matched:
+        worksheet = workbook[matched[0]]
+    else:
+        raise KeyError(f"未找到 RoutingTable，"
+                       f"可用: {workbook.sheetnames}")</div>
+      </div>
+    </div>
+    <div class="benefit">精确匹配优先，模糊匹配兜底。适应不同版本路由表 Sheet 命名（如 "Routing_Table"、"routingtable" 等），无匹配时给出可用 Sheet 列表的明确错误。</div>
+  </div>
+</div>
+
+<!-- ===== M7 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">M7 Medium</span>
+    <span class="fix-title">_read_MIRT_Info 重复调用 &rarr; 加载守卫 + MIRT_path 安全</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>Json_Reader._read_MIRT_Info()</code></div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+def _read_MIRT_Info(self):
+    # 无防重复机制，init 和 getter 各调一次
+    for file in os.listdir(...):
+        if ...:
+            MIRT_path = ...  # 可能未赋值
+            break
+    with open(MIRT_path, ...):  # UnboundLocalError</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+def _read_MIRT_Info(self):
+    if hasattr(self, '_mirt_loaded') and self._mirt_loaded:
+        return  # 加载守卫
+    MIRT_path = None  # 初始化
+    for file in os.listdir(...):
+        ...
+    if MIRT_path is None:
+        print("[警告] 未找到MIRT文件，跳过")
+        self._mirt_loaded = True
+        return
+    ...  # 正常加载
+    self._mirt_loaded = True  # 标记已加载</div>
+      </div>
+    </div>
+    <div class="benefit">三重防护：(1) 加载守卫防止 init + getter 双重调用的重复 I/O 和重复数据；(2) MIRT_path 初始化防止 UnboundLocalError；(3) 无文件时安全跳过。</div>
+  </div>
+</div>
+
+<!-- ===== M9 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">M9 Medium</span>
+    <span class="fix-title">signal_rawvalue_init 空串转换崩溃 &rarr; 安全转换</span>
+    <span class="fix-file">load_can_msg_info.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>Testcode_Generator/Scripts/Load_Tools/load_can_msg_info.py</code> &mdash; <code>_message_information_reconstruction()</code></div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+raw_init_val_str = sig_info.get(
+    "signal_rawvalue_init", "0")
+raw_init_val = hex(int(float(
+    raw_init_val_str))).upper()
+# "" → int(float("")) → ValueError!
+# "0xAB" → float("0xAB") → ValueError!</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+raw_init_val_str = sig_info.get(
+    "signal_rawvalue_init", "0")
+try:
+    if raw_init_val_str and \
+       str(raw_init_val_str).strip():
+        s = str(raw_init_val_str).strip()
+        if s.upper().startswith("0X"):
+            raw_init_val = s.upper()
+        else:
+            raw_init_val = hex(int(float(s))).upper()
+    else:
+        raw_init_val = "0X0"
+except (ValueError, OverflowError):
+    raw_init_val = "0X0"</div>
+      </div>
+    </div>
+    <div class="benefit">兼容三种输入：(1) 空串/None &rarr; 默认 0X0；(2) 已有十六进制字符串 &rarr; 直接保留；(3) 数字字符串 &rarr; 正常转换。异常时安全回退到 0X0。</div>
+  </div>
+</div>
+
+<!-- ===== L1 ===== -->
+<div class="fix-card">
+  <div class="fix-header" onclick="this.parentElement.classList.toggle('open')">
+    <span class="fix-id">L1 Low</span>
+    <span class="fix-title">移除无效 UnicodeDecodeError catch &rarr; 替换为通用 DBC 加载异常处理</span>
+    <span class="fix-file">generate_CANMsgInfo.py</span>
+    <span class="chevron">&#9654;</span>
+  </div>
+  <div class="fix-body">
+    <div class="section">
+      <div class="section-title">修复位置</div>
+      <div class="section-content"><code>parse_dbc_to_custom_json()</code> &mdash; DBC 文件加载 try-except 块</div>
+    </div>
+    <div class="section">
+      <div class="section-title">修复前 vs 修复后</div>
+      <div class="code-compare">
+        <div class="code-box code-before">
+<span class="code-label">Before</span>
+except UnicodeDecodeError:
+    # 兼容GBK编码的DBC文件
+    print("编码格式不正确")
+# cantools 内部处理编码，此 catch 永不触发
+# 注释误导：实际并未兼容 GBK</div>
+        <div class="code-box code-after">
+<span class="code-label">After</span>
+except Exception as dbc_e:
+    print(f"加载DBC文件 {file_name} 失败：{dbc_e}")
+    continue  # 跳过当前DBC，处理下一个
+# 移除不可达的 UnicodeDecodeError
+# 替换为通用异常，输出实际错误信息</div>
+      </div>
+    </div>
+    <div class="benefit">消除误导性代码。通用 except 替代不可达的 UnicodeDecodeError catch，确保 DBC 加载失败时有明确的文件名和错误信息输出，且不阻断其他 DBC 文件的处理。</div>
+  </div>
+</div>
+
+<!-- ===== 修改文件汇总 ===== -->
+<div style="background:var(--card); border-radius:10px; padding:20px 24px; margin-top:24px; box-shadow:0 1px 3px rgba(0,0,0,.06);">
+  <h3 style="font-size:15px; margin-bottom:12px;">修改文件汇总</h3>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <tr style="background:var(--bg); font-weight:600;">
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border);">文件</td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border);">修复项</td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border);">语法检查</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border); font-family:monospace; font-size:12px;">MiSDB_Analysis_Tools/Scripts/SDB2Json_Tools/<br><b>generate_CANMsgInfo.py</b></td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border);">C1, C2, C3, H2, H5, M3-b, M7, L1</td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">PASS</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border); font-family:monospace; font-size:12px;">MiSDB_Analysis_Tools/Scripts/SDB2Json_Tools/<br><b>generate_SignalRoute.py</b></td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border);">M3-a</td>
+      <td style="padding:8px 12px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">PASS</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 12px; font-family:monospace; font-size:12px;">Testcode_Generator/Scripts/Load_Tools/<br><b>load_can_msg_info.py</b></td>
+      <td style="padding:8px 12px;">M9</td>
+      <td style="padding:8px 12px; color:var(--green); font-weight:600;">PASS</td>
+    </tr>
+  </table>
+</div>
+
+<div class="footer">
+  输入物鲁棒性修复报告 &mdash; Generated by Claude Code &mdash; 2026-03-30
+</div>
+
+</div>
+
+<script>
+function toggleAll(open) {
+  document.querySelectorAll('.fix-card').forEach(c => {
+    open ? c.classList.add('open') : c.classList.remove('open');
+  });
+}
+</script>
+</body>
+</html>
