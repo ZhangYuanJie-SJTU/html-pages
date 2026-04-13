@@ -588,7 +588,7 @@ function svgR(v,c){const o=circ*(1-v/10);return`<div class="rad"><svg viewBox="0
 function sc(v){return v>=8.5?'hi':v>=7?'mi':'lo'}
 function fl(l){return{top:'公积金顶级',good:'公积金优秀',mid:'公积金中等',low:'公积金较差'}[l]||''}
 function fcl(l){return{top:'top',good:'good',mid:'mid',low:'low'}[l]||'mid'}
-function rc(r){return r<=1?'r1':r<=5?'r5':r<=12?'r12':r<=27?'r27':'r37'}
+function rc(t){return{sss:'r1',ss:'r5',s:'r12',a:'r27',b:'r37'}[t]||'r37'}
 function tc(t){return{sss:'#d4a843',ss:'#e05d28',s:'#d32f2f',a:'#1a6fc4',b:'#7b1fa2'}[t]||'#666'}
 
 const TM={
@@ -608,7 +608,7 @@ function card(c){
 
   return`<div class="cc" data-tier="${c.tier}" data-rank="${c.rank}">
 <div class="cc-h" onclick="tog(this)">
-  <div class="cc-rank ${rc(c.rank)}">${c.rank}</div>
+  <div class="cc-rank ${rc(c.tier)}">${c.rank}</div>
   <div class="cc-mid"><div class="cc-name">${c.name}</div><div class="cc-en">${c.en||''}</div></div>
   <div class="cc-right">
     ${svgR(c.score,col)}
