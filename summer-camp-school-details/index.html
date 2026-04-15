@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夏令营报名学校详情</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #f5f7fa; color: #333; padding: 20px; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 10px; color: #1a1a2e; font-size: 1.6em; }
+.meta { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.9em; }
+.meta a { color: #4a90d9; text-decoration: none; }
+.meta a:hover { text-decoration: underline; }
+.search-box { text-align: center; margin-bottom: 20px; }
+.search-box input { padding: 8px 16px; width: 300px; max-width: 80%; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; }
+.search-box input:focus { border-color: #4a90d9; box-shadow: 0 0 0 2px rgba(74,144,217,0.2); }
+.table-wrapper { overflow-x: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th { background: #4a90d9; color: #fff; padding: 12px 10px; text-align: left; white-space: nowrap; position: sticky; top: 0; }
+tbody td { padding: 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+tbody tr:hover { background: #f0f5ff; }
+tbody tr:nth-child(even) { background: #fafbfc; }
+tbody tr:nth-child(even):hover { background: #f0f5ff; }
+td a { color: #4a90d9; text-decoration: none; }
+td a:hover { text-decoration: underline; }
+.count { text-align: center; color: #888; margin-top: 10px; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>夏令营报名学校详情</h1>
+<div class="meta">共 59 条记录 | <a href="夏令营报名学校详情.xlsx" download>下载原始 Excel 文件</a></div>
+<div class="search-box"><input type="text" id="search" placeholder="搜索..." oninput="filterTable()"></div>
+<div class="table-wrapper">
+<table>
+<thead><tr>
+<th>层次</th>
+<th>学校</th>
+<th>学院</th>
+<th>学院官网</th>
+<th>主要实验室/研究团队</th>
+<th>特色研究方向</th>
+<th>代表性导师</th>
+<th>可报名数</th>
+<th>推荐类型</th>
+<th>联系老师要求</th>
+</tr></thead>
+<tbody id='tbody'>
+<tr><td>主冲</td><td>清华大学</td><td>信息科学技术学院</td><td><a href="https://www.sist.tsinghua.edu.cn" target="_blank">www.sist.tsinghua.edu.cn</a></td><td>人工智能研究院；智能技术与系统国家重点实验室；交叉信息研究院（姚班）；脑与认知科学研究中心</td><td>人工智能与机器学习；智能信息处理；计算机视觉；量子计算与信息</td><td>张钹（院士/AI理论）；姚期智（图灵奖/交叉信息）；孙富春（智能机器人）；朱军（概率机器学习）；唐杰（知识图谱）</td><td>3</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td>北京大学</td><td>信息科学技术学院</td><td><a href="https://www.ece.pku.edu.cn" target="_blank">www.ece.pku.edu.cn</a></td><td>机器感知与智能教育部重点实验室；高可信软件技术教育部重点实验室；数字媒体研究所</td><td>人工智能与机器学习；计算机视觉；智能感知；数字媒体技术</td><td>黄铁军（计算机视觉/视频编码）；查红彬（智能感知）；邓小铁（多智能体）；谢涛（软件工程）</td><td>2</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td></td><td>工学院</td><td><a href="https://www.coe.pku.edu.cn" target="_blank">www.coe.pku.edu.cn</a></td><td>力学与工程科学系；先进制造与机器人研究所</td><td>先进制造；机器人技术；力学仿真</td><td>段慧玲（力学）；王启宁（机器人）</td><td>2</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td>上海交通大学</td><td>自动化与感知学院</td><td><a href="https://sais.sjtu.edu.cn" target="_blank">sais.sjtu.edu.cn</a></td><td>系统控制与信息处理研究所；智能机器人研究中心；导航与控制实验室；感知科学实验室</td><td>智能感知与控制；机器人导航SLAM；计算机视觉；强化学习；智能驾驶</td><td>杨明（智能驾驶）；张伟楠（强化学习）；严骏驰（机器学习）；王贺升（视觉伺服）</td><td>1</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td></td><td>密西根学院</td><td><a href="https://www.ji.sjtu.edu.cn" target="_blank">www.ji.sjtu.edu.cn</a></td><td>联合研究中心；先进制造与机器人实验室</td><td>机械电子工程；数据科学；人机交互</td><td>李冕（数据科学）</td><td>1</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td>浙江大学</td><td>控制科学与工程学院</td><td><a href="http://www.cse.zju.edu.cn" target="_blank">www.cse.zju.edu.cn</a></td><td>工业控制技术国家重点实验室；智能系统与控制研究所；机器人研究中心</td><td>工业控制与自动化；智能系统；机器人技术；流程工业优化</td><td>孙优贤（院士/工业控制）；吴飞（人工智能）；熊蓉（机器人）；杨春节（过程控制）</td><td>1</td><td>直博/硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>海洋学院</td><td><a href="https://oce.zju.edu.cn" target="_blank">oce.zju.edu.cn</a></td><td>海洋传感与网络技术研究所</td><td>海洋传感技术；水下机器人</td><td>陈鹰（海洋技术）</td><td>1</td><td>直博/硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>航空航天学院</td><td><a href="https://saa.zju.edu.cn" target="_blank">saa.zju.edu.cn</a></td><td>飞行器设计与控制研究所</td><td>飞行器控制；无人机系统</td><td>邵雪明（流体力学）</td><td>1</td><td>直博/硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>生物医学工程与仪器科学学院</td><td><a href="http://bmei.zju.edu.cn" target="_blank">bmei.zju.edu.cn</a></td><td>生物医学工程研究所；智能医疗仪器实验室</td><td>医学影像；智能医疗仪器；脑机接口</td><td>刘华锋（医学影像）</td><td>1</td><td>直博/硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>工程师学院</td><td><a href="https://pi.zju.edu.cn" target="_blank">pi.zju.edu.cn</a></td><td>专业学位研究生联合培养基地</td><td>工程实践；智能制造</td><td>杨华勇（院士/智能制造装备）；罗仕鉴（教授/智能设计）</td><td>1</td><td>直博/硕士</td><td>都需要</td></tr>
+<tr><td></td><td>复旦大学</td><td>机器人与先进制造创新学院</td><td><a href="https://robotics.fudan.edu.cn" target="_blank">robotics.fudan.edu.cn</a></td><td>智能机器人实验室；先进制造研究中心</td><td>智能机器人；先进制造；人机交互</td><td>张文强（智能机器人）；甘中学（智能制造）</td><td>1</td><td>直博/硕士</td><td>直博</td></tr>
+<tr><td></td><td></td><td>生物医学工程创新学院</td><td><a href="https://biomedical.fudan.edu.cn" target="_blank">biomedical.fudan.edu.cn</a></td><td>医学影像与智能诊疗实验室</td><td>医学影像处理；智能诊疗系统</td><td>宋志坚（医学影像）</td><td>1</td><td>直博/硕士</td><td>直博</td></tr>
+<tr><td></td><td>南京大学</td><td>机器人与自动化学院</td><td><a href="https://robot.nju.edu.cn" target="_blank">robot.nju.edu.cn</a></td><td>智能机器人实验室；机器学习与控制实验室</td><td>智能机器人；机器学习；智能控制</td><td>周志华（机器学习先驱）；高阳（强化学习）；李武军（数据挖掘）</td><td>2</td><td>直博</td><td>直博</td></tr>
+<tr><td></td><td>中科院</td><td>自动化研究所</td><td><a href="http://www.ia.ac.cn" target="_blank">www.ia.ac.cn</a></td><td>模式识别国家重点实验室；复杂系统管理与控制国家重点实验室；多模态人工智能系统全国重点实验室</td><td>模式识别与计算机视觉；智能控制与机器人；自然语言处理；脑科学与类脑智能</td><td>刘成林（模式识别）；宗成庆（NLP）；王亮（计算机视觉）；曾毅（类脑智能）</td><td>1</td><td>直博/硕士</td><td>直博</td></tr>
+<tr><td></td><td>中国人民大学</td><td>高瓴人工智能学院</td><td><a href="https://ai.ruc.edu.cn" target="_blank">ai.ruc.edu.cn</a></td><td>智能信息检索实验室；大规模语言模型实验室；计算机视觉实验室</td><td>信息检索与推荐；大规模语言模型；计算机视觉；知识图谱</td><td>文继荣（信息检索）；窦志成（推荐系统）；赵鑫（NLP）；卢志武（多模态）</td><td>1</td><td>硕士</td><td>直博</td></tr>
+<tr><td>主申</td><td>北京航空航天大学</td><td>自动化科学与电气工程学院</td><td><a href="https://dept3.buaa.edu.cn" target="_blank">dept3.buaa.edu.cn</a></td><td>飞行器控制一体化国防重点实验室；智能感知与控制实验室</td><td>飞行器控制与导航；智能感知；无人机自主控制</td><td>段海滨（无人机集群）；郭雷（控制理论）；任章（导航制导）</td><td>不限制</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td></td><td>仪器科学与光电工程学院</td><td><a href="https://instrument.buaa.edu.cn" target="_blank">instrument.buaa.edu.cn</a></td><td>惯性技术国防科技重点实验室；精密光电测试技术实验室</td><td>惯性导航；精密测量；光电检测</td><td>房建成（院士/惯性导航）；郑德智（精密仪器）</td><td>不限制</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>中国科学技术大学</td><td>信息科学技术学院</td><td><a href="https://sist.ustc.edu.cn" target="_blank">sist.ustc.edu.cn</a></td><td>语音及语言信息处理国家工程实验室；类脑智能技术及应用国家工程实验室</td><td>语音识别与合成；类脑计算；计算机视觉</td><td>陈恩红（数据挖掘）；吴枫（视频编码）；李卫平（计算机视觉）</td><td>2</td><td>硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>先进技术研究院</td><td><a href="https://iat.ustc.edu.cn" target="_blank">iat.ustc.edu.cn</a></td><td>先进机器人应用工程技术中心；智能制造研究所</td><td>智能制造；机器人定位导航；视觉伺服控制</td><td>张世武（教授/机器人）；夏海生（副教授/机器人）；吉建民（自动驾驶/强化学习）</td><td>2</td><td>硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>工程科学学院</td><td><a href="https://ess.ustc.edu.cn" target="_blank">ess.ustc.edu.cn</a></td><td>精密机械与精密仪器系</td><td>精密仪器；力学；微纳制造</td><td>李家文（教授/精密仪器）；刘之光（特任教授/微纳制造）；田超（教授/精密测量）</td><td>2</td><td>硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>苏州生物医学工程研究所</td><td><a href="https://bmei.ustc.edu.cn" target="_blank">bmei.ustc.edu.cn</a></td><td>生物医学工程研究中心</td><td>医学影像；生物传感；智能诊疗</td><td>——（导师信息见学院官网师资页面）</td><td>2</td><td>硕士</td><td>都需要</td></tr>
+<tr><td></td><td></td><td>科学岛（中科院合肥物质研究院）</td><td><a href="https://www.hfcas.ac.cn" target="_blank">www.hfcas.ac.cn</a></td><td>智能机械研究所；等离子体物理研究所</td><td>智能机械；核聚变控制</td><td>刘文清（环境光学）</td><td>2</td><td>硕士</td><td>都需要</td></tr>
+<tr><td></td><td>哈尔滨工业大学</td><td>电气工程及自动化学院</td><td><a href="https://hitee.hit.edu.cn" target="_blank">hitee.hit.edu.cn</a></td><td>空间控制与惯性技术研究中心；微纳机器人实验室</td><td>空间机器人；惯性导航；电力电子；微纳机器人</td><td>刘宏（院士/空间机器人）；赵杰（机器人）；孙立宁（微纳机器人）</td><td>1</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>西安交通大学</td><td>自动化科学与工程学院</td><td><a href="http://automation.xjtu.edu.cn" target="_blank">automation.xjtu.edu.cn</a></td><td>机械制造系统工程国家重点实验室（联合）；智能网络与网络安全教育部重点实验室</td><td>智能制造与控制；网络化控制系统；计算机视觉</td><td>郑南宁（院士/人工智能）；管晓宏（院士/网络控制）；薛建儒（计算机视觉）</td><td>3</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td></td><td>仪器科学与技术学院</td><td><a href="https://inst.xjtu.edu.cn" target="_blank">inst.xjtu.edu.cn</a></td><td>精密工程研究所；微纳制造与测试技术研究所</td><td>精密测量；微纳制造；智能仪器</td><td>蒋庄德（院士/精密工程）</td><td>3</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>同济大学</td><td>电子与信息工程学院</td><td><a href="https://see.tongji.edu.cn" target="_blank">see.tongji.edu.cn</a></td><td>嵌入式系统与服务计算教育部重点实验室；智能机器人实验室</td><td>智能系统；嵌入式系统；机器人技术；智慧城市</td><td>陈杰（院士/智能控制）；何斌（机器人）</td><td>1</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>东南大学</td><td>自动化学院</td><td><a href="https://automation.seu.edu.cn" target="_blank">automation.seu.edu.cn</a></td><td>复杂工程系统测量与控制教育部重点实验室；机器人与智能系统研究所</td><td>复杂系统控制；机器人技术；智能优化</td><td>戴先中（控制理论）；费树岷（智能控制）</td><td>1</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>华中科技大学</td><td>人工智能与自动化学院</td><td><a href="https://aia.hust.edu.cn" target="_blank">aia.hust.edu.cn</a></td><td>图像信息处理与智能控制教育部重点实验室；智能机器人研究所</td><td>图像处理与计算机视觉；智能控制与机器人；电力电子与运动控制</td><td>丁汉（院士/智能制造）；曾志刚（智能系统）；黄心汉（机器人传感）</td><td>1</td><td>硕士</td><td>弱com</td></tr>
+<tr><td></td><td>北京理工大学</td><td>自动化学院</td><td><a href="https://ac.bit.edu.cn" target="_blank">ac.bit.edu.cn</a></td><td>复杂系统智能控制与决策国家重点实验室；智能机器人研究所</td><td>智能控制与决策；机器人技术；导航制导</td><td>付梦印（导航制导）；夏元清（控制理论）；王美玲（智能控制）</td><td>1</td><td>硕士</td><td>弱com</td></tr>
+<tr><td></td><td>武汉大学</td><td>机器人学院</td><td><a href="https://www.whu.edu.cn" target="_blank">www.whu.edu.cn</a></td><td>智能机器人实验室；无人系统研究所（依托武汉大学信息学部）</td><td>智能机器人；无人系统；计算机视觉</td><td>肖晓晖（执行院长/教授/博导）；郭迟（教授/无人系统智能导航）</td><td>1</td><td>硕士</td><td>直博</td></tr>
+<tr><td></td><td>国防科技大学</td><td>智能科学学院</td><td><a href="https://www.nudt.edu.cn" target="_blank">www.nudt.edu.cn</a></td><td>智能无人系统研究所；并行与分布式处理国家重点实验室</td><td>智能无人系统；并行计算；军事智能</td><td>吴曼青（院士/雷达）；王怀民（分布式计算）</td><td>不限制</td><td>硕士</td><td>强com</td></tr>
+<tr><td></td><td></td><td>电子科学学院</td><td><a href="https://www.nudt.edu.cn" target="_blank">www.nudt.edu.cn</a></td><td>电磁兼容实验室</td><td>电磁工程；微波技术</td><td>刘康（教授/SAR成像）；雷菁（教授/信号处理）</td><td>不限制</td><td>硕士</td><td>强com</td></tr>
+<tr><td></td><td></td><td>计算机学院</td><td><a href="https://cs.nudt.edu.cn" target="_blank">cs.nudt.edu.cn</a></td><td>天河超算中心</td><td>高性能计算；大数据</td><td>刘杰（研究员/天河超算副总师）；王挺（教授/计算机软件）</td><td>不限制</td><td>硕士</td><td>强com</td></tr>
+<tr><td>主稳</td><td>中国科学院大学</td><td>未来技术学院</td><td><a href="https://futuretech.ucas.ac.cn" target="_blank">futuretech.ucas.ac.cn</a></td><td>人工智能与机器人实验室；脑科学与智能技术实验室</td><td>人工智能；脑科学；智能机器人；合成生物学</td><td>徐波（智能信息处理）</td><td>1</td><td>硕士</td><td>弱com</td></tr>
+<tr><td></td><td>中国科学院</td><td>沈阳自动化研究所</td><td><a href="http://www.sia.cn" target="_blank">www.sia.cn</a></td><td>机器人学国家重点实验室；工业信息学重点实验室</td><td>工业机器人；水下机器人；智能制造；空间机器人</td><td>于海斌（工业控制）；李斌（水下机器人）；韩建达（康复机器人）</td><td>1</td><td>硕士</td><td>强com</td></tr>
+<tr><td></td><td>中山大学</td><td>系统科学与工程学院</td><td><a href="https://systemse.sysu.edu.cn" target="_blank">systemse.sysu.edu.cn</a></td><td>智能系统与控制实验室；数据科学研究所</td><td>智能系统；数据科学；复杂网络；控制理论</td><td>陈俊龙（智能系统）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>天津大学</td><td>电气自动化与信息工程学院</td><td><a href="https://eaie.tju.edu.cn" target="_blank">eaie.tju.edu.cn</a></td><td>电气工程研究所；智能电网教育部重点实验室</td><td>电气工程；智能电网；自动化控制</td><td>余贻鑫（院士/电力系统）；王成山（院士/配电系统）</td><td>1</td><td>硕士</td><td>导师团</td></tr>
+<tr><td></td><td>电子科技大学</td><td>自动化工程学院</td><td><a href="https://www.auto.uestc.edu.cn" target="_blank">www.auto.uestc.edu.cn</a></td><td>智能感知与控制实验室；测量与控制技术研究所</td><td>智能感知；测控技术；机器人</td><td>田书林（测控技术）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>西北工业大学</td><td>自动化学院</td><td><a href="https://zdhxy.nwpu.edu.cn" target="_blank">zdhxy.nwpu.edu.cn</a></td><td>飞行控制与仿真技术国防重点学科实验室；智能感知与控制实验室</td><td>飞行控制；无人机自主控制；导航制导</td><td>潘泉（飞行控制）；史忠科（交通控制）</td><td>1</td><td>硕士</td><td>弱com</td></tr>
+<tr><td></td><td>四川大学</td><td>电气工程学院</td><td><a href="https://ee.scu.edu.cn" target="_blank">ee.scu.edu.cn</a></td><td>智能电网四川省重点实验室；电气工程研究所</td><td>智能电网；电气工程；电力电子</td><td>刘俊勇（电力系统）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>大连理工大学</td><td>控制科学与工程学院</td><td><a href="https://scse.dlut.edu.cn" target="_blank">scse.dlut.edu.cn</a></td><td>工业装备与控制技术教育部重点实验室；智能控制与优化研究所</td><td>过程控制；智能优化；工业自动化</td><td>邵诚（过程控制）；韩敏（智能控制）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>中南大学</td><td>自动化学院</td><td><a href="https://soa.csu.edu.cn" target="_blank">soa.csu.edu.cn</a></td><td>智能控制与优化研究所；复杂系统控制实验室</td><td>复杂系统控制；智能优化；冶金自动化</td><td>桂卫华（院士/有色冶金自动化）；阳春华（过程控制）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>厦门大学</td><td>信息学院</td><td><a href="https://informatics.xmu.edu.cn" target="_blank">informatics.xmu.edu.cn</a></td><td>智能科学与技术系；多媒体可信感知与高效计算教育部重点实验室</td><td>计算机视觉；多媒体处理；智能信息处理</td><td>纪荣嵘（计算机视觉）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td></td><td>人工智能研究院</td><td><a href="https://iai.xmu.edu.cn" target="_blank">iai.xmu.edu.cn</a></td><td>计算机视觉团队；机器学习与智能信息处理实验室</td><td>计算机视觉；机器学习；空间感知与计算</td><td>王程（教授/空间感知）；丁兴号（教授/机器学习）；肖亮（教授）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>华南理工大学</td><td>自动化科学与工程学院</td><td><a href="https://www2.scut.edu.cn/automation/" target="_blank">www2.scut.edu.cn/automation</a></td><td>精密电子制造技术与装备教育部重点实验室；智能系统与控制研究所</td><td>精密电子制造；智能控制；机器视觉；机器人</td><td>李迪（精密制造）；胡跃明（智能控制）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>山东大学</td><td>控制科学与工程学院</td><td><a href="https://control.sdu.edu.cn" target="_blank">control.sdu.edu.cn</a></td><td>工程系统控制实验室；智能系统与控制研究所</td><td>智能控制；机器人；过程控制</td><td>张承慧（控制理论）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>吉林大学</td><td>卓越工程师学院</td><td><a href="https://ze.jlu.edu.cn" target="_blank">ze.jlu.edu.cn</a></td><td>工程实践与创新中心；校企联合培养</td><td>工程实践；智能制造</td><td>——（联合培养模式，导师由合作企业与学院双聘）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td></td><td>电子科学与工程学院</td><td><a href="https://ese.jlu.edu.cn" target="_blank">ese.jlu.edu.cn</a></td><td>集成光电子学国家重点实验室</td><td>光电子学；微纳器件；气体传感器</td><td>卢革宇（教授/气体传感器）；刘凤敏（教授/半导体材料）；冯晶（教授/微电子）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>重庆大学</td><td>机械工程学院</td><td><a href="https://me.cqu.edu.cn" target="_blank">me.cqu.edu.cn</a></td><td>机械传动国家重点实验室；机器人与智能制造研究所</td><td>机器人；智能制造；机械传动</td><td>王时龙（智能制造）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td></td><td>电气工程学院</td><td><a href="https://ee.cqu.edu.cn" target="_blank">ee.cqu.edu.cn</a></td><td>输配电装备及系统安全与新技术国家重点实验室</td><td>电力系统；高压绝缘；电机控制</td><td>廖瑞金（院士/高电压）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>湖南大学</td><td>电气与信息工程学院</td><td><a href="https://eeit.hnu.edu.cn" target="_blank">eeit.hnu.edu.cn</a></td><td>电能高效高质转化全国重点实验室</td><td>电力电子；电机控制；智能电网</td><td>罗安（院士/电能变换）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td></td><td>人工智能与机器人学院</td><td><a href="https://air.hnu.edu.cn" target="_blank">air.hnu.edu.cn</a></td><td>机器人视觉感知与控制技术国家工程研究中心</td><td>机器人视觉；智能控制；自动驾驶</td><td>王耀南（院士/机器人视觉）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td>保底</td><td>东北大学</td><td>控制科学与工程学院</td><td><a href="http://www.neu.edu.cn/ise/" target="_blank">www.neu.edu.cn/ise</a></td><td>流程工业综合自动化国家重点实验室</td><td>流程工业自动化；复杂系统优化；智能控制</td><td>柴天佑（院士/流程工业自动化）；唐立新（优化调度）</td><td>1</td><td>硕士</td><td>可以联系</td></tr>
+<tr><td></td><td>西安电子科技大学</td><td>机电工程学院</td><td><a href="https://see.xidian.edu.cn" target="_blank">see.xidian.edu.cn</a></td><td>电子装备结构设计教育部重点实验室；智能机器人实验室</td><td>电子装备设计；机器人技术；智能控制</td><td>段宝岩（院士/电子装备）</td><td></td><td>硕士</td><td></td></tr>
+<tr><td></td><td>南方科技大学</td><td>卓越工程师学院</td><td><a href="https://cee.sustech.edu.cn" target="_blank">cee.sustech.edu.cn</a></td><td>半导体学院；新材料与信息技术实验室</td><td>半导体；新材料；智能制造</td><td>张浩（教授/半导体）；陈志华（教授）；刘志权（教授/半导体）</td><td></td><td>硕士</td><td></td></tr>
+<tr><td></td><td></td><td>电子与电气工程系</td><td><a href="https://eee.sustech.edu.cn" target="_blank">eee.sustech.edu.cn</a></td><td>智能感知与计算实验室</td><td>智能感知；信号处理；微波与天线</td><td>陈锐（教授）；丛龙庆（副教授/微波）</td><td></td><td>硕士</td><td></td></tr>
+<tr><td></td><td>南京航空航天大学</td><td>自动化学院</td><td><a href="https://cae.nuaa.edu.cn" target="_blank">cae.nuaa.edu.cn</a></td><td>飞行器自主控制技术国防重点学科实验室；智能系统与控制研究所</td><td>飞行器控制；无人机自主控制；智能系统</td><td>姜斌（飞行控制）；杨忠（无人机）</td><td></td><td>硕士</td><td></td></tr>
+<tr><td></td><td>南京理工大学</td><td>自动化学院</td><td><a href="https://au.njust.edu.cn" target="_blank">au.njust.edu.cn</a></td><td>智能弹药技术国防重点学科实验室；先进机器人技术研究所</td><td>智能弹药；机器人技术；控制理论</td><td>刘明雍（导航控制）</td><td></td><td>硕士</td><td></td></tr>
+<tr><td></td><td>北京科技大学</td><td>自动化学院</td><td><a href="https://saee.ustb.edu.cn" target="_blank">saee.ustb.edu.cn</a></td><td>工业过程知识自动化教育部重点实验室；智能控制实验室</td><td>工业自动化；智能控制；冶金过程控制</td><td>张朝晖（教授/博导）；肖文栋（教授/博导）；杨旭（教授/博导）</td><td></td><td>硕士</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<div class="count" id="count"></div>
+</div>
+<script>
+function filterTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const rows = document.querySelectorAll('#tbody tr');
+  let shown = 0;
+  rows.forEach(r => {
+    const match = r.textContent.toLowerCase().includes(q);
+    r.style.display = match ? '' : 'none';
+    if (match) shown++;
+  });
+  document.getElementById('count').textContent = q ? `显示 ${shown} / ${rows.length} 条` : '';
+}
+</script>
+</body>
+</html>
