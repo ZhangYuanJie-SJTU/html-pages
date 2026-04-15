@@ -577,24 +577,70 @@ function shareIt(){
 }
 function toast(m){const o=document.querySelector('.toast');if(o)o.remove();const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3000)}
 
+let chatHist=[]; // 后端对话历史
+let hasBackend=null; // null=未知, true=有, false=无
+
 function send(){
   const inp=document.getElementById('chatIn'),msg=inp.value.trim();if(!msg)return;
   inp.value='';
   const ch=document.getElementById('chips');if(ch)ch.style.display='none';
-  // 移除之前的建议
   const oldSug=document.querySelector('.suggestions');if(oldSug)oldSug.remove();
   addMsg(msg,'user','chatBox');
   chatContext.push(msg);
   const ld=addLd('chatBox');
-  const delay=300+Math.random()*500;
-  setTimeout(()=>{
-    ld.remove();
-    const answer=findAnswer(msg);
-    addMsg(answer,'ai','chatBox');
-    // 自动生成后续建议
-    const sugs=genSuggestions(msg,answer);
-    if(sugs.length)addSuggestions(sugs);
-  },delay);
+
+  // 尝试后端API
+  if(hasBackend!==false){
+    fetch('/api/search',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:msg,history:chatHist})
+    })
+    .then(r=>r.json())
+    .then(data=>{
+      ld.remove();
+      if(data.success){
+        hasBackend=true;
+        chatHist=data.history||[];
+        const answer=data.reply;
+        addMsg(answer,'ai','chatBox');
+        if(data.searched)addSearchBadge();
+        const sugs=genSuggestions(msg,answer);
+        if(sugs.length)addSuggestions(sugs);
+      }else{throw new Error('api fail')}
+    })
+    .catch(()=>{
+      ld.remove();
+      hasBackend=false;
+      fallbackReply(msg,ld);
+    });
+  }else{
+    // 已知无后端，直接用本地
+    setTimeout(()=>{ld.remove();fallbackReply(msg,ld)},400+Math.random()*400);
+  }
+}
+
+function fallbackReply(msg,ld){
+  const answer=findAnswer(msg);
+  addMsg(answer,'ai','chatBox');
+  const sugs=genSuggestions(msg,answer);
+  if(sugs.length)addSuggestions(sugs);
+}
+
+function addSearchBadge(){
+  // 在最后一条AI消息加搜索标记
+  const msgs=document.querySelectorAll('#chatBox .msg:not(.user)');
+  const last=msgs[msgs.length-1];
+  if(last){
+    const bub=last.querySelector('.bub');
+    if(bub&&!bub.querySelector('.search-tag')){
+      const tag=document.createElement('div');
+      tag.className='search-tag';
+      tag.style.cssText='display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.68rem;color:var(--green);background:rgba(46,204,113,0.08);padding:2px 8px;margin-bottom:6px;border:1px solid rgba(46,204,113,0.2)';
+      tag.textContent='AI + 联网搜索';
+      bub.insertBefore(tag,bub.firstChild);
+    }
+  }
 }
 function ask(el){
   document.getElementById('chatIn').value=el.textContent;send();
