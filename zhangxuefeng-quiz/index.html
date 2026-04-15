@@ -849,6 +849,10 @@ function shareResult(){
   else if(navigator.clipboard)navigator.clipboard.writeText(text+'\n'+location.href).then(()=>toast('结果已复制'));
   else toast('请手动复制链接分享');
 }
+
+// ── 心跳（关浏览器自动关服务器）───────────────
+setInterval(()=>{fetch('/api/heartbeat',{method:'POST'}).catch(()=>{})},10000);
+
 </script>
 </body>
 </html>
