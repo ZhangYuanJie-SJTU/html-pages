@@ -246,7 +246,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
   <!-- DATA -->
   <div class="panel" id="pData">
     <div class="dsearch">
-      <input type="text" id="dIn" placeholder="搜索专业：计算机、金融、临床..." onkeydown="if(event.key==='Enter')searchD()">
+      <input type="text" id="dIn" placeholder="搜索专业：计算机、金融、临床..." list="majorList" onkeydown="if(event.key==='Enter')searchD()">
+      <datalist id="majorList"></datalist>
       <button onclick="searchD()">SEARCH</button>
     </div>
     <div id="dCon"><div style="text-align:center;padding:36px;color:var(--text-dim);font-family:var(--mono);font-size:.78rem">LOADING DATABASE...</div></div>
@@ -664,6 +665,11 @@ function addLd(boxId){
 
 // ── Data DB渲染 ──────────────────────────────────
 function renderDB(filter){
+  // 填充搜索补全
+  const dl=document.getElementById('majorList');
+  if(dl&&!dl.children.length){
+    Object.keys(DB).forEach(n=>{const o=document.createElement('option');o.value=n;dl.appendChild(o)});
+  }
   const el=document.getElementById('dCon');
   let cats={};
   for(let[name,info]of Object.entries(DB)){
@@ -733,12 +739,47 @@ function pick(btn,idx){
   if(aRound>=aTotal){
     setTimeout(()=>{
       const recs=recommend(aAnswers);
-      let html='<div class="msg"><div class="av ai">峰</div><div class="bub">行，8道题做完了。我给你<strong>捋清楚</strong>——</div></div>';
-      html+='<div class="rec-grid">';
-      recs.forEach(r=>{
-        html+=`<div class="rec-card"><div class="rs">${r.score}/10</div><div class="rm">${r.major}</div><div class="rr">${r.reason}</div></div>`;
+      // 生成性格标签
+      const profiles=["务实派","理想派","稳健派","冒险家","技术控","社交达人","学术型","创业型"];
+      const profileIdx=aAnswers.reduce((s,c)=>s+"ABCD".indexOf(c),0)%profiles.length;
+      const profile=profiles[profileIdx];
+      // 生成雷达图数据
+      const dims=["理工倾向","人文倾向","经济条件","求稳程度","考研意愿","高薪追求","城市优先","兴趣驱动"];
+      const dimScores=aAnswers.map((a,i)=>({name:dims[i],score:["ABCD".indexOf(a)]}));
+
+      let html=`<div class="msg"><div class="av ai">峰</div><div class="bub">行，8道题做完了。你属于<strong>"${profile}"</strong>——</div></div>`;
+
+      // 结果卡片
+      html+='<div style="background:var(--bg2);border:1px solid var(--yellow);padding:20px;margin:10px 0;animation:up .5s ease-out">';
+      html+=`<div style="font-family:var(--mono);font-size:.72rem;color:var(--yellow);letter-spacing:2px;margin-bottom:12px">YOUR PROFILE: ${profile.toUpperCase()}</div>`;
+
+      // 答题可视化
+      html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px">';
+      aAnswers.forEach((a,i)=>{
+        const labels=['科目偏好','个人优势','家庭条件','工作环境','读研意愿','方向选择','择校标准','收入预期'];
+        const colors={A:'var(--yellow)',B:'var(--blue)',C:'var(--green)',D:'var(--orange)'};
+        html+=`<div style="font-size:.75rem;color:var(--text-dim)">${labels[i]}: <span style="color:${colors[a]};font-weight:700">${a}</span></div>`;
       });
-      html+='</div><br><button class="send-btn" onclick="location.reload()" style="width:100%">RESTART</button>';
+      html+='</div>';
+
+      html+='<div style="border-top:1px solid var(--steel);padding-top:14px">';
+      html+='<div style="font-family:var(--mono);font-size:.72rem;color:var(--yellow);letter-spacing:2px;margin-bottom:10px">RECOMMENDED</div>';
+      recs.forEach((r,i)=>{
+        const barW=r.score*10;
+        html+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-weight:700;color:var(--text-bright)">${i+1}. ${r.major}</span><span style="font-family:var(--mono);color:var(--yellow)">${r.score}/10</span></div>`;
+        html+=`<div style="background:var(--steel);height:4px;border-radius:2px;margin-bottom:4px"><div style="background:var(--yellow);height:4px;border-radius:2px;width:${barW}%;transition:width .8s"></div></div>`;
+        html+=`<div style="font-size:.78rem;color:var(--text-dim);line-height:1.5">${r.reason}</div></div>`;
+      });
+      html+='</div>';
+
+      // 操作按钮
+      html+='<div style="display:flex;gap:8px;margin-top:12px">';
+      html+='<button class="send-btn" onclick="location.reload()" style="flex:1">RESTART</button>';
+      html+='<button class="send-btn" onclick="shareResult()" style="flex:1;background:var(--steel);border:1px solid var(--yellow);color:var(--yellow)">SHARE</button>';
+      html+='</div>';
+
+      html+='</div>';
+
       const wrap=document.createElement('div');wrap.style.animation='up .5s ease-out';wrap.innerHTML=html;
       document.getElementById('assChat').appendChild(wrap);
       wrap.scrollIntoView({behavior:'smooth',block:'end'});
@@ -755,6 +796,12 @@ function updateUI(){
 }
 
 // ── Init ────────────────────────────────────────
+function shareResult(){
+  const text='我在张雪峰智能志愿百科做了职业测评，推荐专业：'+(document.querySelector('.rec-card .rm')?document.querySelector('.rec-card .rm').textContent:'未知');
+  if(navigator.share)navigator.share({title:'张雪峰说 · 我的测评结果',text,url:location.href});
+  else if(navigator.clipboard)navigator.clipboard.writeText(text+'\n'+location.href).then(()=>toast('结果已复制'));
+  else toast('请手动复制链接分享');
+}
 </script>
 </body>
 </html>
