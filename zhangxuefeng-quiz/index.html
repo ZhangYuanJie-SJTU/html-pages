@@ -695,11 +695,43 @@ function addSuggestions(sugs){
   div.scrollIntoView({behavior:'smooth',block:'end'});
 }
 
+// ── Markdown 渲染器 ────────────────────────────────
+function md2html(t){
+  if(!t)return '';
+  // 表格
+  t=t.replace(/(\|.+\|\n\|[-| :]+\|\n(?:\|.+\|\n?)+)/g,m=>{
+    const rows=m.trim().split('\n').filter(r=>r.trim());
+    if(rows.length<2)return m;
+    const hdrs=rows[0].split('|').filter(c=>c.trim()).map(c=>c.trim());
+    const data=rows.slice(2);
+    let h='<table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem">';
+    h+='<tr>'+hdrs.map(x=>'<th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);color:var(--accent);font-size:.7rem;font-weight:600">'+x+'</th>').join('')+'</tr>';
+    data.forEach(r=>{
+      const cols=r.split('|').filter(c=>c.trim()).map(c=>c.trim());
+      h+='<tr>'+cols.map(x=>'<td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">'+x+'</td>').join('')+'</tr>';
+    });
+    return h+'</table>';
+  });
+  // 粗体
+  t=t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  // 标题
+  t=t.replace(/^### (.+)$/gm,'<div style="font-size:.8rem;color:var(--accent);font-weight:700;margin:10px 0 6px;letter-spacing:1px">$1</div>');
+  // 列表
+  t=t.replace(/^- (.+)$/gm,'<div style="padding:2px 0 2px 12px">• $1</div>');
+  t=t.replace(/^(\d+)\. (.+)$/gm,'<div style="padding:2px 0"><span style="color:var(--accent);font-weight:700;margin-right:6px">$1.</span>$2</div>');
+  // 分隔线
+  t=t.replace(/^---+$/gm,'<hr style="border:none;border-top:1px solid var(--border);margin:10px 0">');
+  // 换行
+  t=t.replace(/\n\n/g,'</p><p>');
+  t=t.replace(/\n/g,'<br>');
+  return '<p>'+t+'</p>';
+}
+
 function addMsg(text,who,boxId){
   const box=document.getElementById(boxId),d=document.createElement('div');
   d.className='msg'+(who==='user'?' user':'');
   const av=who==='user'?'<div class="av me">YOU</div>':'<div class="av ai">峰</div>';
-  const fmt=who==='user'?text:text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  const fmt=who==='user'?text.replace(/\n/g,'<br>'):md2html(text);
   d.innerHTML=av+'<div class="bub">'+fmt+'</div>';
   box.appendChild(d);d.scrollIntoView({behavior:'smooth',block:'end'});
 }
