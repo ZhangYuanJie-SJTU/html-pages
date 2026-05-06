@@ -355,15 +355,25 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
   <p class="intro">评分 = <b>九维独立加权求和</b>。数据口径：2024-2025 各学院官方就业质量报告 + 2026 春招岗位台账 + 脉脉 / 校招薪水 / 牛客应届生 offer 样本 + 第四轮学科评估与教育部"双一流"学科名单交叉校验。为避免头部极值误导，坚持 <i>中位数 &gt; 均值</i>、<i>P25-P75 分布 &gt; 最高值</i>、<i>主流岗位结构 &gt; 顶流 offer 叙事</i>。</p>
 
   <div class="method">
-    <div class="mc"><span class="tag">M.01</span><div class="w">28<sup>%</sup></div><div class="lbl">硕士起薪中位数</div><div class="desc">税前年薪含年终/签字/股票<br/>剔除 5% 头尾极值</div></div>
-    <div class="mc"><span class="tag">M.02</span><div class="w">15<sup>%</sup></div><div class="lbl">头部企业就业率</div><div class="desc">分行业前 10% 企业<br/>互联网/IC/电力/医电分口径</div></div>
-    <div class="mc"><span class="tag">M.03</span><div class="w">15<sup>%</sup></div><div class="lbl">学院校内定位</div><div class="desc">王牌 / 主流 / 尾部 溢价<br/>学科评估 × 校内资源</div></div>
-    <div class="mc"><span class="tag">M.04</span><div class="w">10<sup>%</sup></div><div class="lbl">2026-2030 赛道溢价</div><div class="desc">AI / IC / 医电 / 自驾 = 100<br/>土木 / 传统环境 = 30</div></div>
-    <div class="mc"><span class="tag">M.05</span><div class="w">10<sup>%</sup></div><div class="lbl">上海就业认可度</div><div class="desc">就业比 × 0.6 + 优先级 × 0.4<br/>S=100 / A=80 / B=60</div></div>
-    <div class="mc"><span class="tag">M.06</span><div class="w">5<sup>%</sup></div><div class="lbl">江浙其余加分</div><div class="desc">南京 / 苏州 / 杭州<br/>本地龙头 30 家优先级</div></div>
-    <div class="mc"><span class="tag">M.07</span><div class="w">7<sup>%</sup></div><div class="lbl">薪资分布均衡性</div><div class="desc">1-(P75-P25)/中位数<br/>防"头部一人带全院"</div></div>
-    <div class="mc"><span class="tag">M.08</span><div class="w">5<sup>%</sup></div><div class="lbl">3-5 年薪资涨幅</div><div class="desc">中期倍率<br/>防起薪高后劲差</div></div>
-    <div class="mc"><span class="tag">M.09</span><div class="w">5<sup>%</sup></div><div class="lbl">稳定性 &amp; 转行率</div><div class="desc">体制内 × 抗风险<br/>电力=100 / IC=90 / 互联网=70</div></div>
+    <div class="mc"><span class="tag">M.01</span><div class="w">25<sup>%</sup></div><div class="lbl">硕士起薪中位数</div><div class="desc">税前年薪含年终/签字/股票<br/>剔除 5% 头尾极值</div></div>
+    <div class="mc"><span class="tag">M.02</span><div class="w">14<sup>%</sup></div><div class="lbl">头部企业就业率</div><div class="desc">分行业前 10% 企业<br/>互联网/IC/电力/医电分口径</div></div>
+    <div class="mc"><span class="tag">M.03</span><div class="w">12<sup>%</sup></div><div class="lbl">学校品牌护城河 <span class="pill new">新</span></div><div class="desc">T0 清北+上交 = 100<br/>T1 华五(浙中科) = 88<br/>T2 中九其余+985强 = 78</div></div>
+    <div class="mc"><span class="tag">M.04</span><div class="w">8<sup>%</sup></div><div class="lbl">学院校内定位</div><div class="desc">王牌 / 主流 / 尾部<br/>学科评估 × 校内资源</div></div>
+    <div class="mc"><span class="tag">M.05</span><div class="w">10<sup>%</sup></div><div class="lbl">2026-2030 赛道溢价</div><div class="desc">AI / IC / 医电 / 自驾 = 100<br/>土木 / 传统环境 = 30</div></div>
+    <div class="mc"><span class="tag">M.06</span><div class="w">10<sup>%</sup></div><div class="lbl">上海就业认可度</div><div class="desc">就业比 × 0.6 + 优先级 × 0.4<br/>S=100 / A=80 / B=60</div></div>
+    <div class="mc"><span class="tag">M.07</span><div class="w">5<sup>%</sup></div><div class="lbl">江浙其余加分</div><div class="desc">南京 / 苏州 / 杭州<br/>本地龙头 30 家优先级</div></div>
+    <div class="mc"><span class="tag">M.08</span><div class="w">6<sup>%</sup></div><div class="lbl">薪资分布均衡性</div><div class="desc">1-(P75-P25)/中位数<br/>防"头部一人带全院"</div></div>
+    <div class="mc"><span class="tag">M.09</span><div class="w">5<sup>%</sup></div><div class="lbl">3-5 年薪资涨幅</div><div class="desc">中期倍率<br/>防起薪高后劲差</div></div>
+    <div class="mc"><span class="tag">M.10</span><div class="w">5<sup>%</sup></div><div class="lbl">稳定性 &amp; 转行率</div><div class="desc">体制内 × 抗风险<br/>电力=100 / IC=90 / 互联网=70</div></div>
+  </div>
+
+  <div style="margin-top:20px;padding:18px 22px;border:1px dashed var(--rule-strong);background:rgba(199,154,74,0.04);">
+    <div style="font-family:var(--disp);font-style:italic;font-size:18px;color:var(--gold);margin-bottom:8px;">学校梯队（M.03 基底）</div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--paper-2);line-height:1.85;">
+      <b style="color:var(--seal);">T0 品牌垄断</b> · 清华 · 上海交大 — 工科市场双巨头，所有赛道头部企业默认目标校，留京/留沪议价能力最强<br/>
+      <b style="color:var(--gold);">T1 全国顶尖</b> · 北大 · 浙江大学 · 中国科学技术大学 — 综合品牌强，各方向头部梯队；北大偏学术 + 量化 + 软微金融科技，浙大长三角互联网深耕，中科大量子 / 科研强势<br/>
+      <b style="color:#d2a455;">T2 华五其余 + 中九 + 985 工科强校</b> · 复旦 · 南京大学 · 西安交通大学 · 哈工大 · 同济 · 华中科技 · 东南大学 · 北航 · 北理工 · 电子科大 · 天津大学 · 华南理工 · 西工大 — 单项学科或地域优势突出
+    </div>
   </div>
 
   <div class="tier-legend">
@@ -404,10 +414,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
   <div class="tsum">
     <div class="ts-seal">SSS+</div>
     <div class="tsb">
-      <h3>Tier 0 · 垄断级 · 4 学院</h3>
-      <p>中国工科就业的绝对天花板。<b>清华计院 / 清华电子系 / 上交计院 / 上交集成电路学院</b>。共同特征：行业具备"一票否决权"，转行率均 &lt; 5%，头部企业按名单抢人。核心差异——清华偏北京 AI Infra + 国防信创；上交偏上海互联网 + IC 设计。</p>
+      <h3>Tier 0 · 垄断级 · 5 学院</h3>
+      <p>中国工科就业的绝对天花板。<b>清华计院 / 清华电子系 / 上交计院 / 上交集成电路学院 / 上交自动化与感知学院</b>。共同特征：行业具备"一票否决权"，转行率均 &lt; 5%，头部企业按名单抢人，上海 / 北京头部产业默认目标校。核心差异——清华偏北京 AI Infra + 国防信创；上交系三院偏上海互联网 + IC 设计 + 智能感知 / 医疗电子 / 自动驾驶全覆盖。</p>
     </div>
-    <div class="ts-stat"><span class="big">45-55</span>万 · 年薪中位数<br/>P75 可达 68 万</div>
+    <div class="ts-stat"><span class="big">38-55</span>万 · 年薪中位数<br/>P75 可达 68 万</div>
   </div>
 
   <div class="college">
@@ -506,18 +516,66 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
     </div>
   </div>
 
+  <div class="college">
+    <div class="c-rank">05</div>
+    <div>
+      <div class="c-school">SJTU · 上海交通大学 <span class="tag-new">2024.12 成立</span></div>
+      <div class="c-name">自动化与感知学院<span class="en">School of Automation &amp; Intelligent Sensing · SAIS</span></div>
+      <div class="c-note">2024 年 12 月由原电院自动化系 + 感知科学与工程学院合并组建，原电院核心资源整体承接。拥有 <b>控制科学与工程 A+</b> 与 <b>仪器科学与技术 A</b> 两个一级学科 —— 国内<b>唯一将"控制 A+ + 仪器全体系"打通的顶级学院</b>。依托上交 C9 / 华五母校品牌 + 上海地理红利，毕业生<b>同时横跨自动驾驶算法 / 机器人控制 / 医疗电子 / 智能诊疗仪器 / 可穿戴 / 精密测控 / AIoT</b> 全部第一赛道方向，无短板可言。<i>留沪率 65%、上海认可度 95 分，仅次于上交计院与集成电路学院</i>。</div>
+      <div class="c-detail">
+        <div><span class="k">代表方向</span><span class="v">自动驾驶 / 机器人感知 / 智能诊疗仪器 / 可穿戴多体征监护 / 电化学生物传感 / 微针阵列 / 精密测控 / 量子感知 / AIoT 嵌入式</span></div>
+        <div><span class="k">主要雇主</span><span class="v">联影医疗 / BrainCo 强脑 / 迈瑞医疗 / 华为健康 / 直觉外科 / 特斯拉健康座舱 / 蔚来健康 / 小马智行 / 地平线 / Momenta / 商汤 / 苹果上研</span></div>
+        <div><span class="k">3 年路径</span><span class="v">医疗电子 / 可穿戴研发 32→55 万；自动驾驶算法 38→65 万；精密测控 28→45 万</span></div>
+        <div><span class="k">岗位结构</span><span class="v">自动驾驶 / 机器人 30% · 医疗电子 / 仪器 25% · AIoT / 工控 20% · 智能感知 15% · 其他 10%</span></div>
+      </div>
+      <div class="c-dirs"><span class="dir sssp">SSS+ 自动驾驶</span><span class="dir sssp">SSS+ 机器人控制</span><span class="dir sssp">SSS+ 医疗电子 / 智能诊疗</span><span class="dir sss">SSS 可穿戴 / 生物传感</span><span class="dir sss">SSS 精密测控 / AIoT</span><span class="dir ss">SS 导航制导 / 传统仪器</span></div>
+    </div>
+    <div class="c-right">
+      <div class="c-score-bar"><div class="c-score">95</div><div class="c-score-lbl">/ 100</div></div>
+      <div class="c-salary">38 万 <span class="range">· P25 32 / P75 58</span></div>
+      <div class="c-metric"><span class="k">头部率</span><span class="v hi">79%</span></div>
+      <div class="c-metric"><span class="k">上海认可</span><span class="v hi">95 · S级</span></div>
+      <div class="c-metric"><span class="k">留沪率</span><span class="v hi">~65%</span></div>
+      <div class="c-metric"><span class="k">学科评估</span><span class="v hi">控制 A+ / 仪器 A</span></div>
+    </div>
+  </div>
+
+  <div class="college">
+    <div class="c-rank">06</div>
+    <div>
+      <div class="c-school">TSINGHUA · 清华大学</div>
+      <div class="c-name">自动化系<span class="en">Dept. of Automation</span></div>
+      <div class="c-note">清华 C5 品牌护城河 + 学科评估 A+。<b>自动驾驶算法 + 机器人控制</b>方向是传统自动化向 AI 转型最成功的案例，薪资接近计算机 AI 赛道。小马智行 / 文远知行 / Waymo China / 地平线 / 理想汽车算法组目标校。清华"强电强信"两翼之外的第三极，毕业生在自动化 / 控制行业整体认可度领先 SAIS 略高（清北品牌 buff 约 2-3 分）。</div>
+      <div class="c-detail">
+        <div><span class="k">代表团队</span><span class="v">张长水（模式识别）/ 孙富春（机器人）/ 刘华平 / 陶建华（信号）</span></div>
+        <div><span class="k">主要雇主</span><span class="v">小马智行 / 文远知行 / 地平线 / 理想 / 华为车 BU / Momenta / 大疆车载 / 字节 AI Lab</span></div>
+        <div><span class="k">3 年路径</span><span class="v">自动驾驶算法岗 → 资深，起薪 38→65 万；创业公司期权可兑现 1.5-3×</span></div>
+        <div><span class="k">岗位结构</span><span class="v">自动驾驶 35% · 机器人控制 25% · AI 算法 25% · 传统控制 15%</span></div>
+      </div>
+      <div class="c-dirs"><span class="dir sssp">SSS+ 自动驾驶</span><span class="dir sssp">SSS+ 机器人控制</span><span class="dir sss">SSS 工业控制 / AI</span><span class="dir ss">SS 传统自动化</span></div>
+    </div>
+    <div class="c-right">
+      <div class="c-score-bar"><div class="c-score">95</div><div class="c-score-lbl">/ 100</div></div>
+      <div class="c-salary">38 万 <span class="range">· P25 32 / P75 58</span></div>
+      <div class="c-metric"><span class="k">头部率</span><span class="v hi">78%</span></div>
+      <div class="c-metric"><span class="k">上海认可</span><span class="v mid">76 · S级</span></div>
+      <div class="c-metric"><span class="k">转行率</span><span class="v hi">4%</span></div>
+      <div class="c-metric"><span class="k">学科评估</span><span class="v hi">A+</span></div>
+    </div>
+  </div>
+
   <!-- =============== SSS =============== -->
   <div class="tsum gold">
     <div class="ts-seal">SSS</div>
     <div class="tsb">
-      <h3>Tier Ⅰ · 全国顶尖 · 7 学院</h3>
-      <p>第一梯队核心目标校，与 SSS+ 差距仅在"绝对垄断性"上。<b>北大软微 / 北大计院 / 浙大计院 / 复旦计算与智能 / 清华自动化 / 上交自动化与感知 / 复旦集成电路</b>。</p>
+      <h3>Tier Ⅰ · 全国顶尖 · 5 学院</h3>
+      <p>第一梯队核心目标校，与 SSS+ 差距仅在绝对品牌溢价上。<b>T1 梯队（北大 / 浙大 / 中科大）+ 复旦双创新</b>。清华 / 上交系工科三大核心（计院 / IC / 自动化）已全部进入 SSS+；本档以北大 · 华五 · 浙中科的顶级学院为主。</p>
     </div>
-    <div class="ts-stat"><span class="big">38-48</span>万 · 年薪中位数<br/>P75 可达 60 万</div>
+    <div class="ts-stat"><span class="big">37-45</span>万 · 年薪中位数<br/>P75 可达 58 万</div>
   </div>
 
   <div class="college">
-    <div class="c-rank">05</div>
+    <div class="c-rank">07</div>
     <div>
       <div class="c-school">PKU · 北京大学</div>
       <div class="c-name">软件与微电子学院<span class="en">School of Software &amp; Microelectronics</span></div>
@@ -541,7 +599,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
   </div>
 
   <div class="college">
-    <div class="c-rank">06</div>
+    <div class="c-rank">08</div>
     <div>
       <div class="c-school">PKU · 北京大学</div>
       <div class="c-name">计算机学院<span class="en">School of Computer Science<span class="tag-new">2021 独立</span></span></div>
@@ -565,7 +623,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
   </div>
 
   <div class="college">
-    <div class="c-rank">07</div>
+    <div class="c-rank">09</div>
     <div>
       <div class="c-school">ZJU · 浙江大学</div>
       <div class="c-name">计算机科学与技术学院<span class="en">College of Computer Science</span></div>
@@ -589,7 +647,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
   </div>
 
   <div class="college">
-    <div class="c-rank">08</div>
+    <div class="c-rank">10</div>
     <div>
       <div class="c-school">FUDAN · 复旦大学 <span class="tag-new">2024.1 首批揭牌</span></div>
       <div class="c-name">计算与智能创新学院<span class="en">School of Computing &amp; Intelligent Innovation</span></div>
@@ -609,54 +667,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
       <div class="c-metric"><span class="k">上海认可</span><span class="v hi">96 · S级</span></div>
       <div class="c-metric"><span class="k">留沪率</span><span class="v hi">~70%</span></div>
       <div class="c-metric"><span class="k">学科特色</span><span class="v hi">复旦王牌</span></div>
-    </div>
-  </div>
-
-  <div class="college">
-    <div class="c-rank">09</div>
-    <div>
-      <div class="c-school">TSINGHUA · 清华大学</div>
-      <div class="c-name">自动化系<span class="en">Dept. of Automation</span></div>
-      <div class="c-note">学科评估 A+。<b>自动驾驶算法 + 机器人控制</b>方向是传统自动化向 AI 转型最成功的案例，薪资接近计算机 AI 赛道。小马智行 / 文远知行 / Waymo China / 地平线 / 理想汽车算法组目标校。</div>
-      <div class="c-detail">
-        <div><span class="k">代表团队</span><span class="v">张长水（模式识别）/ 孙富春（机器人）/ 刘华平 / 陶建华（信号）</span></div>
-        <div><span class="k">主要雇主</span><span class="v">小马智行 / 文远知行 / 地平线 / 理想 / 华为车 BU / Momenta / 大疆车载</span></div>
-        <div><span class="k">3 年路径</span><span class="v">自动驾驶算法岗 → 资深，起薪 36→60 万；创业公司期权可兑现 1.5-3×</span></div>
-        <div><span class="k">岗位结构</span><span class="v">自动驾驶 35% · 机器人控制 25% · AI 算法 25% · 传统控制 15%</span></div>
-      </div>
-      <div class="c-dirs"><span class="dir sss">SSS 自动驾驶</span><span class="dir sss">SSS 机器人控制</span><span class="dir ss">SS 工业控制 / AI</span><span class="dir sp">S+ 传统自动化</span></div>
-    </div>
-    <div class="c-right">
-      <div class="c-score-bar"><div class="c-score">92</div><div class="c-score-lbl">/ 100</div></div>
-      <div class="c-salary">36 万 <span class="range">· P25 30 / P75 55</span></div>
-      <div class="c-metric"><span class="k">头部率</span><span class="v hi">75%</span></div>
-      <div class="c-metric"><span class="k">上海认可</span><span class="v mid">76 · S级</span></div>
-      <div class="c-metric"><span class="k">转行率</span><span class="v hi">4%</span></div>
-      <div class="c-metric"><span class="k">学科评估</span><span class="v hi">A+</span></div>
-    </div>
-  </div>
-
-  <div class="college">
-    <div class="c-rank">10</div>
-    <div>
-      <div class="c-school">SJTU · 上海交通大学 <span class="tag-new">2024.12 成立</span></div>
-      <div class="c-name">自动化与感知学院<span class="en">School of Automation &amp; Intelligent Sensing · SAIS</span></div>
-      <div class="c-note">2024 年 12 月由原电院自动化系 + 感知科学与工程学院合并组建（早于 2025.2.19 电院整体拆分）。拥有 <b>控制科学与工程 A+</b> 和 <b>仪器科学与技术</b> 两个一级学科。方向评价：<br/>· 自动驾驶算法 / 机器人控制 / 智能诊疗仪器（医疗电子）三方向同属 SSS 级；<br/>· <b>仪器科学与技术（医疗电子 / 可穿戴 / 生理信号分析 / 电化学生物传感 / 微针阵列）方向</b>薪资中位数 32-38 万，是全国仪器学科就业质量最高的方向之一。底层嵌入式 + 信号处理 + 控制算法技能与电子/计算机通用，就业不受医疗行业绑定。</div>
-      <div class="c-detail">
-        <div><span class="k">代表团队</span><span class="v">医工交叉方向团队多组（可穿戴 / 神经工程 / 精密测控 / 生物传感 / AIoT 嵌入式）</span></div>
-        <div><span class="k">主要雇主</span><span class="v">联影医疗 / BrainCo 强脑 / 迈瑞医疗 / 华为健康 / 微创 / 直觉外科 / 特斯拉健康 / 地平线 / 小马智行 / 蔚来</span></div>
-        <div><span class="k">3 年路径</span><span class="v">医疗电子 / 可穿戴研发岗 28→50 万；自动驾驶算法 35→60 万</span></div>
-        <div><span class="k">岗位结构</span><span class="v">医疗电子 / 仪器 25% · 自动驾驶 25% · 机器人 20% · AI / 工控 30%</span></div>
-      </div>
-      <div class="c-dirs"><span class="dir sss">SSS 自动驾驶</span><span class="dir sss">SSS 医疗电子</span><span class="dir sss">SSS 机器人控制</span><span class="dir ss">SS 精密测控 / 可穿戴</span><span class="dir sp">S+ 传统自动化 / 导航制导</span></div>
-    </div>
-    <div class="c-right">
-      <div class="c-score-bar"><div class="c-score">91</div><div class="c-score-lbl">/ 100</div></div>
-      <div class="c-salary">35 万 <span class="range">· P25 29 / P75 52</span></div>
-      <div class="c-metric"><span class="k">头部率</span><span class="v hi">73%</span></div>
-      <div class="c-metric"><span class="k">上海认可</span><span class="v hi">95 · S级</span></div>
-      <div class="c-metric"><span class="k">留沪率</span><span class="v hi">~65%</span></div>
-      <div class="c-metric"><span class="k">学科评估</span><span class="v hi">控制 A+</span></div>
     </div>
   </div>
 
@@ -2565,7 +2575,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
       <div class="sidx-list">
         <span class="sidx-item sssp">计算机系 <span class="bd">SSS+</span></span>
         <span class="sidx-item sssp">电子工程系 <span class="bd">SSS+</span></span>
-        <span class="sidx-item sss">自动化系 <span class="bd">SSS</span></span>
+        <span class="sidx-item sssp">自动化系 <span class="bd">SSS+</span></span>
         <span class="sidx-item ss">软件学院 <span class="bd">SS</span></span>
         <span class="sidx-item sp">集成电路学院 <span class="bd">S+</span></span>
         <span class="sidx-item sp">车辆与运载 <span class="bd">S+</span></span>
@@ -2588,7 +2598,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opa
       <div class="sidx-list">
         <span class="sidx-item sssp">计算机学院 <span class="bd">SSS+</span></span>
         <span class="sidx-item sssp">集成电路学院 <span class="bd">SSS+</span></span>
-        <span class="sidx-item sss">自动化与感知 <span class="bd">SSS</span></span>
+        <span class="sidx-item sssp">自动化与感知 <span class="bd">SSS+</span></span>
         <span class="sidx-item ss">电气工程 <span class="bd">SS</span></span>
         <span class="sidx-item sp">机械与动力 <span class="bd">S+</span></span>
         <span class="sidx-item sp">软件学院 <span class="bd">S+</span></span>
