@@ -844,13 +844,22 @@ function setupEvents() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCompare(); });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  recompute();
-  renderAll();
-  renderUT();
-  renderTL();
-  renderCalc();
-  renderInd();
-  setupEvents();
-});
-window.addEventListener('resize', () => { renderScatter(); renderCurve(); });
+function initApp() {
+  try {
+    recompute();
+    renderAll();
+    renderUT();
+    renderTL();
+    renderCalc();
+    renderInd();
+    setupEvents();
+  } catch(e) { console.error('init err:', e); }
+}
+// 双重保险：DOMContentLoaded + 立即检查
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+window.addEventListener('resize', () => { try { renderScatter(); renderCurve(); } catch(e) {} });
+window.initApp = initApp; // 暴露为 window 方法供手动触发
