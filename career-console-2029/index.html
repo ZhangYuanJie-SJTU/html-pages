@@ -3,823 +3,1248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elemental · N° IV · 2029届就业决策刊 · 张元杰</title>
-<meta name="description" content="A personal intelligence publication for 2029 SJTU Instrument Science MEng graduate. 9-dimension weighted career decision console.">
+<title>2029 就业决策台 · 张元杰 · v5.0</title>
+<meta name="description" content="2029届交大仪科硕士·嵌入式工程师·就业决策工具 · 9维评分 · 60家候选 · 个性化推荐">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Inter:wght@300;400;450;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════
-   Elemental · Editorial Console Design System v4.0
+   Career Decision Console · V5.0 · Readability First
+   Design Principles:
+   - 浅色 + 高对比（WCAG AAA 7:1+）
+   - 信息直给（默认展开核心信息）
+   - 一句话推荐（3秒判断）
+   - 等宽数字 + 系统字体
    ═══════════════════════════════════════════════════════════════ */
-:root{
-  /* Paper & Ink */
-  --paper-0:#fbf8f1;--paper-1:#f4f0e6;--paper-2:#e8e2d1;--paper-3:#d5ccb4;
-  --ink-0:#0a0e14;--ink-1:#1d232e;--ink-2:#3d4556;--ink-3:#6b7383;--ink-4:#9ca3af;
-  /* Accents */
-  --accent:#c41e3a;--accent-deep:#8b0a1e;
-  --gold:#b08d3f;--ink-blue:#1a3a5c;--sage:#5f7a5f;--brick:#a63d2a;
-  /* Tiers */
-  --t-sss:#8b0a1e;--t-ss:#b8792a;--t-s:#1a3a5c;--t-a:#5f7a5f;--t-b:#6b7383;--t-gem:#b08d3f;
-  /* Fonts */
-  --f-display:'Noto Serif SC','Source Han Serif',Georgia,serif;
-  --f-body:'Inter','PingFang SC',system-ui,sans-serif;
-  --f-mono:'JetBrains Mono','SF Mono',monospace;
-  --f-italic:'Instrument Serif','Noto Serif SC',serif;
-  /* Sizes */
-  --fs-xs:0.6875rem;--fs-sm:0.8125rem;--fs-base:0.9375rem;--fs-lg:1.125rem;
-  --fs-xl:1.5rem;--fs-2xl:2rem;--fs-3xl:2.75rem;--fs-4xl:4.25rem;--fs-5xl:6.5rem;
-  /* Spacing */
-  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;--sp-10:128px;
-  /* Shadows */
-  --sh-paper:0 1px 2px rgba(10,14,20,.04),0 2px 8px rgba(10,14,20,.04);
-  --sh-lift:0 2px 4px rgba(10,14,20,.06),0 12px 24px rgba(10,14,20,.08);
-  --sh-float:0 8px 16px rgba(10,14,20,.08),0 24px 48px rgba(10,14,20,.1);
-  /* Transitions */
-  --ease-ed:cubic-bezier(0.22,1,0.36,1);
-  --ease-snap:cubic-bezier(0.4,0,0.2,1);
+:root {
+  --bg: #fbfbf8;
+  --bg-soft: #f3f4f3;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --ink: #0a0a0a;
+  --ink-2: #374151;
+  --ink-3: #6b7280;
+  --ink-4: #9ca3af;
+  --accent: #2563eb;
+  --accent-soft: #eff6ff;
+  --accent-strong: #1d4ed8;
+  --success: #059669;
+  --success-soft: #d1fae5;
+  --warn: #d97706;
+  --warn-soft: #fef3c7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --gold: #b08d3f;
+
+  --t-sss: #dc2626;
+  --t-ss:  #ea580c;
+  --t-s:   #2563eb;
+  --t-a:   #059669;
+  --t-b:   #6b7280;
+  --t-gem: #7c3aed;
+
+  --f-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', 'SF Mono', Consolas, Menlo, monospace;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+
+  --sh-sm: 0 1px 2px rgba(10,10,10,.04);
+  --sh-md: 0 1px 3px rgba(10,10,10,.05), 0 4px 8px rgba(10,10,10,.04);
+  --sh-lg: 0 4px 12px rgba(10,10,10,.08), 0 12px 32px rgba(10,10,10,.06);
+  --sh-focus: 0 0 0 3px rgba(37,99,235,.25);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--paper-0)}
-body{font-family:var(--f-body);color:var(--ink-0);background:var(--paper-0);font-size:var(--fs-base);line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.italic{font-family:var(--f-italic);font-style:italic}
-.serif{font-family:var(--f-display)}
 
-/* ═══ MASTHEAD ═══ */
-.masthead{position:relative;padding:var(--sp-8) var(--sp-7) var(--sp-7);border-bottom:4px double var(--ink-0);background:var(--paper-0);overflow:hidden}
-.masthead::before{content:'';position:absolute;top:0;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(196,30,58,.04),transparent 70%);pointer-events:none}
-.mast-bar{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font:400 var(--fs-xs)/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-bottom:var(--sp-5);border-bottom:1px solid var(--paper-3);margin-bottom:var(--sp-6)}
-.mast-bar span{display:flex;align-items:center;gap:8px}
-.mast-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.mast-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:var(--sp-8);align-items:end}
-.mast-title{font:900 var(--fs-4xl)/1 var(--f-display);letter-spacing:-.03em;color:var(--ink-0)}
-.mast-title sup{font-size:.32em;vertical-align:super;font-weight:400;color:var(--accent);letter-spacing:0}
-.mast-tagline{display:block;font:italic 400 var(--fs-xl)/1.2 var(--f-italic);color:var(--ink-2);margin-top:var(--sp-4)}
-.mast-lede{font:400 var(--fs-xl)/1.5 var(--f-italic);color:var(--ink-1);margin-top:var(--sp-5);max-width:38ch}
-.mast-lede em{color:var(--accent);font-style:italic}
-.mast-byline{font:400 var(--fs-sm)/1.7 var(--f-body);color:var(--ink-3);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--paper-2)}
-.mast-byline strong{font-weight:700;color:var(--ink-0);letter-spacing:.1em;text-transform:uppercase;font-size:var(--fs-xs);display:block;margin-bottom:2px}
-.mast-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-5);padding:var(--sp-5);background:var(--paper-1);border:1px solid var(--paper-2)}
-.mst{text-align:left}
-.mst-n{display:block;font:700 var(--fs-3xl) var(--f-mono);color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
-.mst-l{font:400 var(--fs-xs) var(--f-body);color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em;margin-top:6px;display:block}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.mono, .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 
-/* ═══ NAV ═══ */
-.topnav{position:sticky;top:0;z-index:100;background:rgba(251,248,241,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--paper-3);padding:var(--sp-3) var(--sp-7)}
-.topnav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:var(--sp-5);overflow-x:auto;white-space:nowrap;scrollbar-width:none}
-.topnav-inner::-webkit-scrollbar{display:none}
-.topnav a{color:var(--ink-3);text-decoration:none;font:500 var(--fs-xs) var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 0;position:relative;transition:color var(--ease-snap) 180ms}
-.topnav a:hover,.topnav a.act{color:var(--accent)}
-.topnav a.act::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent)}
-.topnav .brand{font:italic 700 var(--fs-base) var(--f-italic);color:var(--ink-0);margin-right:auto;letter-spacing:0;text-transform:none}
+/* Focus ring (Vercel a11y) */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: none;
+  box-shadow: var(--sh-focus);
+  border-color: var(--accent);
+}
 
-/* ═══ SECTION FRAME ═══ */
-.wrap{max-width:1400px;margin:0 auto;padding:0 var(--sp-7)}
-.sec{padding:var(--sp-9) 0;scroll-margin-top:80px;border-bottom:1px solid var(--paper-2);position:relative}
-.sec:last-of-type{border-bottom:none}
-.sec-kicker{display:flex;align-items:center;gap:var(--sp-3);font:500 var(--fs-xs) var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-bottom:var(--sp-3)}
-.sec-kicker-num{color:var(--accent);font-weight:700}
-.sec-kicker-line{flex:1;height:1px;background:var(--paper-3)}
-.sec-title{font:700 var(--fs-3xl)/1.1 var(--f-display);letter-spacing:-.02em;color:var(--ink-0);margin-bottom:var(--sp-3);max-width:32ch}
-.sec-dek{font:400 var(--fs-xl)/1.5 var(--f-italic);color:var(--ink-2);max-width:48ch;margin-bottom:var(--sp-7)}
-.sec-dek em{color:var(--accent);font-style:italic}
+/* ═══ HEADER ═══ */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251,251,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-inner {
+  max-width: 1440px; margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.brand {
+  font-size: 15px; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--ink);
+  padding-right: 16px; border-right: 1px solid var(--border);
+}
+.brand .sub { color: var(--accent); font-weight: 600; margin-left: 4px; }
+.topbar nav {
+  display: flex; gap: 4px; flex: 1; overflow-x: auto; scrollbar-width: none;
+}
+.topbar nav::-webkit-scrollbar { display: none; }
+.topbar nav a {
+  font-size: 12px; font-weight: 500;
+  color: var(--ink-3);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  transition: color 150ms, background 150ms;
+}
+.topbar nav a:hover { color: var(--ink); background: var(--bg-soft); }
+.topbar nav a.act { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
 
-/* ═══ 01 PERSONA ═══ */
-.persona-row{display:grid;grid-template-columns:340px 1fr;gap:var(--sp-8);padding:var(--sp-7);background:var(--paper-1);border:1px solid var(--paper-2);position:relative}
-.persona-row::before{content:'※';position:absolute;top:var(--sp-5);right:var(--sp-5);font:400 var(--fs-xl) var(--f-italic);color:var(--ink-4)}
-.portrait{aspect-ratio:3/4;background:linear-gradient(135deg,var(--paper-2),var(--paper-3));border:1px solid var(--paper-3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.portrait::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(176,141,63,.15),transparent 60%)}
-.portrait-initials{font:900 5rem var(--f-display);color:var(--ink-0);letter-spacing:-.05em;z-index:1;position:relative}
-.portrait-label{position:absolute;bottom:var(--sp-3);left:var(--sp-3);right:var(--sp-3);font:italic 400 var(--fs-sm) var(--f-italic);color:var(--ink-2);line-height:1.3}
-.persona-info h3{font:700 var(--fs-2xl)/1.1 var(--f-display);margin-bottom:var(--sp-2);color:var(--ink-0);letter-spacing:-.01em}
-.persona-role{font:italic 400 var(--fs-lg)/1.4 var(--f-italic);color:var(--accent);margin-bottom:var(--sp-5)}
-.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4);margin-bottom:var(--sp-6);padding:var(--sp-5) 0;border-top:1px solid var(--paper-3);border-bottom:1px solid var(--paper-3)}
-.fact-k{font:400 var(--fs-xs) var(--f-mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:4px}
-.fact-v{font:600 var(--fs-base)/1.4 var(--f-body);color:var(--ink-0)}
-.fact-v small{font-size:.75em;color:var(--ink-2);font-weight:400}
-.hard-goods{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-5)}
-.hg{font:500 var(--fs-xs) var(--f-mono);padding:4px 10px;border:1px solid currentColor;letter-spacing:.08em;text-transform:uppercase}
-.hg.acc{color:var(--accent);background:rgba(196,30,58,.05)}
-.hg.gold{color:var(--gold);background:rgba(176,141,63,.06)}
-.hg.blue{color:var(--ink-blue);background:rgba(26,58,92,.04)}
-.hg.sage{color:var(--sage);background:rgba(95,122,95,.05)}
-.stack-row{display:grid;grid-template-columns:90px 1fr;gap:var(--sp-4);align-items:start;padding:var(--sp-3) 0;border-bottom:1px solid var(--paper-2);font-size:var(--fs-sm)}
-.stack-row:last-child{border-bottom:none}
-.stack-row .sk{font:600 var(--fs-xs) var(--f-mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em;padding-top:2px}
-.stack-row .sv{color:var(--ink-1);line-height:1.6}
-.stack-row .sv em{font-family:var(--f-italic);color:var(--accent);font-style:italic}
-.soft-note{margin-top:var(--sp-5);padding:var(--sp-4) var(--sp-5);background:var(--paper-0);border-left:3px solid var(--gold);font:italic 400 var(--fs-sm)/1.7 var(--f-italic);color:var(--ink-2)}
+/* ═══ HERO ═══ */
+.hero {
+  max-width: 1440px; margin: 0 auto;
+  padding: 56px 24px 32px;
+}
+.hero h1 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero .subtitle {
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 680px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.hero .meta-row {
+  display: flex; flex-wrap: wrap; gap: 8px 16px;
+  font-size: 13px; color: var(--ink-3);
+  margin-bottom: 24px;
+}
+.hero .meta-row b { color: var(--ink); font-weight: 600; }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  transition: border-color 150ms;
+}
+.stat-card:hover { border-color: var(--border-strong); }
+.stat-card .sk { font-size: 11px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.stat-card .sv { font-size: 28px; font-weight: 700; margin-top: 6px; letter-spacing: -0.02em; }
+.stat-card .sv.sss { color: var(--t-sss); }
+.stat-card .sv.ss { color: var(--t-ss); }
+.stat-card .sv.s { color: var(--t-s); }
+.stat-card .sv.a { color: var(--t-a); }
+.stat-card .sv.gem { color: var(--t-gem); }
+.stat-card .sdesc { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
 
-/* ═══ 02 WEIGHT CONSOLE ═══ */
-.console{background:var(--paper-0);border:1px solid var(--paper-2)}
-.console-head{padding:var(--sp-5) var(--sp-6);border-bottom:1px solid var(--paper-2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-3)}
-.console-head h4{font:600 var(--fs-base) var(--f-body);letter-spacing:.02em}
-.presets{display:flex;gap:6px;flex-wrap:wrap}
-.preset-btn{font:500 var(--fs-xs) var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;background:transparent;border:1px solid var(--paper-3);color:var(--ink-2);cursor:pointer;transition:all 180ms var(--ease-snap)}
-.preset-btn:hover{border-color:var(--ink-2);color:var(--ink-0)}
-.preset-btn.act{background:var(--ink-0);color:var(--paper-0);border-color:var(--ink-0)}
-.dims{padding:0 var(--sp-6)}
-.dim-row{display:grid;grid-template-columns:40px 1fr 300px 80px;gap:var(--sp-5);align-items:center;padding:var(--sp-5) 0;border-bottom:1px solid var(--paper-2);transition:background 180ms var(--ease-snap)}
-.dim-row:last-child{border-bottom:none}
-.dim-row:hover{background:rgba(196,30,58,.015)}
-.dim-rank{font:400 var(--fs-sm) var(--f-mono);color:var(--ink-4);letter-spacing:.14em}
-.dim-meta h5{font:500 var(--fs-lg)/1.2 var(--f-display);color:var(--ink-0);margin-bottom:2px;letter-spacing:-.005em}
-.dim-meta p{font:400 var(--fs-sm)/1.5 var(--f-body);color:var(--ink-3)}
-.dim-slot{position:relative}
-.range{-webkit-appearance:none;width:100%;height:32px;background:transparent;cursor:pointer}
-.range::-webkit-slider-runnable-track{height:3px;background:var(--paper-3);border-radius:2px}
-.range::-moz-range-track{height:3px;background:var(--paper-3);border-radius:2px}
-.range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--paper-0);border:2px solid var(--accent);margin-top:-7px;box-shadow:var(--sh-paper);transition:transform 180ms var(--ease-snap)}
-.range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--paper-0);border:2px solid var(--accent);box-shadow:var(--sh-paper);cursor:pointer}
-.range:hover::-webkit-slider-thumb{transform:scale(1.3)}
-.dim-bar-fill{position:absolute;left:0;top:14.5px;height:3px;background:var(--accent);border-radius:2px;pointer-events:none;transition:width 200ms var(--ease-ed)}
-.dim-val{font:700 var(--fs-2xl) var(--f-mono);color:var(--accent);text-align:right;font-variant-numeric:tabular-nums}
-.dim-val sub{font-size:.5em;color:var(--ink-3);font-weight:400;vertical-align:baseline}
+/* ═══ SECTION ═══ */
+.sec {
+  max-width: 1440px; margin: 0 auto;
+  padding: 56px 24px 32px;
+  scroll-margin-top: 64px;
+}
+.sec-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+.sec-head-left h2 {
+  font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink);
+}
+.sec-head-left .sec-label {
+  font-size: 11px; color: var(--accent); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sec-head-left p {
+  font-size: 14px; color: var(--ink-3); margin-top: 4px;
+}
+.sec-head-right {
+  font-size: 12px; color: var(--ink-3); text-align: right;
+}
 
-/* ═══ 03 TIER LEGEND ═══ */
-.tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--ink-0);border-bottom:1px solid var(--ink-0)}
-.tier-col{padding:var(--sp-5) var(--sp-4);border-right:1px solid var(--paper-2);position:relative}
-.tier-col:last-child{border-right:none}
-.tier-col .tb{font:700 var(--fs-xl) var(--f-mono);letter-spacing:.02em;display:block;margin-bottom:var(--sp-2)}
-.tier-col.sss .tb{color:var(--t-sss)}
-.tier-col.ss .tb{color:var(--t-ss)}
-.tier-col.s .tb{color:var(--t-s)}
-.tier-col.a .tb{color:var(--t-a)}
-.tier-col.b .tb{color:var(--t-b)}
-.tier-col .tn{font:600 var(--fs-sm) var(--f-body);color:var(--ink-0);margin-bottom:4px}
-.tier-col .td{font:400 var(--fs-xs)/1.5 var(--f-body);color:var(--ink-3)}
-.tier-col .tc{font:700 var(--fs-lg) var(--f-mono);color:var(--ink-0);margin-top:var(--sp-3);display:block;font-variant-numeric:tabular-nums}
+/* ═══ PERSONA CARD ═══ */
+.persona {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 28px; display: grid; grid-template-columns: 200px 1fr; gap: 28px;
+}
+.persona-avatar {
+  width: 200px; height: 200px;
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  border-radius: var(--r-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px; font-weight: 800; color: var(--accent);
+  letter-spacing: -0.04em;
+}
+.persona-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.persona-info .role { font-size: 14px; color: var(--ink-2); margin-bottom: 16px; }
+.persona-info .role b { color: var(--accent); }
 
-/* ═══ 04 FILTERS + RANK ═══ */
-.filters{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-4) 0;border-bottom:1px solid var(--paper-3);margin-bottom:var(--sp-6);flex-wrap:wrap;gap:var(--sp-3)}
-.chips{display:flex;gap:var(--sp-2);flex-wrap:wrap}
-.chip{font:500 var(--fs-xs) var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--paper-3);background:transparent;color:var(--ink-2);cursor:pointer;transition:all 180ms var(--ease-snap)}
-.chip:hover{border-color:var(--ink-2);color:var(--ink-0)}
-.chip.act{background:var(--ink-0);color:var(--paper-0);border-color:var(--ink-0)}
-.search-sort{display:flex;gap:var(--sp-3);align-items:center}
-.ssort{font:500 var(--fs-xs) var(--f-mono);background:var(--paper-0);border:1px solid var(--paper-3);color:var(--ink-1);padding:6px 10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-.ssearch{position:relative}
-.ssearch input{font:400 var(--fs-sm) var(--f-mono);background:var(--paper-0);border:1px solid var(--paper-3);padding:7px 12px 7px 30px;color:var(--ink-0);width:200px}
-.ssearch::before{content:'⌕';position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:14px}
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.fact { padding: 12px; background: var(--bg-soft); border-radius: var(--r-md); }
+.fact-k { font-size: 11px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.fact-v { font-size: 14px; font-weight: 600; color: var(--ink); }
+.fact-v small { font-weight: 400; color: var(--ink-2); font-size: 12px; }
 
-.firms{display:flex;flex-direction:column;gap:var(--sp-2)}
-.tgroup{margin-bottom:var(--sp-7)}
-.tgroup-h{display:flex;align-items:baseline;gap:var(--sp-4);padding-bottom:var(--sp-3);border-bottom:2px solid var(--ink-0);margin-bottom:var(--sp-4)}
-.tgroup-h .tgb{font:700 var(--fs-lg) var(--f-mono);letter-spacing:.02em}
-.tgroup-h.sss .tgb{color:var(--t-sss)}.tgroup-h.ss .tgb{color:var(--t-ss)}
-.tgroup-h.s .tgb{color:var(--t-s)}.tgroup-h.a .tgb{color:var(--t-a)}
-.tgroup-h.b .tgb{color:var(--t-b)}.tgroup-h.gem .tgb{color:var(--t-gem)}
-.tgroup-h .tgt{font:italic 400 var(--fs-base) var(--f-italic);color:var(--ink-2)}
-.tgroup-h .tgc{margin-left:auto;font:400 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.stack-box { margin-top: 12px; padding: 16px; background: var(--bg-soft); border-radius: var(--r-md); }
+.stack-k { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.stack-v { font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+.stack-v b { color: var(--ink); font-weight: 600; }
 
-.firm-card{background:var(--paper-0);border-top:1px solid var(--paper-3);padding:var(--sp-5) var(--sp-5);cursor:pointer;transition:background 180ms var(--ease-snap)}
-.firm-card:hover{background:var(--paper-1)}
-.firm-card.open{background:var(--paper-1);border-top-color:var(--ink-0)}
-.firm-h{display:grid;grid-template-columns:44px 1fr auto 80px 24px;gap:var(--sp-4);align-items:center}
-.firm-rank{font:600 var(--fs-sm) var(--f-mono);color:var(--ink-3);letter-spacing:.02em;font-variant-numeric:tabular-nums;padding-top:4px}
-.firm-title .fname{font:700 var(--fs-xl)/1.1 var(--f-display);color:var(--ink-0);letter-spacing:-.01em;margin-bottom:3px;display:flex;align-items:baseline;gap:var(--sp-2);flex-wrap:wrap}
-.fname .gem-tag{font:500 var(--fs-xs) var(--f-mono);color:var(--t-gem);padding:2px 6px;border:1px solid var(--t-gem);letter-spacing:.08em;text-transform:uppercase}
-.fname .intern-tag{font:500 var(--fs-xs) var(--f-mono);color:var(--accent);padding:2px 6px;background:rgba(196,30,58,.08);letter-spacing:.08em;text-transform:uppercase}
-.firm-sub{font:italic 400 var(--fs-sm) var(--f-italic);color:var(--ink-2)}
-.firm-sub .cat-icon{color:var(--accent);margin-right:6px}
-.firm-meta{display:flex;gap:var(--sp-3);font:500 var(--fs-xs) var(--f-mono);color:var(--ink-2);letter-spacing:.08em;text-transform:uppercase}
-.firm-meta .mm b{color:var(--ink-0);font-size:var(--fs-sm)}
-.firm-score{text-align:right}
-.firm-score .fs-n{font:700 var(--fs-2xl) var(--f-mono);line-height:1;font-variant-numeric:tabular-nums}
-.firm-score.sss .fs-n{color:var(--t-sss)}
-.firm-score.ss .fs-n{color:var(--t-ss)}
-.firm-score.s .fs-n{color:var(--t-s)}
-.firm-score.a .fs-n{color:var(--t-a)}
-.firm-score.b .fs-n{color:var(--t-b)}
-.firm-score .fs-l{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;margin-top:2px;display:block}
-.firm-arrow{color:var(--ink-3);font-size:20px;transition:transform 280ms var(--ease-ed);line-height:1}
-.firm-card.open .firm-arrow{transform:rotate(180deg)}
+.hard-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.hchip {
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  border-radius: 12px; border: 1px solid;
+}
+.hchip.red { color: var(--danger); border-color: var(--danger-soft); background: var(--danger-soft); }
+.hchip.blue { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); }
+.hchip.green { color: var(--success); border-color: var(--success-soft); background: var(--success-soft); }
+.hchip.gold { color: var(--warn); border-color: var(--warn-soft); background: var(--warn-soft); }
 
-.firm-body{display:none;padding-top:var(--sp-5);margin-top:var(--sp-5);border-top:1px dotted var(--paper-3);animation:fadeIn 280ms var(--ease-ed)}
-.firm-card.open .firm-body{display:block}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.firm-intro{font:400 var(--fs-lg)/1.75 var(--f-italic);color:var(--ink-1);padding:var(--sp-4) var(--sp-5);border-left:3px solid var(--accent);background:var(--paper-0);margin-bottom:var(--sp-5);font-style:italic}
-.firm-why{margin-bottom:var(--sp-5)}
-.firm-why h6{font:500 var(--fs-xs) var(--f-mono);color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--sp-3)}
-.firm-why ul{list-style:none;display:grid;gap:var(--sp-2)}
-.firm-why li{font:400 var(--fs-sm)/1.6 var(--f-body);color:var(--ink-1);padding-left:20px;position:relative}
-.firm-why li::before{content:'◆';position:absolute;left:0;top:3px;color:var(--accent);font-size:9px}
-.firm-match-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);margin-bottom:var(--sp-5)}
-.fm-cell{padding:var(--sp-4);background:var(--paper-0);border:1px solid var(--paper-2)}
-.fm-cell .fm-k{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between}
-.fm-cell .fm-k b{color:var(--accent);font:700 var(--fs-sm) var(--f-mono)}
-.fm-cell .fm-v{font:400 var(--fs-sm)/1.55 var(--f-body);color:var(--ink-1)}
-.pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);margin-bottom:var(--sp-5)}
-.pay-cell{padding:var(--sp-4);background:var(--paper-0);border-top:2px solid var(--ink-0)}
-.pay-k{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
-.pay-v{font:700 var(--fs-xl) var(--f-mono);color:var(--ink-0);margin-top:4px;font-variant-numeric:tabular-nums}
-.pay-v small{font-size:.55em;color:var(--ink-2);font-weight:400;margin-left:3px}
-.dim9-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:var(--sp-5)}
-.d9{text-align:center;padding:var(--sp-3) var(--sp-1);background:var(--paper-0);border:1px solid var(--paper-2)}
-.d9-l{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.02em;font-size:10px;text-transform:uppercase}
-.d9-v{font:700 var(--fs-lg) var(--f-mono);color:var(--ink-0);margin-top:4px;font-variant-numeric:tabular-nums}
-.d9-bar{height:2px;margin-top:6px;background:var(--paper-3)}
-.d9-bar i{display:block;height:100%;background:var(--accent)}
+/* ═══ WEIGHT CONSOLE ═══ */
+.console {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 24px;
+}
+.console-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  flex-wrap: wrap; gap: 12px;
+}
+.console-head h4 { font-size: 15px; font-weight: 700; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.preset {
+  font-size: 12px; font-weight: 500;
+  padding: 5px 12px; border-radius: var(--r-sm);
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--ink-2); cursor: pointer;
+  transition: all 150ms;
+}
+.preset:hover { border-color: var(--accent); color: var(--accent); }
+.preset.act { background: var(--ink); color: #fff; border-color: var(--ink); }
+.dims { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 32px; }
+.dim {
+  display: grid; grid-template-columns: 24px 1fr 200px 56px;
+  gap: 12px; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.dim:last-child, .dim:nth-last-child(2) { border-bottom: none; }
+.dim-num { font-size: 11px; color: var(--ink-4); font-weight: 600; }
+.dim-title h5 { font-size: 13px; font-weight: 600; color: var(--ink); }
+.dim-title p { font-size: 11px; color: var(--ink-3); }
+.dim-slot { position: relative; }
+.dim input[type=range] {
+  -webkit-appearance: none; width: 100%; height: 16px;
+  background: transparent; cursor: pointer;
+}
+.dim input[type=range]::-webkit-slider-runnable-track {
+  height: 4px; background: var(--border); border-radius: 2px;
+}
+.dim input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--accent); border: 2px solid #fff;
+  margin-top: -5px; box-shadow: var(--sh-sm);
+  transition: transform 150ms;
+}
+.dim input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.2); }
+.dim-val {
+  font-size: 15px; font-weight: 700; color: var(--accent);
+  text-align: right;
+}
+.dim-val sub { font-size: 10px; color: var(--ink-3); font-weight: 400; vertical-align: baseline; }
 
-.firm-pos{margin-bottom:var(--sp-5);padding:var(--sp-4);background:var(--paper-0);border:1px solid var(--paper-2)}
-.firm-pos h6{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--sp-3)}
-.pg{margin-bottom:var(--sp-3)}
-.pg-d{font:600 var(--fs-sm) var(--f-body);color:var(--ink-blue);margin-bottom:3px}
-.pg-j{list-style:none;font:400 var(--fs-sm)/1.5 var(--f-body);color:var(--ink-2);padding-left:var(--sp-4)}
-.pg-j li::before{content:'›';margin-right:8px;color:var(--ink-3)}
-.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);margin-bottom:var(--sp-4)}
-.ar{padding:var(--sp-4);background:var(--paper-0);border-left:3px solid}
-.ar.adv{border-color:var(--sage)}
-.ar.risk{border-color:var(--brick)}
-.ar h6{font:500 var(--fs-xs) var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--sp-2)}
-.ar.adv h6{color:var(--sage)}
-.ar.risk h6{color:var(--brick)}
-.ar ul{list-style:none;font:400 var(--fs-sm)/1.5 var(--f-body);color:var(--ink-1)}
-.ar li{padding-left:16px;position:relative;margin-bottom:2px}
-.ar.adv li::before{content:'▲';position:absolute;left:0;color:var(--sage);font-size:8px;top:6px}
-.ar.risk li::before{content:'▼';position:absolute;left:0;color:var(--brick);font-size:8px;top:6px}
-.firm-footer{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-3);background:var(--paper-0);border:1px dashed var(--paper-3);font:400 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.05em}
-.firm-footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+/* ═══ TIER LEGEND ═══ */
+.tiers {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+}
+.tier-item {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 16px; border-top: 3px solid;
+  transition: transform 150ms;
+}
+.tier-item:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
+.tier-item.sss { border-top-color: var(--t-sss); }
+.tier-item.ss { border-top-color: var(--t-ss); }
+.tier-item.s { border-top-color: var(--t-s); }
+.tier-item.a { border-top-color: var(--t-a); }
+.tier-item.b { border-top-color: var(--t-b); }
+.tier-label { font-size: 13px; font-weight: 700; color: var(--ink); }
+.tier-label .count {
+  display: inline-block; padding: 1px 8px; border-radius: 10px;
+  background: var(--bg-soft); color: var(--ink-3);
+  font-size: 11px; margin-left: 6px;
+  font-family: var(--f-mono); font-weight: 500;
+}
+.tier-name { font-size: 12px; color: var(--ink-2); margin-top: 2px; font-weight: 500; }
+.tier-desc { font-size: 11px; color: var(--ink-3); margin-top: 6px; line-height: 1.5; }
 
-/* ═══ 05 HEATMAP ═══ */
-.heat-ctl{display:flex;gap:var(--sp-2);margin-bottom:var(--sp-4)}
-.heat{border:1px solid var(--paper-3);overflow:hidden}
-.heat-h,.heat-r{display:grid;grid-template-columns:200px repeat(10,1fr) 80px;gap:1px;background:var(--paper-3)}
-.heat-h>div{padding:10px 6px;background:var(--paper-1);font:500 var(--fs-xs) var(--f-mono);color:var(--ink-2);text-align:center;letter-spacing:.08em;text-transform:uppercase}
-.heat-h>div:first-child{text-align:left;padding-left:var(--sp-4)}
-.heat-r>div{padding:var(--sp-3) 6px;background:var(--paper-0);font:500 var(--fs-sm) var(--f-mono);text-align:center;font-variant-numeric:tabular-nums;transition:transform 180ms var(--ease-snap)}
-.heat-r>div:first-child{text-align:left;padding-left:var(--sp-4);font:500 var(--fs-sm) var(--f-body);color:var(--ink-0);background:var(--paper-1)}
-.heat-r>div:hover{transform:scale(1.15);z-index:5;box-shadow:var(--sh-lift)}
-.hc-1{background:#fef6ed !important;color:#9a6b3a}
-.hc-2{background:#fdedd6 !important;color:#8a4a20}
-.hc-3{background:#fce0bd !important;color:#7a3818}
-.hc-4{background:#f9d3a0 !important;color:#6b2f16}
-.hc-5{background:#f2c57a !important;color:#5c2818}
-.hc-6{background:#e3a54a !important;color:#fef6ed}
-.hc-7{background:#c98430 !important;color:#fef6ed}
-.hc-8{background:#a85e22 !important;color:#fef6ed}
-.hc-9{background:#7a3818 !important;color:#fef6ed}
-.hc-10{background:#4a1a0e !important;color:#fef6ed;font-weight:700}
+/* ═══ FILTERS + RANK ═══ */
+.filter-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; margin-bottom: 16px;
+  flex-wrap: wrap; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: 12px; font-weight: 500;
+  padding: 5px 12px; border-radius: var(--r-sm);
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--ink-2); cursor: pointer;
+  transition: all 150ms;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.act { background: var(--ink); color: #fff; border-color: var(--ink); }
+.sort-row { display: flex; gap: 8px; align-items: center; }
+.sort-row select {
+  font-size: 12px; padding: 5px 10px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-sm); color: var(--ink); cursor: pointer;
+  font-family: var(--f-sans);
+}
+.sort-row input[type=text] {
+  font-size: 12px; padding: 5px 12px 5px 30px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-sm); color: var(--ink); width: 180px;
+  font-family: var(--f-sans);
+}
+.search-wrap { position: relative; }
+.search-wrap::before {
+  content: '🔍'; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 11px; opacity: 0.5;
+}
 
-/* ═══ 06 SCATTER ═══ */
-.scatter{background:var(--paper-1);border:1px solid var(--paper-2);padding:var(--sp-5);height:520px;position:relative;overflow:hidden}
-.sc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--sp-4);flex-wrap:wrap;gap:var(--sp-3)}
-.sc-head h4{font:600 var(--fs-lg) var(--f-display);color:var(--ink-0)}
-.sc-legend{display:flex;gap:var(--sp-4);font:400 var(--fs-xs) var(--f-mono);color:var(--ink-2);flex-wrap:wrap}
-.sl-dot{width:10px;height:10px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:5px}
-.sc-plot{position:relative;height:calc(100% - 60px);background:var(--paper-0);border:1px solid var(--paper-2)}
-.sc-grid{position:absolute;inset:40px;background-image:linear-gradient(var(--paper-2) 1px,transparent 1px),linear-gradient(90deg,var(--paper-2) 1px,transparent 1px);background-size:25% 25%;opacity:.6}
-.sc-quadrant{position:absolute;padding:3px 10px;background:var(--paper-1);border:1px solid var(--paper-3);font:italic 400 var(--fs-xs) var(--f-italic);color:var(--ink-3)}
-.sc-ax{position:absolute;font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.08em}
-.sc-dot{position:absolute;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;transition:all 200ms var(--ease-ed);border:2px solid var(--paper-0);box-shadow:var(--sh-paper)}
-.sc-dot:hover{z-index:10;transform:translate(-50%,-50%) scale(1.8);box-shadow:var(--sh-float)}
-.sc-tip{position:absolute;background:var(--ink-0);color:var(--paper-0);padding:10px 12px;font:500 var(--fs-xs) var(--f-mono);border-radius:3px;display:none;z-index:100;pointer-events:none;min-width:180px;box-shadow:var(--sh-float)}
-.sc-tip b{color:var(--gold);display:block;margin-bottom:4px;font-family:var(--f-body);font-size:var(--fs-sm)}
+.tgroup { margin-bottom: 32px; }
+.tgroup-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 2px solid var(--ink); margin-bottom: 12px;
+}
+.tgroup-badge {
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: var(--r-sm);
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.tgroup-badge.sss { background: var(--t-sss); }
+.tgroup-badge.ss { background: var(--t-ss); }
+.tgroup-badge.s { background: var(--t-s); }
+.tgroup-badge.a { background: var(--t-a); }
+.tgroup-badge.b { background: var(--t-b); }
+.tgroup-badge.gem { background: var(--t-gem); }
+.tgroup-title { font-size: 15px; font-weight: 600; }
+.tgroup-count { margin-left: auto; font-size: 12px; color: var(--ink-3); font-family: var(--f-mono); }
 
-/* ═══ 07 CURVE ═══ */
-.curve{background:var(--paper-1);border:1px solid var(--paper-2);padding:var(--sp-5)}
-.curve-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--sp-4);flex-wrap:wrap;gap:var(--sp-3)}
-.curve-sel{display:flex;flex-wrap:wrap;gap:4px;max-width:70%}
-.cs-btn{font:500 var(--fs-xs) var(--f-mono);letter-spacing:.05em;padding:4px 10px;background:transparent;border:1px solid var(--paper-3);color:var(--ink-2);cursor:pointer;transition:all 180ms var(--ease-snap)}
-.cs-btn:hover{border-color:var(--ink-2)}
-.cs-btn.act{background:var(--ink-0);color:var(--paper-0);border-color:var(--ink-0)}
-.curve-svg{width:100%;height:420px;background:var(--paper-0);border:1px solid var(--paper-2)}
+/* ═══ FIRM CARD (decisional · default expanded) ═══ */
+.firm {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 20px 24px; margin-bottom: 10px;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.firm:hover { border-color: var(--accent); box-shadow: var(--sh-md); }
+.firm-top {
+  display: grid; grid-template-columns: 44px 1fr 200px 80px;
+  gap: 16px; align-items: center;
+}
+.firm-rank {
+  font-size: 22px; font-weight: 800;
+  color: var(--ink-4);
+  font-family: var(--f-mono);
+  letter-spacing: -0.02em;
+  padding-top: 2px;
+}
+.firm-title { min-width: 0; }
+.firm-name {
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+.firm-badge {
+  font-size: 10px; font-weight: 600; padding: 2px 7px;
+  border-radius: 4px; color: #fff;
+  letter-spacing: 0.04em;
+}
+.firm-badge.gem { background: var(--t-gem); }
+.firm-badge.warn { background: var(--warn); }
+.firm-badge.intern { background: var(--ink-2); }
+.firm-sub {
+  font-size: 12px; color: var(--ink-3);
+}
+.firm-sub .cat-icon { color: var(--accent); margin-right: 4px; font-weight: 600; }
+.firm-stats-mini {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  font-size: 11px;
+}
+.sm-chip {
+  padding: 3px 8px; background: var(--bg-soft);
+  border-radius: var(--r-sm); color: var(--ink-2);
+  font-family: var(--f-mono); font-weight: 500;
+}
+.sm-chip b { color: var(--ink); font-weight: 700; }
+.firm-score-block { text-align: right; }
+.firm-score {
+  font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+  font-family: var(--f-mono);
+  line-height: 1;
+}
+.firm-score.sss { color: var(--t-sss); }
+.firm-score.ss { color: var(--t-ss); }
+.firm-score.s { color: var(--t-s); }
+.firm-score.a { color: var(--t-a); }
+.firm-score.b { color: var(--t-b); }
+.firm-tier {
+  font-size: 10px; font-weight: 700; color: var(--ink-3);
+  margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase;
+}
 
-/* ═══ 08 UNIT TYPES ═══ */
-.ut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5)}
-.ut-card{background:var(--paper-0);border:1px solid var(--paper-2);padding:var(--sp-5);position:relative;border-top:3px solid var(--accent);transition:all 280ms var(--ease-ed)}
-.ut-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lift)}
-.ut-card.medical{border-top-color:#8b0a1e}
-.ut-card.auto{border-top-color:#1a3a5c}
-.ut-card.aiot{border-top-color:#b08d3f}
-.ut-card.soe{border-top-color:#6b5a28}
-.ut-card.hospital{border-top-color:#5f7a5f}
-.ut-card.startup{border-top-color:#a63d2a}
-.ut-num{position:absolute;top:var(--sp-4);right:var(--sp-5);font:700 var(--fs-3xl) var(--f-display);color:var(--paper-3);letter-spacing:-.03em;line-height:1}
-.ut-card h5{font:700 var(--fs-xl)/1.2 var(--f-display);color:var(--ink-0);letter-spacing:-.01em;margin-bottom:var(--sp-2);max-width:80%}
-.ut-card .ut-tag{font:italic 400 var(--fs-sm) var(--f-italic);color:var(--ink-2);margin-bottom:var(--sp-4)}
-.ut-body{font:400 var(--fs-sm)/1.75 var(--f-body);color:var(--ink-1);margin-bottom:var(--sp-4)}
-.ut-body em{color:var(--accent);font-style:italic}
-.ut-bullets{list-style:none;font:400 var(--fs-sm)/1.7 var(--f-body);color:var(--ink-2);margin-bottom:var(--sp-4)}
-.ut-bullets li{padding-left:16px;position:relative;margin-bottom:3px}
-.ut-bullets li::before{content:'—';position:absolute;left:0;color:var(--ink-3)}
-.ut-rec{padding:var(--sp-3) var(--sp-4);background:var(--paper-1);font:500 var(--fs-xs) var(--f-mono);color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-left:3px solid var(--accent)}
+/* Oneliner (always visible) */
+.firm-oneliner {
+  margin-top: 12px;
+  font-size: 14px; line-height: 1.6;
+  color: var(--ink-2);
+  padding: 10px 14px;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-weight: 500;
+}
+.firm-caveat {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--warn);
+  padding: 10px 14px;
+  background: var(--warn-soft);
+  border-left: 3px solid var(--warn);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-weight: 500;
+}
 
-/* ═══ 09 TIMELINE ═══ */
-.tl-wrap{background:var(--paper-1);border:1px solid var(--paper-2);padding:var(--sp-6);overflow-x:auto}
-.tl{min-width:1000px;position:relative;padding:80px 0}
-.tl-line{position:absolute;top:50%;left:0;right:0;height:1px;background:var(--ink-0)}
-.tl-mk{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:var(--paper-0);border:2px solid var(--ink-0);border-radius:50%;z-index:2}
-.tl-mk.now{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 6px rgba(196,30,58,.15);animation:pulse 2s infinite}
-.tl-mk.milestone{width:14px;height:14px;background:var(--accent);border-color:var(--accent)}
-.tl-lbl{position:absolute;left:50%;transform:translateX(-50%);width:140px;font:400 var(--fs-xs)/1.4 var(--f-body);color:var(--ink-2);text-align:center}
-.tl-lbl.above{bottom:calc(50% + 14px)}
-.tl-lbl.below{top:calc(50% + 14px)}
-.tl-lbl b{display:block;color:var(--ink-0);font-weight:600;font-size:var(--fs-sm);margin-bottom:2px;font-family:var(--f-display)}
-.tl-lbl .tl-d{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.08em}
-.tl-lbl.now b{color:var(--accent)}
+/* Key metrics row (always visible) */
+.firm-metrics {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  margin-top: 16px;
+}
+.metric-cell {
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-radius: var(--r-md);
+}
+.metric-k { font-size: 10px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.metric-v { font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 3px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.metric-v small { font-size: 11px; color: var(--ink-2); font-weight: 500; margin-left: 2px; }
 
-/* ═══ 10 SETTLE CALC ═══ */
-.calc-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:var(--sp-6)}
-.calc-in{background:var(--paper-0);border:1px solid var(--paper-2);padding:var(--sp-5)}
-.ci-row{display:grid;grid-template-columns:120px 1fr 70px;gap:var(--sp-3);align-items:center;padding:var(--sp-3) 0;border-bottom:1px solid var(--paper-2)}
-.ci-row:last-child{border-bottom:none}
-.ci-row label{font:500 var(--fs-sm) var(--f-body);color:var(--ink-2)}
-.ci-row select,.ci-row input[type=range]{-webkit-appearance:none;background:transparent}
-.ci-row select{grid-column:span 2;padding:6px;background:var(--paper-1);border:1px solid var(--paper-3);font:500 var(--fs-sm) var(--f-body);color:var(--ink-0);cursor:pointer}
-.ci-row input[type=range]{height:24px}
-.ci-row input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--paper-2)}
-.ci-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--paper-0);border:2px solid var(--accent);margin-top:-5.5px}
-.ci-val{font:700 var(--fs-lg) var(--f-mono);color:var(--accent);text-align:right;font-variant-numeric:tabular-nums}
-.calc-out{background:var(--paper-1);border:1px solid var(--paper-2);padding:var(--sp-5)}
-.calc-out h6{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--sp-4);padding-bottom:var(--sp-3);border-bottom:1px solid var(--paper-2)}
-.co-row{display:grid;grid-template-columns:1fr auto;gap:var(--sp-3);padding:var(--sp-3) 0;border-bottom:1px dotted var(--paper-3);align-items:baseline}
-.co-row:last-of-type{border-bottom:none}
-.co-k{font:400 var(--fs-sm) var(--f-body);color:var(--ink-2)}
-.co-v{font:700 var(--fs-xl) var(--f-mono);color:var(--ink-0);font-variant-numeric:tabular-nums}
-.co-v small{font-size:.55em;color:var(--ink-2);font-weight:400}
-.co-v.red{color:var(--brick)}.co-v.green{color:var(--sage)}
-.verdict{margin-top:var(--sp-5);padding:var(--sp-5);background:var(--paper-0);border:1px solid var(--paper-3);border-left:4px solid var(--accent);font:400 var(--fs-base)/1.6 var(--f-italic);font-style:italic;color:var(--ink-1)}
+/* Details toggle */
+.firm-details-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--accent); cursor: pointer;
+  border: none; background: none;
+  padding: 4px 0;
+}
+.firm-details-toggle:hover { text-decoration: underline; }
+.firm-details-toggle .arr { transition: transform 200ms; }
+.firm.open .firm-details-toggle .arr { transform: rotate(180deg); }
 
-/* ═══ 11 INDUSTRY ═══ */
-.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5)}
-.ind-card{background:var(--paper-0);border:1px solid var(--paper-2);padding:var(--sp-6);border-top:4px solid var(--accent);position:relative}
-.ind-card.med{border-top-color:#8b0a1e}
-.ind-card.auto{border-top-color:#1a3a5c}
-.ind-card.aiot{border-top-color:#b08d3f}
-.ind-card h5{font:700 var(--fs-2xl)/1.1 var(--f-display);color:var(--ink-0);letter-spacing:-.02em;margin-bottom:4px}
-.ind-card .ind-w{font:italic 400 var(--fs-sm) var(--f-italic);color:var(--ink-3);margin-bottom:var(--sp-5)}
-.ind-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);margin-bottom:var(--sp-5);padding:var(--sp-4);background:var(--paper-1)}
-.is{padding:var(--sp-2) 0}
-.is-l{font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase}
-.is-v{font:700 var(--fs-xl) var(--f-mono);color:var(--accent);margin-top:2px;font-variant-numeric:tabular-nums}
-.ind-body{font:400 var(--fs-sm)/1.75 var(--f-body);color:var(--ink-1);margin-bottom:var(--sp-4)}
-.ind-body em{color:var(--accent);font-family:var(--f-italic);font-style:italic}
-.ind-b{list-style:none;font:400 var(--fs-sm)/1.75 var(--f-body);color:var(--ink-2)}
-.ind-b li{padding-left:16px;position:relative}
-.ind-b li::before{content:'◆';position:absolute;left:0;top:5px;color:var(--accent);font-size:8px}
+.firm-details { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.firm.open .firm-details { display: block; }
 
-/* ═══ 12 SOURCES ═══ */
-.conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);margin-bottom:var(--sp-6)}
-.conf-card{padding:var(--sp-4) var(--sp-5);background:var(--paper-0);border-left:3px solid}
-.conf-card.hi{border-color:var(--sage)}
-.conf-card.mid{border-color:var(--gold)}
-.conf-card.low{border-color:var(--brick)}
-.conf-card b{font:700 var(--fs-base) var(--f-body);color:var(--ink-0);display:block;margin-bottom:4px}
-.conf-card p{font:400 var(--fs-sm)/1.5 var(--f-body);color:var(--ink-2)}
-.src-list{list-style:none;font:400 var(--fs-sm)/1.9 var(--f-body);color:var(--ink-2)}
-.src-list li{padding-left:20px;position:relative}
-.src-list li::before{content:'§';position:absolute;left:0;color:var(--accent);font-family:var(--f-italic);font-style:italic}
+.why-block { margin-bottom: 16px; }
+.why-block h6, .pos-block h6, .ar-block h6 {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+}
+.why-block ul { list-style: none; display: grid; gap: 4px; }
+.why-block li {
+  font-size: 13px; line-height: 1.6; color: var(--ink-2);
+  padding-left: 20px; position: relative;
+}
+.why-block li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--accent); font-weight: 700;
+}
 
-/* ═══ Footer ═══ */
-.footer{padding:var(--sp-8) var(--sp-7);background:var(--ink-0);color:var(--paper-1);text-align:center;margin-top:var(--sp-9)}
-.footer h3{font:900 var(--fs-2xl) var(--f-display);color:var(--paper-0);letter-spacing:-.02em;margin-bottom:var(--sp-3)}
-.footer h3 sup{font-size:.4em;color:var(--accent);font-weight:400;vertical-align:super}
-.footer p{font:400 var(--fs-sm)/1.8 var(--f-body);color:var(--ink-3);margin-bottom:4px}
-.footer .f-sig{font:400 var(--fs-xs) var(--f-mono);color:var(--ink-4);letter-spacing:.2em;text-transform:uppercase;margin-top:var(--sp-5);padding-top:var(--sp-5);border-top:1px solid var(--ink-2);max-width:500px;margin-left:auto;margin-right:auto}
+.pos-block { margin-bottom: 16px; padding: 14px; background: var(--bg-soft); border-radius: var(--r-md); }
+.pos-group { margin-bottom: 8px; }
+.pos-group:last-child { margin-bottom: 0; }
+.pos-dept { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.pos-jobs { list-style: none; padding-left: 12px; }
+.pos-jobs li { font-size: 12px; color: var(--ink-2); padding: 1px 0; position: relative; padding-left: 12px; }
+.pos-jobs li::before { content: '·'; position: absolute; left: 0; color: var(--ink-3); font-weight: 700; }
+
+.ar-block { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.ar-card {
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border-left: 3px solid;
+}
+.ar-card.adv { background: var(--success-soft); border-left-color: var(--success); }
+.ar-card.risk { background: var(--danger-soft); border-left-color: var(--danger); }
+.ar-card h6 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.ar-card.adv h6 { color: var(--success); }
+.ar-card.risk h6 { color: var(--danger); }
+.ar-card ul { list-style: none; }
+.ar-card li {
+  font-size: 12px; color: var(--ink-2); line-height: 1.6;
+  padding-left: 14px; position: relative;
+  margin-bottom: 2px;
+}
+.ar-card.adv li::before { content: '+'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+.ar-card.risk li::before { content: '−'; position: absolute; left: 0; color: var(--danger); font-weight: 700; }
+
+.firm-src {
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-radius: var(--r-md);
+  font-size: 11px; color: var(--ink-3);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  font-family: var(--f-mono);
+}
+.firm-src a { color: var(--accent); text-decoration: none; }
+.firm-src a:hover { text-decoration: underline; }
+
+/* Show more button */
+.show-more {
+  display: block; margin: 16px auto 0;
+  font-size: 13px; font-weight: 600;
+  padding: 8px 20px;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  color: var(--ink);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 150ms;
+}
+.show-more:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ═══ HEATMAP ═══ */
+.heat-wrap {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  background: var(--card);
+  overflow: hidden;
+}
+.heat-ctrl { display: flex; gap: 6px; padding: 12px; border-bottom: 1px solid var(--border); background: var(--bg-soft); }
+.heat-scroll { overflow-x: auto; }
+.heat {
+  min-width: 900px;
+  display: grid;
+  grid-template-columns: 180px repeat(10, 1fr) 80px;
+  gap: 0;
+}
+.heat > div {
+  padding: 10px 6px; text-align: center;
+  font-size: 12px; font-family: var(--f-mono);
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+.heat > div:last-child { border-right: none; }
+.heat .h-head {
+  background: var(--bg-soft);
+  font-weight: 700;
+  color: var(--ink-2);
+  font-size: 11px; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.heat .h-name {
+  text-align: left; padding-left: 14px;
+  font-family: var(--f-sans); font-weight: 600;
+  color: var(--ink);
+  background: var(--card);
+}
+.hc-1 { background: #fef2f2; color: #991b1b; }
+.hc-2 { background: #fee2e2; color: #991b1b; }
+.hc-3 { background: #fed7aa; color: #9a3412; }
+.hc-4 { background: #fef3c7; color: #92400e; }
+.hc-5 { background: #fef9c3; color: #854d0e; }
+.hc-6 { background: #ecfccb; color: #3f6212; }
+.hc-7 { background: #d1fae5; color: #065f46; }
+.hc-8 { background: #a7f3d0; color: #064e3b; }
+.hc-9 { background: #6ee7b7; color: #064e3b; font-weight: 700; }
+.hc-10 { background: #34d399; color: #064e3b; font-weight: 800; }
+
+/* ═══ SCATTER ═══ */
+.scatter {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px;
+}
+.sc-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }
+.sc-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); }
+.sl-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 5px; }
+.sc-plot {
+  position: relative; height: 440px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.sc-grid {
+  position: absolute; inset: 40px;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 25% 25%;
+  opacity: 0.7;
+}
+.sc-qd {
+  position: absolute;
+  padding: 3px 10px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 11px; color: var(--ink-3); font-weight: 500;
+}
+.sc-ax {
+  position: absolute;
+  font-size: 11px; color: var(--ink-3); font-family: var(--f-mono);
+}
+.sc-dot {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border: 2px solid var(--card);
+  box-shadow: var(--sh-sm);
+  transition: transform 200ms;
+}
+.sc-dot:hover { z-index: 10; transform: translate(-50%, -50%) scale(1.8); box-shadow: var(--sh-lg); }
+.sc-tip {
+  position: absolute;
+  background: var(--ink); color: #fff;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: var(--r-sm);
+  display: none;
+  z-index: 100;
+  pointer-events: none;
+  min-width: 160px;
+  box-shadow: var(--sh-lg);
+  font-family: var(--f-mono);
+}
+.sc-tip b { color: #fbbf24; display: block; margin-bottom: 3px; font-family: var(--f-sans); font-size: 13px; }
+
+/* ═══ CURVE ═══ */
+.curve {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px;
+}
+.curve-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }
+.curve-sel { display: flex; flex-wrap: wrap; gap: 4px; max-width: 70%; }
+.cs-btn {
+  font-size: 11px; padding: 4px 10px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--ink-2); cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: all 150ms;
+  font-family: var(--f-sans);
+}
+.cs-btn:hover { border-color: var(--accent); color: var(--accent); }
+.cs-btn.act { background: var(--ink); color: #fff; border-color: var(--ink); }
+.curve-svg { width: 100%; height: 380px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); }
+
+/* ═══ UNIT TYPES ═══ */
+.ut-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ut-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 24px;
+  border-top: 4px solid var(--accent);
+  position: relative;
+  transition: transform 200ms, box-shadow 200ms;
+}
+.ut-card:hover { transform: translateY(-3px); box-shadow: var(--sh-lg); }
+.ut-card.medical { border-top-color: #dc2626; }
+.ut-card.auto { border-top-color: #2563eb; }
+.ut-card.aiot { border-top-color: #7c3aed; }
+.ut-card.soe { border-top-color: #d97706; }
+.ut-card.hospital { border-top-color: #059669; }
+.ut-card.startup { border-top-color: #ea580c; }
+.ut-num {
+  position: absolute; top: 16px; right: 20px;
+  font-size: 32px; font-weight: 800;
+  color: var(--border); letter-spacing: -0.04em; line-height: 1;
+  font-family: var(--f-mono);
+}
+.ut-card h5 { font-size: 17px; font-weight: 700; margin-bottom: 4px; max-width: 80%; letter-spacing: -0.01em; }
+.ut-tag { font-size: 12px; color: var(--ink-3); margin-bottom: 14px; }
+.ut-body { font-size: 13px; line-height: 1.7; color: var(--ink-2); margin-bottom: 12px; }
+.ut-body strong { color: var(--ink); font-weight: 700; }
+.ut-bullets { list-style: none; font-size: 12px; color: var(--ink-2); margin-bottom: 12px; line-height: 1.7; }
+.ut-bullets li { padding-left: 14px; position: relative; }
+.ut-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--ink-3); }
+.ut-rec {
+  padding: 10px 14px; background: var(--accent-soft); border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+}
+
+/* ═══ TIMELINE ═══ */
+.tl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
+  overflow-x: auto;
+}
+.tl {
+  min-width: 1000px; position: relative;
+  padding: 80px 0;
+}
+.tl-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--ink-2); }
+.tl-mk {
+  position: absolute; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  background: var(--card); border: 2px solid var(--ink);
+  border-radius: 50%; z-index: 2;
+}
+.tl-mk.now {
+  width: 14px; height: 14px;
+  background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(37,99,235,0.15);
+}
+.tl-mk.ms { background: var(--accent); border-color: var(--accent); }
+.tl-lbl {
+  position: absolute; left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  text-align: center;
+  font-size: 12px;
+}
+.tl-lbl.above { bottom: calc(50% + 16px); }
+.tl-lbl.below { top: calc(50% + 16px); }
+.tl-lbl b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
+.tl-lbl.now b { color: var(--accent); }
+.tl-lbl .tl-d { font-size: 11px; color: var(--ink-3); font-family: var(--f-mono); }
+
+/* ═══ SETTLE CALC ═══ */
+.calc {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 28px;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px;
+}
+.calc-in { border-right: 1px solid var(--border); padding-right: 32px; }
+.calc-in h6, .calc-out h6 {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.ci {
+  display: grid; grid-template-columns: 110px 1fr 56px;
+  gap: 10px; align-items: center;
+  padding: 10px 0;
+}
+.ci label { font-size: 13px; color: var(--ink-2); }
+.ci select, .ci input[type=range] {
+  -webkit-appearance: none; background: transparent;
+}
+.ci select {
+  grid-column: span 2;
+  padding: 6px 10px;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--r-sm); font-size: 13px; color: var(--ink);
+  font-family: var(--f-sans); cursor: pointer;
+}
+.ci input[type=range] {
+  height: 24px;
+}
+.ci input[type=range]::-webkit-slider-runnable-track {
+  height: 4px; background: var(--border); border-radius: 2px;
+}
+.ci input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--accent); border: 2px solid #fff;
+  margin-top: -5px; box-shadow: var(--sh-sm);
+}
+.ci-val {
+  font-size: 14px; font-weight: 700; color: var(--accent);
+  text-align: right; font-family: var(--f-mono);
+}
+.co {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; padding: 10px 0;
+  border-bottom: 1px dotted var(--border);
+  align-items: baseline;
+}
+.co:last-of-type { border-bottom: none; }
+.co-k { font-size: 13px; color: var(--ink-2); }
+.co-v { font-size: 18px; font-weight: 700; color: var(--ink); font-family: var(--f-mono); }
+.co-v small { font-size: 11px; color: var(--ink-2); font-weight: 500; margin-left: 2px; }
+.co-v.red { color: var(--danger); }
+.co-v.green { color: var(--success); }
+.verdict {
+  margin-top: 16px; padding: 14px 16px;
+  background: var(--accent-soft); border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 13px; line-height: 1.6; color: var(--ink);
+  font-weight: 500;
+}
+
+/* ═══ INDUSTRY ═══ */
+.ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ind-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
+  border-top: 4px solid;
+}
+.ind-card.med { border-top-color: #dc2626; }
+.ind-card.auto { border-top-color: #2563eb; }
+.ind-card.aiot { border-top-color: #7c3aed; }
+.ind-card h5 { font-size: 19px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+.ind-w { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+.ind-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; padding: 14px; background: var(--bg-soft); border-radius: var(--r-md); }
+.is-l { font-size: 11px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.is-v { font-size: 18px; font-weight: 700; color: var(--accent); margin-top: 2px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.ind-body { font-size: 13px; line-height: 1.7; color: var(--ink-2); margin-bottom: 12px; }
+.ind-body strong { color: var(--ink); font-weight: 700; }
+.ind-b { list-style: none; font-size: 12px; color: var(--ink-2); line-height: 1.7; }
+.ind-b li { padding-left: 14px; position: relative; }
+.ind-b li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+/* ═══ SOURCES ═══ */
+.conf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.conf-card {
+  padding: 14px 18px; background: var(--card);
+  border: 1px solid var(--border); border-left: 3px solid;
+  border-radius: var(--r-md);
+}
+.conf-card.hi { border-left-color: var(--success); }
+.conf-card.mid { border-left-color: var(--warn); }
+.conf-card.low { border-left-color: var(--ink-3); }
+.conf-card b { font-size: 13px; font-weight: 700; color: var(--ink); display: block; margin-bottom: 4px; }
+.conf-card p { font-size: 12px; color: var(--ink-2); }
+.src-list { list-style: none; font-size: 13px; line-height: 1.9; color: var(--ink-2); background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px 24px; }
+.src-list li { padding-left: 18px; position: relative; }
+.src-list li::before { content: '§'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.src-list b { color: var(--ink); font-weight: 700; }
+
+/* ═══ FOOTER ═══ */
+.footer {
+  max-width: 1440px; margin: 64px auto 0;
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 12px; color: var(--ink-3);
+}
+.footer h3 { font-size: 16px; color: var(--ink); margin-bottom: 6px; }
 
 /* Back to top */
-.btt{position:fixed;bottom:var(--sp-5);right:var(--sp-5);width:44px;height:44px;background:var(--ink-0);color:var(--paper-0);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font:700 var(--fs-lg) var(--f-mono);opacity:0;pointer-events:none;transition:opacity 280ms var(--ease-ed);box-shadow:var(--sh-float);z-index:50}
-.btt.vis{opacity:1;pointer-events:auto}
-.btt:hover{background:var(--accent)}
-
-/* Scroll fade */
-.will-fade{opacity:0;transform:translateY(24px);transition:opacity 600ms var(--ease-ed),transform 600ms var(--ease-ed)}
-.in-view{opacity:1;transform:translateY(0)}
+.btt {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 44px; height: 44px;
+  background: var(--ink); color: #fff;
+  border: none; cursor: pointer;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700;
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms, transform 200ms;
+  box-shadow: var(--sh-lg);
+  z-index: 50;
+}
+.btt.vis { opacity: 1; pointer-events: auto; }
+.btt:hover { background: var(--accent); transform: translateY(-2px); }
 
 /* Responsive */
-@media(max-width:1100px){
-  .persona-row,.calc-grid,.ut-grid,.ind-grid{grid-template-columns:1fr}
-  .mast-inner{grid-template-columns:1fr}
-  .firm-h{grid-template-columns:40px 1fr 80px 24px}
-  .firm-meta{display:none}
-  .dim9-grid{grid-template-columns:repeat(5,1fr)}
+@media (max-width: 1100px) {
+  .persona { grid-template-columns: 1fr; }
+  .persona-avatar { width: 160px; height: 160px; margin: 0 auto; }
+  .facts, .hero-stats, .tiers { grid-template-columns: repeat(2, 1fr); }
+  .dims { grid-template-columns: 1fr; }
+  .firm-top { grid-template-columns: 36px 1fr 80px; }
+  .firm-stats-mini { display: none; }
+  .firm-metrics { grid-template-columns: repeat(3, 1fr); }
+  .ar-block, .ut-grid, .ind-grid, .conf-grid { grid-template-columns: 1fr; }
+  .calc { grid-template-columns: 1fr; }
+  .calc-in { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
 }
-@media(max-width:700px){
-  .wrap{padding:0 var(--sp-4)}
-  .sec{padding:var(--sp-7) 0}
-  .tiers{grid-template-columns:repeat(2,1fr)}
-  .pay-grid{grid-template-columns:repeat(2,1fr)}
-  .dim9-grid{grid-template-columns:repeat(3,1fr)}
-  .dim-row{grid-template-columns:30px 1fr;gap:var(--sp-2)}
-  .dim-slot,.dim-val{grid-column:span 2}
-  .firm-match-row,.ar-grid{grid-template-columns:1fr}
-  .heat-h,.heat-r{grid-template-columns:130px repeat(10,1fr) 60px;font-size:10px}
-  .mast-title{font-size:3rem}
+@media (max-width: 700px) {
+  .hero { padding: 32px 16px; }
+  .sec { padding: 32px 16px; }
+  .firm-metrics { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .tiers { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 </head>
 <body>
 
-<!-- ════════ MASTHEAD ════════ -->
-<header class="masthead" id="top">
-  <div class="mast-bar">
-    <span><i class="mast-dot"></i> N° IV · VOL. MMXXVI</span>
-    <span>ELEMENTAL™ · Personal Intelligence Publication</span>
-    <span>MAY · MMXXVI</span>
+<!-- ════════ TOPBAR ════════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">就业决策台<span class="sub">v5.0</span></span>
+    <nav id="topnav">
+      <a href="#persona">个人画像</a>
+      <a href="#method">评分体系</a>
+      <a href="#tiers">梯度说明</a>
+      <a href="#rank">公司总榜</a>
+      <a href="#heat">对比矩阵</a>
+      <a href="#scatter">薪资 × WLB</a>
+      <a href="#curve">5年曲线</a>
+      <a href="#units">单位百科</a>
+      <a href="#timeline">时间线</a>
+      <a href="#settle">定居计算</a>
+      <a href="#industry">行业前瞻</a>
+      <a href="#sources">数据来源</a>
+    </nav>
   </div>
-  <div class="mast-inner">
-    <div>
-      <h1 class="mast-title">Elemental<sup>™</sup>
-        <span class="mast-tagline">就业决策刊 · 微针世代</span>
-      </h1>
-      <p class="mast-lede">
-        Nine dimensions. Sixty candidates. Three verticals.<br>
-        One question: <em>where should a 2029 SJTU-MSE graduate land?</em>
-      </p>
-      <div class="mast-byline">
-        <strong>ZHANG YUANJIE · 张元杰</strong>
-        Shanghai Jiao Tong University · 仪器科学与技术 · Wang Kan Laboratory ·
-        面向医疗电子 · 车载电子 · AIoT 嵌入式系统工程师
-      </div>
-    </div>
-    <div class="mast-stats" id="mastStats">
-      <!-- injected -->
-    </div>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero" id="top">
+  <h1>2029 届 <span class="accent">交大仪科硕</span> 就业决策台</h1>
+  <p class="subtitle">面向 <b style="color:var(--ink)">张元杰</b> 个人的嵌入式工程师求职工具 · 9 维评分 · 60 家候选 · 3 秒定位 Top 5</p>
+  <div class="meta-row">
+    <span>王侃课题组 · 微针可穿戴医疗电子方向</span>
+    <span>·</span>
+    <span>目标入职 <b>2029.04</b></span>
+    <span>·</span>
+    <span>求职窗口 <b>2028.09 – 2029.10</b></span>
+    <span>·</span>
+    <span>定居目标 <b>闵行 / 嘉定</b></span>
+    <span>·</span>
+    <span>更新 <b>2026.05.07</b></span>
   </div>
+  <div class="hero-stats" id="heroStats"></div>
 </header>
 
-<!-- ════════ NAV ════════ -->
-<nav class="topnav">
-  <div class="topnav-inner" id="topnav">
-    <a class="brand" href="#top">Elemental<sup style="font-size:.5em;color:var(--accent)">™</sup></a>
-    <a href="#persona">I · 画像</a>
-    <a href="#method">II · 方法论</a>
-    <a href="#tiers">III · 梯度</a>
-    <a href="#rank">IV · 总榜</a>
-    <a href="#heat">V · 热力图</a>
-    <a href="#scatter">VI · 散点</a>
-    <a href="#curve">VII · 5 年曲线</a>
-    <a href="#units">VIII · 单位百科</a>
-    <a href="#timeline">IX · 时间线</a>
-    <a href="#settle">X · 定居</a>
-    <a href="#industry">XI · 前瞻</a>
-    <a href="#sources">XII · 来源</a>
-  </div>
-</nav>
-
-<!-- ════════ I · PERSONA ════════ -->
+<!-- ════════ 01 PERSONA ════════ -->
 <section class="sec" id="persona">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">I</span>
-      <span>THE SUBJECT</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ PERSONAL PROFILE</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 01 · 个人画像</div>
+      <h2>作为参照的候选人</h2>
+      <p>每个评分维度都以「张元杰」为锚点 · 这不是泛化榜单</p>
     </div>
-    <h2 class="sec-title">The candidate in question.</h2>
-    <p class="sec-dek">每一维评分都以 <em>张元杰</em> 为参照 —— 这不是泛化榜单。</p>
+  </div>
 
-    <div class="persona-row">
-      <div>
-        <div class="portrait">
-          <div class="portrait-initials">ZYJ</div>
-          <div class="portrait-label">2004 · Shanghai-born · Jiangsu-origin · Baoshan-resident</div>
+  <div class="persona">
+    <div class="persona-avatar">ZYJ</div>
+    <div class="persona-info">
+      <h3>张元杰 · Zhang Yuanjie</h3>
+      <div class="role">SJTU 仪器科学与技术学硕 · <b>王侃课题组</b> · 2026.09 – 2029.03</div>
+
+      <div class="facts">
+        <div class="fact">
+          <div class="fact-k">本科</div>
+          <div class="fact-v">武理 94.24/100<small> · 1 / 119</small></div>
+        </div>
+        <div class="fact">
+          <div class="fact-k">户籍 · 定居锚</div>
+          <div class="fact-v">上海宝山<small> · 闵行/嘉定置换</small></div>
+        </div>
+        <div class="fact">
+          <div class="fact-k">求职窗口</div>
+          <div class="fact-v">2028.09–2029.10</div>
         </div>
       </div>
-      <div class="persona-info">
-        <h3>张元杰 · Zhang Yuanjie</h3>
-        <p class="persona-role">SJTU 仪器科学与技术 · 学术型硕士 · 王侃课题组 · 2026.09–2029.03</p>
 
-        <div class="facts">
-          <div><div class="fact-k">教育基线</div><div class="fact-v">武理 94.24/100<small> · 1 / 119 · 国奖×3</small></div></div>
-          <div><div class="fact-k">研究生出口</div><div class="fact-v">SJTU · C9<small> · 原电子信息与电气工程学院</small></div></div>
-          <div><div class="fact-k">户籍·定居锚</div><div class="fact-v">上海宝山<small> · 闵行/嘉定置换</small></div></div>
-          <div><div class="fact-k">求职窗口</div><div class="fact-v">2028.09–2029.10<small> · 2029.04 入职</small></div></div>
-        </div>
+      <div class="hard-chips">
+        <span class="hchip red">AFM 末位挂名</span>
+        <span class="hchip gold">EI 一作 · 1</span>
+        <span class="hchip gold">发明专利 · 6</span>
+        <span class="hchip gold">软著 · 2 + 实用新型 · 2</span>
+        <span class="hchip blue">小米汽车 OS 实习（跨方向）</span>
+        <span class="hchip blue">宇构智核实习（< 2 月）</span>
+        <span class="hchip green">国奖 ×3 · 小米奖 · 卓越奖</span>
+      </div>
 
-        <div class="hard-goods">
-          <span class="hg acc">AFM · 1 作末位挂名</span>
-          <span class="hg gold">EI 一作 · 1</span>
-          <span class="hg gold">发明专利 · 6</span>
-          <span class="hg gold">软著 · 2 · 实用新型 · 2</span>
-          <span class="hg blue">小米汽车 OS 实习</span>
-          <span class="hg blue">宇构智核脑机接口实习</span>
-          <span class="hg sage">国奖 ×3 · 小米奖 · 卓越奖</span>
-        </div>
-
-        <div class="stack-row">
-          <div class="sk">现有栈 '26</div>
-          <div class="sv">STM32 / ESP32S3 / Hi3861 · FreeRTOS · AUTOSAR · CAN/LIN/BLE/MQTT · TF Lite Micro · Kalman · 1D-CNN · PCB/FPC 设计 · <em>嵌入式系统工程全栈</em></div>
-        </div>
-        <div class="stack-row">
-          <div class="sk">未来栈 '29</div>
-          <div class="sv">电化学/生物传感 · 微针阵列 · 微流控 · 柔性基材 · MOF 复合材料 · POCT · NFC 能量传输 · 自泵结构 · ARM Linux · <em>功能材料 × 嵌入式系统交叉</em></div>
-        </div>
-        <div class="stack-row">
-          <div class="sk">课题方向</div>
-          <div class="sv">微针阵列传感器的可穿戴医疗电子设备 · 以王侃课题组 <em>POCT · 汗液传感 · AI-IVD · 自供能</em> 四方向为基础延展</div>
-        </div>
-        <div class="stack-row">
-          <div class="sk">毕业约束</div>
-          <div class="sv">2 篇 SCI 一区一作（综述 1 + 研究性 1）· 导师不放长期实习 · <em>可实习时间仅有寒暑假</em></div>
-        </div>
-
-        <p class="soft-note">
-          <strong style="font-style:normal;color:var(--ink-0);font-weight:700">软实力备注：</strong>
-          学生会主席 · 近 100 场答辩 · 英语六级 518 · 领导力与表达能力突出 —
-          <em>适合管培/EM/对外岗位，但不作为独立评分维度，仅在适配岗位中加分。</em>
-        </p>
+      <div class="stack-box">
+        <div class="stack-k">现有栈 · 2026</div>
+        <div class="stack-v">STM32 / ESP32S3 / Hi3861 · <b>FreeRTOS · AUTOSAR · CAN/LIN/BLE/MQTT</b> · TF Lite Micro · Kalman · 1D-CNN · PCB/FPC 设计 — <b>嵌入式系统工程全栈</b></div>
+      </div>
+      <div class="stack-box" style="margin-top:8px">
+        <div class="stack-k">未来栈 · 2029 · 研究生将获取</div>
+        <div class="stack-v"><b>电化学 / 生物传感</b> · 微针阵列 · 微流控 · 柔性基材 · MOF 复合材料 · <b>POCT</b> · NFC 能量传输 · 自泵结构 · ARM Linux — <b>功能材料 × 嵌入式系统交叉</b></div>
+      </div>
+      <div class="stack-box" style="margin-top:8px">
+        <div class="stack-k">研究方向</div>
+        <div class="stack-v">微针阵列传感器的可穿戴医疗电子设备 — 以王侃课题组 <b>POCT · 汗液传感 · AI-IVD · 自供能</b> 为基础展开</div>
+      </div>
+      <div class="stack-box" style="margin-top:8px">
+        <div class="stack-k">毕业约束</div>
+        <div class="stack-v">2 篇 SCI 一区一作（综述 1 + 研究 1） · 导师<b>不放长期实习</b> · 可实习时间<b>仅寒暑假</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ II · METHOD ════════ -->
+<!-- ════════ 02 METHOD ════════ -->
 <section class="sec" id="method">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">II</span>
-      <span>METHODOLOGY</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ 9-DIMENSION WEIGHTED MODEL</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 02 · 评分体系</div>
+      <h2>9 维权重控制台</h2>
+      <p>拖动滑块实时重算全部 60 家排名</p>
     </div>
-    <h2 class="sec-title">The scoring console.</h2>
-    <p class="sec-dek">九维权重 · 合计 100% · 拖动滑块 <em>实时重算</em> 全部 60 家排名</p>
+  </div>
 
-    <div class="console">
-      <div class="console-head">
-        <h4>W<sub style="font-size:.6em">i</sub> · 权重自由调节</h4>
-        <div class="presets">
-          <button class="preset-btn act" onclick="preset('default')">默认 V4.0</button>
-          <button class="preset-btn" onclick="preset('salary')">薪资优先</button>
-          <button class="preset-btn" onclick="preset('tech')">技术契合优先</button>
-          <button class="preset-btn" onclick="preset('settle')">定居优先</button>
-          <button class="preset-btn" onclick="preset('cohort')">课题契合优先</button>
-        </div>
+  <div class="console">
+    <div class="console-head">
+      <h4>权重自由调节</h4>
+      <div class="presets">
+        <button class="preset act" onclick="preset('default', event)">默认 · V5</button>
+        <button class="preset" onclick="preset('salary', event)">薪资优先</button>
+        <button class="preset" onclick="preset('tech', event)">技术契合优先</button>
+        <button class="preset" onclick="preset('settle', event)">定居优先</button>
+        <button class="preset" onclick="preset('cohort', event)">课题组契合优先</button>
       </div>
-      <div class="dims" id="dimsG"></div>
     </div>
+    <div class="dims" id="dims"></div>
   </div>
 </section>
 
-<!-- ════════ III · TIERS ════════ -->
+<!-- ════════ 03 TIERS ════════ -->
 <section class="sec" id="tiers">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">III</span>
-      <span>CLASSIFICATION</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ PERCENTILE-BASED</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 03 · 梯度说明</div>
+      <h2>5 档梯度 · 按分位数动态划分</h2>
+      <p>权重变动后自动重新分档 · 避免僵化阈值</p>
     </div>
-    <h2 class="sec-title">Five tiers, dynamically ranked.</h2>
-    <p class="sec-dek">按分位数动态划分 · 权重变动后自动重新分档 · 避免僵化阈值</p>
-    <div class="tiers" id="tierLegend"></div>
   </div>
+  <div class="tiers" id="tierLegend"></div>
 </section>
 
-<!-- ════════ IV · RANK ════════ -->
+<!-- ════════ 04 RANK ════════ -->
 <section class="sec" id="rank">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">IV</span>
-      <span>THE REGISTRY</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ 60 CANDIDATES · FILTERABLE</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 04 · 公司总榜</div>
+      <h2>60 家候选 · 信息直给</h2>
+      <p>卡片默认展示核心信息 · 点击展开完整档案</p>
     </div>
-    <h2 class="sec-title">The candidates.</h2>
-    <p class="sec-dek">60 家候选雇主 · 覆盖 6 大类型 · <em>点击展开</em> 完整档案</p>
-
-    <div class="filters">
-      <div class="chips">
-        <button class="chip act" data-f="cat" data-v="all">全部</button>
-        <button class="chip" data-f="cat" data-v="medical">医疗电子</button>
-        <button class="chip" data-f="cat" data-v="auto">汽车电子</button>
-        <button class="chip" data-f="cat" data-v="aiot">AIoT</button>
-        <button class="chip" data-f="cat" data-v="soe">央国企</button>
-        <button class="chip" data-f="cat" data-v="hospital">医院</button>
-        <button class="chip" data-f="cat" data-v="startup">初创</button>
-      </div>
-      <div class="search-sort">
-        <select class="ssort" id="sortSel">
-          <option value="score">总分 ▼</option>
-          <option value="pay">薪酬 ▼</option>
-          <option value="tech_future">未来栈契合 ▼</option>
-          <option value="cohort">课题契合 ▼</option>
-          <option value="geo">地缘 ▼</option>
-          <option value="wlb">WLB ▼</option>
-          <option value="total5y">5 年总包 ▼</option>
-        </select>
-        <div class="ssearch"><input id="searchInp" placeholder="搜索公司"></div>
-      </div>
-    </div>
-
-    <div id="rankC"></div>
   </div>
+
+  <div class="filter-bar">
+    <div class="chips">
+      <button class="chip act" data-f="cat" data-v="all">全部 60</button>
+      <button class="chip" data-f="cat" data-v="medical">🏥 医疗电子</button>
+      <button class="chip" data-f="cat" data-v="auto">🚗 汽车电子</button>
+      <button class="chip" data-f="cat" data-v="aiot">📱 AIoT</button>
+      <button class="chip" data-f="cat" data-v="soe">🏛️ 央国企</button>
+      <button class="chip" data-f="cat" data-v="hospital">⚕ 医院</button>
+      <button class="chip" data-f="cat" data-v="startup">🚀 初创</button>
+    </div>
+    <div class="sort-row">
+      <select id="sortSel" aria-label="排序">
+        <option value="score">总分 ↓</option>
+        <option value="pay">薪资 ↓</option>
+        <option value="tech_future">未来栈 ↓</option>
+        <option value="cohort">课题契合 ↓</option>
+        <option value="geo">地缘 ↓</option>
+        <option value="wlb">WLB ↓</option>
+        <option value="total5y">5年总包 ↓</option>
+      </select>
+      <div class="search-wrap">
+        <input type="text" id="searchInp" placeholder="搜索公司" aria-label="搜索公司">
+      </div>
+    </div>
+  </div>
+
+  <div id="rankC"></div>
 </section>
 
-<!-- ════════ V · HEATMAP ════════ -->
+<!-- ════════ 05 HEATMAP ════════ -->
 <section class="sec" id="heat">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">V</span>
-      <span>COMPARATIVE MATRIX</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ HEATMAP</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 05 · 对比矩阵</div>
+      <h2>9 维热力图</h2>
+      <p>深色即高分 · 一眼看出每家的长板短板</p>
     </div>
-    <h2 class="sec-title">Nine dimensions, compared.</h2>
-    <p class="sec-dek">克制的单色渐变 · 深色即极值 · 一眼看出每家的长板短板</p>
-    <div class="heat-ctl">
-      <button class="chip act" onclick="setHeatCount(20, event)">Top 20</button>
-      <button class="chip" onclick="setHeatCount(30, event)">Top 30</button>
-      <button class="chip" onclick="setHeatCount(60, event)">全部 60</button>
+  </div>
+  <div class="heat-wrap">
+    <div class="heat-ctrl">
+      <button class="chip act" onclick="setHeat(20, event)">Top 20</button>
+      <button class="chip" onclick="setHeat(30, event)">Top 30</button>
+      <button class="chip" onclick="setHeat(60, event)">全部 60</button>
     </div>
-    <div class="heat">
-      <div class="heat-h">
-        <div>Company</div>
-        <div>薪酬</div><div>现栈</div><div>未来栈</div><div>地缘</div><div>职业</div>
-        <div>WLB</div><div>禀赋</div><div>前景</div><div>课题</div><div>置换</div>
-        <div>Σ 总分</div>
-      </div>
-      <div id="heatRows"></div>
+    <div class="heat-scroll">
+      <div class="heat" id="heatC"></div>
     </div>
   </div>
 </section>
 
-<!-- ════════ VI · SCATTER ════════ -->
+<!-- ════════ 06 SCATTER ════════ -->
 <section class="sec" id="scatter">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">VI</span>
-      <span>QUADRANT VIEW</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ SALARY × WLB</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 06 · 散点定位</div>
+      <h2>薪资 × WLB 四象限</h2>
+      <p>点大小 = 总分 · 颜色 = 赛道 · 右上角为"理想区"</p>
     </div>
-    <h2 class="sec-title">The four quadrants.</h2>
-    <p class="sec-dek">X 轴 薪酬分 · Y 轴 WLB 分 · 点大小 = 总分 · 颜色 = 赛道</p>
-
-    <div class="scatter">
-      <div class="sc-head">
-        <div>
-          <h4>薪酬-生活平衡定位</h4>
-          <div class="sc-legend" id="scatLeg"></div>
-        </div>
-      </div>
-      <div class="sc-plot" id="scatPlot">
-        <div class="sc-grid"></div>
-        <div class="sc-quadrant" style="top:50px;right:50px">钱多·活少<em>　理想区</em></div>
-        <div class="sc-quadrant" style="bottom:50px;right:50px">钱多·活多<em>　卷王区</em></div>
-        <div class="sc-quadrant" style="top:50px;left:50px">钱少·活少<em>　安逸区</em></div>
-        <div class="sc-quadrant" style="bottom:50px;left:50px">钱少·活多<em>　避雷区</em></div>
-        <div class="sc-ax" style="bottom:16px;left:50%;transform:translateX(-50%)">薪酬 →</div>
-        <div class="sc-ax" style="left:16px;top:50%;transform:translateY(-50%) rotate(-90deg)">← WLB</div>
-        <div class="sc-tip" id="scTip"></div>
-      </div>
+  </div>
+  <div class="scatter">
+    <div class="sc-head">
+      <div></div>
+      <div class="sc-legend" id="scLegend"></div>
+    </div>
+    <div class="sc-plot" id="scPlot">
+      <div class="sc-grid"></div>
+      <div class="sc-qd" style="top:50px;right:50px">理想区 · 钱多活少</div>
+      <div class="sc-qd" style="bottom:50px;right:50px">卷王区 · 钱多活多</div>
+      <div class="sc-qd" style="top:50px;left:50px">安逸区 · 钱少活少</div>
+      <div class="sc-qd" style="bottom:50px;left:50px">避雷区 · 钱少活多</div>
+      <div class="sc-ax" style="bottom:14px;left:50%;transform:translateX(-50%)">薪资分 →</div>
+      <div class="sc-ax" style="left:14px;top:50%;transform:translateY(-50%) rotate(-90deg)">← WLB 分</div>
+      <div class="sc-tip" id="scTip"></div>
     </div>
   </div>
 </section>
 
-<!-- ════════ VII · CURVE ════════ -->
+<!-- ════════ 07 CURVE ════════ -->
 <section class="sec" id="curve">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">VII</span>
-      <span>LONGITUDINAL VIEW</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ 5-YEAR PROJECTION</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 07 · 5 年收入曲线</div>
+      <h2>累计收入预测（万元）</h2>
+      <p>现金 + 涨薪 + 公积金 + 股票兑现 · 点击公司可切换对比</p>
     </div>
-    <h2 class="sec-title">The five-year horizon.</h2>
-    <p class="sec-dek">累计收入预测 = 现金总包 + 年度涨薪 + 公积金 + 股票兑现 · <em>单位：万元</em></p>
-
-    <div class="curve">
-      <div class="curve-head">
-        <h4>Top 15 五年累计收入 · 单击切换对比</h4>
-        <div class="curve-sel" id="curveSel"></div>
-      </div>
-      <svg class="curve-svg" id="curveSvg" viewBox="0 0 1000 420" preserveAspectRatio="none"></svg>
+  </div>
+  <div class="curve">
+    <div class="curve-head">
+      <h4 style="font-size:15px;font-weight:700">Top 15 公司 5 年累计</h4>
+      <div class="curve-sel" id="curveSel"></div>
     </div>
+    <svg class="curve-svg" id="curveSvg" viewBox="0 0 1000 380" preserveAspectRatio="none"></svg>
   </div>
 </section>
 
-<!-- ════════ VIII · UNIT TYPES ════════ -->
+<!-- ════════ 08 UNIT TYPES ════════ -->
 <section class="sec" id="units">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">VIII</span>
-      <span>ENCYCLOPEDIA</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ SIX EMPLOYER TYPES</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 08 · 单位百科</div>
+      <h2>6 类雇主 · 文化差异</h2>
+      <p>不只看一种 · 央企/外企/初创各有逻辑</p>
     </div>
-    <h2 class="sec-title">Six kinds of employer.</h2>
-    <p class="sec-dek">从央企到独角兽 · 每类的文化基因与陷阱 · <em>别只看一种雇主</em></p>
-    <div class="ut-grid" id="utGrid"></div>
   </div>
+  <div class="ut-grid" id="utGrid"></div>
 </section>
 
-<!-- ════════ IX · TIMELINE ════════ -->
+<!-- ════════ 09 TIMELINE ════════ -->
 <section class="sec" id="timeline">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">IX</span>
-      <span>ROADMAP</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ 36 MONTHS TO EMPLOYMENT</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 09 · 时间线</div>
+      <h2>36 月求职路径图</h2>
+      <p>从 2026.05 小米实习到 2029.04 入职 · 红点为当前位置</p>
     </div>
-    <h2 class="sec-title">The 36-month runway.</h2>
-    <p class="sec-dek">从 2026.05 小米实习到 2029.04 入职 · <em>每一格都是决策点</em></p>
-    <div class="tl-wrap">
-      <div class="tl" id="tl"></div>
-    </div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl" id="tl"></div>
   </div>
 </section>
 
-<!-- ════════ X · SETTLE CALC ════════ -->
+<!-- ════════ 10 SETTLE ════════ -->
 <section class="sec" id="settle">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">X</span>
-      <span>CAPITAL MECHANICS</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ BAOSHAN → MINHANG/JIADING</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 10 · 定居计算器</div>
+      <h2>宝山 → 闵行/嘉定置换资金流</h2>
+      <p>宝山房产 + 父母支持 + 工作积累 → 首付覆盖度实时算账</p>
     </div>
-    <h2 class="sec-title">The settlement calculator.</h2>
-    <p class="sec-dek">宝山置换 + 父母支持 + 工作积累 → 首付覆盖度 · <em>实时算账</em></p>
-
-    <div class="calc-grid">
-      <div class="calc-in">
-        <h6 style="font:500 var(--fs-xs) var(--f-mono);color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--sp-4);padding-bottom:var(--sp-3);border-bottom:1px solid var(--paper-2)">Inputs · 输入</h6>
-        <div class="ci-row"><label>目标公司</label><select id="calcCompany"></select></div>
-        <div class="ci-row"><label>目标区</label><select id="calcDist">
-          <option value="嘉定新城" selected>嘉定新城 (4.0w/㎡)</option>
-          <option value="嘉定安亭">嘉定安亭 (2.9w/㎡)</option>
-          <option value="闵行老闵行">闵行老闵行 (3.9w/㎡)</option>
-          <option value="闵行马桥">闵行马桥 (5.5w/㎡)</option>
-          <option value="闵行莘庄">闵行莘庄 (5.9w/㎡)</option>
-          <option value="张江">张江 (9.5w/㎡)</option>
-          <option value="临港">临港 (4.2w/㎡)</option>
-        </select></div>
-        <div class="ci-row"><label>房屋面积</label><input type="range" id="calcArea" min="60" max="140" value="90"><span class="ci-val" id="calcAreaV">90㎡</span></div>
-        <div class="ci-row"><label>宝山置换</label><input type="range" id="calcBS" min="160" max="240" value="200"><span class="ci-val" id="calcBSV">200w</span></div>
-        <div class="ci-row"><label>父母支持</label><input type="range" id="calcPR" min="0" max="100" value="50"><span class="ci-val" id="calcPRV">50w</span></div>
-        <div class="ci-row"><label>工作存款（3年）</label><input type="range" id="calcSV" min="0" max="150" value="60"><span class="ci-val" id="calcSVV">60w</span></div>
-        <div class="ci-row"><label>贷款年限</label><input type="range" id="calcYR" min="20" max="30" value="30" step="5"><span class="ci-val" id="calcYRV">30Y</span></div>
-      </div>
-      <div class="calc-out">
-        <h6>Outputs · 实时算账</h6>
-        <div id="calcOut"></div>
-        <div class="verdict" id="calcVerdict"></div>
-      </div>
+  </div>
+  <div class="calc">
+    <div class="calc-in">
+      <h6>Inputs · 输入</h6>
+      <div class="ci"><label>目标公司</label><select id="calcCompany"></select></div>
+      <div class="ci"><label>目标区</label><select id="calcDist">
+        <option value="嘉定新城" selected>嘉定新城 (4.0w/㎡)</option>
+        <option value="嘉定安亭">嘉定安亭 (2.9w/㎡)</option>
+        <option value="闵行老闵行">闵行老闵行 (3.9w/㎡)</option>
+        <option value="闵行马桥">闵行马桥 (5.5w/㎡)</option>
+        <option value="闵行莘庄">闵行莘庄 (5.9w/㎡)</option>
+        <option value="张江">张江 (9.5w/㎡)</option>
+        <option value="临港">临港 (4.2w/㎡)</option>
+      </select></div>
+      <div class="ci"><label>房屋面积</label><input type="range" id="calcArea" min="60" max="140" value="90"><span class="ci-val" id="calcAreaV">90㎡</span></div>
+      <div class="ci"><label>宝山置换</label><input type="range" id="calcBS" min="160" max="240" value="200"><span class="ci-val" id="calcBSV">200w</span></div>
+      <div class="ci"><label>父母支持</label><input type="range" id="calcPR" min="0" max="100" value="50"><span class="ci-val" id="calcPRV">50w</span></div>
+      <div class="ci"><label>工作 3 年存款</label><input type="range" id="calcSV" min="0" max="150" value="60"><span class="ci-val" id="calcSVV">60w</span></div>
+      <div class="ci"><label>贷款年限</label><input type="range" id="calcYR" min="20" max="30" value="30" step="5"><span class="ci-val" id="calcYRV">30Y</span></div>
+    </div>
+    <div class="calc-out">
+      <h6>Outputs · 实时算账</h6>
+      <div id="calcOut"></div>
+      <div class="verdict" id="calcVerdict"></div>
     </div>
   </div>
 </section>
 
-<!-- ════════ XI · INDUSTRY ════════ -->
+<!-- ════════ 11 INDUSTRY ════════ -->
 <section class="sec" id="industry">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">XI</span>
-      <span>INDUSTRY OUTLOOK</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ 2029-2032</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 11 · 行业前瞻</div>
+      <h2>三大赛道 2029-2032 展望</h2>
+      <p>医疗电子 · 汽车电子 · AIoT · 硬数据 + 国家规划</p>
     </div>
-    <h2 class="sec-title">Three verticals, one horizon.</h2>
-    <p class="sec-dek">医疗电子 · 汽车电子 · AIoT · <em>国家规划 + 硬数据</em></p>
-    <div class="ind-grid" id="indGrid"></div>
   </div>
+  <div class="ind-grid" id="indGrid"></div>
 </section>
 
-<!-- ════════ XII · SOURCES ════════ -->
+<!-- ════════ 12 SOURCES ════════ -->
 <section class="sec" id="sources">
-  <div class="wrap">
-    <div class="sec-kicker">
-      <span class="sec-kicker-num">XII</span>
-      <span>BIBLIOGRAPHY</span>
-      <span class="sec-kicker-line"></span>
-      <span>§ DATA TRANSPARENCY</span>
+  <div class="sec-head">
+    <div class="sec-head-left">
+      <div class="sec-label">§ 12 · 数据来源</div>
+      <h2>透明披露 · 可核查</h2>
+      <p>每项数据的出处 + 置信度标签</p>
     </div>
-    <h2 class="sec-title">The sources.</h2>
-    <p class="sec-dek">每项数据的出处 · 置信度标签透明披露 · <em>可核查 · 可复现</em></p>
-
-    <div class="conf-grid">
-      <div class="conf-card hi"><b>🟢 高置信度</b><p>多源核实 · 官方或权威媒体披露的精确数字</p></div>
-      <div class="conf-card mid"><b>🟡 中置信度</b><p>单源验证 · 看准 / 脉脉 / 招聘网站的区间数据</p></div>
-      <div class="conf-card low"><b>🟠 市场估算</b><p>基于行业规律推演 · 未得到单家公司具体验证</p></div>
-    </div>
-
-    <ul class="src-list">
-      <li><b>薪资基准</b> · 知乎《偷偷盘点互联网26届校招薪资》2026.02.24 · 掘金《小米汽车25年薪资》· BOSS直聘实时在招 · 猎聘 · 职友集</li>
-      <li><b>行业数据</b> · Mordor Intelligence 2026.05 · Global Market Insights · 华经产业研究院 2026.01 · 东方财富研报 2026.01</li>
-      <li><b>政策原文</b> · 健康中国2030规划纲要 · 健康中国行动 2019-2030 · 十五五规划建议 · 健康上海2030 · 上海十五五规划纲要</li>
-      <li><b>房价数据</b> · 安居客宝山均价 2026.05 (31702元/㎡) · 房天下嘉定新城均价 (36609元/㎡) · 中原地产月浦板块</li>
-      <li><b>公积金</b> · 基于上海社平工资上限 12884元/月 (2025) × 2 × 比例</li>
-      <li><b>企业数据</b> · 各公司官方招聘 · 年报 · 上市招股书 · 交大就业指导中心公开信息</li>
-    </ul>
   </div>
+  <div class="conf-grid">
+    <div class="conf-card hi"><b>🟢 高置信度</b><p>多源核实 · 官方数据或权威媒体披露的精确数字</p></div>
+    <div class="conf-card mid"><b>🟡 中置信度</b><p>单源验证 · 看准 / 脉脉 / 招聘网站的区间</p></div>
+    <div class="conf-card low"><b>🟠 市场估算</b><p>基于行业规律推演 · 未得到单家公司验证</p></div>
+  </div>
+  <ul class="src-list">
+    <li><b>薪资基准</b> · 知乎《26 届互联网校招薪资》2026.02.24 · 掘金《小米汽车 25 年薪资》· BOSS 直聘 · 猎聘 · 职友集</li>
+    <li><b>行业数据</b> · Mordor Intelligence 2026.05 · Global Market Insights · 华经产业研究院 2026.01 · 东方财富研报 2026.01</li>
+    <li><b>政策原文</b> · 健康中国 2030 · 健康中国行动 2019-2030 · 十五五规划建议 · 健康上海 2030</li>
+    <li><b>房价数据</b> · 安居客宝山均价 2026.05 (31702 元/㎡) · 房天下嘉定新城 (36609 元/㎡) · 中原地产月浦板块</li>
+    <li><b>公积金</b> · 基于上海社平工资上限 12884 元/月 (2025) × 2 × 比例</li>
+    <li><b>企业数据</b> · 各公司官方招聘 · 年报 · 上市招股书 · 交大就业指导中心</li>
+  </ul>
 </section>
 
-<!-- ════════ FOOTER ════════ -->
 <footer class="footer">
-  <h3>Elemental<sup>™</sup></h3>
-  <p>N° IV · VOL. MMXXVI · 就业决策刊 · 微针世代</p>
-  <p>60 家候选 · 9 维评分 · 王侃课题组方向对齐</p>
-  <p class="f-sig">◆ A Personal Intelligence Publication · Confidential Use · 2026.05.07 ◆</p>
+  <h3>2029 届交大仪科硕 · 就业决策台 v5.0</h3>
+  <p>60 家候选 · 9 维评分 · 王侃课题组方向对齐 · 2026.05.07 更新</p>
+  <p style="margin-top:12px;font-size:11px">A decision tool for personal use · Built with care</p>
 </footer>
 
-<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
-<!-- Data -->
 <script>
 /* ═══════════════════════════════════════════════════════════
    Elemental · V4.0 数据层
@@ -1602,10 +2027,354 @@ function recomputeTiers(weights) {
 recomputeTiers();
 
 </script>
-<!-- Render -->
 <script>
 /* ═══════════════════════════════════════════════════════════
-   Elemental · V4.0 · Render Engine
+   V5.0 Patch · 一句话推荐 + 排名客观校准 + 解读补齐
+   严格按 data-v4 的 id 映射
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ 分数校准（外企上海岗位稀缺降权）═══ */
+const V5_ADJUST = {
+  // id=8 英伟达上海：算法门槛高+与你方向弱+招人极少
+  8: { pay: 9.5, tech_now: 7.0, tech_future: 5.5, geo: 6.0, career: 9.5,
+       wlb: 9.0, endow: 9.0, industry: 10, cohort: 3, housing: 4 },
+  // id=2 华为健康军团：上海岗少
+  2: { geo: 5.5, wlb: 5.5 },
+  // id=27 美敦力：上海以商务法规为主
+  27: { cash_low: 25, cash_high: 35, cash_mid: 30, geo: 6.0, career: 6.8, endow: 7.0 },
+  // id=28 强生医疗：同美敦力
+  28: { cash_mid: 30, pay: 6.8, geo: 5.5, career: 6.5 },
+  // id=14 中科院微系统所：硕士难进
+  14: { career: 8.0, endow: 8.5 }
+};
+
+/* ═══ 60 家 oneliner（严格按 id 映射）═══ */
+const V5_ONELINERS = {
+  1:  '🏆 嘉定总部 · 微针可穿戴事业部 · AFM + 交大内推直通 · 你的主战场首选',
+  2:  '🔥 PPG/BLE 毕设 100% 匹配 + TUP 长期 · ⚠️ 上海岗位少主要在深圳',
+  3:  '💊 毕设心率血氧 100% 对口 · IEC 业内标杆 · 闵行研发离家近',
+  4:  '🚗 你实习中 · ⚠️ 亲述太累太卷跨方向 · 作为保底转正位',
+  5:  '🧠 柔性脑机接口头部 · 闵行 · ⚠️ 非你主线（你没写过这技术栈）',
+  6:  '🔬 微针给药 = 王侃组核心方向 · 港股上市 · AFM 研究员岗通道',
+  7:  '🩸 CGM+微针+电化学 课题组契合 9.8 · ⚠️ 现金包偏低',
+  8:  '⚡ 薪资天花板但门槛极高 · ⚠️ 算法导向+招人少+与你医疗主线弱相关',
+  9:  '🎧 可穿戴芯片国内第一 · 临港 · ⚠️ 通勤需权衡买房临港',
+  10: '🧠 全球首款植入 BCI · ⚠️ 非你主线 · 与脑虎二选一',
+  11: '🚗 自动驾驶芯片独角兽 Pre-IPO · 张江 · ⚠️ 房价 9.5w 需 SP',
+  12: '🏢 外企 WLB 40h 顶级 + 公积金顶格 · 周浦基地 · 稳定安逸',
+  13: '🏠 家用医疗龙头 · 闵行 + WLB 41h · 公积金 11+11 · 稳定',
+  14: '🏛️ MEMS 国家队 · AFM 硬门票 · 可在职博士 · ⚠️ 硕士招聘窗口窄',
+  15: '⚕ 交大医学院附属 · 事业编 · 你 AFM+专利直接变现为医院科研',
+  16: '🛩️ 央企 955 WLB 顶级 + 住房补贴 · ⚠️ 航空与医疗偏离',
+  17: '🏛️ 事业编+安家费 15 万 · 闵行 · 医疗电子事业部对口',
+  18: '🚗 上汽高端 · 嘉定安亭房价 2.9w · 公积金顶格 · 置换最轻松',
+  19: '🔧 芯片设计顶级 · ⚠️ WLB 差+公积金低+与医疗偏离',
+  20: '💉 CGM+胰岛素泵可穿戴医疗 · 课题组契合 · ⚠️ 港股波动平台小',
+  21: '🧬 基因测序龙头 · POCT 方向对口 · 科创板 688114',
+  22: '🤖 AI 大模型独角兽 · 薪资高期权大 · ⚠️ 偏算法非嵌入式',
+  23: '🏛️ 航天系事业编+安家费 15 万 · 闵行 · ⚠️ 保密性强跳槽面窄',
+  24: '⚕ 交大医学院附属三甲 · 事业编 · AFM 可申科研基金',
+  25: '🚗 高端电动车 · 嘉定总部 · ⚠️ 公积金仅 5+5',
+  26: '🚗 新势力销量头部 · 公积金顶格 · ⚠️ WLB 偏低',
+  27: '🌐 外企医疗龙头 WLB 顶级 · ⚠️ 上海以商务法规为主研发岗少',
+  28: '🌐 外企医疗巨头 · ⚠️ 同美敦力问题：上海非研发中心',
+  29: '🔌 Intel 紫竹 + 公积金顶格 · ⚠️ 全球业务下行',
+  30: '📸 X 射线探测器龙头 · 嘉定总部 · 细分方向',
+  31: '🧠 脑机接口第三梯队 · ⚠️ 非你主线',
+  32: '🚗 特斯拉 · 品牌光环 + RSU + 公积金顶格 · 临港',
+  33: '📱 字节健康 · 薪资 45w · ⚠️ WLB 55h+ 大小周',
+  34: '🔧 Bosch 外资 Tier 1 · WLB 40h 顶级',
+  35: '🚁 无人机龙头 · 技术深度 · ⚠️ 总部深圳非医疗方向',
+  36: '🧠 ⚠️ 你亲述：公司太小不推荐 · 经历写简历即可',
+  37: '🤖 寒武纪 AI 芯片第一股',
+  38: '🚗 黑芝麻车规 AI 芯片 · 港股独角兽',
+  39: '🚗 上汽 Tier 1 · 公积金顶格 · WLB 42h 国企',
+  40: '🚗 NXP 外企汽车芯片 · WLB 42h',
+  41: '🏛️ 国家级 AI 实验室 · 徐汇 + 落户 · ⚠️ 主要招 PhD',
+  42: '⚕ 复旦中山三甲 · 事业编 · 非交大系人脉弱',
+  43: '⚕ 复旦华山三甲 · 事业编 · 静安',
+  44: '📱 腾讯 AIoT · 公积金顶格 · ⚠️ AIoT 非核心业务',
+  45: '📱 字节 AIoT · ⚠️ 58h WLB 全榜垫底',
+  46: '📱 小米 AIoT · 公积金顶格 · 米家生态',
+  47: '🤖 商汤 AI 视觉 · ⚠️ 持续亏损非医疗',
+  48: '💓 心血管医疗 · 心电监护可延续毕设',
+  49: '🚗 德赛西威国内 Tier 1',
+  50: '🏛️ 上海国资装备 · 工业偏传统',
+  51: '🔋 CATL 动力电池龙头 · BMS 嵌入式',
+  52: '🏛️ 央企微特电机所 · 公积金顶格',
+  53: '🏛️ 央企线缆所 · 光纤传感与本科匹配',
+  54: '🚢 中船军工船舶电子',
+  55: '🏛️ 中科院技物所 · 红外光电 · 方向偏离',
+  56: '💊 阿里健康 · 互联网医疗平台',
+  57: '🤖 石头扫地机器人龙头',
+  58: '💊 京东健康 · 互联网医疗',
+  59: '🔌 TI 模拟芯片 · WLB 40h 顶级',
+  60: '🚗 Aptiv 外资 Tier 1 · WLB 42h'
+};
+
+/* ═══ 关键公司解读补齐（解决 "why_for_you 不足 3 条" 的问题） ═══ */
+const V5_DEEP = {
+  7: { // 三诺生物
+    why_for_you: [
+      'CGM = POCT × 电化学 × 微针 × 可穿戴 四重契合王侃方向',
+      '你 AFM 论文 + 王侃微针研究可直接发表变现',
+      'CGM 国产替代窗口期 · 2029-2032 是爆发期',
+      '上海研究院研究员岗可继续做科研',
+      '⚠️ 总部长沙，上海岗位有限',
+      '⚠️ 现金包 26-36w 偏低'
+    ]
+  },
+  20: { // 微泰医疗
+    why_for_you: [
+      'CGM+胰岛素泵双赛道 · 可穿戴医疗典型',
+      '王侃课题组 POCT+微针方向直接对口',
+      '港股 2235.HK 上市',
+      '⚠️ 平台较小，抗风险能力一般',
+      '⚠️ 港股波动大'
+    ],
+    pos: [
+      {dept: 'CGM 研发', jobs: ['CGM 嵌入式工程师', '微针传感工程师']},
+      {dept: '胰岛素泵研发', jobs: ['低功耗嵌入式']}
+    ],
+    adv: ['课题组方向 100% 匹配', '可穿戴医疗细分'],
+    risk: ['港股波动', '平台规模小']
+  },
+  21: { // 华大智造
+    why_for_you: [
+      '基因测序+医疗设备双龙头',
+      'POCT 方向与王侃组对口',
+      '科创板 688114 上市稳定',
+      '深圳总部+上海研发，医疗设备嵌入式方向多样',
+      '⚠️ 基因测序有周期性（贸易/政策影响）'
+    ],
+    pos: [
+      {dept: '设备研发部', jobs: ['测序仪嵌入式工程师', 'POCT 设备开发']},
+      {dept: '智能诊断', jobs: ['AI 算法嵌入式部署']}
+    ],
+    adv: ['科创板龙头', 'POCT 对口', '医疗电子深度'],
+    risk: ['基因测序周期', '深圳岗位为主']
+  },
+  23: { // 航天八院 804
+    why_for_you: [
+      '航天系事业编制 · 长期稳定',
+      '安家费 15 万 + 人才公寓 5 年',
+      '闵行办公通勤友好',
+      '嵌入式系统方向可延续',
+      '⚠️ 保密性强，后续跳槽面窄',
+      '⚠️ 与医疗电子主线偏离'
+    ],
+    pos: [
+      {dept: '嵌入式系统研发部', jobs: ['嵌入式系统工程师']},
+      {dept: '智能感知中心', jobs: ['智能感知算法工程师']}
+    ],
+    adv: ['事业编+15万安家费', '闵行办公', '稳定性王者'],
+    risk: ['保密性强', '技术方向窄', '与医疗偏离']
+  },
+  24: { // 仁济医院 BME
+    why_for_you: [
+      '事业编制 + 医院人才公寓 · 长期稳定',
+      'AFM + 6 专利直接变现为医院科研基金',
+      '可在职博士 · 临床工程师→科研型工程师路径',
+      '交大医学院系统内部流通，内推天然',
+      'WLB 955/965 · 医疗行业罕见',
+      '⚠️ 薪资较低 18-28w，性价比权衡'
+    ],
+    pos: [
+      {dept: '生物医学工程部', jobs: ['临床医学工程师（设备+研发）', '医工转化研究员']},
+      {dept: '临床研究中心', jobs: ['科研工程师（可申国自然）']}
+    ],
+    adv: ['事业编+公寓', '交大系人脉', 'WLB 极佳', 'AFM 科研变现'],
+    risk: ['薪资较低', '偏体制化', '晋升节奏慢']
+  },
+  27: { // 美敦力
+    why_for_you: [
+      'WLB 顶级 周均 40h · 公积金顶格 12+12',
+      'IEC 62304 认证经验行业权威',
+      '国际化职业路径',
+      '⚠️ 上海办公室研发岗极少（主要商务/法规/临床）',
+      '⚠️ 外企天花板明显',
+      '⚠️ AFM 背景在上海作用有限'
+    ],
+    pos: [
+      {dept: '上海办公室（非研发为主）', jobs: ['临床应用工程师', '法规工程师（QA/RA）']},
+      {dept: '少量 R&D 岗', jobs: ['心脏节律嵌入式（机会稀少）']}
+    ],
+    adv: ['WLB 顶级', '公积金顶格', '国际化平台'],
+    risk: ['上海研发岗极少', '外企天花板', '晋升慢', '全球重组风险']
+  },
+  28: { // 强生医疗
+    why_for_you: [
+      'WLB 顶级 · 国际化',
+      '⚠️ 上海以 Medical Affairs/Regulatory 为主',
+      '⚠️ 研发中心在美国，上海 R&D 岗稀缺'
+    ],
+    pos: [
+      {dept: '上海办公室', jobs: ['临床工程师', '法规工程师']}
+    ],
+    adv: ['WLB 顶级', '国际平台'],
+    risk: ['上海研发岗稀缺', '外企天花板']
+  },
+  29: { // 英特尔上海
+    why_for_you: [
+      '紫竹（闵行）办公 · 定居完美 · 公积金顶格',
+      'WLB 40h 外企标杆',
+      'IoT 嵌入式与你技术栈匹配',
+      '⚠️ Intel 全球业务下行，近年有裁员史',
+      '⚠️ RSU 缩水'
+    ],
+    pos: [
+      {dept: 'IoT 事业部', jobs: ['嵌入式软件工程师', 'IoT 系统开发']}
+    ],
+    adv: ['紫竹定居', 'WLB 顶级', '公积金顶格'],
+    risk: ['业务下行', '裁员风险', 'RSU 价值波动']
+  },
+  30: { // 奕瑞科技
+    why_for_you: [
+      '嘉定总部 · 定居友好',
+      'X 射线探测器全球龙头',
+      '与联影、西门子医疗合作',
+      '⚠️ 业务领域窄，与可穿戴交集有限'
+    ],
+    pos: [
+      {dept: '探测器研发部', jobs: ['X 射线探测器嵌入式']},
+      {dept: '系统集成部', jobs: ['医疗影像系统嵌入式']}
+    ],
+    adv: ['嘉定定居', '细分龙头'],
+    risk: ['业务窄', '与可穿戴弱相关']
+  },
+  42: { // 中山医院 工程科
+    why_for_you: [
+      '复旦系三甲 · 事业编',
+      '医院人才公寓',
+      'WLB 极佳',
+      '⚠️ 非交大系，内推人脉弱'
+    ],
+    pos: [
+      {dept: '工程科', jobs: ['临床工程师', '医工研究员']}
+    ],
+    adv: ['事业编', '三甲平台', 'WLB 极佳'],
+    risk: ['薪资低', '非交大系']
+  },
+  43: { // 华山医院
+    why_for_you: [
+      '复旦华山三甲 · 事业编',
+      '静安办公位置好',
+      'WLB 极佳 955/965'
+    ],
+    pos: [{dept: '工程科', jobs: ['临床工程师']}],
+    adv: ['事业编', '三甲'],
+    risk: ['薪资低']
+  },
+  41: { // 上海 AI Lab
+    why_for_you: [
+      '国家级平台 · 上海市政府直属',
+      'AFM + EI + 6 专利 → 助理研究员硬门票',
+      '人才公寓 + 落户 + 学术资源',
+      '可在职博士路径',
+      '⚠️ 招聘主要面向 PhD · 硕士需强内推'
+    ],
+    pos: [
+      {dept: '具身智能组', jobs: ['嵌入式 AI 研究员', '算法工程师']},
+      {dept: '基础设施组', jobs: ['系统工程师']}
+    ],
+    adv: ['国家级平台', '学术资源', '落户+公寓'],
+    risk: ['主要招 PhD', '硕士窗口窄']
+  },
+  19: { // 华为海思
+    why_for_you: [
+      '芯片设计国内天花板 · 简历含金量极高',
+      '上海设计中心',
+      '⚠️ WLB 差+公积金仅 5+5',
+      '⚠️ 与医疗电子方向偏离',
+      '⚠️ 本科生可申请校招，硕士岗位要求更专业'
+    ],
+    pos: [
+      {dept: 'IoT 芯片设计部', jobs: ['嵌入式 SoC 验证工程师']},
+      {dept: '数模混合部', jobs: ['传感器接口芯片工程师']}
+    ],
+    adv: ['芯片设计顶级', '简历加分'],
+    risk: ['WLB 差', '公积金低', '与医疗偏离']
+  },
+  22: { // 阶跃星辰
+    why_for_you: [
+      '上海 AI 大模型独角兽',
+      '薪资高 40-60w + 期权',
+      '⚠️ 偏算法和大模型，不适合嵌入式主线',
+      '⚠️ 初创风险'
+    ],
+    pos: [
+      {dept: '基础设施部', jobs: ['嵌入式 AI 部署工程师']}
+    ],
+    adv: ['AI 独角兽', '薪资高'],
+    risk: ['偏算法', '初创风险', '与医疗无关']
+  },
+  33: { // 字节健康
+    why_for_you: [
+      '字节健康事业部 · 薪资顶级 45w',
+      '健康硬件与可穿戴相关',
+      '公积金顶格 12+12',
+      '⚠️ WLB 差 55h+ 大小周',
+      '⚠️ 业务战略不稳定'
+    ],
+    pos: [
+      {dept: '智能硬件研发部', jobs: ['健康穿戴嵌入式工程师']},
+      {dept: '健康算法部', jobs: ['运动健康算法工程师']}
+    ],
+    adv: ['薪资顶级', '公积金顶格'],
+    risk: ['WLB 55h+', '业务不稳']
+  },
+  40: { // 恩智浦 NXP
+    why_for_you: [
+      '全球汽车芯片龙头',
+      'WLB 外企标杆 42h',
+      '公积金顶格',
+      '⚠️ 外企天花板',
+      '⚠️ 与医疗方向偏离'
+    ],
+    pos: [
+      {dept: '汽车 MCU 部', jobs: ['汽车芯片嵌入式工程师']}
+    ],
+    adv: ['WLB 顶级', '公积金顶格', '国际化'],
+    risk: ['外企天花板', '偏汽车']
+  },
+  37: { // 寒武纪
+    why_for_you: [
+      'AI 芯片第一股 科创板 688256',
+      'AI 芯片嵌入式方向',
+      '⚠️ 业绩波动大',
+      '⚠️ 与医疗弱相关'
+    ],
+    pos: [
+      {dept: '嵌入式平台部', jobs: ['AI 芯片嵌入式工程师']}
+    ],
+    adv: ['AI 芯片龙头'],
+    risk: ['业绩波动', '与医疗弱相关']
+  }
+};
+
+function applyV5Patches() {
+  COMPANIES_V4.forEach(c => {
+    // 校准分数
+    if (V5_ADJUST[c.id]) Object.assign(c, V5_ADJUST[c.id]);
+    // 深度解读
+    if (V5_DEEP[c.id]) {
+      if (V5_DEEP[c.id].why_for_you) c.why_for_you = V5_DEEP[c.id].why_for_you;
+      if (V5_DEEP[c.id].pos) c.pos = V5_DEEP[c.id].pos;
+      if (V5_DEEP[c.id].adv) c.adv = V5_DEEP[c.id].adv;
+      if (V5_DEEP[c.id].risk) c.risk = V5_DEEP[c.id].risk;
+    }
+    // 一句话推荐
+    if (V5_ONELINERS[c.id]) c.oneliner = V5_ONELINERS[c.id];
+    if (!c.oneliner) c.oneliner = c.subcat + ' · ' + c.dist;
+  });
+  recomputeTiers();
+}
+applyV5Patches();
+
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   V5.0 Render Engine · Readability First
    ═══════════════════════════════════════════════════════════ */
 
 const $ = s => document.querySelector(s);
@@ -1618,25 +2387,25 @@ const STATE = {
   search: '',
   sortBy: 'score',
   heatCount: 20,
+  showCount: 10,
   weights: {...WEIGHTS_V4},
   selectedCurves: []
 };
 const DEFAULT_W = {...WEIGHTS_V4};
 
 const DIM_META = {
-  pay:         {i:'◉', l:'综合薪酬',      d:'5年NPV · 现金+公积金+股票'},
-  tech_now:    {i:'◎', l:'现栈契合·2026',  d:'嵌入式+FreeRTOS+BLE+TF Lite'},
-  tech_future: {i:'◈', l:'未来栈·2029',    d:'电化学+微针+POCT+MEMS'},
-  geo:         {i:'◯', l:'上海地缘深度',   d:'通勤+行业集聚+员工补贴（不含落户）'},
-  career:      {i:'⚑', l:'长期职业价值',    d:'35岁+ 可持续性 + 技能迁移'},
-  wlb:         {i:'◒', l:'WLB 可持续',      d:'周均工时 + 大小周'},
-  endow:       {i:'✦', l:'稀缺禀赋变现',   d:'AFM + 专利 + 领导力'},
-  industry:    {i:'△', l:'行业前景',       d:'2029-2032 政策+增速'},
-  cohort:      {i:'✽', l:'课题组契合',     d:'POCT × 汗液 × AI-IVD × 自供能'},
-  housing:     {i:'⌂', l:'宝山置换链',     d:'宝山→闵/嘉资金可行性'}
+  pay:         {i:'💰', l:'综合薪酬',      d:'5 年 NPV · 现金+公积金+股票'},
+  tech_now:    {i:'⚙', l:'现栈 · 2026',   d:'嵌入式+FreeRTOS+BLE+TF Lite'},
+  tech_future: {i:'🔬', l:'未来栈 · 2029', d:'电化学+微针+POCT+MEMS'},
+  geo:         {i:'🏠', l:'上海地缘深度',   d:'通勤+行业集聚（不含落户）'},
+  career:      {i:'🛡', l:'长期职业价值',    d:'35 岁+ 可持续 + 技能迁移'},
+  wlb:         {i:'⚖', l:'WLB 可持续',      d:'周均工时 + 大小周'},
+  endow:       {i:'⭐', l:'稀缺禀赋变现',    d:'AFM + 专利 + 领导力'},
+  industry:    {i:'📈', l:'行业前景',        d:'2029-2032 政策+增速'},
+  cohort:      {i:'🧪', l:'课题组契合',      d:'POCT × 汗液 × AI-IVD × 自供能'},
+  housing:     {i:'🔑', l:'宝山置换链',      d:'宝山→闵/嘉资金可行性'}
 };
 
-/* ═══ 计算 ═══ */
 function recompute() {
   const W = STATE.weights;
   COMPANIES_V4.forEach(c => { c.score = computeTotalScore(c, W); });
@@ -1658,29 +2427,30 @@ function tierCount() {
   return cnt;
 }
 
-/* ═══ HERO STATS ═══ */
-function renderMastStats() {
+/* ═══ Hero stats ═══ */
+function renderHero() {
   const cnt = tierCount();
-  const top = [...COMPANIES_V4].sort((a,b)=>b.score-a.score).slice(0,5);
-  $('#mastStats').innerHTML = `
-    <div class="mst"><span class="mst-n">${cnt.SSS}</span><span class="mst-l">SSS · 必投</span></div>
-    <div class="mst"><span class="mst-n">${cnt.SS}</span><span class="mst-l">SS · 强推</span></div>
-    <div class="mst"><span class="mst-n">${cnt.S + cnt.A}</span><span class="mst-l">S+A · 推荐</span></div>
-    <div class="mst"><span class="mst-n">${COMPANIES_V4.filter(c=>c.tag).length}</span><span class="mst-l">⭐ 隐藏福地</span></div>`;
+  const gems = COMPANIES_V4.filter(c => c.tag).length;
+  $('#heroStats').innerHTML = `
+    <div class="stat-card"><div class="sk">SSS · 必投</div><div class="sv sss">${cnt.SSS}</div><div class="sdesc">拿到即去</div></div>
+    <div class="stat-card"><div class="sk">SS · 强推</div><div class="sv ss">${cnt.SS}</div><div class="sdesc">次优先级</div></div>
+    <div class="stat-card"><div class="sk">S · 推荐</div><div class="sv s">${cnt.S}</div><div class="sdesc">主投池</div></div>
+    <div class="stat-card"><div class="sk">A+B · 保底</div><div class="sv a">${cnt.A + cnt.B}</div><div class="sdesc">广撒 + 避坑</div></div>
+    <div class="stat-card"><div class="sk">⭐ 福地</div><div class="sv gem">${gems}</div><div class="sdesc">蓝海选项</div></div>
+  `;
 }
 
-/* ═══ WEIGHTS ═══ */
-function renderWeights() {
+/* ═══ Weights ═══ */
+function renderDims() {
   const W = STATE.weights;
-  $('#dimsG').innerHTML = Object.entries(DIM_META).map(([k,m], i) => {
+  $('#dims').innerHTML = Object.entries(DIM_META).map(([k,m],i) => {
     const v = Math.round(W[k] * 100);
     return `
-      <div class="dim-row" data-dim="${k}">
-        <div class="dim-rank">${pad2(i+1)}</div>
-        <div class="dim-meta"><h5>${m.i} ${m.l}</h5><p>${m.d}</p></div>
+      <div class="dim">
+        <div class="dim-num">${pad2(i+1)}</div>
+        <div class="dim-title"><h5>${m.i} ${m.l}</h5><p>${m.d}</p></div>
         <div class="dim-slot">
-          <input type="range" class="range" min="0" max="40" value="${v}" oninput="setW('${k}',this.value)">
-          <div class="dim-bar-fill" id="df-${k}" style="width:${v*2.5}%"></div>
+          <input type="range" min="0" max="40" value="${v}" oninput="setW('${k}',this.value)" aria-label="${m.l}权重">
         </div>
         <div class="dim-val"><span id="dv-${k}">${v}</span><sub>%</sub></div>
       </div>`;
@@ -1690,16 +2460,15 @@ function renderWeights() {
 function setW(k, v) {
   STATE.weights[k] = parseInt(v) / 100;
   $(`#dv-${k}`).textContent = v;
-  $(`#df-${k}`).style.width = (v * 2.5) + '%';
-  $$('.preset-btn').forEach(b => b.classList.remove('act'));
+  $$('.preset').forEach(b => b.classList.remove('act'));
   recompute();
+  renderHero();
   renderTierLegend();
   renderRank();
   renderHeat();
-  renderMastStats();
 }
 
-function preset(name) {
+function preset(name, ev) {
   const ps = {
     default: {...DEFAULT_W},
     salary:  {pay:0.32, tech_now:0.10, tech_future:0.08, geo:0.10, career:0.10, wlb:0.07, endow:0.10, industry:0.07, cohort:0.04, housing:0.02},
@@ -1708,134 +2477,122 @@ function preset(name) {
     cohort:  {pay:0.15, tech_now:0.08, tech_future:0.15, geo:0.08, career:0.08, wlb:0.08, endow:0.10, industry:0.08, cohort:0.18, housing:0.02}
   };
   STATE.weights = {...ps[name]};
-  if (event && event.target) {
-    $$('.preset-btn').forEach(b => b.classList.remove('act'));
-    event.target.classList.add('act');
-  }
-  renderWeights();
+  $$('.preset').forEach(b => b.classList.remove('act'));
+  if (ev && ev.target) ev.target.classList.add('act');
+  renderDims();
   recompute();
+  renderHero();
   renderTierLegend();
   renderRank();
   renderHeat();
-  renderMastStats();
 }
 
-/* ═══ TIER LEGEND ═══ */
+/* ═══ Tier legend ═══ */
 function renderTierLegend() {
   const cnt = tierCount();
   const data = [
-    {cls:'sss', b:'SSS', n:'必投', d:'前 7% 分位 · 拿到即去', c:cnt.SSS},
-    {cls:'ss',  b:'SS',  n:'强推', d:'前 7-22% · 次优先级', c:cnt.SS},
-    {cls:'s',   b:'S',   n:'推荐', d:'前 22-48% · 主投池', c:cnt.S},
-    {cls:'a',   b:'A',   n:'可投', d:'前 48-75% · 保底/广撒', c:cnt.A},
-    {cls:'b',   b:'B',   n:'不推', d:'后 25% · 避坑', c:cnt.B}
+    {cls:'sss', l:'SSS', n:'必投', d:'前 7% · 拿到即去', c:cnt.SSS},
+    {cls:'ss',  l:'SS',  n:'强推', d:'7-22% · 次优先级', c:cnt.SS},
+    {cls:'s',   l:'S',   n:'推荐', d:'22-48% · 主投池', c:cnt.S},
+    {cls:'a',   l:'A',   n:'可投', d:'48-75% · 保底/广撒', c:cnt.A},
+    {cls:'b',   l:'B',   n:'不推', d:'后 25% · 避坑', c:cnt.B}
   ];
   $('#tierLegend').innerHTML = data.map(t => `
-    <div class="tier-col ${t.cls}">
-      <span class="tb">${t.b}</span>
-      <div class="tn">${t.n}</div>
-      <div class="td">${t.d}</div>
-      <span class="tc">${t.c}</span>
+    <div class="tier-item ${t.cls}">
+      <div class="tier-label">${t.l} <span class="count">${t.c}家</span></div>
+      <div class="tier-name">${t.n}</div>
+      <div class="tier-desc">${t.d}</div>
     </div>`).join('');
 }
 
-/* ═══ FIRM CARDS ═══ */
+/* ═══ Firm card · DECISIONAL DESIGN ═══ */
 function renderFirmCard(c) {
   const tcls = c.tier.toLowerCase();
   const cat = CATEGORIES_V4[c.cat];
-  const gemTag = c.tag ? `<span class="gem-tag">⭐ 福地</span>` : '';
-  const internTag = c.intern_path === 'current' ? `<span class="intern-tag">实习中</span>` :
-                    c.intern_path === 'current_off_topic' ? `<span class="intern-tag" style="color:var(--brick);background:rgba(166,61,42,.08)">实习·跨方向</span>` :
-                    c.intern_path === 'adjacent' ? `<span class="intern-tag" style="color:var(--ink-blue);background:rgba(26,58,92,.06)">同赛道</span>` : '';
+  const badges = [];
+  if (c.tag) badges.push('<span class="firm-badge gem">⭐ 福地</span>');
+  if (c.intern_path === 'current') badges.push('<span class="firm-badge intern">实习中</span>');
+  if (c.intern_path === 'current_off_topic') badges.push('<span class="firm-badge warn">实习 · 跨方向</span>');
 
-  const feedback = c.honest_feedback ? `
-    <div class="firm-intro" style="border-left-color:var(--brick);background:rgba(166,61,42,.03)">
-      <strong style="font-style:normal;color:var(--brick);font-weight:700">⚠️ 用户亲述反馈：</strong>${c.honest_feedback}
+  const dims = [
+    {k:'pay', l:'薪酬'}, {k:'tech_now', l:'现栈'}, {k:'tech_future', l:'未来栈'},
+    {k:'geo', l:'地缘'}, {k:'career', l:'职业'}, {k:'wlb', l:'WLB'},
+    {k:'endow', l:'禀赋'}, {k:'industry', l:'前景'}, {k:'cohort', l:'课题'}, {k:'housing', l:'置换'}
+  ];
+
+  const why = c.why_for_you ? `
+    <div class="why-block">
+      <h6>§ 为什么这家适合你</h6>
+      <ul>${c.why_for_you.map(w => `<li>${w}</li>`).join('')}</ul>
     </div>` : '';
 
-  const pos = (c.pos || []).map(p => `
-    <div class="pg">
-      <div class="pg-d">${p.dept}</div>
-      <ul class="pg-j">${(p.jobs || []).map(j => `<li>${j}</li>`).join('')}</ul>
-    </div>`).join('');
+  const pos = (c.pos && c.pos.length) ? `
+    <div class="pos-block">
+      <h6>§ 推荐岗位</h6>
+      ${c.pos.map(p => `
+        <div class="pos-group">
+          <div class="pos-dept">${p.dept}</div>
+          <ul class="pos-jobs">${p.jobs.map(j => `<li>${j}</li>`).join('')}</ul>
+        </div>`).join('')}
+    </div>` : '';
 
-  const dims = ['pay','tech_now','tech_future','geo','career','wlb','endow','industry','cohort','housing'];
-  const dimLabels = {pay:'薪酬', tech_now:'现栈', tech_future:'未来栈', geo:'地缘', career:'职业',
-                     wlb:'WLB', endow:'禀赋', industry:'前景', cohort:'课题', housing:'置换'};
-  const dim9 = dims.map(k => `
-    <div class="d9"><div class="d9-l">${dimLabels[k]}</div><div class="d9-v">${c[k].toFixed(1)}</div><div class="d9-bar"><i style="width:${c[k]*10}%"></i></div></div>
-  `).join('');
+  const ar = `
+    <div class="ar-block">
+      <div class="ar-card adv">
+        <h6>优势</h6>
+        <ul>${(c.adv || []).map(a => `<li>${a}</li>`).join('')}</ul>
+      </div>
+      <div class="ar-card risk">
+        <h6>风险</h6>
+        <ul>${(c.risk || []).map(r => `<li>${r}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+
+  const caveat = (c.caveat || c.honest_feedback) ?
+    `<div class="firm-caveat">⚠ ${c.caveat || c.honest_feedback}</div>` : '';
 
   return `
-    <article class="firm-card" data-tier="${c.tier}" data-cat="${c.cat}" data-id="${c.id}">
-      <header class="firm-h" onclick="this.parentNode.classList.toggle('open')">
+    <article class="firm" data-tier="${c.tier}" data-cat="${c.cat}" data-id="${c.id}">
+      <div class="firm-top">
         <div class="firm-rank">${pad2(c.rank)}</div>
         <div class="firm-title">
-          <div class="fname">${c.name} ${gemTag} ${internTag}</div>
+          <div class="firm-name">${c.name}${badges.join('')}</div>
           <div class="firm-sub"><span class="cat-icon">${cat.icon}</span>${c.en} · ${c.subcat} · ${c.dist}</div>
         </div>
-        <div class="firm-meta">
-          <span class="mm">现金 <b>${c.cash_low}-${c.cash_high}w</b></span>
-          <span class="mm">周 <b>${c.wlb_hours}h</b></span>
-          <span class="mm">公积金 <b>${c.fund_pct}+${c.fund_pct}</b></span>
+        <div class="firm-stats-mini">
+          <span class="sm-chip"><b>${c.cash_low}-${c.cash_high}</b>w</span>
+          <span class="sm-chip">周<b>${c.wlb_hours}</b>h</span>
+          <span class="sm-chip">公积金<b>${c.fund_pct}+${c.fund_pct}</b></span>
         </div>
-        <div class="firm-score ${tcls}">
-          <div class="fs-n">${c.score.toFixed(2)}</div>
-          <div class="fs-l">${c.tier}</div>
+        <div class="firm-score-block">
+          <div class="firm-score ${tcls}">${c.score.toFixed(2)}</div>
+          <div class="firm-tier">${c.tier}</div>
         </div>
-        <div class="firm-arrow">▾</div>
-      </header>
-      <div class="firm-body">
-        <div class="firm-intro">${c.intro || ''}</div>
-        ${feedback}
+      </div>
 
-        ${c.why_for_you ? `<div class="firm-why">
-          <h6>§ 为什么这家适合你</h6>
-          <ul>${c.why_for_you.map(w => `<li>${w}</li>`).join('')}</ul>
-        </div>` : ''}
+      <div class="firm-oneliner">${c.oneliner || ''}</div>
+      ${caveat}
 
-        <div class="firm-match-row">
-          <div class="fm-cell">
-            <div class="fm-k">现栈契合度 <b>${c.tech_now.toFixed(1)}</b></div>
-            <div class="fm-v">${c.current_match || '-'}</div>
-          </div>
-          <div class="fm-cell">
-            <div class="fm-k">未来栈契合度 <b>${c.tech_future.toFixed(1)}</b></div>
-            <div class="fm-v">${c.future_match || '-'}</div>
-          </div>
-        </div>
+      <div class="firm-metrics">
+        <div class="metric-cell"><div class="metric-k">5 年总包</div><div class="metric-v">${c.total5y}<small>w</small></div></div>
+        <div class="metric-cell"><div class="metric-k">未来栈契合</div><div class="metric-v">${c.tech_future.toFixed(1)}</div></div>
+        <div class="metric-cell"><div class="metric-k">课题组契合</div><div class="metric-v">${c.cohort.toFixed(1)}</div></div>
+        <div class="metric-cell"><div class="metric-k">定居友好</div><div class="metric-v">${c.geo.toFixed(1)}</div></div>
+        <div class="metric-cell"><div class="metric-k">股票期权</div><div class="metric-v" style="font-size:12px">${c.stock || '无'}</div></div>
+      </div>
 
-        <div class="pay-grid">
-          <div class="pay-cell">
-            <div class="pay-k">现金总包</div>
-            <div class="pay-v">${c.cash_low}-${c.cash_high}<small>w</small></div>
-          </div>
-          <div class="pay-cell">
-            <div class="pay-k">年公积金</div>
-            <div class="pay-v">${c.fund_total}<small>w</small></div>
-          </div>
-          <div class="pay-cell">
-            <div class="pay-k">5年累计</div>
-            <div class="pay-v">${c.total5y}<small>w</small></div>
-          </div>
-          <div class="pay-cell">
-            <div class="pay-k">股票期权</div>
-            <div class="pay-v" style="font-size:var(--fs-sm);font-weight:600">${c.stock || 'none'}</div>
-          </div>
-        </div>
+      <button class="firm-details-toggle" onclick="this.closest('.firm').classList.toggle('open')" aria-expanded="false">
+        <span>查看完整档案</span>
+        <span class="arr">▼</span>
+      </button>
 
-        <div class="dim9-grid">${dim9}</div>
-
-        ${pos ? `<div class="firm-pos"><h6>§ 推荐岗位</h6>${pos}</div>` : ''}
-
-        <div class="ar-grid">
-          <div class="ar adv"><h6>⊕ 核心优势</h6><ul>${(c.adv||[]).map(a=>`<li>${a}</li>`).join('')}</ul></div>
-          <div class="ar risk"><h6>⊖ 风险提示</h6><ul>${(c.risk||[]).map(r=>`<li>${r}</li>`).join('')}</ul></div>
-        </div>
-
-        <div class="firm-footer">
-          <span>${c.ticker ? c.ticker : (c.cat==='soe'?'国资':c.cat==='hospital'?'事业单位':'未上市')} · ${c.dist}</span>
-          <span>${c.source || ''} · <a href="${c.source_url || '#'}" target="_blank">官方招聘 ↗</a></span>
+      <div class="firm-details">
+        ${why}
+        ${pos}
+        ${ar}
+        <div class="firm-src">
+          <span>${c.ticker ? c.ticker : (c.cat==='soe'?'国资':c.cat==='hospital'?'事业单位':'未上市')} · ${c.dist} · ${c.source || ''}</span>
+          <a href="${c.source_url || '#'}" target="_blank" rel="noopener">官方招聘 ↗</a>
         </div>
       </div>
     </article>`;
@@ -1846,20 +2603,30 @@ function renderRank() {
   if (STATE.filterCat !== 'all') list = list.filter(c => c.cat === STATE.filterCat);
   if (STATE.search) {
     const q = STATE.search.toLowerCase();
-    list = list.filter(c => c.name.toLowerCase().includes(q) || (c.en||'').toLowerCase().includes(q));
+    list = list.filter(c => c.name.toLowerCase().includes(q) || (c.en || '').toLowerCase().includes(q));
   }
-  if (STATE.sortBy === 'score') list.sort((a,b)=>b.score-a.score);
-  else list.sort((a,b)=>(b[STATE.sortBy]||0) - (a[STATE.sortBy]||0));
+  if (STATE.sortBy === 'score') list.sort((a,b) => b.score - a.score);
+  else list.sort((a,b) => (b[STATE.sortBy] || 0) - (a[STATE.sortBy] || 0));
 
-  const tiers = ['SSS','SS','S','A','B'];
-  const tn = {SSS:'必投', SS:'强推', S:'推荐', A:'可投', B:'保底'};
-  const ti = {SSS:'Must-apply · 4-5 家', SS:'Highly recommended · 8-10 家', S:'Recommended · 主投池', A:'Safety · 保底', B:'Avoid · 避坑区'};
+  const tiers = ['SSS', 'SS', 'S', 'A', 'B'];
+  const tn = {SSS:'必投', SS:'强推', S:'推荐', A:'可投', B:'避坑'};
+  const ti = {
+    SSS:'Must apply · 4-5 家',
+    SS:'Highly recommended · 9-10 家',
+    S:'Recommended · 主投池',
+    A:'Safety net · 保底',
+    B:'Avoid · 后 25%'
+  };
 
   let html = '';
   const gems = list.filter(c => c.tag);
   if (gems.length) {
     html += `<section class="tgroup">
-      <div class="tgroup-h gem"><span class="tgb">⭐ 福地</span><span class="tgt">${ti['SSS']||''} · Hidden Gems · 非主流但特别适合你</span><span class="tgc">${gems.length}家</span></div>
+      <div class="tgroup-head">
+        <span class="tgroup-badge gem">⭐ 隐藏福地</span>
+        <span class="tgroup-title">独立轨道 · 非主流但特别适合你</span>
+        <span class="tgroup-count">${gems.length} 家</span>
+      </div>
       ${gems.map(renderFirmCard).join('')}
     </section>`;
   }
@@ -1869,95 +2636,95 @@ function renderRank() {
     const g = others.filter(c => c.tier === t);
     if (!g.length) return;
     html += `<section class="tgroup">
-      <div class="tgroup-h ${t.toLowerCase()}"><span class="tgb">${t}</span><span class="tgt">${tn[t]} · ${ti[t]}</span><span class="tgc">${g.length} 家</span></div>
+      <div class="tgroup-head">
+        <span class="tgroup-badge ${t.toLowerCase()}">${t}</span>
+        <span class="tgroup-title">${tn[t]} · ${ti[t]}</span>
+        <span class="tgroup-count">${g.length} 家</span>
+      </div>
       ${g.map(renderFirmCard).join('')}
     </section>`;
   });
   $('#rankC').innerHTML = html;
-
-  // 默认展开 SSS 前 3
-  setTimeout(() => {
-    const ccs = document.querySelectorAll('.firm-card[data-tier=SSS]');
-    for (let i = 0; i < Math.min(3, ccs.length); i++) ccs[i].classList.add('open');
-  }, 60);
 }
 
-/* ═══ HEATMAP ═══ */
+/* ═══ Heatmap ═══ */
 function renderHeat() {
   const rows = [...COMPANIES_V4].sort((a,b)=>b.score-a.score).slice(0, STATE.heatCount);
-  $('#heatRows').innerHTML = rows.map((c,i) => {
-    const cells = ['pay','tech_now','tech_future','geo','career','wlb','endow','industry','cohort','housing']
-      .map(k => `<div class="${heatCls(c[k])}">${c[k].toFixed(1)}</div>`).join('');
-    return `<div class="heat-r">
-      <div>${pad2(i+1)} · ${c.name}</div>
-      ${cells}
-      <div class="${heatCls(c.score)}" style="font-weight:700">${c.score.toFixed(2)}</div>
-    </div>`;
-  }).join('');
+  const dims = ['pay','tech_now','tech_future','geo','career','wlb','endow','industry','cohort','housing'];
+  const dimLbl = {pay:'薪酬',tech_now:'现栈',tech_future:'未来栈',geo:'地缘',career:'职业',wlb:'WLB',endow:'禀赋',industry:'前景',cohort:'课题',housing:'置换'};
+  let html = `<div class="h-head h-name">公司</div>`;
+  dims.forEach(k => html += `<div class="h-head">${dimLbl[k]}</div>`);
+  html += `<div class="h-head">总分</div>`;
+  rows.forEach((c, i) => {
+    html += `<div class="h-name">${pad2(i+1)}. ${c.name}</div>`;
+    dims.forEach(k => {
+      html += `<div class="${heatCls(c[k])}">${c[k].toFixed(1)}</div>`;
+    });
+    html += `<div class="${heatCls(c.score)}" style="font-weight:800">${c.score.toFixed(2)}</div>`;
+  });
+  $('#heatC').innerHTML = html;
 }
 
-function setHeatCount(n, ev) {
+function setHeat(n, ev) {
   STATE.heatCount = n;
-  $$('.heat-ctl .chip').forEach(b => b.classList.remove('act'));
+  $$('.heat-ctrl .chip').forEach(b => b.classList.remove('act'));
   if (ev && ev.target) ev.target.classList.add('act');
   renderHeat();
 }
 
-/* ═══ SCATTER ═══ */
+/* ═══ Scatter ═══ */
 function renderScatter() {
-  const plot = $('#scatPlot');
+  const plot = $('#scPlot');
   [...plot.querySelectorAll('.sc-dot')].forEach(d => d.remove());
   const W = plot.offsetWidth, H = plot.offsetHeight;
   const pad = 50;
   COMPANIES_V4.forEach(c => {
-    const x = pad + (c.pay / 10) * (W - 2*pad);
-    const y = H - pad - (c.wlb / 10) * (H - 2*pad);
+    const x = pad + (c.pay / 10) * (W - 2 * pad);
+    const y = H - pad - (c.wlb / 10) * (H - 2 * pad);
     const size = 8 + (c.score - 6) * 2.2;
     const color = CATEGORIES_V4[c.cat].color;
     const d = document.createElement('div');
     d.className = 'sc-dot';
     d.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${color}`;
-    d.addEventListener('mouseenter', e => {
+    d.setAttribute('aria-label', c.name);
+    d.addEventListener('mouseenter', () => {
       const tip = $('#scTip');
       tip.innerHTML = `<b>${c.name}</b>薪酬: ${c.pay.toFixed(1)} · WLB: ${c.wlb.toFixed(1)}<br>总分: ${c.score.toFixed(2)} · ${c.tier}`;
       tip.style.display = 'block';
-      tip.style.left = (x + 14) + 'px';
+      tip.style.left = (x + 12) + 'px';
       tip.style.top = (y - 30) + 'px';
     });
     d.addEventListener('mouseleave', () => { $('#scTip').style.display = 'none'; });
     plot.appendChild(d);
   });
-
-  $('#scatLeg').innerHTML = Object.entries(CATEGORIES_V4).map(([k,v]) =>
+  $('#scLegend').innerHTML = Object.entries(CATEGORIES_V4).map(([k,v]) =>
     `<span><span class="sl-dot" style="background:${v.color}"></span>${v.icon} ${v.name}</span>`
   ).join('');
 }
 
-/* ═══ 5-YEAR CURVE ═══ */
+/* ═══ Curve ═══ */
 function renderCurve() {
   const top15 = [...COMPANIES_V4].sort((a,b)=>b.score-a.score).slice(0, 15);
-  if (STATE.selectedCurves.length === 0) STATE.selectedCurves = top15.slice(0,5).map(c=>c.id);
+  if (STATE.selectedCurves.length === 0) STATE.selectedCurves = top15.slice(0, 5).map(c => c.id);
   $('#curveSel').innerHTML = top15.map(c =>
-    `<button class="cs-btn ${STATE.selectedCurves.includes(c.id)?'act':''}" onclick="toggleCurve(${c.id})">${c.name}</button>`
+    `<button class="cs-btn ${STATE.selectedCurves.includes(c.id) ? 'act' : ''}" onclick="toggleCurve(${c.id})">${c.name}</button>`
   ).join('');
-
   const svg = $('#curveSvg');
-  const Wv = 1000, Hv = 420, pad = 50;
+  const Wv = 1000, Hv = 380, pad = 50;
   const maxVal = 500;
   let svgHtml = '';
   for (let y = 0; y <= 5; y++) {
-    const yy = pad + (Hv - 2*pad) * y / 5;
-    svgHtml += `<line x1="${pad}" y1="${yy}" x2="${Wv-pad}" y2="${yy}" stroke="#e8e2d1" stroke-width="1"/>`;
-    const val = (5-y) * 100;
-    svgHtml += `<text x="${pad-10}" y="${yy+4}" fill="#9ca3af" font-size="10" font-family="JetBrains Mono" text-anchor="end">${val}w</text>`;
+    const yy = pad + (Hv - 2 * pad) * y / 5;
+    svgHtml += `<line x1="${pad}" y1="${yy}" x2="${Wv-pad}" y2="${yy}" stroke="#e5e7eb" stroke-width="1"/>`;
+    const val = (5 - y) * 100;
+    svgHtml += `<text x="${pad-10}" y="${yy+4}" fill="#6b7280" font-size="11" font-family="JetBrains Mono,monospace" text-anchor="end">${val}w</text>`;
   }
   for (let x = 0; x <= 5; x++) {
-    const xx = pad + (Wv - 2*pad) * x / 5;
-    svgHtml += `<line x1="${xx}" y1="${pad}" x2="${xx}" y2="${Hv-pad}" stroke="#e8e2d1" stroke-width="1"/>`;
-    svgHtml += `<text x="${xx}" y="${Hv-pad+22}" fill="#9ca3af" font-size="10" font-family="JetBrains Mono" text-anchor="middle">Y${x}</text>`;
+    const xx = pad + (Wv - 2 * pad) * x / 5;
+    svgHtml += `<line x1="${xx}" y1="${pad}" x2="${xx}" y2="${Hv-pad}" stroke="#e5e7eb" stroke-width="1"/>`;
+    svgHtml += `<text x="${xx}" y="${Hv-pad+22}" fill="#6b7280" font-size="11" font-family="JetBrains Mono,monospace" text-anchor="middle">Y${x}</text>`;
   }
-
-  const colors = ['#c41e3a','#1a3a5c','#b08d3f','#5f7a5f','#a63d2a','#8b0a1e','#6b5a28','#1abc9c','#9b59b6','#e67e22'];
+  const colors = ['#dc2626', '#2563eb', '#d97706', '#059669', '#7c3aed', '#ea580c', '#0891b2', '#65a30d', '#c026d3', '#4338ca'];
   STATE.selectedCurves.forEach((id, idx) => {
     const c = COMPANIES_V4.find(x => x.id === id);
     if (!c) return;
@@ -1966,22 +2733,22 @@ function renderCurve() {
     let cum = 0;
     const pts = [];
     for (let yr = 0; yr <= 5; yr++) {
-      const mul = yr === 0 ? 0 : 1 + (yr-1) * 0.1;
+      const mul = yr === 0 ? 0 : 1 + (yr - 1) * 0.1;
       const inc = yr === 0 ? 0 : base * mul + fund;
       cum += inc;
-      if (yr >= 3 && c.stock && !/none/i.test(c.stock)) cum += base * 0.15;
-      const x = pad + (Wv - 2*pad) * yr / 5;
-      const y = Hv - pad - (Hv - 2*pad) * Math.min(cum, maxVal) / maxVal;
-      pts.push({x,y,cum});
+      if (yr >= 3 && c.stock && !/none|无/i.test(c.stock)) cum += base * 0.15;
+      const x = pad + (Wv - 2 * pad) * yr / 5;
+      const y = Hv - pad - (Hv - 2 * pad) * Math.min(cum, maxVal) / maxVal;
+      pts.push({x, y, cum});
     }
-    const path = pts.map((p,i) => (i===0?'M':'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join('');
+    const path = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join('');
     const col = colors[idx % colors.length];
-    svgHtml += `<path d="${path}" stroke="${col}" stroke-width="2" fill="none" stroke-linecap="round"/>`;
-    pts.forEach((p,i) => {
+    svgHtml += `<path d="${path}" stroke="${col}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+    pts.forEach((p, i) => {
       if (i === 0) return;
-      svgHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="${col}"/>`;
+      svgHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${col}"/>`;
       if (i === 5) {
-        svgHtml += `<text x="${(p.x+8).toFixed(1)}" y="${(p.y+4).toFixed(1)}" fill="${col}" font-size="11" font-weight="700" font-family="JetBrains Mono">${c.name} ${Math.round(p.cum)}w</text>`;
+        svgHtml += `<text x="${(p.x+8).toFixed(1)}" y="${(p.y+4).toFixed(1)}" fill="${col}" font-size="11" font-weight="700" font-family="Inter">${c.name} ${Math.round(p.cum)}w</text>`;
       }
     });
   });
@@ -1989,22 +2756,37 @@ function renderCurve() {
 }
 
 function toggleCurve(id) {
-  if (STATE.selectedCurves.includes(id)) {
-    STATE.selectedCurves = STATE.selectedCurves.filter(x => x !== id);
-  } else if (STATE.selectedCurves.length < 6) {
-    STATE.selectedCurves.push(id);
-  }
+  if (STATE.selectedCurves.includes(id)) STATE.selectedCurves = STATE.selectedCurves.filter(x => x !== id);
+  else if (STATE.selectedCurves.length < 6) STATE.selectedCurves.push(id);
   renderCurve();
 }
 
-/* ═══ UNIT TYPES ═══ */
+/* ═══ Unit types ═══ */
 const UTG = [
-  {cls:'medical', num:'01', name:'医疗电子·可穿戴医疗', tag:'代表：联影 · 迈瑞 · 微创 · 脑虎 · 三诺 · 华为健康', body:'**强技术壁垒 + 强政策红利 + 老龄化确定性**。医疗电子行业监管严格（IEC 62304/60601），准入门槛高，但一旦进入就有长期价值。**王侃课题组研究方向最直接的产业出口**。', bullets:['薪资 28-50w（医疗龙头）/ 35-55w（大厂健康军团）','WLB 44-50h（研发）/ 40h（外企）','35 岁+ 无年龄焦虑，技术路线清晰','核心：可穿戴电子 + 生物传感 + 低功耗 + 医疗级可靠性','关键证书：IEC 62304 / IEC 60601'], rec:'✓ 你的最佳主投方向（契合度天花板）'},
-  {cls:'auto', num:'02', name:'汽车电子', tag:'代表：小米汽车 · 地平线 · 黑芝麻 · 蔚来 · 理想', body:'**高薪 + 高强度 + 行业整合期**。新势力进入淘汰赛，头部玩家薪资优厚但 WLB 差。与你医疗电子主线偏离 —— <em>你已实习小米汽车，感受过了太累太卷</em>。', bullets:['薪资 35-58w（新势力）/ 25-35w（传统 Tier 1）','WLB 48-55h，大小周常见','技术栈：AUTOSAR/CAN/LIN/座舱 OS/域控制器','2027-2029 可能二次洗牌','建议：保底可选，不作为主投'], rec:'○ 不推荐作为主投方向'},
-  {cls:'aiot', num:'03', name:'AIoT · 可穿戴芯片', tag:'代表：恒玄 · 华为海思 · 英伟达 · 大疆', body:'**薪资天花板 + 技术前沿**。英伟达/华为海思简历含金量顶级，恒玄是可穿戴芯片国内龙头。AIoT × 医疗方向最有前景的交叉点。', bullets:['薪资 42-67w（头部）/ 32-45w（中档）','WLB 两极分化（外企优秀/国内中厂差）','核心：SoC嵌入式/AI部署/低功耗','35 岁+ 年龄焦虑相对明显','机会：AIoT × 医疗 = 可穿戴医疗金矿'], rec:'△ 冲击 SSS 级的备选方向'},
-  {cls:'soe', num:'04', name:'央企 · 国企 · 研究所', tag:'代表：商飞 · 中电科32所 · 中科院微系统所 · 航天804', body:'**稳定王者 + 人才公寓 + 事业编制**。现金不如私企，但 **安家费 10-15w + 人才公寓 5 年 + 公积金顶格 12+12** 等效总包不输大厂 B 档。**AFM 背景 + 交大学硕是助理研究员岗绿色通道**。', bullets:['薪资 22-32w 现金 + 补贴等效 30-40w','WLB 955 典范，周均 40-44h','晋升体制化但稳定到 30 年','核心：国产 RTOS / 军工电子 / MEMS / 航电','独特：可申报国自然基金 · 在职博士通道'], rec:'⭐ 强烈推荐纳入主投 + 保底'},
-  {cls:'hospital', num:'05', name:'医院工程科 · 临床研究中心', tag:'代表：瑞金 BME · 仁济 · 中山 · 华山', body:'**绝对蓝海 + 交大医学院系统 + 事业编**。99% 同学没考虑过但极适合你：你的 6 项发明专利 + AFM 论文可**直接变现**为医院科研项目，可申报国自然基金。可边工作边读博。', bullets:['薪资 18-28w（事业编）','WLB 955/965 典范','晋升：临床工程师→科研工程师→博后→副高','核心：事业编+人才公寓+落户+科研空间','路径：可在职博士 · 可申报基金'], rec:'⭐ 蓝海选项·你的科研背景完美匹配'},
-  {cls:'startup', num:'06', name:'独角兽 · 前沿初创', tag:'代表：脑虎 · 博睿康 · 阶跃星辰 · 阶梯', body:'**期权增值潜力 + 技术前沿 + 风险高**。脑机接口赛道（脑虎/博睿康/阶梯）与你脑机接口实习对口。<em>但规模过小的初创不推荐</em>（如宇构智核）。', bullets:['薪资 28-50w（头部）/ 22-32w（小初创）','WLB 48-52h','扁平组织晋升快','核心：前沿赛道（脑机/AI芯片/大模型）','风险：融资断裂 / 转型 / 期权归零'], rec:'○ 仅限头部独角兽（脑虎/博睿康）'}
+  {cls:'medical', num:'01', name:'医疗电子 · 可穿戴医疗', tag:'代表：联影 · 迈瑞 · 微创 · 三诺 · 华为健康',
+   body:'**你的主战场**。强技术壁垒 + 强政策红利 + 老龄化确定性。监管严格（IEC 62304/60601），准入门槛高，一旦进入长期价值极高。',
+   b:['薪资 28-50w（龙头）· 35-55w（大厂健康军团）','WLB 44-50h（研发）· 40h（外企）','35 岁+ 无年龄焦虑','核心：生物传感+低功耗+医疗级可靠性','证书：IEC 62304 · IEC 60601'],
+   rec:'✓ 你的最佳主投方向（契合度天花板）'},
+  {cls:'auto', num:'02', name:'汽车电子', tag:'代表：小米汽车 · 地平线 · 黑芝麻 · 蔚来',
+   body:'**高薪 + 高强度 + 整合期**。新势力进入淘汰赛，头部玩家薪资优厚但 WLB 差。你已亲身体验过 —— <strong>太累太卷且跨方向</strong>。',
+   b:['薪资 35-58w（新势力）· 25-35w（传统 Tier 1）','WLB 48-55h，大小周常见','AUTOSAR/CAN/LIN/座舱 OS','2027-2029 可能二次洗牌','与你医疗主线偏离'],
+   rec:'○ 不推荐作为主投方向 · 小米可做保底'},
+  {cls:'aiot', num:'03', name:'AIoT · 可穿戴芯片', tag:'代表：恒玄 · 华为海思 · 英伟达 · 大疆',
+   body:'**薪资天花板 + 技术前沿**。英伟达/华为海思简历含金量顶级，恒玄是国内可穿戴芯片龙头。AIoT × 医疗是最佳交叉点。',
+   b:['薪资 42-67w（头部）· 32-45w（中档）','WLB 两极分化（外企优秀 / 国内中厂差）','SoC嵌入式+AI部署+低功耗','35 岁+ 年龄焦虑相对明显','机会：AIoT × 医疗 = 金矿'],
+   rec:'△ 作为冲击 SSS 级的备选'},
+  {cls:'soe', num:'04', name:'央企 · 国企 · 研究所', tag:'代表：商飞 · 中电科 · 中科院微系统所 · 航天八院',
+   body:'**稳定王者 + 人才公寓 + 事业编制**。现金不如私企，但 **安家费 10-15w + 人才公寓 5 年 + 公积金顶格** 等效总包不输大厂 B 档。AFM + 交大学硕是助理研究员岗绿色通道。',
+   b:['薪资 22-32w 现金 + 补贴等效 30-40w','WLB 955 典范，40-44h','晋升体制化但稳定到退休','核心：国产 RTOS · 军工电子 · MEMS','独特：国自然基金 · 在职博士'],
+   rec:'⭐ 强烈推荐纳入主投 + 保底'},
+  {cls:'hospital', num:'05', name:'医院工程科 · 临床研究中心', tag:'代表：瑞金 · 仁济 · 中山 · 华山',
+   body:'**绝对蓝海 + 交大医学院系统 + 事业编**。99% 同学没考虑过但极适合你：<strong>你的 6 项发明专利 + AFM 论文可直接变现</strong>为医院科研项目，可申国自然基金。可边工作边读博。',
+   b:['薪资 18-28w（事业编）','WLB 955/965 典范','晋升：临床→科研→博后→副高','事业编+人才公寓+落户+科研空间','路径：在职博士 · 申报基金'],
+   rec:'⭐ 蓝海选项 · 你的科研背景完美匹配'},
+  {cls:'startup', num:'06', name:'独角兽 · 前沿初创', tag:'代表：脑虎 · 博睿康 · 阶跃星辰',
+   body:'**期权潜力 + 技术前沿 + 风险高**。脑机接口赛道（脑虎/博睿康）<strong>非你主线方向</strong>（你没写脑机接口技术栈）。规模过小的不推荐（如宇构）。',
+   b:['薪资 28-50w（头部）· 22-32w（小初创）','WLB 48-52h','扁平组织晋升快','前沿赛道（脑机/AI芯片/大模型）','风险：融资断裂 · 转型 · 期权归零'],
+   rec:'○ 仅限头部 · 脑机接口并非你主线'}
 ];
 function renderUT() {
   $('#utGrid').innerHTML = UTG.map(u => `
@@ -2012,24 +2794,23 @@ function renderUT() {
       <div class="ut-num">${u.num}</div>
       <h5>${u.name}</h5>
       <div class="ut-tag">${u.tag}</div>
-      <p class="ut-body">${u.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/<em>(.+?)<\/em>/g,'<em>$1</em>')}</p>
-      <ul class="ut-bullets">${u.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      <p class="ut-body">${u.body.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>
+      <ul class="ut-bullets">${u.b.map(b => `<li>${b}</li>`).join('')}</ul>
       <div class="ut-rec">${u.rec}</div>
     </article>`).join('');
 }
 
-/* ═══ TIMELINE ═══ */
+/* ═══ Timeline ═══ */
 const TL = [
-  {d:'2026.05', p:.02, l:'当前·小米实习中', now:true, above:true},
+  {d:'2026.05', p:.02, l:'当前 · 小米实习中', now:true, above:true},
   {d:'2026.06', p:.06, l:'本科毕业', above:false},
-  {d:'2026.07', p:.09, l:'实习结束', above:true},
-  {d:'2026.09', p:.14, l:'交大入学·王侃组', above:false, ms:true},
+  {d:'2026.09', p:.14, l:'交大入学 · 王侃组', above:false, ms:true},
   {d:'2026.11', p:.18, l:'确定微针研究方向', above:true},
-  {d:'2027.01', p:.24, l:'寒假·第一段硕士实习', above:false},
+  {d:'2027.01', p:.24, l:'寒假 · 第一段硕士实习', above:false},
   {d:'2027.06', p:.36, l:'SCI 综述投稿', above:true},
-  {d:'2027.09', p:.44, l:'2028届秋招·观察员', above:false},
-  {d:'2027.12', p:.52, l:'AFM 发表 / 综述录用', above:true},
-  {d:'2028.03', p:.58, l:'研究性 SCI 投稿', above:false},
+  {d:'2027.09', p:.44, l:'2028 届秋招观察员', above:false},
+  {d:'2027.12', p:.52, l:'AFM / 综述录用', above:true},
+  {d:'2028.03', p:.58, l:'研究 SCI 投稿', above:false},
   {d:'2028.06', p:.66, l:'硕二暑期实习窗口', above:true},
   {d:'2028.09', p:.74, l:'🎯 秋招正式启动', above:false, ms:true},
   {d:'2028.10', p:.78, l:'大厂提前批 · 医疗电子', above:true},
@@ -2041,19 +2822,17 @@ const TL = [
 ];
 function renderTL() {
   $('#tl').innerHTML = '<div class="tl-line"></div>' + TL.map(e => `
-    <div class="tl-mk ${e.now?'now':''} ${e.ms?'milestone':''}" style="left:${e.p*100}%"></div>
+    <div class="tl-mk ${e.now?'now':''} ${e.ms?'ms':''}" style="left:${e.p*100}%"></div>
     <div class="tl-lbl ${e.above?'above':'below'} ${e.now?'now':''}" style="left:${e.p*100}%">
       <b>${e.l}</b><span class="tl-d">${e.d}</span>
     </div>`).join('');
 }
 
-/* ═══ SETTLE CALC ═══ */
+/* ═══ Settle calc ═══ */
 const PRICE_MAP = {'嘉定新城':4.0,'嘉定安亭':2.9,'闵行老闵行':3.9,'闵行马桥':5.5,'闵行莘庄':5.9,'张江':9.5,'临港':4.2};
 function renderCalc() {
-  const top30 = [...COMPANIES_V4].sort((a,b)=>b.score-a.score).slice(0,30);
-  $('#calcCompany').innerHTML = top30.map(c =>
-    `<option value="${c.id}">${c.name} · 年包 ${c.cash_mid}w</option>`
-  ).join('');
+  const top30 = [...COMPANIES_V4].sort((a,b)=>b.score-a.score).slice(0, 30);
+  $('#calcCompany').innerHTML = top30.map(c => `<option value="${c.id}">${c.name} · 年包 ${c.cash_mid}w</option>`).join('');
   ['calcArea','calcBS','calcPR','calcSV','calcYR'].forEach(id => {
     $(`#${id}`).addEventListener('input', e => {
       const unit = id === 'calcArea' ? '㎡' : id === 'calcYR' ? 'Y' : 'w';
@@ -2088,54 +2867,52 @@ function updateCalc() {
   const fundMly = fund * 10000 / 12;
   const ratio = mly / (salMly + fundMly * 0.5);
   const disposable = c.cash_mid - mly * 12 / 10000;
-
   const verdict = ratio < 0.3 ? '🟢 极为宽裕 · 首付与月供都轻松' :
-                  ratio < 0.5 ? '🟡 可负担 · 月供占比正常范围' :
+                  ratio < 0.5 ? '🟡 可负担 · 月供占比正常' :
                   ratio < 0.7 ? '🟠 偏紧张 · 建议提升薪资或降低预算' :
-                                '🔴 紧张 · 月供超 70%，重新考虑目标区';
-
+                                '🔴 紧张 · 月供超 70% · 重新考虑目标区';
   $('#calcOut').innerHTML = `
-    <div class="co-row"><div class="co-k">房屋总价</div><div class="co-v">${totalW.toFixed(0)}<small>w</small></div></div>
-    <div class="co-row"><div class="co-k">首付 35%</div><div class="co-v">${downW.toFixed(0)}<small>w</small></div></div>
-    <div class="co-row"><div class="co-k">资金池（宝山+父母+存款）</div><div class="co-v green">${pool}<small>w</small></div></div>
-    <div class="co-row"><div class="co-k">首付缺口</div><div class="co-v ${gap>0?'red':'green'}">${gap>0?gap.toFixed(0)+'w':'无'}</div></div>
-    <div class="co-row"><div class="co-k">贷款额度</div><div class="co-v">${loan.toFixed(0)}<small>w</small></div></div>
-    <div class="co-row"><div class="co-k">月供</div><div class="co-v">${(mly/1000).toFixed(1)}<small>k</small></div></div>
-    <div class="co-row"><div class="co-k">月供占比</div><div class="co-v ${ratio<0.5?'green':ratio<0.7?'':'red'}">${(ratio*100).toFixed(1)}%</div></div>
-    <div class="co-row"><div class="co-k">年可支配（扣月供）</div><div class="co-v green">${disposable.toFixed(1)}<small>w</small></div></div>`;
-  $('#calcVerdict').innerHTML = `<strong style="font-style:normal;font-weight:700;color:var(--ink-0);font-family:var(--f-body);font-size:var(--fs-base)">判定：</strong> ${verdict}`;
+    <div class="co"><div class="co-k">房屋总价</div><div class="co-v">${totalW.toFixed(0)}<small>w</small></div></div>
+    <div class="co"><div class="co-k">首付 35%</div><div class="co-v">${downW.toFixed(0)}<small>w</small></div></div>
+    <div class="co"><div class="co-k">资金池（宝山+父母+存款）</div><div class="co-v green">${pool}<small>w</small></div></div>
+    <div class="co"><div class="co-k">首付缺口</div><div class="co-v ${gap>0?'red':'green'}">${gap>0?gap.toFixed(0)+'w':'无'}</div></div>
+    <div class="co"><div class="co-k">贷款额度</div><div class="co-v">${loan.toFixed(0)}<small>w</small></div></div>
+    <div class="co"><div class="co-k">月供</div><div class="co-v">${(mly/1000).toFixed(1)}<small>k</small></div></div>
+    <div class="co"><div class="co-k">月供占比</div><div class="co-v ${ratio<0.5?'green':ratio<0.7?'':'red'}">${(ratio*100).toFixed(1)}%</div></div>
+    <div class="co"><div class="co-k">年可支配</div><div class="co-v green">${disposable.toFixed(1)}<small>w</small></div></div>`;
+  $('#calcVerdict').innerHTML = `<strong>判定：</strong> ${verdict}`;
 }
 
-/* ═══ INDUSTRY ═══ */
+/* ═══ Industry ═══ */
 const IND = [
   {cls:'med', n:'医疗电子 · 可穿戴医疗', w:'你主攻方向 60% · 政策确定性最高',
-   stats:[{l:'2030全球规模',v:'996亿USD'},{l:'CAGR',v:'15.6%'},{l:'中国 2024',v:'615亿元'},{l:'中国5年',v:'14.7%'}],
-   body:'**健康中国 2030 + 十五五 + 健康上海 2030** 三重政策叠加。可穿戴医疗明确写入国家规划。上海集成电路+生物医药+AI 三大先导产业 2024 突破 2 万亿。',
-   b:['老龄化 3.8 亿（2030）→ 慢病监测刚需爆发','CGM / 心电 / 脑电采集三大细分高增速','王侃课题组微针+POCT方向是"明星细分"','国产替代确定性极高（联影/迈瑞/三诺/微创）','2029 毕业正好赶上可穿戴医疗第二波上市潮']},
+   stats:[{l:'2030全球',v:'996亿USD'},{l:'CAGR',v:'15.6%'},{l:'中国2024',v:'615亿元'},{l:'中国5年',v:'14.7%'}],
+   body:'<strong>健康中国 2030 + 十五五 + 健康上海 2030</strong> 三重政策叠加。可穿戴医疗明确写入国家规划。上海集成电路+生物医药+AI 三大先导产业 2024 突破 2 万亿。',
+   b:['老龄化 3.8 亿（2030）→ 慢病监测刚需爆发','CGM / 心电 / 脑电采集三大细分高增速','王侃课题组微针+POCT 是"明星细分"','国产替代确定性极高','2029 毕业赶上可穿戴医疗第二波上市潮']},
   {cls:'auto', n:'汽车电子 · 智能驾驶座舱', w:'你辅修方向 30% · 小米实习延伸',
    stats:[{l:'2025新能源',v:'>50%'},{l:'2029预测',v:'>75%'},{l:'智驾CAGR',v:'25%+'},{l:'座舱渗透',v:'>80%'}],
-   body:'**行业进入淘汰赛**。新势力前三+比亚迪+特斯拉占 70% 份额，头部化加剧。<em>你亲身实习反馈汽车电子 WLB 差且跨方向</em>，需谨慎评估。',
-   b:['小米汽车 SU7 + YU7 持续放量','地平线/黑芝麻车规 AI 芯片国产替代','AUTOSAR + 域控制器嵌入式技术栈稀缺','2027-2029 可能新势力二次洗牌','风险：WLB 差且与医疗电子主线偏离']},
+   body:'<strong>行业进入淘汰赛</strong>。新势力前三 + 比亚迪 + 特斯拉占 70% 份额，头部化加剧。你亲身实习反馈 <strong>WLB 差且跨方向</strong>。',
+   b:['小米汽车 SU7 + YU7 持续放量','地平线/黑芝麻车规 AI 芯片','AUTOSAR + 域控制器嵌入式','2027-2029 可能二次洗牌','风险：与医疗主线偏离']},
   {cls:'aiot', n:'AIoT · 边缘 AI', w:'你辅修方向 10% · 技术栈深化',
    stats:[{l:'2030全球',v:'1850亿USD'},{l:'CAGR',v:'15%'},{l:'中国传感器',v:'35%份额'},{l:'AI边缘',v:'CAGR 20%+'}],
-   body:'**边缘 AI + 可穿戴芯片是交叉增长点**。恒玄、华为海思、英伟达是国产替代 + 天花板。TF Lite Micro + 1D-CNN 边缘部署完全重合你毕设。',
-   b:['恒玄智能手表芯片国内第一','英伟达 Jetson = 嵌入式 AI 黄金组合','小米/华为/字节 AIoT 生态扩张','机会：AIoT × 医疗 = 可穿戴医疗金矿','风险：消费电子周期性较强']}
+   body:'<strong>边缘 AI + 可穿戴芯片是交叉增长点</strong>。恒玄、华为海思、英伟达国产替代 + 天花板。TF Lite Micro + 1D-CNN 与你毕设重合。',
+   b:['恒玄智能手表芯片国内第一','英伟达 Jetson 嵌入式 AI 黄金组合','小米/华为/字节 AIoT 生态扩张','机会：AIoT × 医疗 = 金矿','风险：消费电子周期性较强']}
 ];
 function renderInd() {
   $('#indGrid').innerHTML = IND.map(i => `
     <article class="ind-card ${i.cls}">
       <h5>${i.n}</h5>
       <div class="ind-w">${i.w}</div>
-      <div class="ind-stats">${i.stats.map(s => `<div class="is"><div class="is-l">${s.l}</div><div class="is-v">${s.v}</div></div>`).join('')}</div>
-      <p class="ind-body">${i.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>
+      <div class="ind-stats">${i.stats.map(s => `<div><div class="is-l">${s.l}</div><div class="is-v">${s.v}</div></div>`).join('')}</div>
+      <p class="ind-body">${i.body}</p>
       <ul class="ind-b">${i.b.map(x => `<li>${x}</li>`).join('')}</ul>
     </article>`).join('');
 }
 
-/* ═══ INIT ═══ */
+/* ═══ Main render ═══ */
 function renderAll() {
-  renderMastStats();
-  renderWeights();
+  renderHero();
+  renderDims();
   renderTierLegend();
   renderRank();
   renderHeat();
@@ -2153,21 +2930,16 @@ function setupEvents() {
       renderRank();
     });
   });
-  $('#sortSel')?.addEventListener('change', e => { STATE.sortBy = e.target.value; renderRank(); });
-  $('#searchInp')?.addEventListener('input', e => { STATE.search = e.target.value; renderRank(); });
+  $('#sortSel').addEventListener('change', e => { STATE.sortBy = e.target.value; renderRank(); });
+  $('#searchInp').addEventListener('input', e => { STATE.search = e.target.value; renderRank(); });
 
   const secs = ['persona','method','tiers','rank','heat','scatter','curve','units','timeline','settle','industry','sources'];
   window.addEventListener('scroll', () => {
     let cur = 'persona';
-    secs.forEach(id => { const s = document.getElementById(id); if (s && window.scrollY >= s.offsetTop - 120) cur = id; });
-    $$('.topnav a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
+    secs.forEach(id => { const s = document.getElementById(id); if (s && window.scrollY >= s.offsetTop - 80) cur = id; });
+    $$('#topnav a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
     $('#btt').classList.toggle('vis', window.scrollY > 400);
   });
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-  }, {threshold:0.1, rootMargin:'0px 0px -60px 0px'});
-  document.querySelectorAll('.sec, .firm-card').forEach(el => { el.classList.add('will-fade'); io.observe(el); });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
