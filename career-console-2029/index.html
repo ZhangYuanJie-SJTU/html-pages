@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2029届·张元杰·就业决策驾驶舱 v3.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   BLOOMBERG TERMINAL × 决策驾驶舱 设计系统
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0a0e17;--bg-2:#111827;--bg-3:#1a2332;--bg-4:#243044;
+  --line:#2d3a52;--line-2:#3d4e6d;
+  --txt:#e8edf5;--txt-2:#a4b3cc;--txt-3:#6b7a94;--txt-mute:#48566e;
+  --gold:#f0b429;--gold-2:#ffd45c;--amber:#ff9800;
+  --red:#ef4444;--rose:#f43f5e;
+  --green:#10b981;--lime:#84cc16;
+  --blue:#3b82f6;--cyan:#06b6d4;--indigo:#6366f1;
+  --purple:#a855f7;--pink:#ec4899;
+  /* Tier colors */
+  --tier-sss:#ffd45c;--tier-ss:#ff9800;--tier-s:#ef4444;
+  --tier-a:#3b82f6;--tier-b:#a855f7;--tier-gem:#10b981;
+  /* cat */
+  --cat-medical:#e74c3c;--cat-auto:#3498db;--cat-aiot:#9b59b6;
+  --cat-soe:#f39c12;--cat-hospital:#1abc9c;--cat-startup:#e67e22;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Inter','Noto Serif SC',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"cv02","cv03","cv04","cv11"}
+.serif{font-family:'Noto Serif SC',serif}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:60px 32px;background:linear-gradient(180deg,#0a0e17 0%,#111827 60%,#0a0e17 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 20% 30%,rgba(240,180,41,.08),transparent 50%),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(59,130,246,.1),transparent 50%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(61,78,109,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(61,78,109,.15) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;mask-image:radial-gradient(circle at center,#000 40%,transparent 80%)}
+.hero-c{position:relative;z-index:2;text-align:center;max-width:1100px;width:100%}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid rgba(240,180,41,.4);border-radius:50px;background:rgba(240,180,41,.08);color:var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:24px}
+.hero-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5vw,58px);font-weight:900;line-height:1.15;margin-bottom:14px;background:linear-gradient(135deg,#fff 0%,#f0dca0 50%,#a4b3cc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(13px,1.4vw,15px);color:var(--txt-2);font-weight:400;margin-bottom:28px;letter-spacing:.5px}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:40px}
+.hero-meta-item{padding:8px 18px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:50px;font-size:12px;color:var(--txt-2);font-family:'JetBrains Mono',monospace}
+.hero-meta-item b{color:var(--gold);font-weight:600}
+
+.hero-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border-radius:14px;overflow:hidden;max-width:1000px;margin:0 auto;border:1px solid var(--line-2)}
+.hs-item{background:var(--bg-2);padding:18px 10px;text-align:center;transition:background .3s}
+.hs-item:hover{background:var(--bg-3)}
+.hs-item .n{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(22px,2.8vw,30px);font-weight:800;line-height:1}
+.hs-item .l{font-size:10px;color:var(--txt-3);font-weight:500;margin-top:6px;display:block;letter-spacing:.5px;text-transform:uppercase}
+.hs-item:nth-child(1) .n{color:var(--tier-sss)}.hs-item:nth-child(2) .n{color:var(--tier-ss)}
+.hs-item:nth-child(3) .n{color:var(--tier-s)}.hs-item:nth-child(4) .n{color:var(--tier-a)}
+.hs-item:nth-child(5) .n{color:var(--tier-b)}.hs-item:nth-child(6) .n{color:var(--tier-gem)}
+
+/* ═══ NAV ═══ */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(10,14,23,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);padding:12px 24px}
+.topnav-inner{max-width:1600px;margin:0 auto;display:flex;align-items:center;gap:24px;overflow-x:auto;white-space:nowrap}
+.topnav a{color:var(--txt-3);text-decoration:none;font-size:12px;font-weight:500;padding:6px 10px;border-radius:6px;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.topnav a:hover{color:var(--txt);background:var(--bg-3)}
+.topnav a.act{color:var(--gold);background:rgba(240,180,41,.1)}
+.topnav .brand{font-weight:800;color:var(--gold);margin-right:auto;font-size:13px}
+
+/* ═══ PAGE STRUCTURE ═══ */
+.wrap{max-width:1600px;margin:0 auto;padding:0 32px}
+.sec{margin:64px 0;scroll-margin-top:80px}
+.sec-h{display:flex;align-items:flex-start;gap:18px;margin-bottom:28px}
+.sec-num{font-family:'JetBrains Mono',monospace;width:48px;height:48px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--amber));color:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;box-shadow:0 4px 16px rgba(240,180,41,.25)}
+.sec-title{font-family:'Noto Serif SC',serif;font-size:clamp(22px,2.6vw,30px);font-weight:900;line-height:1.2;margin-bottom:6px}
+.sec-desc{font-size:13px;color:var(--txt-3);font-weight:400}
+.sec-tag{display:inline-block;margin-left:8px;padding:2px 8px;background:var(--bg-3);border:1px solid var(--line);border-radius:4px;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--txt-2)}
+
+/* ═══ PERSONA CARD (SEC 01) ═══ */
+.persona{background:linear-gradient(135deg,var(--bg-2) 0%,var(--bg-3) 100%);border:1px solid var(--line);border-radius:16px;padding:32px;display:grid;grid-template-columns:280px 1fr;gap:32px;position:relative;overflow:hidden}
+.persona::before{content:'';position:absolute;top:0;right:0;width:280px;height:280px;background:radial-gradient(circle,rgba(240,180,41,.08),transparent 70%);pointer-events:none}
+.persona-avatar{display:flex;flex-direction:column;gap:16px;position:relative;z-index:1}
+.pa-frame{aspect-ratio:1;background:linear-gradient(135deg,var(--bg-3),var(--bg-4));border:1px solid var(--line-2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;overflow:hidden}
+.pa-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(240,180,41,.15),transparent 60%)}
+.pa-frame span{position:relative;z-index:2}
+.pa-name{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:900;text-align:center}
+.pa-sub{font-size:11px;color:var(--gold);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-top:-8px}
+
+.persona-info{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px}
+.pi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pi-cell{padding:12px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px}
+.pi-label{font-size:10px;color:var(--txt-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.pi-value{font-size:14px;font-weight:600;color:var(--txt)}
+.pi-value small{font-size:11px;color:var(--txt-2);font-weight:400;margin-left:4px}
+
+.pi-tags{display:flex;flex-wrap:wrap;gap:6px}
+.pt{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:500;font-family:'JetBrains Mono',monospace}
+.pt.hard{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.pt.skill{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.3)}
+.pt.soft{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid rgba(168,85,247,.3)}
+.pt.gold{background:rgba(240,180,41,.15);color:var(--gold);border:1px solid rgba(240,180,41,.3)}
+
+.pi-radar{aspect-ratio:1;width:100%;max-width:220px}
+.radar-row{display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:center}
+@media(max-width:1100px){.radar-row{grid-template-columns:1fr}.radar-row .pi-radar{margin:0 auto}}
+
+/* ═══ METHODOLOGY (SEC 02) ═══ */
+.method{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;padding:28px}
+.method-intro{font-size:13px;color:var(--txt-2);margin-bottom:22px;line-height:1.8}
+.weights{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.w-item{text-align:center;padding:16px 6px;background:var(--bg-3);border-radius:10px;border:1px solid var(--line);transition:transform .2s,border-color .2s}
+.w-item:hover{transform:translateY(-2px);border-color:var(--line-2)}
+.w-item .wv{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;color:var(--gold);line-height:1}
+.w-item .wl{font-size:10px;color:var(--txt-2);margin-top:6px;font-weight:500}
+.w-item .wi{font-size:20px;margin-bottom:6px;display:block}
+@media(max-width:900px){.weights{grid-template-columns:repeat(4,1fr)}}
+
+.adjust-panel{background:var(--bg-3);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px}
+.adjust-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.adjust-head h4{font-size:13px;font-weight:700;color:var(--gold)}
+.adjust-head .ctrl-btns{display:flex;gap:6px}
+.ctrl-btn{padding:5px 12px;background:var(--bg-4);border:1px solid var(--line-2);border-radius:6px;color:var(--txt-2);font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all .2s}
+.ctrl-btn:hover{background:var(--bg-2);color:var(--gold);border-color:var(--gold)}
+.ctrl-btn.act{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.sliders{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:800px){.sliders{grid-template-columns:1fr}}
+.slider-row{display:grid;grid-template-columns:110px 1fr 50px;gap:10px;align-items:center;font-size:12px}
+.slider-row label{color:var(--txt-2);font-weight:500}
+.slider-row input[type=range]{-webkit-appearance:none;height:4px;background:var(--bg-4);border-radius:2px;outline:none}
+.slider-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg)}
+.slider-row .sv{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;text-align:right}
+
+/* ═══ TIER LEGEND (SEC 03) ═══ */
+.tier-legend{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:900px){.tier-legend{grid-template-columns:repeat(2,1fr)}}
+.tl-card{padding:16px 14px;border-radius:10px;background:var(--bg-2);border-left:3px solid;position:relative;overflow:hidden}
+.tl-card.sss{border-color:var(--tier-sss)}
+.tl-card.ss{border-color:var(--tier-ss)}
+.tl-card.s{border-color:var(--tier-s)}
+.tl-card.a{border-color:var(--tier-a)}
+.tl-card.b{border-color:var(--tier-b)}
+.tl-card.gem{border-color:var(--tier-gem)}
+.tl-card .tb{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:900;margin-bottom:4px}
+.tl-card.sss .tb{color:var(--tier-sss)}
+.tl-card.ss .tb{color:var(--tier-ss)}
+.tl-card.s .tb{color:var(--tier-s)}
+.tl-card.a .tb{color:var(--tier-a)}
+.tl-card.b .tb{color:var(--tier-b)}
+.tl-card.gem .tb{color:var(--tier-gem);font-size:18px}
+.tl-card .td{font-size:11px;color:var(--txt-2);font-weight:500;margin-bottom:2px}
+.tl-card .tn{font-size:10px;color:var(--txt-3)}
+
+/* ═══ FILTERS (SEC 04) ═══ */
+.filters{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:20px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
+@media(max-width:900px){.filters{grid-template-columns:1fr}}
+.fg{display:flex;flex-wrap:wrap;gap:6px}
+.fg-label{font-size:11px;color:var(--txt-3);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-right:8px;letter-spacing:1px}
+.fc{padding:5px 11px;border-radius:20px;background:var(--bg-3);border:1px solid var(--line);color:var(--txt-2);font-size:11px;cursor:pointer;transition:all .15s;font-weight:500}
+.fc:hover{border-color:var(--line-2);color:var(--txt)}
+.fc.act{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:700}
+.sort-box{display:flex;gap:6px;align-items:center}
+.sort-box select{background:var(--bg-3);border:1px solid var(--line);color:var(--txt);font-size:11px;padding:5px 8px;border-radius:6px;cursor:pointer;font-family:'JetBrains Mono',monospace}
+.search-box{position:relative}
+.search-box input{background:var(--bg-3);border:1px solid var(--line);color:var(--txt);font-size:12px;padding:8px 12px 8px 30px;border-radius:6px;width:180px;font-family:'JetBrains Mono',monospace}
+.search-box::before{content:'⌕';position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--txt-3);font-size:14px}
+
+/* ═══ COMPANY CARDS ═══ */
+.tg{margin-bottom:36px}
+.tg-h{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.tg-badge{padding:5px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:11px;color:#fff;letter-spacing:1px}
+.tg-badge.sss{background:linear-gradient(135deg,var(--tier-sss),#d89915);color:var(--bg)}
+.tg-badge.ss{background:linear-gradient(135deg,var(--tier-ss),#d46a00)}
+.tg-badge.s{background:linear-gradient(135deg,var(--tier-s),#b91c1c)}
+.tg-badge.a{background:linear-gradient(135deg,var(--tier-a),#1d4ed8)}
+.tg-badge.b{background:linear-gradient(135deg,var(--tier-b),#7e22ce)}
+.tg-badge.gem{background:linear-gradient(135deg,var(--tier-gem),#059669)}
+.tg-h-title{font-size:15px;font-weight:700}
+.tg-h-count{margin-left:auto;font-size:12px;color:var(--txt-3);font-family:'JetBrains Mono',monospace}
+
+.cc{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.cc:hover{border-color:var(--line-2)}
+.cc-h{display:grid;grid-template-columns:44px 1fr auto auto auto;gap:14px;padding:14px 18px;cursor:pointer;align-items:center}
+.cc-rank{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+.cc-rank.sss{background:linear-gradient(135deg,var(--tier-sss),#d89915);color:var(--bg)}
+.cc-rank.ss{background:linear-gradient(135deg,var(--tier-ss),#d46a00)}
+.cc-rank.s{background:linear-gradient(135deg,var(--tier-s),#b91c1c)}
+.cc-rank.a{background:linear-gradient(135deg,var(--tier-a),#1d4ed8)}
+.cc-rank.b{background:linear-gradient(135deg,var(--tier-b),#7e22ce)}
+.cc-title{min-width:0}
+.cc-name{font-size:15px;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cc-name .cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cc-name .gem-tag{padding:1px 6px;background:rgba(16,185,129,.15);color:var(--tier-gem);border:1px solid rgba(16,185,129,.3);font-size:10px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cc-sub{font-size:11px;color:var(--txt-3);margin-top:2px;font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cc-meta{display:flex;align-items:center;gap:12px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px}
+.cc-meta .mm{padding:3px 8px;background:var(--bg-3);border-radius:4px;border:1px solid var(--line)}
+.cc-meta .mm b{color:var(--gold)}
+.cc-score-box{text-align:right;min-width:70px}
+.cc-score{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;line-height:1}
+.cc-score.sss{color:var(--tier-sss)}.cc-score.ss{color:var(--tier-ss)}.cc-score.s{color:var(--tier-s)}
+.cc-score.a{color:var(--tier-a)}.cc-score.b{color:var(--tier-b)}
+.cc-score-lbl{font-size:9px;color:var(--txt-3);margin-top:2px;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+.cc-arrow{width:24px;height:24px;border-radius:6px;background:var(--bg-3);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:transform .3s;color:var(--txt-2)}
+.cc.open .cc-arrow{transform:rotate(180deg)}
+
+.cc-body{display:none;border-top:1px solid var(--line);padding:20px;background:var(--bg-3);animation:expand .3s}
+@keyframes expand{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.cc.open .cc-body{display:block}
+
+.cc-intro{font-size:13px;color:var(--txt-2);line-height:1.8;margin-bottom:16px;padding:14px 16px;background:var(--bg-2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
+.cc-match{background:rgba(240,180,41,.06);border:1px solid rgba(240,180,41,.2);border-radius:8px;padding:14px;margin-bottom:16px}
+.cc-match h5{font-size:11px;color:var(--gold);font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase}
+.cc-match ul{list-style:none}
+.cc-match li{font-size:12px;color:var(--txt);padding:3px 0;padding-left:18px;position:relative}
+.cc-match li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:800}
+
+.sal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:700px){.sal-grid{grid-template-columns:repeat(2,1fr)}}
+.sal-cell{padding:12px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px}
+.sal-label{font-size:10px;color:var(--txt-3);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+.sal-value{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;color:var(--gold)}
+.sal-value small{font-size:10px;color:var(--txt-2);font-weight:400;margin-left:2px}
+.sal-note{font-size:10px;color:var(--txt-3);margin-top:2px}
+
+.dims-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:16px}
+@media(max-width:800px){.dims-grid{grid-template-columns:repeat(4,1fr)}}
+.dim-cell{padding:10px 6px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;text-align:center}
+.dim-l{font-size:9px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.dim-v{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:800;line-height:1}
+.dim-v.hi{color:var(--green)}.dim-v.mid{color:var(--gold)}.dim-v.lo{color:var(--red)}
+.dim-bar{height:3px;background:var(--bg-4);margin-top:4px;border-radius:2px;overflow:hidden;position:relative}
+.dim-bar::after{content:'';position:absolute;left:0;top:0;height:100%;background:currentColor;border-radius:2px;width:var(--w,0%)}
+
+.pos-box{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:16px}
+.pos-box h5{font-size:11px;color:var(--gold);font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.pos-group{margin-bottom:10px}
+.pos-group:last-child{margin-bottom:0}
+.pos-dept{font-size:12px;color:var(--cyan);font-weight:600;margin-bottom:4px}
+.pos-jobs{list-style:none;padding-left:14px}
+.pos-jobs li{font-size:12px;color:var(--txt-2);padding:1px 0;position:relative}
+.pos-jobs li::before{content:'▸';color:var(--txt-mute);margin-right:6px}
+
+.advrsk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:700px){.advrsk-grid{grid-template-columns:1fr}}
+.ar-box{padding:12px 14px;border-radius:8px;background:var(--bg-2);border-left:3px solid}
+.ar-box.adv{border-color:var(--green)}
+.ar-box.risk{border-color:var(--rose)}
+.ar-box h5{font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.ar-box.adv h5{color:var(--green)}
+.ar-box.risk h5{color:var(--rose)}
+.ar-box ul{list-style:none;font-size:12px;color:var(--txt-2)}
+.ar-box li{padding:2px 0;padding-left:14px;position:relative;line-height:1.6}
+.ar-box.adv li::before{content:'▲';position:absolute;left:0;color:var(--green);font-size:9px;top:5px}
+.ar-box.risk li::before{content:'▼';position:absolute;left:0;color:var(--rose);font-size:9px;top:5px}
+
+.src-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;font-size:11px;color:var(--txt-3);font-family:'JetBrains Mono',monospace}
+.src-row a{color:var(--cyan);text-decoration:none}
+.src-row a:hover{text-decoration:underline}
+
+/* ═══ HEATMAP (SEC 05) ═══ */
+.heatmap-wrap{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto}
+.heatmap{display:grid;gap:1px;background:var(--bg);border:1px solid var(--line);min-width:900px}
+.heatmap-head{display:grid;grid-template-columns:200px repeat(7,70px) 70px;background:var(--bg-3);gap:1px}
+.heatmap-head>div{padding:10px 6px;font-size:10px;font-weight:700;color:var(--txt-2);text-align:center;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.5px;background:var(--bg-3)}
+.heatmap-head>div:first-child{text-align:left;padding-left:14px}
+.heatmap-row{display:grid;grid-template-columns:200px repeat(7,70px) 70px;gap:1px}
+.heatmap-row>div{padding:8px;font-size:11px;font-family:'JetBrains Mono',monospace;text-align:center;background:var(--bg-2)}
+.heatmap-row>div:first-child{text-align:left;padding-left:14px;font-size:12px;font-weight:600;color:var(--txt);font-family:inherit}
+.heat-cell{font-weight:700}
+.heat-1{background:#4a0e0e !important;color:#fca5a5}
+.heat-2{background:#5a1f0e !important;color:#fdba74}
+.heat-3{background:#6b3410 !important;color:#fbbf24}
+.heat-4{background:#6b5414 !important;color:#facc15}
+.heat-5{background:#4a5a14 !important;color:#bef264}
+.heat-6{background:#2d4a1c !important;color:#86efac}
+.heat-7{background:#0e4a2d !important;color:#6ee7b7}
+.heat-8{background:#0e4a4a !important;color:#67e8f9}
+.heat-9{background:#0e3a5a !important;color:#7dd3fc}
+.heat-10{background:#1e1e8a !important;color:#a5b4fc;box-shadow:inset 0 0 10px rgba(240,180,41,.3)}
+
+/* ═══ SCATTER (SEC 06) ═══ */
+.scatter-wrap{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:20px}
+.scatter-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.scatter-head h4{font-size:14px;font-weight:700}
+.scatter-head p{font-size:11px;color:var(--txt-3);margin-top:4px}
+.scatter-legend{display:flex;gap:12px;font-size:11px;flex-wrap:wrap}
+.sl-item{display:flex;align-items:center;gap:5px;color:var(--txt-2);font-family:'JetBrains Mono',monospace}
+.sl-dot{width:10px;height:10px;border-radius:50%}
+.scatter-canvas{position:relative;height:480px;background:linear-gradient(135deg,var(--bg-3),var(--bg));border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.sc-grid{position:absolute;inset:40px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:25% 25%;opacity:.3}
+.sc-axis-x{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--txt-3);font-family:'JetBrains Mono',monospace}
+.sc-axis-y{position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:11px;color:var(--txt-3);font-family:'JetBrains Mono',monospace}
+.sc-qd{position:absolute;padding:3px 8px;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.2);border-radius:4px;font-size:10px;color:var(--gold);font-family:'JetBrains Mono',monospace;pointer-events:none}
+.sc-dot{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;transition:all .2s;border:2px solid var(--bg);box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.sc-dot:hover{width:18px;height:18px;z-index:10;box-shadow:0 0 16px currentColor}
+.sc-tip{position:absolute;display:none;background:var(--bg-4);border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;font-size:11px;color:var(--txt);z-index:100;pointer-events:none;min-width:160px;font-family:'JetBrains Mono',monospace;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sc-tip b{color:var(--gold);display:block;margin-bottom:3px;font-family:inherit}
+
+/* ═══ CURVE (SEC 07) ═══ */
+.curve-wrap{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:20px}
+.curve-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.curve-head h4{font-size:14px;font-weight:700}
+.curve-selectors{display:flex;flex-wrap:wrap;gap:6px}
+.curve-sel{padding:4px 10px;background:var(--bg-3);border:1px solid var(--line);border-radius:20px;cursor:pointer;font-size:10px;color:var(--txt-2);font-family:'JetBrains Mono',monospace;font-weight:500}
+.curve-sel.act{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:700}
+.curve-svg{width:100%;height:400px;background:var(--bg-3);border-radius:8px;border:1px solid var(--line)}
+
+/* ═══ UNIT TYPE GUIDE (SEC 08) ═══ */
+.utg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:1100px){.utg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.utg{grid-template-columns:1fr}}
+.utg-card{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:18px;border-top:3px solid}
+.utg-card h4{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.utg-card .utg-tag{font-size:10px;color:var(--txt-3);font-family:'JetBrains Mono',monospace;margin-bottom:12px}
+.utg-card .utg-body{font-size:12px;color:var(--txt-2);line-height:1.7;margin-bottom:10px}
+.utg-card ul{list-style:none;font-size:11px;color:var(--txt-2)}
+.utg-card li{padding:2px 0;padding-left:14px;position:relative}
+.utg-card li::before{content:'▪';position:absolute;left:0;color:var(--gold)}
+.utg-card .utg-rec{margin-top:10px;padding:8px 10px;background:var(--bg-3);border-radius:6px;font-size:11px;color:var(--gold);font-family:'JetBrains Mono',monospace}
+.utg-card.medical{border-top-color:var(--cat-medical)}
+.utg-card.auto{border-top-color:var(--cat-auto)}
+.utg-card.aiot{border-top-color:var(--cat-aiot)}
+.utg-card.soe{border-top-color:var(--cat-soe)}
+.utg-card.hospital{border-top-color:var(--cat-hospital)}
+.utg-card.startup{border-top-color:var(--cat-startup)}
+
+/* ═══ TIMELINE (SEC 09) ═══ */
+.tl-wrap{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:20px;overflow-x:auto}
+.tl-inner{min-width:900px;position:relative;padding:40px 0}
+.tl-track{position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--gold),var(--amber),var(--red))}
+.tl-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.tl-marker.now{background:var(--gold);box-shadow:0 0 16px var(--gold),0 0 32px rgba(240,180,41,.3);animation:pulse 2s infinite}
+.tl-label{position:absolute;font-size:10px;color:var(--txt-2);font-family:'JetBrains Mono',monospace;white-space:nowrap;text-align:center;left:50%;transform:translateX(-50%);width:140px}
+.tl-label.above{bottom:calc(50% + 14px)}
+.tl-label.below{top:calc(50% + 14px)}
+.tl-label b{color:var(--gold);display:block;margin-bottom:2px;font-size:11px}
+.tl-label .tl-date{font-size:9px;color:var(--txt-3)}
+
+/* ═══ 定居计算器 (SEC 10) ═══ */
+.settle-calc{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:24px;display:grid;grid-template-columns:1fr 1.4fr;gap:24px}
+@media(max-width:900px){.settle-calc{grid-template-columns:1fr}}
+.sc-inputs{display:flex;flex-direction:column;gap:14px}
+.sc-input{display:grid;grid-template-columns:120px 1fr 70px;gap:10px;align-items:center}
+.sc-input label{font-size:12px;color:var(--txt-2)}
+.sc-input input[type=range]{-webkit-appearance:none;height:4px;background:var(--bg-4);border-radius:2px}
+.sc-input input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer}
+.sc-input .sc-val{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;font-size:13px;text-align:right}
+.sc-results{background:var(--bg-3);border:1px solid var(--line);border-radius:10px;padding:18px}
+.sc-res-head{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:14px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px}
+.sc-res-list{display:flex;flex-direction:column;gap:10px}
+.sc-res-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;align-items:center}
+.sc-res-l{font-size:12px;color:var(--txt-2)}
+.sc-res-v{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:800;color:var(--gold)}
+.sc-res-v.red{color:var(--red)}
+.sc-res-v.green{color:var(--green)}
+.sc-verdict{margin-top:14px;padding:14px;background:linear-gradient(135deg,rgba(240,180,41,.15),rgba(255,212,92,.08));border:1px solid rgba(240,180,41,.3);border-radius:8px;font-size:12px;color:var(--txt);line-height:1.6}
+
+/* ═══ INDUSTRY PAGE (SEC 11) ═══ */
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:1000px){.ind-grid{grid-template-columns:1fr}}
+.ind-card{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:22px;border-top:4px solid}
+.ind-card.med{border-top-color:var(--cat-medical)}
+.ind-card.auto{border-top-color:var(--cat-auto)}
+.ind-card.aiot{border-top-color:var(--cat-aiot)}
+.ind-card h4{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.ind-w{font-size:11px;color:var(--txt-3);font-family:'JetBrains Mono',monospace;margin-bottom:14px}
+.ind-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.is-cell{padding:10px;background:var(--bg-3);border-radius:6px;border:1px solid var(--line)}
+.is-l{font-size:10px;color:var(--txt-3);text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.is-v{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:800;color:var(--gold);margin-top:2px}
+.ind-body{font-size:12px;color:var(--txt-2);line-height:1.7;margin-bottom:14px}
+.ind-bullets{list-style:none;font-size:12px;color:var(--txt-2)}
+.ind-bullets li{padding:3px 0;padding-left:18px;position:relative}
+.ind-bullets li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:9px;top:6px}
+
+/* ═══ FOOTER ═══ */
+.footer{margin:80px 0 40px;padding:40px 32px;background:var(--bg-2);border:1px solid var(--line);border-radius:14px;text-align:center}
+.footer h3{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:800;margin-bottom:8px}
+.footer p{font-size:12px;color:var(--txt-2);margin-bottom:6px}
+.footer .sig{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt-3);letter-spacing:1px;margin-top:16px;text-transform:uppercase}
+
+/* ═══ SCROLL TO TOP ═══ */
+.stt{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 8px 24px rgba(240,180,41,.35);z-index:50}
+.stt.vis{opacity:1;pointer-events:auto}
+.stt:hover{background:var(--gold-2);transform:translateY(-4px)}
+
+@media(max-width:900px){
+  .persona{grid-template-columns:1fr}
+  .wrap{padding:0 16px}
+  .pi-row{grid-template-columns:repeat(2,1fr)}
+  .cc-h{grid-template-columns:36px 1fr auto;gap:10px;padding:12px 14px}
+  .cc-meta{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <div class="hero-c">
+    <div class="hero-chip"><span class="dot"></span>CAREER DECISION CONSOLE · v3.0</div>
+    <h1>2029届·张元杰·就业决策驾驶舱</h1>
+    <p class="hero-sub">上海交大仪科硕士 · 嵌入式工程师（医疗电子 60% / 汽车电子 30% / AIoT 10%）· 7维评分 · 60家公司 · 可调权重 · 交互式决策工具</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">目标入职 <b id="meta-date">2029.04</b></div>
+      <div class="hero-meta-item">目标地点 <b>上海·闵行/嘉定</b></div>
+      <div class="hero-meta-item">求职窗口 <b>2028.09–2029.10</b></div>
+      <div class="hero-meta-item">候选库 <b id="meta-count">60家</b></div>
+      <div class="hero-meta-item">最近更新 <b>2026.05.07</b></div>
+    </div>
+    <div class="hero-stats" id="heroStats"></div>
+  </div>
+</section>
+
+<!-- ════════ TOP NAV ════════ -->
+<nav class="topnav">
+  <div class="topnav-inner" id="topnav">
+    <a class="brand" href="#hero">◆ 驾驶舱</a>
+    <a href="#persona">01 个人画像</a>
+    <a href="#method">02 评价体系</a>
+    <a href="#tier">03 梯度标准</a>
+    <a href="#rank">04 公司总榜</a>
+    <a href="#heatmap">05 对比矩阵</a>
+    <a href="#scatter">06 薪WLB散点</a>
+    <a href="#curve">07 5年曲线</a>
+    <a href="#unitype">08 单位百科</a>
+    <a href="#timeline">09 时间作战</a>
+    <a href="#settle">10 定居计算</a>
+    <a href="#industry">11 行业前瞻</a>
+    <a href="#sources">12 数据来源</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ════════ 01 个人画像 ════════ -->
+<section class="sec" id="persona">
+  <div class="sec-h">
+    <div class="sec-num">01</div>
+    <div>
+      <div class="sec-title">个人画像 <span class="sec-tag">决策锚点</span></div>
+      <div class="sec-desc">所有评分维度都以「你」为参照，不是泛化排行</div>
+    </div>
+  </div>
+
+  <div class="persona">
+    <div class="persona-avatar">
+      <div class="pa-frame"><span>🎯</span></div>
+      <div class="pa-name">张元杰 · ZYJ</div>
+      <div class="pa-sub">SJTU · 仪器科学与技术 · 学术型硕士</div>
+    </div>
+    <div class="persona-info">
+      <div class="pi-row">
+        <div class="pi-cell">
+          <div class="pi-label">学术背景</div>
+          <div class="pi-value">武理 94.24/100<small>· 1/119</small></div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">研究生</div>
+          <div class="pi-value">SJTU 王侃课题组<small>· 2026.09入学</small></div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">毕业节点</div>
+          <div class="pi-value">2029.03<small>· 求职2028.09起</small></div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">户籍·定居</div>
+          <div class="pi-value">上海宝山<small>· 闵行/嘉定优先</small></div>
+        </div>
+      </div>
+
+      <div class="pi-row">
+        <div class="pi-cell">
+          <div class="pi-label">科研硬货</div>
+          <div class="pi-value" style="font-size:12px">1 EI · 6 发明专利 · 2 软著 · 2 实用新型</div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">实习背景</div>
+          <div class="pi-value" style="font-size:12px">小米汽车 OS · 宇构智核脑机接口</div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">奖学金</div>
+          <div class="pi-value" style="font-size:12px">国奖×3 · 小米 · 卓越</div>
+        </div>
+        <div class="pi-cell">
+          <div class="pi-label">综合素质</div>
+          <div class="pi-value" style="font-size:12px">学生会主席 · 188cm · 英语518</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pi-label" style="margin-bottom:6px">核心技能栈（按熟练度）</div>
+        <div class="pi-tags">
+          <span class="pt hard">STM32</span>
+          <span class="pt hard">ESP32S3</span>
+          <span class="pt hard">Hi3861</span>
+          <span class="pt hard">FreeRTOS</span>
+          <span class="pt hard">AUTOSAR</span>
+          <span class="pt hard">CAN/LIN/BLE/MQTT</span>
+          <span class="pt skill">TF Lite Micro</span>
+          <span class="pt skill">1D-CNN</span>
+          <span class="pt skill">Kalman 滤波</span>
+          <span class="pt skill">OpenCV/PyTorch</span>
+          <span class="pt skill">FPC/PCB 设计</span>
+          <span class="pt gold">⭐ 可穿戴医疗电子全栈</span>
+          <span class="pt gold">⭐ 脑电信号处理</span>
+          <span class="pt soft">领导力</span>
+          <span class="pt soft">主持/答辩</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 02 评价体系 ════════ -->
+<section class="sec" id="method">
+  <div class="sec-h">
+    <div class="sec-num">02</div>
+    <div>
+      <div class="sec-title">七维评价体系 <span class="sec-tag">V3.2</span></div>
+      <div class="sec-desc">权重已严格评估 · 合计100% · 可通过下方 slider 调整实时重算排名</div>
+    </div>
+  </div>
+  <div class="method">
+    <p class="method-intro">评价体系是针对「张元杰·2029届仪科硕士·嵌入式工程师·上海定居导向」**个人化**设计。
+    权重经过四轮迭代（去重、去相关、合并晋升与长期职业、提高个人禀赋杠杆），严格对应你的真实决策优先级：
+    <b style="color:var(--gold)">薪酬 > 技术契合 > 定居 > 长期职业 > WLB > 禀赋杠杆 > 行业前景</b>。</p>
+    <div class="weights" id="weightsG"></div>
+
+    <div class="adjust-panel">
+      <div class="adjust-head">
+        <h4>◆ 权重自由调节 · 拖动滑块实时重算排名</h4>
+        <div class="ctrl-btns">
+          <button class="ctrl-btn act" onclick="preset('default')">默认 V3.2</button>
+          <button class="ctrl-btn" onclick="preset('salary')">薪资优先</button>
+          <button class="ctrl-btn" onclick="preset('settle')">定居优先</button>
+          <button class="ctrl-btn" onclick="preset('tech')">技术契合优先</button>
+          <button class="ctrl-btn" onclick="preset('wlb')">WLB优先</button>
+        </div>
+      </div>
+      <div class="sliders" id="slidersG"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 03 梯度 ════════ -->
+<section class="sec" id="tier">
+  <div class="sec-h">
+    <div class="sec-num">03</div>
+    <div>
+      <div class="sec-title">梯度标准 · 按分位数动态划分</div>
+      <div class="sec-desc">权重变动后自动重新分档 · 避免僵化的硬阈值</div>
+    </div>
+  </div>
+  <div class="tier-legend" id="tierLegend"></div>
+</section>
+
+<!-- ════════ 04 公司总榜 ════════ -->
+<section class="sec" id="rank">
+  <div class="sec-h">
+    <div class="sec-num">04</div>
+    <div>
+      <div class="sec-title">公司总榜 · 60 家候选 <span class="sec-tag" id="totalCount">60家</span></div>
+      <div class="sec-desc">点击公司卡片展开完整信息 · 多维筛选 + 排序</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="fg">
+      <span class="fg-label">类别</span>
+      <button class="fc act" data-f="cat" data-v="all">全部</button>
+      <button class="fc" data-f="cat" data-v="medical">🏥 医疗</button>
+      <button class="fc" data-f="cat" data-v="auto">🚗 汽车</button>
+      <button class="fc" data-f="cat" data-v="aiot">📱 AIoT</button>
+      <button class="fc" data-f="cat" data-v="soe">🏛️ 央国企</button>
+      <button class="fc" data-f="cat" data-v="hospital">⚕️ 医院</button>
+      <button class="fc" data-f="cat" data-v="startup">🚀 初创</button>
+    </div>
+    <div class="fg">
+      <span class="fg-label">区位</span>
+      <button class="fc act" data-f="dist" data-v="all">全部</button>
+      <button class="fc" data-f="dist" data-v="嘉定">嘉定</button>
+      <button class="fc" data-f="dist" data-v="闵行">闵行</button>
+      <button class="fc" data-f="dist" data-v="张江">张江</button>
+      <button class="fc" data-f="dist" data-v="临港">临港</button>
+    </div>
+    <div class="sort-box">
+      <span class="fg-label">排序</span>
+      <select id="sortSel">
+        <option value="score">综合得分 ▼</option>
+        <option value="pay">薪酬 ▼</option>
+        <option value="tech">技术契合 ▼</option>
+        <option value="wlb">WLB ▼</option>
+        <option value="settle">定居友好 ▼</option>
+        <option value="future">行业前景 ▼</option>
+        <option value="total5y">5年总包 ▼</option>
+      </select>
+      <div class="search-box"><input type="text" id="searchInp" placeholder="公司名搜索..."></div>
+    </div>
+  </div>
+
+  <div id="rankC"></div>
+</section>
+
+<!-- ════════ 05 对比矩阵 ════════ -->
+<section class="sec" id="heatmap">
+  <div class="sec-h">
+    <div class="sec-num">05</div>
+    <div>
+      <div class="sec-title">对比矩阵 · 热力图</div>
+      <div class="sec-desc">一眼看出每家公司各维度强弱 · 默认显示 Top 20，切换显示更多</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:12px">
+    <button class="fc act" onclick="setHeatCount(20)">Top 20</button>
+    <button class="fc" onclick="setHeatCount(30)">Top 30</button>
+    <button class="fc" onclick="setHeatCount(60)">全部 60</button>
+  </div>
+  <div class="heatmap-wrap">
+    <div class="heatmap">
+      <div class="heatmap-head">
+        <div>公司</div><div>薪酬</div><div>技术契合</div><div>定居</div><div>长期职业</div><div>WLB</div><div>禀赋杠杆</div><div>行业前景</div><div>总分</div>
+      </div>
+      <div id="heatmapRows"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 06 散点图 ════════ -->
+<section class="sec" id="scatter">
+  <div class="sec-h">
+    <div class="sec-num">06</div>
+    <div>
+      <div class="sec-title">薪资 × WLB 散点图 · 四象限决策</div>
+      <div class="sec-desc">象限定位 · 一眼看出钱多活少、钱多活多、钱少活少、钱少活多</div>
+    </div>
+  </div>
+  <div class="scatter-wrap">
+    <div class="scatter-head">
+      <div>
+        <h4>薪资-WLB 散点定位</h4>
+        <p>X轴：薪资分 · Y轴：WLB 分 · 点大小=综合得分 · 颜色=类别</p>
+      </div>
+      <div class="scatter-legend" id="scatLegend"></div>
+    </div>
+    <div class="scatter-canvas" id="scatCanvas"></div>
+  </div>
+</section>
+
+<!-- ════════ 07 5年曲线 ════════ -->
+<section class="sec" id="curve">
+  <div class="sec-h">
+    <div class="sec-num">07</div>
+    <div>
+      <div class="sec-title">5 年预期收入曲线</div>
+      <div class="sec-desc">含现金薪资·公积金·股票兑现·落户补贴·年度涨薪的 5 年现金流预测</div>
+    </div>
+  </div>
+  <div class="curve-wrap">
+    <div class="curve-head">
+      <h4>5 年累计收入预测 · 单位：万元</h4>
+      <div class="curve-selectors" id="curveSelectors"></div>
+    </div>
+    <svg class="curve-svg" id="curveSvg" viewBox="0 0 1000 400" preserveAspectRatio="none"></svg>
+  </div>
+</section>
+
+<!-- ════════ 08 单位类型百科 ════════ -->
+<section class="sec" id="unitype">
+  <div class="sec-h">
+    <div class="sec-num">08</div>
+    <div>
+      <div class="sec-title">单位类型百科 · 六类目标雇主全面解读</div>
+      <div class="sec-desc">每类单位的**文化差异 · 晋升路径 · 隐性福利 · 踩雷点**</div>
+    </div>
+  </div>
+  <div class="utg" id="utgGrid"></div>
+</section>
+
+<!-- ════════ 09 时间作战 ════════ -->
+<section class="sec" id="timeline">
+  <div class="sec-h">
+    <div class="sec-num">09</div>
+    <div>
+      <div class="sec-title">求职作战时间线 · 2026.05 → 2029.04</div>
+      <div class="sec-desc">28 个关键节点 · 当前位置自动标记 · 遇节点倒计时显示</div>
+    </div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-inner" id="tlInner"></div>
+  </div>
+</section>
+
+<!-- ════════ 10 定居计算器 ════════ -->
+<section class="sec" id="settle">
+  <div class="sec-h">
+    <div class="sec-num">10</div>
+    <div>
+      <div class="sec-title">上海定居计算器</div>
+      <div class="sec-desc">输入薪资·房价·宝山置换资金，计算首付缺口、月供可负担度、5 年可支配</div>
+    </div>
+  </div>
+  <div class="settle-calc">
+    <div class="sc-inputs">
+      <div class="sc-input">
+        <label>目标公司</label>
+        <select id="calcCompany" style="grid-column:span 2;background:var(--bg-3);border:1px solid var(--line);color:var(--txt);padding:6px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px"></select>
+      </div>
+      <div class="sc-input">
+        <label>目标区</label>
+        <select id="calcDist" style="grid-column:span 2;background:var(--bg-3);border:1px solid var(--line);color:var(--txt);padding:6px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px">
+          <option value="min">闵行（4-5w/㎡）</option>
+          <option value="jd" selected>嘉定新城（4.8-5.5w/㎡）</option>
+          <option value="lg">临港（3.5-4.5w/㎡）</option>
+          <option value="zj">张江（8-10w/㎡）</option>
+        </select>
+      </div>
+      <div class="sc-input">
+        <label>房屋面积(㎡)</label>
+        <input type="range" id="calcArea" min="60" max="150" value="90">
+        <span class="sc-val" id="calcAreaV">90</span>
+      </div>
+      <div class="sc-input">
+        <label>宝山置换(w)</label>
+        <input type="range" id="calcBaoshan" min="0" max="500" value="280">
+        <span class="sc-val" id="calcBaoshanV">280</span>
+      </div>
+      <div class="sc-input">
+        <label>父母支持(w)</label>
+        <input type="range" id="calcParent" min="0" max="200" value="50">
+        <span class="sc-val" id="calcParentV">50</span>
+      </div>
+      <div class="sc-input">
+        <label>贷款年限</label>
+        <input type="range" id="calcYears" min="20" max="30" value="30" step="5">
+        <span class="sc-val" id="calcYearsV">30</span>
+      </div>
+    </div>
+    <div class="sc-results">
+      <div class="sc-res-head">◆ 定居可行性分析</div>
+      <div class="sc-res-list" id="calcResults"></div>
+      <div class="sc-verdict" id="calcVerdict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 11 行业前瞻 ════════ -->
+<section class="sec" id="industry">
+  <div class="sec-h">
+    <div class="sec-num">11</div>
+    <div>
+      <div class="sec-title">行业前瞻专刊 · 2029-2032</div>
+      <div class="sec-desc">医疗电子 / 汽车电子 / AIoT 三大方向硬数据预测 · 政策与市场双视角</div>
+    </div>
+  </div>
+  <div class="ind-grid" id="indGrid"></div>
+</section>
+
+<!-- ════════ 12 数据来源 ════════ -->
+<section class="sec" id="sources">
+  <div class="sec-h">
+    <div class="sec-num">12</div>
+    <div>
+      <div class="sec-title">数据来源与置信度</div>
+      <div class="sec-desc">每项数据的出处透明披露 · 可核查可复现</div>
+    </div>
+  </div>
+  <div class="heatmap-wrap" style="padding:20px">
+    <h4 style="margin-bottom:14px;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:13px">◆ 置信度标签说明</h4>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+      <div style="padding:12px;background:var(--bg-3);border-radius:8px;border-left:3px solid var(--green)">
+        <b style="color:var(--green);font-size:13px">🟢 高置信度</b>
+        <p style="font-size:11px;color:var(--txt-2);margin-top:4px">多源核实 · 官方数据或权威媒体披露的精确数字</p>
+      </div>
+      <div style="padding:12px;background:var(--bg-3);border-radius:8px;border-left:3px solid var(--gold)">
+        <b style="color:var(--gold);font-size:13px">🟡 中置信度</b>
+        <p style="font-size:11px;color:var(--txt-2);margin-top:4px">单源验证 · 看准/脉脉/招聘网站的区间数据</p>
+      </div>
+      <div style="padding:12px;background:var(--bg-3);border-radius:8px;border-left:3px solid var(--amber)">
+        <b style="color:var(--amber);font-size:13px">🟠 市场估算</b>
+        <p style="font-size:11px;color:var(--txt-2);margin-top:4px">基于行业规律推演 · 未得到单家公司具体验证</p>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom:14px;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:13px">◆ 核心数据来源</h4>
+    <ul style="list-style:none;font-size:12px;color:var(--txt-2);line-height:2">
+      <li>▪ <b>薪资数据</b>：知乎专栏《偷偷盘点互联网26届校招薪资》（2026.02.24）、掘金《小米汽车 25 年薪资与岗位》、BOSS直聘实时在招、猎聘、职友集</li>
+      <li>▪ <b>行业数据</b>：Mordor Intelligence 2026.05、Global Market Insights、华经产业研究院 2026.01、东方财富研报 2026.01</li>
+      <li>▪ <b>国家政策</b>：健康中国2030规划纲要、健康中国行动（2019-2030）、十五五规划建议、健康上海 2030、上海十五五规划纲要、宝山区十五五规划</li>
+      <li>▪ <b>企业数据</b>：各公司官方招聘页面、年报、上市招股书</li>
+      <li>▪ <b>WLB评价</b>：看准、脉脉匿名/实名评价、知乎相关职场讨论</li>
+      <li>▪ <b>房价数据</b>：链家、安居客 2026.04 最新挂牌价</li>
+      <li>▪ <b>公积金</b>：基于上海社平工资上限 12884 元/月（2025年）× 2 × 比例计算</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h3>2029届·张元杰·就业决策驾驶舱 v3.0</h3>
+  <p>上海交大仪科硕士 · 王侃课题组 · 微针可穿戴智能传感器方向</p>
+  <p>数据时效：2026.05.07 · 60 家候选公司 · 7 维评分 · 可调权重</p>
+  <p class="sig">◆ BUILT WITH CARE · FOR PERSONAL DECISION · CONFIDENTIAL USE ◆</p>
+</footer>
+
+<button class="stt" id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Data + Logic -->
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   2029届交大仪科硕士·嵌入式工程师·就业决策驾驶舱 · 数据层
+   ═══════════════════════════════════════════════════════════════
+   数据说明：
+   - 置信度 c: 🟢=多源核实 / 🟡=单源核实 / 🟠=市场估算
+   - 薪资单位：万元/年（现金总包，不含股票期权）
+   - 公积金比例：公司缴存%+个人缴存%
+   - fund_total: 年公积金收入(万)（基于上海社平工资上限12884×24×比例）
+   - 七维：pay(薪资NPV) / tech(技术契合) / settle(定居) / career(长期职业) / wlb / bonus(禀赋杠杆) / future(行业前景)
+   - 每项 0-10 分，根据 V3.2 权重: 22/20/14/13/12/10/9 计算加权总分
+   - dist: 主要办公地 @闵行/嘉定/张江/临港/徐汇/浦东等
+   - commute: 闵行/嘉定通勤友好度 1-5 (5=最友好)
+   ═══════════════════════════════════════════════════════════════ */
+
+const WEIGHTS = {
+  pay:    0.22,
+  tech:   0.20,
+  settle: 0.14,
+  career: 0.13,
+  wlb:    0.12,
+  bonus:  0.10,
+  future: 0.09
+};
+
+const COMPANIES = [
+  // ═══ 医疗电子 · 可穿戴医疗（你的主战场）═══
+  {
+    id: 1, name: '联影医疗', en: 'United Imaging Healthcare', ticker: '688271.SH',
+    cat: 'medical', subcat: '医疗影像龙头',
+    dist: '嘉定', commute: 5,
+    cash: '35-48', cash_mid: 41.5, fund: '8+8', fund_total: 8.8, stock: '股权激励·3年兑现',
+    total5y: 245, total5y_note: '5年累计（含涨薪+公积金+股票预期）',
+    wlb_hours: 44, wlb_note: '周均44h，项目期偶有加班',
+    pay: 8.0, tech: 9.5, settle: 10, career: 9.2, wlb: 8.5, bonus: 9.0, future: 9.5,
+    score: null, // 后面 render 时计算
+    c_pay: '🟡', c_tech: '🟢', c_settle: '🟢', c_wlb: '🟡',
+    intro: '上海嘉定本土医疗影像龙头，PET/CT/MRI大型设备国产替代核心。嘉定新城定居性价比天花板，交大校友密度全市前列。2021科创板上市，年营收破百亿。',
+    match_points: ['可穿戴医疗设备事业部直接对口你的FreeRTOS+TF Lite Micro+BLE技术栈', '数字健康研究院做医疗AIoT方向', '临床诊断设备部要生理信号采集嵌入式'],
+    pos: [
+      {dept: '联影微电子·可穿戴医疗设备事业部', jobs: ['嵌入式软件开发工程师（生物传感器方向）', '可穿戴设备嵌入式全栈工程师']},
+      {dept: '数字健康研究院', jobs: ['医疗AIoT嵌入式工程师', '多体征监护系统开发工程师']},
+      {dept: '临床诊断设备事业部', jobs: ['生理信号采集嵌入式工程师']}
+    ],
+    adv: ['嘉定新城房价4.8-5.5w/㎡，定居性价比天花板', '周均44h工时，WLB医疗赛道最佳', '交大校友占比高，内推通道成熟', '2026校招已启动，管培生+科研合作岗位丰富'],
+    risk: ['紧急项目阶段性加班至45-50h', '股票期权3年兑现周期', '非头部岗位薪资中等'],
+    source_url: 'https://global.united-imaging.com/zh-cn/careers',
+    source_note: '数据来源：联影集团2026校招公告 + 猎聘 + 超级简历WonderCV',
+    tier: 'SS' // 先定位，后按总分 re-tier
+  },
+  {
+    id: 2, name: '华为 · 健康军团', en: 'Huawei Health Corps', ticker: 'private',
+    cat: 'medical', subcat: '消费医疗穿戴',
+    dist: '深圳总部+上海研究所', commute: 3,
+    cash: '40-58', cash_mid: 49, fund: '5+5', fund_total: 4.5, stock: 'TUP激励·3-5年',
+    total5y: 295, total5y_note: 'TUP兑现后5年总包可显著提升',
+    wlb_hours: 55, wlb_note: '周均55h+，大小周因团队而异',
+    pay: 9.2, tech: 9.0, settle: 6.5, career: 9.5, wlb: 5.5, bonus: 9.2, future: 9.0,
+    c_pay: '🟢', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟢',
+    intro: '华为可穿戴全球领先（Watch GT/D系列出货量全球前三）。健康军团主攻CGM（连续血糖监测）、心率血氧、PPG算法等。TUP激励可显著提升5年总包，但一次性现金薪资中等。',
+    match_points: ['PPG+TF Lite Micro+BLE技术栈完美匹配', 'CGM方向与你毕设心率血氧延续', '华为品牌对简历加成顶级'],
+    pos: [
+      {dept: '可穿戴设备研发部', jobs: ['传感器嵌入式工程师（PPG/ECG+BLE）', '低功耗固件工程师']},
+      {dept: '健康算法部', jobs: ['边缘AI部署工程师（TF Lite Micro）', '生理信号处理算法（Kalman滤波）']}
+    ],
+    adv: ['品牌光环+薪资天花板', '技术栈深度匹配（你毕设的PPG+TF Lite Micro直接用）', 'TUP激励长期价值高'],
+    risk: ['WLB差（周均55+h）', '深圳为主，上海研究所岗位少', '公积金仅按基本工资5+5', 'CGM仍在R&D阶段'],
+    source_url: 'https://career.huawei.com',
+    source_note: '数据来源：BOSS直聘实招20-40K×14薪 + 知乎华为校招解读 + 知行公社',
+    tier: 'SS'
+  },
+  {
+    id: 3, name: '迈瑞医疗', en: 'Mindray', ticker: '300760.SZ',
+    cat: 'medical', subcat: '医疗器械龙头',
+    dist: '上海研发中心（闵行）', commute: 5,
+    cash: '32-44', cash_mid: 38, fund: '6+6', fund_total: 6.5, stock: '期权·限制性股票',
+    total5y: 225,
+    wlb_hours: 46, wlb_note: '研发加班较多，项目期周均50h',
+    pay: 7.8, tech: 9.2, settle: 9.0, career: 9.3, wlb: 7.5, bonus: 8.5, future: 9.2,
+    c_pay: '🟡', c_tech: '🟢', c_settle: '🟢', c_wlb: '🟡',
+    intro: '国产医疗器械绝对龙头，全球监护仪市占率Top3。心率/血氧监测方向与你毕设（MAX30102+Kalman+1D-CNN）高度相关。2018深交所上市，市值3000亿+。',
+    match_points: ['心率/血氧与你毕设 MIT-BIH 项目完美匹配', 'IEC 60601/62304 认证经验行业内最权威', '闵行研发中心离交大近'],
+    pos: [
+      {dept: '生命信息与支持事业部', jobs: ['监护仪嵌入式工程师（心率/血氧/血压）', '生理参数测量工程师（传感器信号处理）']},
+      {dept: '体外诊断事业部', jobs: ['POCT设备嵌入式工程师']}
+    ],
+    adv: ['心率血氧方向毕设对口', 'IEC 60601/62304经验业内标杆', '闵行定居超友好', '行业地位最稳固'],
+    risk: ['公积金偏低6+6', 'R&D 加班较多', '薪资天花板不如互联网'],
+    source_url: 'https://www.mindray.com/cn/about-us/careers',
+    source_note: '数据来源：迈瑞官网 + 看准网 + 猎聘',
+    tier: 'SS'
+  },
+  {
+    id: 4, name: '微创医疗机器人', en: 'MicroPort MedBot', ticker: '2252.HK',
+    cat: 'medical', subcat: '手术机器人',
+    dist: '张江', commute: 3,
+    cash: '30-42', cash_mid: 36, fund: '10+10', fund_total: 10.5, stock: '港股期权',
+    total5y: 215,
+    wlb_hours: 45,
+    pay: 7.5, tech: 9.3, settle: 7.5, career: 8.5, wlb: 7.8, bonus: 8.0, future: 9.0,
+    c_pay: '🟡', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟡',
+    intro: '港股2252.HK，手术机器人国产龙头（图迈腔镜、鸿鹄骨科）。可穿戴医疗事业部负责微针给药和传感器系统——与你王侃课题组微针方向完美对口。',
+    match_points: ['可穿戴医疗事业部负责微针给药 → 与王侃课题组完全契合', '手术机器人+可穿戴双赛道', 'IEC 62304 经验'],
+    pos: [
+      {dept: '可穿戴医疗事业部', jobs: ['嵌入式软件工程师（低功耗MCU+BLE）', '传感器系统工程师（电化学/MEMS）']},
+      {dept: '手术机器人研发部', jobs: ['嵌入式控制系统工程师']}
+    ],
+    adv: ['微针方向与王侃课题组直接对口', '港股期权长期价值', 'WLB优于华为'],
+    risk: ['仍处亏损阶段', '港股波动', '平台规模不及大厂'],
+    source_url: 'https://www.microport.com.cn/careers',
+    source_note: '数据来源：公司官网 + 港交所财报 + 看准',
+    tier: 'S'
+  },
+  {
+    id: 5, name: '脑虎科技', en: 'NeuroXess', ticker: 'private',
+    cat: 'medical', subcat: '脑机接口前沿',
+    dist: '闵行', commute: 5,
+    cash: '32-42', cash_mid: 37, fund: '8+8', fund_total: 8.8, stock: 'A轮期权',
+    total5y: 215,
+    wlb_hours: 47,
+    pay: 7.5, tech: 9.8, settle: 8.0, career: 7.5, wlb: 7.5, bonus: 9.5, future: 9.3,
+    c_pay: '🟢', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟡',
+    intro: '脑机接口头部企业（柔性脑机接口龙头），2022 完成数亿元A轮（华兴资本领投）。研发侵入式/非侵入式脑电采集系统。与你宇构智核实习（TGAM+FreeRTOS+1D-CNN）直接延续。',
+    match_points: ['与宇构智核实习完全延续', '脑电+FreeRTOS+1D-CNN 匹配 98%', '前沿赛道头部', '闵行办公对口定居'],
+    pos: [
+      {dept: '电生理系统部', jobs: ['嵌入式软件开发工程师（脑电采集+FreeRTOS）', '神经信号采集工程师（柔性电极）']},
+      {dept: '算法部', jobs: ['脑电信号解析工程师（1D-CNN边缘部署）']}
+    ],
+    adv: ['与你脑机接口实习直接延续', '前沿赛道头部，简历含金量高', '闵行办公通勤友好', '质量工程师12-20k·13薪参考薪资合理'],
+    risk: ['初创阶段，融资周期风险', '平台规模有限', '商业化周期长'],
+    source_url: 'https://www.neuroxess.com',
+    source_note: '数据来源：公司官网 + 猎聘（质量岗12-20k·13薪） + 动脉网报道',
+    tier: 'S'
+  },
+  {
+    id: 6, name: '博睿康医疗', en: 'BrainCo', ticker: 'private',
+    cat: 'medical', subcat: '脑机接口前沿',
+    dist: '上海', commute: 3,
+    cash: '33-42', cash_mid: 37.5, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 220,
+    wlb_hours: 47,
+    pay: 7.5, tech: 9.5, settle: 7.5, career: 7.5, wlb: 7.5, bonus: 9.3, future: 9.3,
+    c_pay: '🟡', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟠',
+    intro: '脑机接口全球领先，全球首款获批上市侵入式脑机接口产品。清华孵化背景，与脑虎竞争态势。',
+    match_points: ['植入式BCI 全球首款', '与你脑机接口实习背景直接匹配', '清华系人脉'],
+    pos: [
+      {dept: '脑机接口事业部', jobs: ['植入式神经信号采集嵌入式工程师', '穿戴式康复设备开发工程师']},
+      {dept: '算法部', jobs: ['神经信号处理算法工程师']}
+    ],
+    adv: ['全球首款获批植入BCI', '前瞻性极强', '与脑虎双选项可对比'],
+    risk: ['初创阶段', '商业化周期长', '上海非总部'],
+    source_url: 'https://www.brainco.tech',
+    source_note: '数据来源：公司官网 + 动脉网 + 36氪报道',
+    tier: 'S'
+  },
+  {
+    id: 7, name: '西门子医疗', en: 'Siemens Healthineers', ticker: 'SHL.DE',
+    cat: 'medical', subcat: '外企医疗影像',
+    dist: '浦东（周浦）', commute: 3,
+    cash: '32-42', cash_mid: 37, fund: '12+12', fund_total: 13.5, stock: '少量RSU',
+    total5y: 235,
+    wlb_hours: 40, wlb_note: '典型外企8小时无加班',
+    pay: 7.8, tech: 8.0, settle: 7.5, career: 7.5, wlb: 9.8, bonus: 8.0, future: 8.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟢',
+    intro: '全球医疗影像三巨头之一，上海周浦基地。大型医疗设备嵌入式主控和多传感器融合。',
+    match_points: ['WLB顶级（周均38-40h），工作生活平衡', '公积金12+12顶格', '国际化平台'],
+    pos: [
+      {dept: '医疗设备研发部', jobs: ['系统控制软件工程师（CT/MRI主控）', '医疗设备嵌入式开发工程师']},
+      {dept: '超声产品部', jobs: ['超声信号处理嵌入式工程师']}
+    ],
+    adv: ['WLB业内最佳', '国际化', '公积金顶格'],
+    risk: ['外企天花板', '晋升较慢', '裁员风险（全球重组）'],
+    source_url: 'https://jobs.siemens-healthineers.com',
+    source_note: '数据来源：官方招聘 + 看准',
+    tier: 'S'
+  },
+  {
+    id: 8, name: '美敦力', en: 'Medtronic', ticker: 'MDT',
+    cat: 'medical', subcat: '外企医疗器械',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '12+12', fund_total: 13.5, stock: '少量RSU',
+    total5y: 210,
+    wlb_hours: 40,
+    pay: 7.0, tech: 7.8, settle: 7.0, career: 7.2, wlb: 9.8, bonus: 7.8, future: 8.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '全球医疗器械第一大公司（NYSE:MDT，市值千亿美金）。心脏节律、神经调控、糖尿病业务覆盖可穿戴医疗核心赛道。',
+    match_points: ['IEC 62304 经验', '全球最大医疗器械平台', 'WLB顶级'],
+    pos: [
+      {dept: '心脏节律管理部', jobs: ['嵌入式电子工程师（植入式起搏器+BLE遥测）']},
+      {dept: '神经调控事业部', jobs: ['固件工程师（神经刺激器+闭环控制）']}
+    ],
+    adv: ['WLB顶级', 'IEC 62304经验', '国际职业路径'],
+    risk: ['外企天花板', '本土化决策权有限', '晋升慢'],
+    source_url: 'https://jobs.medtronic.com',
+    source_note: '数据来源：官方招聘 + 脉脉匿名评价',
+    tier: 'A'
+  },
+  {
+    id: 9, name: '鱼跃医疗', en: 'Yuwell', ticker: '002223.SZ',
+    cat: 'medical', subcat: '家用医疗器械',
+    dist: '上海研发中心（闵行）', commute: 5,
+    cash: '28-38', cash_mid: 33, fund: '11+11', fund_total: 12.3, stock: '期权',
+    total5y: 205,
+    wlb_hours: 41, wlb_note: '医疗行业WLB极佳',
+    pay: 7.0, tech: 8.0, settle: 9.5, career: 7.5, wlb: 9.5, bonus: 7.5, future: 8.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟡',
+    intro: '家用医疗器械龙头，制氧机/血压计市占率第一。老龄化大趋势受益者，增长确定性高。',
+    match_points: ['WLB极佳', '公积金11+11', '闵行定居', '家用医疗与可穿戴方向延伸'],
+    pos: [
+      {dept: '智能健康设备研发部', jobs: ['家用健康设备嵌入式工程师（血压/血氧+BLE）', 'IoT 系统工程师（MQTT+云端）']}
+    ],
+    adv: ['WLB极佳（周均40-42h）', '公积金11+11', '闵行定居高', '稳定性好'],
+    risk: ['现金包偏低', '技术前沿性略弱'],
+    source_url: 'https://www.yuwell.com.cn',
+    source_note: '数据来源：公司官网 + 看准',
+    tier: 'A'
+  },
+  {
+    id: 10, name: '三诺生物', en: 'Sinocare', ticker: '300298.SZ',
+    cat: 'medical', subcat: 'CGM连续血糖',
+    dist: '上海研究院', commute: 3,
+    cash: '26-36', cash_mid: 31, fund: '8+8', fund_total: 8.8, stock: '限制性股票',
+    total5y: 190,
+    wlb_hours: 43,
+    pay: 6.5, tech: 8.5, settle: 7.5, career: 8.0, wlb: 8.0, bonus: 7.5, future: 9.0,
+    c_pay: '🟠', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟠',
+    intro: '国产血糖监测龙头，推进CGM（连续血糖）国产替代。可穿戴医疗电子标杆细分赛道。',
+    match_points: ['CGM 与可穿戴医疗完美匹配', '微针给药+电化学传感与王侃课题组对口', '细分龙头'],
+    pos: [
+      {dept: 'CGM 产品研发部', jobs: ['CGM 嵌入式开发工程师', '可穿戴传感工程师']},
+      {dept: '智能算法部', jobs: ['血糖预测算法工程师']}
+    ],
+    adv: ['CGM方向国产替代顶风', '细分龙头', '与王侃课题组微针方向契合'],
+    risk: ['现金包偏低', '体量小', '总部长沙'],
+    source_url: 'https://www.sinocare.com',
+    source_note: '数据来源：公司官网 + 招股书',
+    tier: 'A'
+  },
+  {
+    id: 11, name: '奕瑞科技', en: 'iRay Technology', ticker: '688301.SH',
+    cat: 'medical', subcat: 'X射线探测器',
+    dist: '嘉定', commute: 5,
+    cash: '28-36', cash_mid: 32, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 195,
+    wlb_hours: 43,
+    pay: 6.5, tech: 7.5, settle: 9.0, career: 7.5, wlb: 8.0, bonus: 6.5, future: 8.0,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟠',
+    intro: 'X射线探测器全球龙头，嘉定总部。与联影、西门子医疗等深度合作。',
+    match_points: ['嘉定总部定居友好', '医疗影像细分龙头', '与可穿戴方向相关性弱'],
+    pos: [
+      {dept: '探测器研发部', jobs: ['X射线探测器嵌入式工程师']},
+      {dept: '系统集成部', jobs: ['医疗影像系统嵌入式工程师']}
+    ],
+    adv: ['嘉定定居友好', '细分赛道龙头'],
+    risk: ['业务领域窄', '与可穿戴方向弱相关'],
+    source_url: 'https://www.iraychina.com',
+    source_note: '数据来源：公司官网 + 招股书',
+    tier: 'A'
+  },
+  {
+    id: 12, name: '阶梯医疗', en: 'Stairmed', ticker: 'private',
+    cat: 'medical', subcat: '脑机接口新锐',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 195,
+    wlb_hours: 48,
+    pay: 6.8, tech: 9.0, settle: 7.0, career: 7.0, wlb: 7.0, bonus: 8.8, future: 9.0,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟠',
+    intro: '脑机接口新锐，复旦孵化背景。侵入式脑机接口第三玩家（脑虎+博睿康+阶梯三足鼎立）。',
+    match_points: ['脑机接口第三选手', '复旦系人脉', '初创增值空间大'],
+    pos: [
+      {dept: '脑机接口研发部', jobs: ['嵌入式开发工程师', '神经信号处理工程师']}
+    ],
+    adv: ['与你实习背景对口', '初创期权增值潜力'],
+    risk: ['初创风险', '平台不如脑虎博睿康成熟'],
+    source_url: 'https://www.stairmed.com',
+    source_note: '数据来源：36氪 + 动脉网',
+    tier: 'A'
+  },
+
+  // ═══ 汽车电子（你小米实习的延伸）═══
+  {
+    id: 13, name: '小米汽车', en: 'Xiaomi Auto', ticker: '1810.HK',
+    cat: 'auto', subcat: '新能源汽车',
+    dist: '嘉定', commute: 5,
+    cash: '40-58', cash_mid: 49, fund: '12+12', fund_total: 13.5, stock: '港股期权',
+    total5y: 310,
+    wlb_hours: 50, wlb_note: '项目期大小周',
+    pay: 9.0, tech: 9.0, settle: 9.0, career: 8.8, wlb: 6.0, bonus: 9.5, future: 8.5,
+    c_pay: '🟢', c_tech: '🟢', c_settle: '🟢', c_wlb: '🟢',
+    intro: '小米SU7交付量持续走高。嘉定总部，你已经在汽车OS架构部实习，有转正资格 + 内部人脉。',
+    match_points: ['你已实习过，转正议价权最高', '嘉定总部定居完美', '26届C++嵌入式24k×15+房补=378k已验证', '自动驾驶硕岗可达58.5w'],
+    pos: [
+      {dept: '汽车OS架构部（你实习部门）', jobs: ['域控制器通信工程师（CAN/LIN+AUTOSAR）', '嵌入式软件开发工程师']},
+      {dept: '智能座舱部', jobs: ['车载嵌入式软件工程师']},
+      {dept: '自动驾驶部', jobs: ['域控制器嵌入式（需要强算法）']}
+    ],
+    adv: ['实习经历加持，转正议价权最高', '嘉定定居完美', '26届薪资已披露透明', '公积金顶格12+12'],
+    risk: ['WLB偏低（周均50h）', '纯汽车电子与医疗方向有偏', '港股波动'],
+    source_url: 'https://hr.xiaomi.com',
+    source_note: '数据来源：🟢 知乎26届校招薪资开奖2026-02-24 + 掘金2025-03-14',
+    tier: 'S'
+  },
+  {
+    id: 14, name: '蔚来汽车', en: 'NIO', ticker: '9866.HK',
+    cat: 'auto', subcat: '新能源汽车',
+    dist: '嘉定', commute: 5,
+    cash: '34-48', cash_mid: 41, fund: '5+5', fund_total: 4.5, stock: '美股期权',
+    total5y: 245,
+    wlb_hours: 48,
+    pay: 7.5, tech: 7.5, settle: 9.0, career: 8.0, wlb: 7.0, bonus: 7.5, future: 7.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟡',
+    intro: '高端电动车标杆，全栈自研（NT3.0、SkyOS）。',
+    match_points: ['嘉定总部', '全栈自研技术栈深度'],
+    pos: [
+      {dept: '智能座舱事业部', jobs: ['座舱域控制器嵌入式工程师（高通8295+Linux/QNX）']},
+      {dept: '数字系统工程部', jobs: ['汽车OS嵌入式开发工程师']}
+    ],
+    adv: ['发展潜力大', '嘉定定居高'],
+    risk: ['公积金仅5+5', '持续亏损风险', '与医疗偏差'],
+    source_url: 'https://www.nio.com/careers',
+    source_note: '数据来源：公司官网 + 脉脉',
+    tier: 'A'
+  },
+  {
+    id: 15, name: '理想汽车', en: 'Li Auto', ticker: '2015.HK',
+    cat: 'auto', subcat: '新能源汽车',
+    dist: '上海研发中心', commute: 3,
+    cash: '35-48', cash_mid: 41.5, fund: '12+12', fund_total: 13.5, stock: '美股期权',
+    total5y: 255,
+    wlb_hours: 50,
+    pay: 8.0, tech: 7.0, settle: 7.5, career: 8.5, wlb: 6.5, bonus: 7.5, future: 7.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '新势力销量头部。无"车载健康监测"专属岗位，相关职责拆分至座舱和DMS算法。',
+    match_points: ['公积金顶格', 'L系列销量稳定', 'DMS疲劳检测与生理信号相关'],
+    pos: [
+      {dept: '智能座舱事业部', jobs: ['智能座舱系统工程师']},
+      {dept: '主动安全部', jobs: ['DMS算法工程师（疲劳检测）']}
+    ],
+    adv: ['公积金12+12顶格', '销量稳定'],
+    risk: ['WLB偏低', '健康监测非核心'],
+    source_url: 'https://careers.lixiang.com',
+    source_note: '数据来源：公司官网 + BOSS直聘',
+    tier: 'A'
+  },
+  {
+    id: 16, name: '智己汽车', en: 'IM Motors', ticker: 'private',
+    cat: 'auto', subcat: '上汽集团',
+    dist: '嘉定安亭', commute: 5,
+    cash: '33-45', cash_mid: 39, fund: '12+12', fund_total: 13.5, stock: '股权激励',
+    total5y: 240,
+    wlb_hours: 48,
+    pay: 7.5, tech: 7.2, settle: 9.0, career: 8.0, wlb: 7.0, bonus: 7.5, future: 7.5,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟠',
+    intro: '上汽高端新能源品牌。嘉定安亭定居高。',
+    match_points: ['嘉定安亭定居优秀', '公积金顶格', '上汽集团背景'],
+    pos: [
+      {dept: '智能驾驶事业部', jobs: ['域控制器嵌入式工程师']},
+      {dept: '电子电器架构部', jobs: ['车载通信协议工程师']}
+    ],
+    adv: ['嘉定安亭定居优', '公积金顶格'],
+    risk: ['销量波动', '非医疗核心'],
+    source_url: 'https://www.immotors.com',
+    source_note: '数据来源：猎聘 + BOSS直聘',
+    tier: 'A'
+  },
+  {
+    id: 17, name: '特斯拉', en: 'Tesla', ticker: 'TSLA',
+    cat: 'auto', subcat: '外资新能源',
+    dist: '临港 + 嘉定研发', commute: 4,
+    cash: '36-50', cash_mid: 43, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 265,
+    wlb_hours: 48,
+    pay: 8.0, tech: 7.5, settle: 8.5, career: 8.5, wlb: 7.0, bonus: 8.5, future: 8.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '全球电动车标杆。上海研发中心迅速扩张。',
+    match_points: ['品牌光环强', '公积金顶格', 'BMS/车身电子与你车载方向匹配'],
+    pos: [
+      {dept: '动力与能源工程部', jobs: ['BMS嵌入式软件工程师']},
+      {dept: '车身电子部', jobs: ['车身控制器嵌入式工程师']}
+    ],
+    adv: ['品牌光环强', '公积金顶格', 'RSU长期价值'],
+    risk: ['WLB一般', '与医疗不相关'],
+    source_url: 'https://www.tesla.com/careers',
+    source_note: '数据来源：官网 + 脉脉',
+    tier: 'A'
+  },
+  {
+    id: 18, name: '华域汽车', en: 'HASCO', ticker: '600741.SH',
+    cat: 'auto', subcat: '上汽集团 Tier 1',
+    dist: '上海', commute: 3,
+    cash: '26-36', cash_mid: 31, fund: '12+12', fund_total: 13.5, stock: '少量',
+    total5y: 195,
+    wlb_hours: 42, wlb_note: '国企WLB良好',
+    pay: 6.5, tech: 7.2, settle: 8.5, career: 7.5, wlb: 9.0, bonus: 7.0, future: 7.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟡', c_wlb: '🟡',
+    intro: '上汽集团核心零部件平台。国企背景+WLB+公积金三优。',
+    match_points: ['公积金顶格', 'WLB极佳', '国企稳定'],
+    pos: [
+      {dept: '电子系统研发部', jobs: ['车载嵌入式软件工程师']},
+      {dept: '智能驾驶预研部', jobs: ['传感器融合工程师']}
+    ],
+    adv: ['公积金顶格', 'WLB极佳', '国企稳定'],
+    risk: ['偏传统汽车零部件', '薪资中等'],
+    source_url: 'https://www.hasco.com.cn',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 19, name: '博世', en: 'Bosch', ticker: 'private',
+    cat: 'auto', subcat: '外资 Tier 1',
+    dist: '上海（漕河泾）', commute: 3,
+    cash: '26-34', cash_mid: 30, fund: '12+12', fund_total: 13.5, stock: 'none',
+    total5y: 190,
+    wlb_hours: 40,
+    pay: 6.2, tech: 7.5, settle: 7.5, career: 7.5, wlb: 9.5, bonus: 7.5, future: 7.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟢',
+    intro: '全球Tier 1汽车零部件巨头，WLB极佳。',
+    match_points: ['WLB顶级', '公积金顶格', '国际化平台'],
+    pos: [
+      {dept: '底盘控制系统部', jobs: ['ESP/ABS嵌入式工程师（AUTOSAR）']},
+      {dept: 'ADAS事业部', jobs: ['毫米波雷达嵌入式工程师']}
+    ],
+    adv: ['WLB极佳（周均38-42h）', '国际化'],
+    risk: ['晋升较窄', '涨薪有限'],
+    source_url: 'https://www.bosch.com.cn',
+    source_note: '数据来源：公司官网 + 看准',
+    tier: 'A'
+  },
+  {
+    id: 20, name: '地平线', en: 'Horizon Robotics', ticker: 'private',
+    cat: 'auto', subcat: '自动驾驶芯片',
+    dist: '上海（张江）', commute: 3,
+    cash: '36-50', cash_mid: 43, fund: '10+10', fund_total: 10.5, stock: 'Pre-IPO期权',
+    total5y: 265,
+    wlb_hours: 50,
+    pay: 8.0, tech: 8.5, settle: 7.5, career: 8.8, wlb: 6.5, bonus: 8.5, future: 8.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟠',
+    intro: '自动驾驶芯片独角兽（已冲击港股IPO），征程系列车规级芯片广泛装车。',
+    match_points: ['自动驾驶 + AI 芯片独角兽', 'Pre-IPO 期权价值', '上海张江办公'],
+    pos: [
+      {dept: '芯片系统集成部', jobs: ['SoC 嵌入式软件工程师']},
+      {dept: 'BPU 算法部', jobs: ['AI 算法部署工程师（TensorRT+CUDA）']}
+    ],
+    adv: ['AI芯片独角兽', 'Pre-IPO期权', '技术深度'],
+    risk: ['WLB一般', 'IPO时间不确定'],
+    source_url: 'https://www.horizon.auto',
+    source_note: '数据来源：公司官网 + 脉脉',
+    tier: 'S'
+  },
+  {
+    id: 21, name: '黑芝麻智能', en: 'Black Sesame', ticker: '2533.HK',
+    cat: 'auto', subcat: '自动驾驶芯片',
+    dist: '上海', commute: 3,
+    cash: '32-46', cash_mid: 39, fund: '10+10', fund_total: 10.5, stock: '港股期权',
+    total5y: 240,
+    wlb_hours: 48,
+    pay: 7.3, tech: 8.2, settle: 7.0, career: 8.0, wlb: 7.0, bonus: 8.0, future: 8.0,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟠',
+    intro: '车规级自动驾驶芯片独角兽，2024 港股上市。',
+    match_points: ['车规AI芯片', '港股上市期权'],
+    pos: [
+      {dept: '芯片系统部', jobs: ['SoC 嵌入式软件工程师']}
+    ],
+    adv: ['AI芯片头部', '港股期权'],
+    risk: ['股价波动', '市场份额小于地平线'],
+    source_url: 'https://www.blacksesametech.com',
+    source_note: '数据来源：公司官网 + 港交所',
+    tier: 'A'
+  },
+
+  // ═══ AIoT / 消费电子 ═══
+  {
+    id: 22, name: '恒玄科技', en: 'BES Technic', ticker: '688608.SH',
+    cat: 'aiot', subcat: '可穿戴芯片',
+    dist: '临港', commute: 2,
+    cash: '32-44', cash_mid: 38, fund: '10+10', fund_total: 10.5, stock: '限制性股票',
+    total5y: 230,
+    wlb_hours: 47,
+    pay: 7.5, tech: 9.0, settle: 7.0, career: 8.5, wlb: 7.0, bonus: 8.5, future: 9.0,
+    c_pay: '🟠', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟠',
+    intro: '全球智能可穿戴音频芯片龙头，TWS耳机/智能手表芯片国内市占率第一。专注低功耗可穿戴嵌入式。',
+    match_points: ['可穿戴芯片国内第一', '低功耗嵌入式完美对口你的技术栈', '智能手表 = 可穿戴医疗的硬件基础'],
+    pos: [
+      {dept: '芯片设计部', jobs: ['SoC 嵌入式验证工程师']},
+      {dept: '应用工程部', jobs: ['可穿戴设备固件工程师']}
+    ],
+    adv: ['可穿戴芯片龙头', '技术栈完美匹配', 'SAP 股票持续上涨'],
+    risk: ['临港通勤远', '消费电子周期性'],
+    source_url: 'https://www.bestechnic.com',
+    source_note: '数据来源：公司官网 + 招股书',
+    tier: 'S'
+  },
+  {
+    id: 23, name: '英伟达上海', en: 'NVIDIA Shanghai', ticker: 'NVDA',
+    cat: 'aiot', subcat: '全球AI龙头',
+    dist: '浦东（张江）', commute: 3,
+    cash: '50-85', cash_mid: 67.5, fund: '12+12', fund_total: 13.5, stock: 'RSU·大量',
+    total5y: 480,
+    wlb_hours: 42, wlb_note: '外企WLB+SSP薪资',
+    pay: 10, tech: 9.0, settle: 7.5, career: 9.8, wlb: 9.0, bonus: 10, future: 10,
+    c_pay: '🟢', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '全球AI算力龙头，股价2年涨10倍。上海张江研发中心，嵌入式AI天花板。',
+    match_points: ['全球AI龙头，简历含金量天花板', 'RSU长期价值巨大', 'WLB外企级', 'Jetson平台=嵌入式AI完美对口'],
+    pos: [
+      {dept: 'Jetson 嵌入式平台部', jobs: ['嵌入式 AI 系统工程师']},
+      {dept: '自动驾驶部', jobs: ['CUDA 嵌入式部署工程师']}
+    ],
+    adv: ['薪资天花板', 'RSU爆仓潜力', 'WLB好', '简历极度加分'],
+    risk: ['录取难度天花板级', '中美关系不确定性', '语言要求高'],
+    source_url: 'https://nvidia.wd5.myworkdayjobs.com',
+    source_note: '数据来源：Levels.fyi + 一亩三分地',
+    tier: 'SSS'
+  },
+  {
+    id: 24, name: '大疆创新', en: 'DJI', ticker: 'private',
+    cat: 'aiot', subcat: '无人机龙头',
+    dist: '上海研发中心', commute: 3,
+    cash: '32-48', cash_mid: 40, fund: '10+10', fund_total: 10.5, stock: '虚拟股权',
+    total5y: 250,
+    wlb_hours: 50,
+    pay: 7.8, tech: 7.5, settle: 7.0, career: 8.5, wlb: 6.5, bonus: 8.5, future: 8.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟡',
+    intro: '全球无人机龙头。RTOS 开发国内天花板。',
+    match_points: ['RTOS开发天花板', '飞控嵌入式全球领先'],
+    pos: [
+      {dept: '飞控系统部', jobs: ['飞控嵌入式工程师（AUTOSAR+RTOS）']},
+      {dept: '相机产品线', jobs: ['中/高级嵌入式工程师（ISP驱动+多核）']}
+    ],
+    adv: ['技术深度强', '简历加分'],
+    risk: ['WLB偏低', '与医疗方向偏'],
+    source_url: 'https://we.dji.com',
+    source_note: '数据来源：公司官网 + 知乎',
+    tier: 'S'
+  },
+  {
+    id: 25, name: '华为海思', en: 'HiSilicon', ticker: 'private',
+    cat: 'aiot', subcat: '芯片设计',
+    dist: '上海', commute: 3,
+    cash: '42-56', cash_mid: 49, fund: '5+5', fund_total: 4.5, stock: 'TUP',
+    total5y: 285,
+    wlb_hours: 55,
+    pay: 8.5, tech: 7.0, settle: 7.0, career: 9.5, wlb: 5.5, bonus: 9.0, future: 9.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟢',
+    intro: '国产芯片设计绝对核心。',
+    match_points: ['芯片设计顶级平台', '简历含金量极高'],
+    pos: [
+      {dept: 'IoT 芯片设计部', jobs: ['嵌入式 SoC 验证工程师']},
+      {dept: '数模混合芯片部', jobs: ['传感器接口芯片工程师']}
+    ],
+    adv: ['芯片设计顶级平台', '简历极加分'],
+    risk: ['WLB差', '公积金低', '与医疗偏差'],
+    source_url: 'https://career.huawei.com',
+    source_note: '数据来源：华为官网 + 知乎',
+    tier: 'S'
+  },
+  {
+    id: 26, name: '字节健康', en: 'ByteDance Health', ticker: 'private',
+    cat: 'aiot', subcat: '互联网+健康',
+    dist: '上海', commute: 3,
+    cash: '38-52', cash_mid: 45, fund: '12+12', fund_total: 13.5, stock: '期权',
+    total5y: 275,
+    wlb_hours: 55,
+    pay: 8.5, tech: 7.5, settle: 7.5, career: 8.5, wlb: 5.5, bonus: 8.0, future: 8.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟢',
+    intro: '字节健康事业部，聚焦健康管理、在线问诊和智能硬件。',
+    match_points: ['薪资极高', '公积金顶格', '健康硬件与可穿戴相关'],
+    pos: [
+      {dept: '智能硬件研发部', jobs: ['健康穿戴设备嵌入式工程师（心率/血氧/睡眠）']},
+      {dept: '健康算法部', jobs: ['运动健康算法工程师']}
+    ],
+    adv: ['薪资极高', '公积金顶格'],
+    risk: ['WLB差（55+h）', '健康业务战略不定'],
+    source_url: 'https://jobs.bytedance.com',
+    source_note: '数据来源：字节招聘 + 知乎',
+    tier: 'A'
+  },
+  {
+    id: 27, name: '字节 AIoT', en: 'ByteDance AIoT', ticker: 'private',
+    cat: 'aiot', subcat: '互联网+IoT',
+    dist: '上海', commute: 3,
+    cash: '38-52', cash_mid: 45, fund: '12+12', fund_total: 13.5, stock: '期权',
+    total5y: 275,
+    wlb_hours: 58,
+    pay: 8.3, tech: 6.5, settle: 7.5, career: 8.0, wlb: 5.0, bonus: 7.5, future: 7.5,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '字节AIoT事业部。',
+    match_points: ['薪资最高梯队', '公积金顶格'],
+    pos: [
+      {dept: 'IoT 设备研发部', jobs: ['智能设备嵌入式工程师']}
+    ],
+    adv: ['薪资最高', '公积金顶格'],
+    risk: ['WLB最差', '与医疗偏差大'],
+    source_url: 'https://jobs.bytedance.com',
+    source_note: '数据来源：字节招聘',
+    tier: 'B'
+  },
+  {
+    id: 28, name: '腾讯 AIoT', en: 'Tencent AIoT', ticker: '700.HK',
+    cat: 'aiot', subcat: '互联网+IoT',
+    dist: '上海', commute: 3,
+    cash: '35-48', cash_mid: 41.5, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 255,
+    wlb_hours: 50,
+    pay: 7.8, tech: 6.0, settle: 7.5, career: 8.0, wlb: 6.5, bonus: 8.0, future: 7.5,
+    c_pay: '🟡', c_tech: '🟠', c_settle: '🟡', c_wlb: '🟡',
+    intro: '腾讯 AIoT 依托腾讯云 IoT 平台。',
+    match_points: ['品牌光环', '薪资优秀', '公积金顶格'],
+    pos: [
+      {dept: 'IoT 终端开发部', jobs: ['IoT 嵌入式软件工程师']}
+    ],
+    adv: ['品牌光环', '公积金顶格'],
+    risk: ['AIoT 非核心业务'],
+    source_url: 'https://careers.tencent.com',
+    source_note: '数据来源：腾讯招聘',
+    tier: 'A'
+  },
+  {
+    id: 29, name: '小米 AIoT', en: 'Xiaomi AIoT', ticker: '1810.HK',
+    cat: 'aiot', subcat: '消费 AIoT',
+    dist: '上海', commute: 3,
+    cash: '32-44', cash_mid: 38, fund: '12+12', fund_total: 13.5, stock: '港股期权',
+    total5y: 240,
+    wlb_hours: 50,
+    pay: 7.5, tech: 6.5, settle: 8.0, career: 7.5, wlb: 6.5, bonus: 7.5, future: 7.5,
+    c_pay: '🟢', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '小米 AIoT 生态（米家），连接设备超 7 亿台。',
+    match_points: ['公积金顶格', '定居高', '可穿戴设备连接'],
+    pos: [
+      {dept: 'IoT 模组研发部', jobs: ['WiFi/BLE 模组嵌入式工程师']},
+      {dept: '米家平台部', jobs: ['IoT 设备固件工程师']}
+    ],
+    adv: ['公积金顶格', '生态大'],
+    risk: ['偏消费IoT', '利润薄'],
+    source_url: 'https://hr.xiaomi.com',
+    source_note: '数据来源：🟢 知乎26届薪资 + 牛客网',
+    tier: 'B'
+  },
+  {
+    id: 30, name: '寒武纪', en: 'Cambricon', ticker: '688256.SH',
+    cat: 'aiot', subcat: 'AI 芯片',
+    dist: '上海', commute: 3,
+    cash: '35-50', cash_mid: 42.5, fund: '10+10', fund_total: 10.5, stock: '限制性股票',
+    total5y: 260,
+    wlb_hours: 50,
+    pay: 8.0, tech: 8.0, settle: 7.0, career: 8.5, wlb: 6.5, bonus: 8.5, future: 8.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: 'AI芯片第一股，国产AI芯片赛道。',
+    match_points: ['AI芯片国产替代', '嵌入式AI硬件层'],
+    pos: [
+      {dept: '嵌入式平台部', jobs: ['AI 芯片嵌入式工程师']}
+    ],
+    adv: ['AI芯片龙头'],
+    risk: ['业绩波动大'],
+    source_url: 'https://www.cambricon.com',
+    source_note: '数据来源：公司官网',
+    tier: 'A'
+  },
+
+  // ═══ 央企/国企/研究所（隐藏福地）═══
+  {
+    id: 31, name: '中国商飞', en: 'COMAC', ticker: 'SOE',
+    cat: 'soe', subcat: '央企航空',
+    dist: '浦东（祝桥）/ 闵行', commute: 4,
+    cash: '23-30', cash_mid: 26.5, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '1000-3000元/月',
+    total5y: 200, total5y_note: '含住房补贴+人才公寓5年',
+    wlb_hours: 40, wlb_note: '央企 955 典范',
+    pay: 5.8, tech: 7.0, settle: 9.5, career: 9.0, wlb: 10, bonus: 9.0, future: 9.5,
+    c_pay: '🟢', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟢',
+    intro: '央企大飞机龙头。WLB顶级（955），住房补贴1000-3000元/月，人才公寓5年，落户友好。',
+    match_points: ['WLB 顶级 955', '人才公寓 5 年 + 住房补贴', '央企落户直通车', '航电嵌入式与你专业对口'],
+    pos: [
+      {dept: '上飞院·航电系统部', jobs: ['嵌入式软件开发工程师（机载设备）', '智能座舱系统工程师']},
+      {dept: '商飞时代航空', jobs: ['底层嵌入式工程师', '航空传感器系统集成工程师']},
+      {dept: '试飞中心', jobs: ['测试系统嵌入式工程师', '多参数数据采集系统工程师']}
+    ],
+    adv: ['央企稳定性极强', 'WLB 顶级（955）', '住房补贴+人才公寓+落户', 'C919 战略地位'],
+    risk: ['薪资偏低（23-30w）', '航空与医疗电子有差异', '升迁体制化'],
+    source_url: 'https://www.comac.cc',
+    source_note: '数据来源：公司招聘公告 + 985高校就业报告',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 32, name: '中电科 32 所', en: 'CETC 32nd Institute', ticker: 'SOE',
+    cat: 'soe', subcat: '央企研究所',
+    dist: '闵行（华东计算所）', commute: 5,
+    cash: '28-36', cash_mid: 32, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '安家费15万 + 人才公寓5年',
+    total5y: 225, total5y_note: '含安家费+人才公寓',
+    wlb_hours: 44,
+    pay: 7.0, tech: 7.5, settle: 10, career: 8.5, wlb: 9.0, bonus: 8.5, future: 8.0,
+    c_pay: '🟢', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟡',
+    intro: '中国电科核心研究所（华东计算所）。闵行办公，安家费15万，5年人才公寓，事业编制。',
+    match_points: ['事业编制', '安家费15万+公积金顶格', '国产RTOS开发方向', '闵行办公通勤完美'],
+    pos: [
+      {dept: '嵌入式操作系统事业部', jobs: ['国产RTOS开发工程师']},
+      {dept: '医疗电子事业部', jobs: ['医疗设备嵌入式系统工程师']}
+    ],
+    adv: ['事业编制+安家费15万', '闵行办公', '医疗电子事业部直接对口'],
+    risk: ['薪资偏低', '技术迭代慢', '保密性限制'],
+    source_url: 'https://www.ecit.com.cn',
+    source_note: '数据来源：中电科招聘公告 + 985高校就业报告',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 33, name: '航天八院 804 所', en: 'SAST 804th', ticker: 'SOE',
+    cat: 'soe', subcat: '央企军工电子',
+    dist: '闵行', commute: 5,
+    cash: '27-35', cash_mid: 31, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '安家费15万 + 人才公寓5年',
+    total5y: 220,
+    wlb_hours: 44,
+    pay: 6.8, tech: 7.0, settle: 10, career: 8.3, wlb: 9.0, bonus: 8.3, future: 7.8,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟡',
+    intro: '航天科技集团八院核心所。闵行办公。安家费15万，5年人才公寓，事业编制。',
+    match_points: ['事业编', '闵行办公', '嵌入式系统 + 智能感知方向'],
+    pos: [
+      {dept: '嵌入式系统研发部', jobs: ['嵌入式系统工程师']},
+      {dept: '智能感知技术中心', jobs: ['智能感知算法工程师']}
+    ],
+    adv: ['事业编', '安家费15万+人才公寓', '闵行办公'],
+    risk: ['保密性强', '跳槽面窄'],
+    source_url: 'https://www.sast-space.com',
+    source_note: '数据来源：航天招聘公告',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 34, name: '中科院上海微系统所', en: 'SIMIT, CAS', ticker: 'SOE',
+    cat: 'soe', subcat: '国家研究所',
+    dist: '长宁', commute: 3,
+    cash: '22-30', cash_mid: 26, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '博后公寓+安家补贴10w',
+    total5y: 190,
+    wlb_hours: 45,
+    pay: 5.5, tech: 9.5, settle: 8.5, career: 8.5, wlb: 8.5, bonus: 9.8, future: 9.5,
+    c_pay: '🟠', c_tech: '🟢', c_settle: '🟡', c_wlb: '🟡',
+    intro: '中国科学院上海微系统所，MEMS 研究国家队。与你可穿戴方向、微针传感器完美对口。',
+    match_points: ['MEMS国家队', '与王侃课题组直接对口', '学术+产业双通道', '可选读博'],
+    pos: [
+      {dept: 'MEMS 实验室', jobs: ['MEMS 传感器研发工程师']},
+      {dept: '柔性电子研究部', jobs: ['柔性可穿戴系统工程师']}
+    ],
+    adv: ['技术契合度顶级', '学术资源', '可转博'],
+    risk: ['薪资偏低', '偏学术'],
+    source_url: 'http://www.sim.cas.cn',
+    source_note: '数据来源：中科院研究所招聘',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 35, name: '中科院上海技物所', en: 'SITP, CAS', ticker: 'SOE',
+    cat: 'soe', subcat: '国家研究所',
+    dist: '虹口', commute: 2,
+    cash: '22-28', cash_mid: 25, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '安家补贴',
+    total5y: 180,
+    wlb_hours: 45,
+    pay: 5.3, tech: 7.5, settle: 7.5, career: 8.0, wlb: 8.5, bonus: 8.5, future: 8.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟡',
+    intro: '中国科学院上海技术物理研究所，红外+光电探测国家队。',
+    match_points: ['国家研究所稳定', '光电探测', '事业编'],
+    pos: [
+      {dept: '红外光电器件部', jobs: ['光电探测嵌入式工程师']}
+    ],
+    adv: ['国家研究所', '事业编'],
+    risk: ['与你方向关联弱', '薪资低'],
+    source_url: 'http://www.sitp.cas.cn',
+    source_note: '数据来源：中科院研究所招聘',
+    tier: 'B',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 36, name: '上海人工智能实验室', en: 'Shanghai AI Lab', ticker: 'SOE',
+    cat: 'soe', subcat: '国家实验室',
+    dist: '徐汇西岸', commute: 3,
+    cash: '32-50', cash_mid: 41, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '人才公寓+落户',
+    total5y: 255,
+    wlb_hours: 45,
+    pay: 7.8, tech: 8.0, settle: 8.5, career: 9.0, wlb: 8.5, bonus: 9.5, future: 9.8,
+    c_pay: '🟡', c_tech: '🟠', c_settle: '🟡', c_wlb: '🟠',
+    intro: '国家级AI实验室，上海"市场化、专业化、国际化"顶层设计。',
+    match_points: ['国家级AI顶层机构', '上海落户直通', '嵌入式AI有机会'],
+    pos: [
+      {dept: '具身智能/AI系统组', jobs: ['嵌入式AI部署工程师']}
+    ],
+    adv: ['国家级平台', '落户人才公寓'],
+    risk: ['嵌入式岗位不如算法多'],
+    source_url: 'https://www.shlab.org.cn',
+    source_note: '数据来源：官网 + 招聘公告',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 37, name: '中电科 21 所', en: 'CETC 21st', ticker: 'SOE',
+    cat: 'soe', subcat: '央企研究所',
+    dist: '上海', commute: 3,
+    cash: '23-31', cash_mid: 27, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '人才公寓',
+    total5y: 195,
+    wlb_hours: 44,
+    pay: 6.0, tech: 6.0, settle: 9.0, career: 7.5, wlb: 9.0, bonus: 8.0, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟡', c_wlb: '🟠',
+    intro: '微特电机研究所。',
+    match_points: ['央企稳定', '公积金顶格'],
+    pos: [
+      {dept: '电机驱动研发部', jobs: ['电机控制嵌入式工程师']}
+    ],
+    adv: ['央国企稳定', '公积金顶格'],
+    risk: ['薪资偏低', '技术方向窄'],
+    source_url: 'https://www.21icresearch.com',
+    source_note: '数据来源：招聘公告',
+    tier: 'B'
+  },
+  {
+    id: 38, name: '中电科 23 所', en: 'CETC 23rd', ticker: 'SOE',
+    cat: 'soe', subcat: '央企研究所',
+    dist: '上海', commute: 3,
+    cash: '22-30', cash_mid: 26, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '人才公寓',
+    total5y: 185,
+    wlb_hours: 44,
+    pay: 5.5, tech: 6.0, settle: 9.0, career: 7.5, wlb: 9.0, bonus: 7.8, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '特种传输线缆研究所。',
+    match_points: ['央企稳定', '光纤传感与你本科项目匹配'],
+    pos: [
+      {dept: '光纤传感部', jobs: ['光纤传感嵌入式工程师']}
+    ],
+    adv: ['央国企稳定', '公积金顶格', '光纤传感与本科对口'],
+    risk: ['薪资最低', '技术面窄'],
+    source_url: 'https://www.cetc23.com',
+    source_note: '数据来源：招聘公告',
+    tier: 'B'
+  },
+  {
+    id: 39, name: '上海电气中央研究院', en: 'SEC Central R&D', ticker: 'SOE',
+    cat: 'soe', subcat: '国企工业装备',
+    dist: '上海', commute: 3,
+    cash: '22-30', cash_mid: 26, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '人才公寓',
+    total5y: 185,
+    wlb_hours: 42,
+    pay: 5.5, tech: 5.5, settle: 9.0, career: 7.2, wlb: 9.0, bonus: 7.5, future: 7.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '上海国资装备制造龙头。',
+    match_points: ['上海国资', '公积金顶格', 'WLB极佳'],
+    pos: [
+      {dept: '智能制造研究部', jobs: ['工业嵌入式系统工程师']}
+    ],
+    adv: ['上海国资', '公积金顶格', 'WLB极佳'],
+    risk: ['薪资最低', '技术偏传统'],
+    source_url: 'https://www.shanghai-electric.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 40, name: '中船 708 所', en: 'MARIC 708th', ticker: 'SOE',
+    cat: 'soe', subcat: '央企军工',
+    dist: '上海', commute: 3,
+    cash: '24-32', cash_mid: 28, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '人才公寓',
+    total5y: 195,
+    wlb_hours: 44,
+    pay: 6.0, tech: 5.5, settle: 9.0, career: 7.8, wlb: 8.8, bonus: 8.0, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '中船 708 所船舶总体设计研究所。',
+    match_points: ['央企军工', '公积金顶格'],
+    pos: [
+      {dept: '船舶电子部', jobs: ['船用嵌入式工程师']}
+    ],
+    adv: ['央企军工稳定'],
+    risk: ['与你方向关联极弱'],
+    source_url: 'https://www.maric.com.cn',
+    source_note: '数据来源：招聘公告',
+    tier: 'B'
+  },
+
+  // ═══ 医院工程科（你的蓝海选项）═══
+  {
+    id: 41, name: '瑞金医院 · 生物医学工程部', en: 'Ruijin Hospital BME', ticker: 'PSU',
+    cat: 'hospital', subcat: '交大系三甲',
+    dist: '黄浦/嘉定分院', commute: 3,
+    cash: '18-28', cash_mid: 23, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '医院人才公寓',
+    total5y: 170, total5y_note: '事业编+人才公寓5年',
+    wlb_hours: 40,
+    pay: 4.5, tech: 8.5, settle: 9.5, career: 9.0, wlb: 9.5, bonus: 9.5, future: 9.0,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '交大医学院附属瑞金医院临床研究中心/工程部。蓝海选项，转化医学+医工交叉。',
+    match_points: ['事业编', '交大系', '医工交叉前沿', '你科研+专利6项可直接变现', '可申报科研基金'],
+    pos: [
+      {dept: '临床研究中心·工程组', jobs: ['医学工程师（医疗设备嵌入式维护+研发）']},
+      {dept: '医工转化中心', jobs: ['医疗仪器研发工程师']}
+    ],
+    adv: ['事业编+人才公寓', '交大系人脉', '你的研究背景完美适配', '可申国自然基金', 'WLB极佳'],
+    risk: ['薪资较低', '偏体制'],
+    source_url: 'https://www.rjh.com.cn',
+    source_note: '数据来源：医院人才招聘 + 交大医学院',
+    tier: 'S',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 42, name: '仁济医院 · 生物医学工程部', en: 'Renji Hospital BME', ticker: 'PSU',
+    cat: 'hospital', subcat: '交大系三甲',
+    dist: '东院（浦东）/西院（黄浦）', commute: 3,
+    cash: '18-28', cash_mid: 23, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '医院人才公寓',
+    total5y: 165,
+    wlb_hours: 40,
+    pay: 4.5, tech: 8.0, settle: 9.0, career: 8.8, wlb: 9.5, bonus: 9.3, future: 8.8,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '交大医学院附属仁济医院生物医学工程部。',
+    match_points: ['交大系', '事业编', '医工交叉'],
+    pos: [
+      {dept: '生物医学工程部', jobs: ['临床工程师（医疗设备嵌入式）']}
+    ],
+    adv: ['事业编', '交大系', 'WLB极佳'],
+    risk: ['薪资低', '偏体制'],
+    source_url: 'https://www.renji.com',
+    source_note: '数据来源：医院招聘',
+    tier: 'A',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 43, name: '中山医院 · 工程科', en: 'Zhongshan Hospital', ticker: 'PSU',
+    cat: 'hospital', subcat: '复旦系三甲',
+    dist: '徐汇', commute: 3,
+    cash: '18-26', cash_mid: 22, fund: '12+12', fund_total: 13.5, stock: 'none',
+    housing_subsidy: '医院人才公寓',
+    total5y: 160,
+    wlb_hours: 40,
+    pay: 4.3, tech: 7.5, settle: 8.8, career: 8.5, wlb: 9.5, bonus: 8.8, future: 8.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '复旦附属中山医院工程科。',
+    match_points: ['复旦系三甲', '事业编', 'WLB极佳'],
+    pos: [{dept: '工程科', jobs: ['临床工程师']}],
+    adv: ['事业编', 'WLB极佳'],
+    risk: ['薪资低', '非交大系'],
+    source_url: 'https://www.zs-hospital.sh.cn',
+    source_note: '数据来源：医院招聘',
+    tier: 'A',
+    tag: '⭐隐藏福地'
+  },
+  {
+    id: 44, name: '华山医院 · 工程科', en: 'Huashan Hospital', ticker: 'PSU',
+    cat: 'hospital', subcat: '复旦系三甲',
+    dist: '静安', commute: 3,
+    cash: '18-26', cash_mid: 22, fund: '12+12', fund_total: 13.5, stock: 'none',
+    total5y: 160,
+    wlb_hours: 40,
+    pay: 4.3, tech: 7.3, settle: 8.8, career: 8.3, wlb: 9.5, bonus: 8.5, future: 8.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '复旦附属华山医院工程科。',
+    match_points: ['三甲', '事业编'],
+    pos: [{dept: '工程科', jobs: ['临床工程师']}],
+    adv: ['事业编', 'WLB极佳'],
+    risk: ['薪资低'],
+    source_url: 'https://www.huashan.org.cn',
+    source_note: '数据来源：医院招聘',
+    tier: 'B',
+    tag: '⭐隐藏福地'
+  },
+
+  // ═══ 前沿独角兽/初创 ═══
+  {
+    id: 45, name: '阶跃星辰', en: 'StepFun', ticker: 'private',
+    cat: 'startup', subcat: 'AI 大模型独角兽',
+    dist: '上海', commute: 3,
+    cash: '40-60', cash_mid: 50, fund: '10+10', fund_total: 10.5, stock: 'SAFE期权',
+    total5y: 305,
+    wlb_hours: 52,
+    pay: 8.5, tech: 7.0, settle: 7.5, career: 8.5, wlb: 6.5, bonus: 8.0, future: 9.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '上海 AI 大模型独角兽。',
+    match_points: ['AI 大模型独角兽', '薪资高', '期权价值大'],
+    pos: [{dept: '基础设施部', jobs: ['嵌入式AI部署工程师']}],
+    adv: ['AI 独角兽', '薪资高'],
+    risk: ['初创风险', '偏算法'],
+    source_url: 'https://www.stepfun.com',
+    source_note: '数据来源：招聘公告 + 36氪',
+    tier: 'A'
+  },
+  {
+    id: 46, name: '华大智造', en: 'MGI Tech', ticker: '688114.SH',
+    cat: 'startup', subcat: '基因测序+医疗设备',
+    dist: '上海', commute: 3,
+    cash: '28-40', cash_mid: 34, fund: '10+10', fund_total: 10.5, stock: '限制性股票',
+    total5y: 215,
+    wlb_hours: 45,
+    pay: 7.0, tech: 8.2, settle: 7.5, career: 8.0, wlb: 8.0, bonus: 8.0, future: 8.5,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '基因测序+医疗设备龙头。',
+    match_points: ['医疗设备嵌入式', '细分龙头'],
+    pos: [{dept: '设备研发部', jobs: ['测序仪嵌入式工程师']}],
+    adv: ['科创板龙头'],
+    risk: ['基因测序周期性'],
+    source_url: 'https://en.mgi-tech.com',
+    source_note: '数据来源：公司官网',
+    tier: 'A'
+  },
+  {
+    id: 47, name: '商汤科技', en: 'SenseTime', ticker: '20.HK',
+    cat: 'startup', subcat: 'AI 视觉',
+    dist: '上海', commute: 3,
+    cash: '28-40', cash_mid: 34, fund: '10+10', fund_total: 10.5, stock: '港股期权',
+    total5y: 210,
+    wlb_hours: 48,
+    pay: 6.8, tech: 6.5, settle: 7.0, career: 7.5, wlb: 7.0, bonus: 7.5, future: 7.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: 'AI 视觉老牌。',
+    match_points: ['AI视觉头部'],
+    pos: [{dept: '边缘AI部', jobs: ['AI部署工程师']}],
+    adv: ['AI视觉技术'],
+    risk: ['持续亏损', '与医疗偏差'],
+    source_url: 'https://www.sensetime.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 48, name: '宇构智核', en: 'Yugou Core', ticker: 'private',
+    cat: 'startup', subcat: '脑机接口早期',
+    dist: '上海', commute: 3,
+    cash: '26-36', cash_mid: 31, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 185,
+    wlb_hours: 48,
+    pay: 6.5, tech: 9.0, settle: 7.0, career: 7.0, wlb: 7.0, bonus: 8.5, future: 8.0,
+    c_pay: '🟠', c_tech: '🟢', c_settle: '🟠', c_wlb: '🟠',
+    intro: '你实习过的公司，脑机接口早期。',
+    match_points: ['你实习过，内部人脉+流程熟', '脑机接口方向'],
+    pos: [{dept: '脑机接口项目部', jobs: ['嵌入式全栈工程师']}],
+    adv: ['你已熟悉', '可优先内推'],
+    risk: ['初创风险', '规模小'],
+    source_url: '-',
+    source_note: '基于你实习经历',
+    tier: 'B'
+  },
+
+  // ═══ 外企 / 其他头部 ═══
+  {
+    id: 49, name: '强生医疗', en: 'Johnson & Johnson Medical', ticker: 'JNJ',
+    cat: 'medical', subcat: '外企医疗',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 210,
+    wlb_hours: 40,
+    pay: 7.2, tech: 7.0, settle: 7.0, career: 7.5, wlb: 9.8, bonus: 7.8, future: 8.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟡',
+    intro: '全球最大医疗器械+药品公司。',
+    match_points: ['WLB顶级', '国际平台'],
+    pos: [{dept: '医疗器械部', jobs: ['嵌入式工程师']}],
+    adv: ['WLB顶级'],
+    risk: ['外企天花板'],
+    source_url: 'https://www.careers.jnj.com',
+    source_note: '数据来源：官方招聘',
+    tier: 'A'
+  },
+  {
+    id: 50, name: '英特尔上海', en: 'Intel Shanghai', ticker: 'INTC',
+    cat: 'aiot', subcat: '外企芯片',
+    dist: '紫竹（闵行）', commute: 5,
+    cash: '30-42', cash_mid: 36, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 225,
+    wlb_hours: 40,
+    pay: 7.5, tech: 7.5, settle: 9.0, career: 7.5, wlb: 9.5, bonus: 8.0, future: 7.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟢', c_wlb: '🟡',
+    intro: '英特尔上海紫竹研发中心。',
+    match_points: ['紫竹定居顶级', 'WLB顶级', '公积金顶格'],
+    pos: [{dept: 'IoT 事业部', jobs: ['嵌入式软件工程师']}],
+    adv: ['紫竹+公积金+WLB三优'],
+    risk: ['业务下行', 'RSU 缩水'],
+    source_url: 'https://jobs.intel.com',
+    source_note: '数据来源：官方招聘',
+    tier: 'A'
+  },
+  {
+    id: 51, name: '恩智浦', en: 'NXP', ticker: 'NXPI',
+    cat: 'auto', subcat: '外企汽车芯片',
+    dist: '上海', commute: 3,
+    cash: '30-42', cash_mid: 36, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 225,
+    wlb_hours: 42,
+    pay: 7.3, tech: 8.0, settle: 7.5, career: 7.8, wlb: 9.5, bonus: 8.0, future: 8.0,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟠',
+    intro: '汽车芯片全球龙头。',
+    match_points: ['汽车芯片', 'WLB顶级'],
+    pos: [{dept: '汽车MCU部', jobs: ['汽车芯片嵌入式工程师']}],
+    adv: ['WLB顶级'],
+    risk: ['外企天花板'],
+    source_url: 'https://www.nxp.com/careers',
+    source_note: '数据来源：官方招聘',
+    tier: 'A'
+  },
+  {
+    id: 52, name: '德州仪器', en: 'Texas Instruments', ticker: 'TXN',
+    cat: 'aiot', subcat: '外企模拟芯片',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 210,
+    wlb_hours: 40,
+    pay: 7.0, tech: 7.5, settle: 7.5, career: 7.5, wlb: 9.8, bonus: 7.8, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟡',
+    intro: '全球模拟芯片龙头。',
+    match_points: ['WLB顶级', '模拟芯片'],
+    pos: [{dept: '工业应用部', jobs: ['嵌入式工程师']}],
+    adv: ['WLB顶级'],
+    risk: ['外企'],
+    source_url: 'https://careers.ti.com',
+    source_note: '数据来源：官方招聘',
+    tier: 'B'
+  },
+
+  // ═══ 其他汽车电子 Tier 1 ═══
+  {
+    id: 53, name: '安波福', en: 'Aptiv', ticker: 'APTV',
+    cat: 'auto', subcat: '外企 Tier 1',
+    dist: '上海', commute: 3,
+    cash: '26-34', cash_mid: 30, fund: '12+12', fund_total: 13.5, stock: 'RSU',
+    total5y: 190,
+    wlb_hours: 42,
+    pay: 6.3, tech: 7.2, settle: 7.5, career: 7.5, wlb: 9.0, bonus: 7.5, future: 7.5,
+    c_pay: '🟠', c_tech: '🟡', c_settle: '🟠', c_wlb: '🟠',
+    intro: '全球汽车电子 Tier 1 巨头。',
+    match_points: ['CAN/LIN匹配', 'WLB好'],
+    pos: [{dept: 'ADAS', jobs: ['域控制器工程师']}],
+    adv: ['WLB好'],
+    risk: ['薪资偏低'],
+    source_url: 'https://www.aptiv.com/careers',
+    source_note: '数据来源：官方招聘',
+    tier: 'B'
+  },
+  {
+    id: 54, name: '德赛西威', en: 'Desay SV', ticker: '002920.SZ',
+    cat: 'auto', subcat: '国内 Tier 1',
+    dist: '上海', commute: 3,
+    cash: '28-36', cash_mid: 32, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 195,
+    wlb_hours: 46,
+    pay: 6.5, tech: 7.0, settle: 7.0, career: 7.5, wlb: 7.5, bonus: 7.0, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '国内汽车电子 Tier 1。',
+    match_points: ['国内Tier1', '嵌入式成长快'],
+    pos: [{dept: '智能座舱', jobs: ['座舱域控']}],
+    adv: ['技术成长'],
+    risk: ['公积金中等'],
+    source_url: 'https://www.desaysv.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+
+  // ═══ 其他医疗补充 ═══
+  {
+    id: 55, name: '乐普医疗', en: 'Lepu Medical', ticker: '300003.SZ',
+    cat: 'medical', subcat: '心血管医疗',
+    dist: '上海研发', commute: 3,
+    cash: '25-35', cash_mid: 30, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 185,
+    wlb_hours: 44,
+    pay: 6.3, tech: 7.5, settle: 7.0, career: 7.0, wlb: 8.0, bonus: 7.0, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '心血管医疗器械龙头。',
+    match_points: ['心血管电子设备', '可穿戴心电延伸'],
+    pos: [{dept: '电生理部', jobs: ['心电监护嵌入式']}],
+    adv: ['心血管细分'],
+    risk: ['薪资中等'],
+    source_url: 'https://www.lepu.cn',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 56, name: '微泰医疗', en: 'MicroTech Medical', ticker: '2235.HK',
+    cat: 'medical', subcat: '可穿戴血糖',
+    dist: '上海', commute: 3,
+    cash: '24-34', cash_mid: 29, fund: '8+8', fund_total: 8.8, stock: '港股期权',
+    total5y: 180,
+    wlb_hours: 44,
+    pay: 6.0, tech: 8.0, settle: 7.0, career: 7.0, wlb: 8.0, bonus: 7.5, future: 8.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '可穿戴胰岛素泵+CGM。',
+    match_points: ['可穿戴医疗细分', 'CGM+胰岛素泵双赛道'],
+    pos: [{dept: 'CGM研发', jobs: ['CGM嵌入式']}],
+    adv: ['可穿戴医疗细分'],
+    risk: ['港股波动'],
+    source_url: 'https://www.microtechmd.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+
+  // ═══ 其他细分 ═══
+  {
+    id: 57, name: '宁德时代上海研发', en: 'CATL Shanghai', ticker: '300750.SZ',
+    cat: 'auto', subcat: '新能源',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '7+7', fund_total: 7.7, stock: '限制性股票',
+    total5y: 200,
+    wlb_hours: 50,
+    pay: 6.8, tech: 6.5, settle: 7.0, career: 8.5, wlb: 6.5, bonus: 8.0, future: 9.0,
+    c_pay: '🟡', c_tech: '🟡', c_settle: '🟡', c_wlb: '🟡',
+    intro: '全球动力电池龙头。',
+    match_points: ['新能源确定性', 'BMS嵌入式'],
+    pos: [{dept: 'BMS研发', jobs: ['BMS嵌入式工程师']}],
+    adv: ['新能源龙头'],
+    risk: ['与医疗偏差'],
+    source_url: 'https://careers.catl.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 58, name: '石头科技', en: 'Roborock', ticker: '688169.SH',
+    cat: 'aiot', subcat: '消费机器人',
+    dist: '上海', commute: 3,
+    cash: '28-38', cash_mid: 33, fund: '8+8', fund_total: 8.8, stock: '期权',
+    total5y: 200,
+    wlb_hours: 46,
+    pay: 6.8, tech: 6.0, settle: 7.5, career: 7.5, wlb: 7.5, bonus: 7.5, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '扫地机器人全球龙头。',
+    match_points: ['细分龙头', '机器人嵌入式'],
+    pos: [{dept: '机器人控制', jobs: ['嵌入式']}],
+    adv: ['WLB好'],
+    risk: ['与医疗不相关'],
+    source_url: 'https://www.roborock.com',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 59, name: '阿里健康', en: 'Ali Health', ticker: '241.HK',
+    cat: 'aiot', subcat: '互联网医疗',
+    dist: '上海', commute: 3,
+    cash: '32-42', cash_mid: 37, fund: '12+12', fund_total: 13.5, stock: '港股期权',
+    total5y: 230,
+    wlb_hours: 48,
+    pay: 7.2, tech: 6.5, settle: 7.0, career: 7.5, wlb: 7.0, bonus: 7.5, future: 7.5,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '阿里大健康旗舰。',
+    match_points: ['公积金顶格', '健康IoT'],
+    pos: [{dept: '智慧医疗', jobs: ['医疗IoT']}],
+    adv: ['公积金顶格'],
+    risk: ['偏平台'],
+    source_url: 'https://www.alihealth.cn',
+    source_note: '数据来源：公司官网',
+    tier: 'B'
+  },
+  {
+    id: 60, name: '京东健康', en: 'JD Health', ticker: '6618.HK',
+    cat: 'aiot', subcat: '互联网医疗',
+    dist: '上海', commute: 3,
+    cash: '30-40', cash_mid: 35, fund: '10+10', fund_total: 10.5, stock: '港股期权',
+    total5y: 215,
+    wlb_hours: 48,
+    pay: 7.0, tech: 6.2, settle: 7.0, career: 7.0, wlb: 7.0, bonus: 7.0, future: 7.0,
+    c_pay: '🟠', c_tech: '🟠', c_settle: '🟠', c_wlb: '🟠',
+    intro: '京东大健康平台。',
+    match_points: ['互联网医疗'],
+    pos: [{dept: '健康硬件', jobs: ['IoT工程师']}],
+    adv: ['薪资OK'],
+    risk: ['偏平台'],
+    source_url: 'https://jobs.jd.com',
+    source_note: '数据来源：京东招聘',
+    tier: 'B'
+  }
+];
+
+/* 类别元信息 */
+const CATEGORIES = {
+  medical: {name: '医疗电子 · 可穿戴医疗', color: '#e74c3c', icon: '🏥'},
+  auto:    {name: '汽车电子', color: '#3498db', icon: '🚗'},
+  aiot:    {name: 'AIoT / 消费电子', color: '#9b59b6', icon: '📱'},
+  soe:     {name: '央企 / 国企 / 研究所', color: '#f39c12', icon: '🏛️'},
+  hospital:{name: '医院工程科', color: '#1abc9c', icon: '⚕️'},
+  startup: {name: '独角兽 / 前沿初创', color: '#e67e22', icon: '🚀'}
+};
+
+/* 计算所有公司总分和梯度 */
+function computeScores() {
+  COMPANIES.forEach(c => {
+    c.score = (
+      c.pay    * WEIGHTS.pay +
+      c.tech   * WEIGHTS.tech +
+      c.settle * WEIGHTS.settle +
+      c.career * WEIGHTS.career +
+      c.wlb    * WEIGHTS.wlb +
+      c.bonus  * WEIGHTS.bonus +
+      c.future * WEIGHTS.future
+    );
+  });
+  // 按分排序，按分位数分 Tier
+  const sorted = [...COMPANIES].sort((a,b)=>b.score-a.score);
+  const n = sorted.length;
+  sorted.forEach((c,i) => {
+    const pct = i / n;
+    if (pct < 0.08)      c.tier = 'SSS';
+    else if (pct < 0.22) c.tier = 'SS';
+    else if (pct < 0.48) c.tier = 'S';
+    else if (pct < 0.75) c.tier = 'A';
+    else                 c.tier = 'B';
+  });
+  // 隐藏福地用独立轨道
+  COMPANIES.forEach(c => { if (c.tag === '⭐隐藏福地') c.hidden_gem = true; });
+}
+
+computeScores();
+
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   Career Decision Console · Render Engine
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ 工具函数 ═══ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const SCR = v => {
+  if (v >= 8.5) return 'hi';
+  if (v >= 6.5) return 'mid';
+  return 'lo';
+};
+const heatClass = v => {
+  const lvl = Math.max(1, Math.min(10, Math.round(v)));
+  return 'heat-' + lvl;
+};
+
+/* ═══ 状态 ═══ */
+const STATE = {
+  filterCat: 'all',
+  filterDist: 'all',
+  search: '',
+  sortBy: 'score',
+  heatCount: 20,
+  curveSelected: null,
+  curveCompare: [],
+  weights: {...WEIGHTS}
+};
+
+/* 保存初始权重用于重置 */
+const DEFAULT_WEIGHTS = {...WEIGHTS};
+
+/* ═══ 重新计算所有分数 ═══ */
+function recompute() {
+  const W = STATE.weights;
+  const total = Object.values(W).reduce((a,b)=>a+b,0);
+  // 归一化权重
+  const Wn = {};
+  Object.keys(W).forEach(k => Wn[k] = W[k] / total);
+
+  COMPANIES.forEach(c => {
+    c.score = (
+      c.pay    * Wn.pay +
+      c.tech   * Wn.tech +
+      c.settle * Wn.settle +
+      c.career * Wn.career +
+      c.wlb    * Wn.wlb +
+      c.bonus  * Wn.bonus +
+      c.future * Wn.future
+    );
+  });
+  const sorted = [...COMPANIES].sort((a,b)=>b.score-a.score);
+  sorted.forEach((c,i) => {
+    const pct = i / sorted.length;
+    if (pct < 0.08)      c.tier = 'SSS';
+    else if (pct < 0.22) c.tier = 'SS';
+    else if (pct < 0.48) c.tier = 'S';
+    else if (pct < 0.75) c.tier = 'A';
+    else                 c.tier = 'B';
+    c.rank = i + 1;
+  });
+}
+
+/* ═══ 统计 ═══ */
+function countByTier() {
+  const cnt = {SSS:0,SS:0,S:0,A:0,B:0,GEM:0};
+  COMPANIES.forEach(c => {
+    cnt[c.tier]++;
+    if (c.hidden_gem) cnt.GEM++;
+  });
+  return cnt;
+}
+
+/* ═══ 01 · HERO 统计 ═══ */
+function renderHero() {
+  const cnt = countByTier();
+  const stats = [
+    {n: cnt.SSS, l: 'SSS · 必投'},
+    {n: cnt.SS,  l: 'SS · 强推'},
+    {n: cnt.S,   l: 'S · 推荐'},
+    {n: cnt.A,   l: 'A · 可投'},
+    {n: cnt.B,   l: 'B · 保底'},
+    {n: cnt.GEM, l: '⭐ 隐藏福地'}
+  ];
+  $('#heroStats').innerHTML = stats.map(s =>
+    `<div class="hs-item"><span class="n">${s.n}</span><span class="l">${s.l}</span></div>`
+  ).join('');
+  $('#totalCount').textContent = `${COMPANIES.length}家`;
+}
+
+/* ═══ 02 · 权重 ═══ */
+const DIM_META = {
+  pay:    {i:'💰', l:'综合薪酬',    d:'5年NPV·现金+公积金+股票'},
+  tech:   {i:'🎯', l:'技术契合度',  d:'对照你的FreeRTOS+TF Lite'},
+  settle: {i:'🏠', l:'上海定居',    d:'通勤+落户+公积金+补贴'},
+  career: {i:'🛡️', l:'长期职业价值',d:'10年可持续+35岁风险'},
+  wlb:    {i:'⚖️', l:'WLB',        d:'周均工时+大小周'},
+  bonus:  {i:'⭐', l:'禀赋杠杆',    d:'你的专利/领导力能否变现'},
+  future: {i:'🚀', l:'行业前景',    d:'2029-2032政策+增速'}
+};
+
+function renderWeights() {
+  const W = STATE.weights;
+  $('#weightsG').innerHTML = Object.entries(DIM_META).map(([k,m]) => `
+    <div class="w-item" data-dim="${k}">
+      <span class="wi">${m.i}</span>
+      <div class="wv">${Math.round(W[k]*100)}<span style="font-size:13px">%</span></div>
+      <div class="wl">${m.l}</div>
+    </div>`).join('');
+
+  $('#slidersG').innerHTML = Object.entries(DIM_META).map(([k,m]) => `
+    <div class="slider-row">
+      <label>${m.i} ${m.l}</label>
+      <input type="range" min="0" max="40" step="1" value="${Math.round(W[k]*100)}"
+             oninput="setWeight('${k}',this.value)">
+      <span class="sv" id="sv-${k}">${Math.round(W[k]*100)}%</span>
+    </div>`).join('');
+}
+
+function setWeight(k, v) {
+  STATE.weights[k] = parseInt(v) / 100;
+  $(`#sv-${k}`).textContent = v + '%';
+  $(`.w-item[data-dim="${k}"] .wv`).innerHTML = v + '<span style="font-size:13px">%</span>';
+  // 取消 preset 按钮激活
+  $$('.ctrl-btn').forEach(b => b.classList.remove('act'));
+  recompute();
+  renderAll();
+}
+
+function preset(name) {
+  const presets = {
+    default: {...DEFAULT_WEIGHTS},
+    salary:  {pay:0.35, tech:0.15, settle:0.12, career:0.12, wlb:0.10, bonus:0.08, future:0.08},
+    settle:  {pay:0.18, tech:0.15, settle:0.28, career:0.12, wlb:0.12, bonus:0.08, future:0.07},
+    tech:    {pay:0.17, tech:0.32, settle:0.12, career:0.12, wlb:0.10, bonus:0.10, future:0.07},
+    wlb:     {pay:0.17, tech:0.15, settle:0.13, career:0.13, wlb:0.25, bonus:0.10, future:0.07}
+  };
+  STATE.weights = {...presets[name]};
+  $$('.ctrl-btn').forEach(b => b.classList.remove('act'));
+  event?.target?.classList.add('act');
+  renderWeights();
+  recompute();
+  renderAll();
+}
+
+/* ═══ 03 · Tier 图例 ═══ */
+function renderTierLegend() {
+  const cnt = countByTier();
+  const tl = [
+    {c:'sss', b:'SSS',  t:'必投',   d:'前 8% 分位 · 拿到即去', n:`${cnt.SSS}家`},
+    {c:'ss',  b:'SS',   t:'强推',   d:'前 8-22% 分位 · 次优先级', n:`${cnt.SS}家`},
+    {c:'s',   b:'S',    t:'推荐',   d:'前 22-48% 分位 · 主投池', n:`${cnt.S}家`},
+    {c:'a',   b:'A',    t:'可投',   d:'前 48-75% 分位 · 保底/广撒', n:`${cnt.A}家`},
+    {c:'b',   b:'B',    t:'不推',   d:'后 25% 分位 · 避坑', n:`${cnt.B}家`},
+    {c:'gem', b:'⭐福地', t:'隐藏选项',d:'独立轨道 · 非主流但超适合你', n:`${cnt.GEM}家`}
+  ];
+  $('#tierLegend').innerHTML = tl.map(t => `
+    <div class="tl-card ${t.c}">
+      <div class="tb">${t.b}</div>
+      <div class="td"><b>${t.t}</b> · ${t.n}</div>
+      <div class="tn">${t.d}</div>
+    </div>`).join('');
+}
+
+/* ═══ 04 · 公司总榜 ═══ */
+function catColor(cat) {
+  return {medical:'#e74c3c',auto:'#3498db',aiot:'#9b59b6',soe:'#f39c12',hospital:'#1abc9c',startup:'#e67e22'}[cat] || '#666';
+}
+
+function dimBar(v) {
+  const cls = SCR(v);
+  const pct = v * 10;
+  return `<div class="dim-bar" style="--w:${pct}%;color:var(--${cls==='hi'?'green':cls==='mid'?'gold':'red'})"></div>`;
+}
+
+function renderCard(c) {
+  const tierCls = c.tier.toLowerCase();
+  const gemTag = c.hidden_gem ? `<span class="gem-tag">⭐ 福地</span>` : '';
+  const cc = CATEGORIES[c.cat];
+
+  const salBox = `
+    <div class="sal-grid">
+      <div class="sal-cell">
+        <div class="sal-label">现金总包 ${c.c_pay}</div>
+        <div class="sal-value">${c.cash}<small>w</small></div>
+      </div>
+      <div class="sal-cell">
+        <div class="sal-label">年公积金</div>
+        <div class="sal-value">${c.fund_total}<small>w</small> <span style="font-size:10px;color:var(--txt-3)">${c.fund}</span></div>
+      </div>
+      <div class="sal-cell">
+        <div class="sal-label">5年预期总包</div>
+        <div class="sal-value">${c.total5y}<small>w</small></div>
+        ${c.total5y_note ? `<div class="sal-note">${c.total5y_note}</div>` : ''}
+      </div>
+      <div class="sal-cell">
+        <div class="sal-label">股票·期权</div>
+        <div class="sal-value" style="font-size:13px">${c.stock || 'none'}</div>
+      </div>
+    </div>`;
+
+  const dims = [
+    {k:'pay',v:c.pay,l:'薪酬',c:c.c_pay},
+    {k:'tech',v:c.tech,l:'技术',c:c.c_tech},
+    {k:'settle',v:c.settle,l:'定居',c:c.c_settle},
+    {k:'career',v:c.career,l:'职业',c:''},
+    {k:'wlb',v:c.wlb,l:'WLB',c:c.c_wlb},
+    {k:'bonus',v:c.bonus,l:'禀赋',c:''},
+    {k:'future',v:c.future,l:'前景',c:''}
+  ];
+  const dimsBox = `<div class="dims-grid">${dims.map(d => `
+    <div class="dim-cell">
+      <div class="dim-l">${d.l} ${d.c}</div>
+      <div class="dim-v ${SCR(d.v)}">${d.v.toFixed(1)}</div>
+      ${dimBar(d.v)}
+    </div>`).join('')}</div>`;
+
+  const matchBox = c.match_points && c.match_points.length ? `
+    <div class="cc-match">
+      <h5>◆ 为什么适合你</h5>
+      <ul>${c.match_points.map(m => `<li>${m}</li>`).join('')}</ul>
+    </div>` : '';
+
+  const posBox = c.pos && c.pos.length ? `
+    <div class="pos-box">
+      <h5>◆ 推荐岗位</h5>
+      ${c.pos.map(p => `
+        <div class="pos-group">
+          <div class="pos-dept">${p.dept}</div>
+          <ul class="pos-jobs">${p.jobs.map(j => `<li>${j}</li>`).join('')}</ul>
+        </div>`).join('')}
+    </div>` : '';
+
+  const arBox = `
+    <div class="advrsk-grid">
+      <div class="ar-box adv">
+        <h5>◆ 核心优势</h5>
+        <ul>${(c.adv||[]).map(a => `<li>${a}</li>`).join('')}</ul>
+      </div>
+      <div class="ar-box risk">
+        <h5>◆ 风险提示</h5>
+        <ul>${(c.risk||[]).map(r => `<li>${r}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+
+  const srcBox = `
+    <div class="src-row">
+      <span>📍 ${c.dist} · ${c.ticker !== 'private' && c.ticker !== 'SOE' && c.ticker !== 'PSU' ? c.ticker : (c.ticker === 'SOE' ? '央国企' : c.ticker === 'PSU' ? '事业单位' : '未上市')}</span>
+      <span>${c.source_note || ''} · <a href="${c.source_url}" target="_blank">↗ 官方招聘</a></span>
+    </div>`;
+
+  return `
+    <div class="cc" data-tier="${c.tier}" data-cat="${c.cat}" data-dist="${c.dist}" data-id="${c.id}">
+      <div class="cc-h" onclick="this.parentNode.classList.toggle('open')">
+        <div class="cc-rank ${tierCls}">${c.rank || '-'}</div>
+        <div class="cc-title">
+          <div class="cc-name">
+            <span class="cat-dot" style="background:${catColor(c.cat)}"></span>
+            ${c.name} ${gemTag}
+          </div>
+          <div class="cc-sub">${c.en} · ${c.subcat} · ${c.dist}</div>
+        </div>
+        <div class="cc-meta">
+          <div class="mm">${c.cash}<span style="color:var(--txt-3)">w</span></div>
+          <div class="mm"><b>${c.wlb_hours}</b>h/周</div>
+          <div class="mm">公积金 <b>${c.fund}</b></div>
+        </div>
+        <div class="cc-score-box">
+          <div class="cc-score ${tierCls}">${c.score.toFixed(2)}</div>
+          <div class="cc-score-lbl">${c.tier}</div>
+        </div>
+        <div class="cc-arrow">▼</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-intro">${c.intro}</div>
+        ${matchBox}
+        ${salBox}
+        ${dimsBox}
+        ${posBox}
+        ${arBox}
+        ${srcBox}
+      </div>
+    </div>`;
+}
+
+function renderRank() {
+  let list = [...COMPANIES];
+
+  if (STATE.filterCat !== 'all') list = list.filter(c => c.cat === STATE.filterCat);
+  if (STATE.filterDist !== 'all') list = list.filter(c => c.dist.includes(STATE.filterDist));
+  if (STATE.search) {
+    const q = STATE.search.toLowerCase();
+    list = list.filter(c => c.name.toLowerCase().includes(q) || c.en.toLowerCase().includes(q));
+  }
+
+  if (STATE.sortBy === 'score') list.sort((a,b) => b.score - a.score);
+  else list.sort((a,b) => (b[STATE.sortBy] || 0) - (a[STATE.sortBy] || 0));
+
+  // 按 Tier 分组展示
+  const tiers = ['SSS','SS','S','A','B'];
+  const tierNames = {SSS:'必投',SS:'强推',S:'推荐',A:'可投',B:'保底'};
+  let html = '';
+
+  // 隐藏福地独立一组
+  const gems = list.filter(c => c.hidden_gem);
+  if (gems.length) {
+    html += `
+      <div class="tg">
+        <div class="tg-h">
+          <span class="tg-badge gem">⭐ 隐藏福地</span>
+          <span class="tg-h-title">独立轨道 · 非主流但超适合你</span>
+          <span class="tg-h-count">${gems.length}家</span>
+        </div>
+        ${gems.map(renderCard).join('')}
+      </div>`;
+  }
+
+  const non_gems = list.filter(c => !c.hidden_gem);
+  tiers.forEach(t => {
+    const group = non_gems.filter(c => c.tier === t);
+    if (!group.length) return;
+    html += `
+      <div class="tg">
+        <div class="tg-h">
+          <span class="tg-badge ${t.toLowerCase()}">${t}</span>
+          <span class="tg-h-title">${tierNames[t]} · ${t==='SSS'?'必投':t==='SS'?'强烈推荐':t==='S'?'推荐':t==='A'?'可投':'保底'}</span>
+          <span class="tg-h-count">${group.length}家</span>
+        </div>
+        ${group.map(renderCard).join('')}
+      </div>`;
+  });
+
+  $('#rankC').innerHTML = html;
+}
+
+/* ═══ 05 · 热力图 ═══ */
+function renderHeatmap() {
+  const sorted = [...COMPANIES].sort((a,b)=>b.score-a.score).slice(0, STATE.heatCount);
+  $('#heatmapRows').innerHTML = sorted.map((c,i) => {
+    const cells = ['pay','tech','settle','career','wlb','bonus','future'].map(k => {
+      const v = c[k];
+      return `<div class="heat-cell ${heatClass(v)}">${v.toFixed(1)}</div>`;
+    }).join('');
+    return `
+      <div class="heatmap-row">
+        <div>${i+1}. ${c.name}</div>
+        ${cells}
+        <div class="heat-cell ${heatClass(c.score)}">${c.score.toFixed(2)}</div>
+      </div>`;
+  }).join('');
+}
+
+function setHeatCount(n) {
+  STATE.heatCount = n;
+  document.querySelectorAll('#heatmap .fc').forEach(b => b.classList.remove('act'));
+  event?.target?.classList.add('act');
+  renderHeatmap();
+}
+
+/* ═══ 06 · 散点图 ═══ */
+function renderScatter() {
+  const canvas = $('#scatCanvas');
+  canvas.innerHTML = '';
+
+  // 象限标签 + 坐标轴
+  canvas.innerHTML += `
+    <div class="sc-grid"></div>
+    <div class="sc-qd" style="top:20px;right:20px">钱多·活少<br>理想区</div>
+    <div class="sc-qd" style="bottom:20px;right:20px">钱多·活多<br>卷王区</div>
+    <div class="sc-qd" style="top:20px;left:20px">钱少·活少<br>安逸区</div>
+    <div class="sc-qd" style="bottom:20px;left:20px">钱少·活多<br>避雷区</div>
+    <div class="sc-axis-x">← 低薪资 · 薪酬评分 · 高薪资 →</div>
+    <div class="sc-axis-y">← 低 WLB · WLB 评分 · 高 →</div>
+    <div class="sc-tip" id="scTip"></div>`;
+
+  COMPANIES.forEach(c => {
+    const x = 40 + (c.pay / 10) * (canvas.offsetWidth - 80);
+    const y = canvas.offsetHeight - 40 - (c.wlb / 10) * (canvas.offsetHeight - 80);
+    const size = 8 + (c.score - 6) * 2.5;
+    const color = catColor(c.cat);
+    const dot = document.createElement('div');
+    dot.className = 'sc-dot';
+    dot.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${color}`;
+    dot.title = c.name;
+    dot.addEventListener('mouseenter', e => {
+      const tip = $('#scTip');
+      tip.innerHTML = `<b>${c.name}</b>薪酬: ${c.pay.toFixed(1)}<br>WLB: ${c.wlb.toFixed(1)}<br>总分: ${c.score.toFixed(2)}<br>Tier: ${c.tier}`;
+      tip.style.display = 'block';
+      const rect = canvas.getBoundingClientRect();
+      tip.style.left = (x + 12) + 'px';
+      tip.style.top = (y - 30) + 'px';
+    });
+    dot.addEventListener('mouseleave', () => { $('#scTip').style.display = 'none'; });
+    canvas.appendChild(dot);
+  });
+
+  // Legend
+  $('#scatLegend').innerHTML = Object.entries(CATEGORIES).map(([k,v]) =>
+    `<span class="sl-item"><span class="sl-dot" style="background:${v.color}"></span>${v.icon} ${v.name}</span>`
+  ).join('');
+}
+
+/* ═══ 07 · 5年曲线 ═══ */
+function renderCurve() {
+  if (!STATE.curveSelected) {
+    // 默认选 Top 5
+    const top5 = [...COMPANIES].sort((a,b)=>b.score-a.score).slice(0,5);
+    STATE.curveSelected = top5[0].id;
+    STATE.curveCompare = top5.map(c=>c.id);
+  }
+
+  $('#curveSelectors').innerHTML = [...COMPANIES].sort((a,b)=>b.score-a.score).slice(0,15).map(c =>
+    `<span class="curve-sel ${STATE.curveCompare.includes(c.id)?'act':''}"
+           onclick="toggleCurve(${c.id})">${c.name}</span>`
+  ).join('');
+
+  const svg = $('#curveSvg');
+  const W = 1000, H = 400, pad = 50;
+  svg.innerHTML = '';
+
+  // 坐标轴与网格
+  for (let y = 0; y <= 5; y++) {
+    const yy = pad + (H - 2*pad) * y / 5;
+    svg.innerHTML += `<line x1="${pad}" y1="${yy}" x2="${W-pad}" y2="${yy}" stroke="#2d3a52" stroke-width="1"/>`;
+    const val = (5-y) * 80;
+    svg.innerHTML += `<text x="${pad-8}" y="${yy+4}" fill="#6b7a94" font-size="10" font-family="JetBrains Mono" text-anchor="end">${val}w</text>`;
+  }
+  for (let x = 0; x <= 5; x++) {
+    const xx = pad + (W - 2*pad) * x / 5;
+    svg.innerHTML += `<line x1="${xx}" y1="${pad}" x2="${xx}" y2="${H-pad}" stroke="#2d3a52" stroke-width="1"/>`;
+    svg.innerHTML += `<text x="${xx}" y="${H-pad+18}" fill="#6b7a94" font-size="10" font-family="JetBrains Mono" text-anchor="middle">Y${x}</text>`;
+  }
+
+  // 画每条公司的曲线
+  const maxVal = 400; // 最大累积 400w
+  const colors = ['#f0b429','#3b82f6','#ef4444','#10b981','#a855f7','#06b6d4','#ec4899','#84cc16','#f97316','#818cf8'];
+
+  STATE.curveCompare.forEach((id, idx) => {
+    const c = COMPANIES.find(x => x.id === id);
+    if (!c) return;
+    // 5 年累积，使用 total5y 作为 Year 5 值，线性分段（简化模型）
+    // 实际模型：Y1=cashMid, Y2=cashMid×1.1, Y3=×1.2, Y4=×1.3, Y5=×1.4 累加，再加上公积金×5 + 股票兑现
+    const base = c.cash_mid || 30;
+    const fund = c.fund_total || 5;
+    // 涨薪模型
+    const years = [0, base + fund, base*1.1 + fund, base*1.2 + fund, base*1.3 + fund, base*1.4 + fund];
+    // 累加
+    let cum = 0;
+    const points = years.map((yr, i) => {
+      cum += yr;
+      // 股票兑现：第3-5年有增量（如果 stock 非 none）
+      if (i >= 3 && c.stock && !c.stock.includes('none')) cum += base * 0.15;
+      const x = pad + (W - 2*pad) * i / 5;
+      const y = H - pad - (H - 2*pad) * cum / maxVal;
+      return {x, y, cum};
+    });
+
+    const path = points.map((p, i) => (i===0?'M':'L') + p.x + ',' + p.y).join('');
+    const color = colors[idx % colors.length];
+
+    svg.innerHTML += `<path d="${path}" stroke="${color}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    points.forEach((p, i) => {
+      if (i === 0) return;
+      svg.innerHTML += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${color}"/>`;
+      if (i === 5) {
+        svg.innerHTML += `<text x="${p.x+8}" y="${p.y+4}" fill="${color}" font-size="11" font-weight="700" font-family="JetBrains Mono">${c.name} ${Math.round(p.cum)}w</text>`;
+      }
+    });
+  });
+}
+
+function toggleCurve(id) {
+  if (STATE.curveCompare.includes(id)) {
+    STATE.curveCompare = STATE.curveCompare.filter(x => x !== id);
+  } else if (STATE.curveCompare.length < 6) {
+    STATE.curveCompare.push(id);
+  }
+  renderCurve();
+}
+
+/* ═══ 08 · 单位类型百科 ═══ */
+const UTG_DATA = [
+  {
+    cls: 'medical',
+    icon: '🏥',
+    name: '医疗电子 · 可穿戴医疗（你的主战场）',
+    tag: '代表：联影 · 迈瑞 · 华为健康 · 脑虎 · 微创 · 鱼跃',
+    body: '**强技术壁垒 + 强政策红利 + 老龄化确定性**。医疗电子行业监管严格（IEC 62304/60601），准入门槛高，但一旦进入就有长期价值。可穿戴医疗方向 CAGR 15.6%，未来 5 年增速最确定。',
+    bullets: [
+      '薪资水平：28-50w（医疗龙头）/ 35-55w（大厂健康军团）',
+      'WLB：研发加班较多（44-50h/周），但外企医疗极佳（40h）',
+      '晋升：技术路线清晰，35岁+ 不存在年龄焦虑',
+      '关键证书：IEC 62304 软件 / IEC 60601 电气安全',
+      '核心能力：可穿戴电子 + 生物传感 + 低功耗 + 医疗级可靠性'
+    ],
+    rec: '✓ 你的最佳主投方向（契合度天花板）'
+  },
+  {
+    cls: 'auto',
+    icon: '🚗',
+    name: '汽车电子（你实习延伸方向）',
+    tag: '代表：小米汽车 · 蔚来 · 理想 · 智己 · 地平线 · 华域',
+    body: '**高薪 + 高强度 + 行业整合期**。新能源汽车行业进入淘汰赛，头部玩家薪资优厚但 WLB 较差。汽车电子嵌入式（域控制器/BMS/座舱）与你小米实习高度延续。',
+    bullets: [
+      '薪资水平：35-58w（新势力头部）/ 25-35w（传统 Tier 1）',
+      'WLB：大部分周均 48-55h，有大小周',
+      '晋升：技术快速迭代，但 2029 后行业可能再洗牌',
+      '核心技术：AUTOSAR/CAN/LIN/座舱 OS/域控制器',
+      '风险：行业产能过剩，非头部淘汰率高'
+    ],
+    rec: '✓ 你已实习的小米转正是最优解'
+  },
+  {
+    cls: 'aiot',
+    icon: '📱',
+    name: 'AIoT / 消费电子',
+    tag: '代表：恒玄 · 华为海思 · 英伟达 · 大疆 · 字节健康',
+    body: '**薪资天花板 + 技术前沿**。头部公司（英伟达/华为海思）简历含金量顶级。AIoT 赛道与可穿戴相关，但部分公司偏消费电子。',
+    bullets: [
+      '薪资水平：42-67w（头部）/ 32-45w（中档）',
+      'WLB：两极分化（外企优秀 / 国内中厂差）',
+      '晋升：技术深度+广度要求高',
+      '核心技术：SoC嵌入式/AI部署/低功耗',
+      '风险：35岁+ 年龄焦虑相对明显'
+    ],
+    rec: '○ 作为冲击 SSS 级的备选'
+  },
+  {
+    cls: 'soe',
+    icon: '🏛️',
+    name: '央企 / 国企 / 研究所（隐藏福地 · 你可能低估）',
+    tag: '代表：商飞 · 中电科 32所 · 航天 804 所 · 中科院微系统所',
+    body: '**稳定性王者 + 人才公寓 + 事业编制**。现金薪资不如私企，但**安家费 10-15w + 人才公寓 5 年 + 公积金顶格 12+12 + 落户直通**，等效总包不输大厂 B 档。WLB 极佳（955 典范）。',
+    bullets: [
+      '薪资水平：22-32w 现金 + 各类补贴（实际等效 30-40w）',
+      'WLB：典范 955，周均 40-44h',
+      '晋升：体制化但稳定，到 30 年资历福利极丰厚',
+      '核心技术：国产 RTOS / 军工电子 / MEMS / 航电',
+      '独特优势：交大学硕背景有绿色通道，可申报科研基金'
+    ],
+    rec: '⭐ 强烈推荐纳入保底 + 长期规划'
+  },
+  {
+    cls: 'hospital',
+    icon: '⚕️',
+    name: '医院工程科 / 临床研究中心（蓝海选项）',
+    tag: '代表：瑞金 BME · 仁济 · 中山 · 华山工程科',
+    body: '**绝对蓝海 + 交大医学院系统 + 事业编**。99% 的同学没考虑过但极适合你：你的 6 项发明专利 + 1 篇 EI + 医工交叉背景可以**直接变现**为医院科研项目，可申报国自然基金。',
+    bullets: [
+      '薪资水平：18-28w（事业编）',
+      'WLB：典范 955/965',
+      '晋升：独特路径（临床工程师→科研型工程师→博后→副高）',
+      '核心优势：事业编+人才公寓+落户+科研空间',
+      '路径特色：可边工作边读博（在职博士）'
+    ],
+    rec: '⭐ 蓝海选项，你的科研背景完美匹配'
+  },
+  {
+    cls: 'startup',
+    icon: '🚀',
+    name: '独角兽 / 前沿初创',
+    tag: '代表：脑虎 · 博睿康 · 阶跃星辰 · 地平线',
+    body: '**期权增值潜力 + 技术前沿 + 风险高**。脑机接口赛道（脑虎/博睿康/阶梯）与你宇构智核实习直接延续。期权价值取决于公司是否 IPO。',
+    bullets: [
+      '薪资水平：28-50w（头部独角兽）/ 25-35w（早期）',
+      'WLB：创业公司 48-52h',
+      '晋升：扁平化组织，职业路径快',
+      '核心技术：前沿赛道技术（脑机/AI芯片/大模型）',
+      '风险：融资断裂 / 业务转型 / 期权价值归零'
+    ],
+    rec: '○ 脑虎/博睿康推荐（与你实习对口）'
+  }
+];
+
+function renderUnitType() {
+  $('#utgGrid').innerHTML = UTG_DATA.map(u => `
+    <div class="utg-card ${u.cls}">
+      <h4>${u.icon} ${u.name}</h4>
+      <div class="utg-tag">${u.tag}</div>
+      <div class="utg-body">${u.body.replace(/\*\*(.+?)\*\*/g, '<b style="color:var(--gold)">$1</b>')}</div>
+      <ul>${u.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      <div class="utg-rec">${u.rec}</div>
+    </div>`).join('');
+}
+
+/* ═══ 09 · 求职时间线 ═══ */
+const TL_EVENTS = [
+  {date:'2026-05', pos:0.02, label:'当前·小米汽车实习', now:true, above:true},
+  {date:'2026-06', pos:0.06, label:'本科毕业答辩', above:false},
+  {date:'2026-07', pos:0.10, label:'实习结束·整理成果', above:true},
+  {date:'2026-09', pos:0.15, label:'交大入学·王侃课题组', above:false},
+  {date:'2026-10', pos:0.20, label:'硕一 · 微针方向调研', above:true},
+  {date:'2027-01', pos:0.28, label:'寒假 · 第一段硕士实习窗口', above:false},
+  {date:'2027-06', pos:0.40, label:'硕一结束 · 开始备战 SCI 一作', above:true},
+  {date:'2027-09', pos:0.48, label:'2028届预秋招·当观察员', above:false},
+  {date:'2027-12', pos:0.54, label:'论文初稿 · 春招实习冲击', above:true},
+  {date:'2028-03', pos:0.60, label:'综述 SCI 投稿', above:false},
+  {date:'2028-06', pos:0.68, label:'硕二暑期 · 大厂实习', above:true},
+  {date:'2028-09', pos:0.75, label:'🎯 2029届秋招正式开始', above:false, milestone:true},
+  {date:'2028-10', pos:0.78, label:'大厂提前批', above:true},
+  {date:'2028-11', pos:0.82, label:'央企研究所·商飞秋招', above:false},
+  {date:'2028-12', pos:0.86, label:'春招补录·医院科研岗', above:true},
+  {date:'2029-01', pos:0.90, label:'寒假 · 面试冲刺期', above:false},
+  {date:'2029-03', pos:0.93, label:'毕业答辩', above:true},
+  {date:'2029-04', pos:0.96, label:'🎯 入职·签三方', above:false, milestone:true},
+  {date:'2029-07', pos:0.99, label:'转正·落户办理', above:true}
+];
+
+function renderTimeline() {
+  const html = ['<div class="tl-track"></div>'];
+  TL_EVENTS.forEach(e => {
+    const left = `${e.pos * 100}%`;
+    html.push(`<div class="tl-marker ${e.now?'now':''}" style="left:${left}"></div>`);
+    html.push(`
+      <div class="tl-label ${e.above?'above':'below'}" style="left:${left}">
+        ${e.label ? `<b>${e.label}</b>` : ''}
+        <div class="tl-date">${e.date}</div>
+      </div>`);
+  });
+  $('#tlInner').innerHTML = html.join('');
+}
+
+/* ═══ 10 · 定居计算器 ═══ */
+function renderCalc() {
+  // 填充公司下拉
+  const top30 = [...COMPANIES].sort((a,b)=>b.score-a.score).slice(0,30);
+  $('#calcCompany').innerHTML = top30.map(c => `<option value="${c.id}">${c.name} (年包 ${c.cash_mid}w)</option>`).join('');
+
+  // 绑定事件
+  const inputs = ['calcArea','calcBaoshan','calcParent','calcYears'];
+  inputs.forEach(id => {
+    $('#'+id).addEventListener('input', e => {
+      $('#'+id+'V').textContent = e.target.value;
+      updateCalc();
+    });
+  });
+  $('#calcCompany').addEventListener('change', updateCalc);
+  $('#calcDist').addEventListener('change', updateCalc);
+
+  updateCalc();
+}
+
+function updateCalc() {
+  const cid = parseInt($('#calcCompany').value);
+  const c = COMPANIES.find(x => x.id === cid);
+  if (!c) return;
+
+  const area = parseInt($('#calcArea').value);
+  const baoshan = parseInt($('#calcBaoshan').value);
+  const parent = parseInt($('#calcParent').value);
+  const years = parseInt($('#calcYears').value);
+
+  const priceMap = {min:4.5, jd:5.2, lg:4.0, zj:9.0};
+  const price = priceMap[$('#calcDist').value];
+  const totalPrice = area * price;
+  const downMin = totalPrice * 0.35;
+  const loan = totalPrice - downMin;
+  const ownFunds = baoshan + parent;
+  const gap = downMin - ownFunds;
+
+  // 房贷月供（等额本息，年利率 4.5%）
+  const rate = 0.045 / 12;
+  const months = years * 12;
+  const monthly = loan * 10000 * rate * Math.pow(1+rate, months) / (Math.pow(1+rate, months) - 1);
+
+  // 月收入（年包 / 12，不含公积金提现用于月供）
+  const salMonthly = c.cash_mid * 10000 / 12;
+  const fundMonthly = c.fund_total * 10000 / 12;
+  const affordRatio = monthly / (salMonthly + fundMonthly * 0.5);
+
+  const yearlyDisposable = c.cash_mid - monthly * 12 / 10000;
+
+  const verdict = affordRatio < 0.3 ? '🟢 极为宽裕 · 首付与月供都轻松' :
+                  affordRatio < 0.5 ? '🟡 可负担 · 月供占比正常' :
+                  affordRatio < 0.7 ? '🟠 偏紧张 · 建议提升薪资或降低购房预算' :
+                                       '🔴 紧张 · 月供超过收入 70%，不建议';
+
+  $('#calcResults').innerHTML = `
+    <div class="sc-res-item"><div class="sc-res-l">房屋总价</div><div class="sc-res-v">${totalPrice.toFixed(0)}w</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">首付 35%</div><div class="sc-res-v">${downMin.toFixed(0)}w</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">可用资金（宝山+父母）</div><div class="sc-res-v green">${ownFunds}w</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">首付缺口</div><div class="sc-res-v ${gap>0?'red':'green'}">${gap>0?gap.toFixed(0)+'w':'无'}</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">贷款额度</div><div class="sc-res-v">${loan.toFixed(0)}w</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">月供</div><div class="sc-res-v">${(monthly/1000).toFixed(1)}k</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">月供占比</div><div class="sc-res-v ${affordRatio<0.5?'green':affordRatio<0.7?'':'red'}">${(affordRatio*100).toFixed(1)}%</div></div>
+    <div class="sc-res-item"><div class="sc-res-l">年可支配（扣月供）</div><div class="sc-res-v green">${yearlyDisposable.toFixed(1)}w</div></div>
+  `;
+  $('#calcVerdict').innerHTML = `<b>判定：</b>${verdict}<br>
+    <span style="font-size:11px;color:var(--txt-3);margin-top:4px;display:inline-block">
+    基于贷款利率 4.5% · 等额本息 · 公积金 50% 覆盖月供 · 忽略通胀涨薪
+    </span>`;
+}
+
+/* ═══ 11 · 行业前瞻 ═══ */
+const IND_DATA = [
+  {
+    cls: 'med',
+    name: '医疗电子 · 可穿戴医疗',
+    w: '你主攻方向 60% · 政策确定性最高',
+    stats: [
+      {l:'全球市场规模', v:'996亿美金'},
+      {l:'CAGR 2025-30', v:'15.6%'},
+      {l:'中国 2024', v:'615亿元'},
+      {l:'中国5年增速', v:'14.7%'}
+    ],
+    body: '**健康中国 2030 + 十五五 + 健康上海 2030 三重政策叠加**。可穿戴医疗设备明确写入国家规划。上海"集成电路+生物医药+AI"三大先导产业 2024 突破 2 万亿，其中生物医药占据核心位。',
+    bullets: [
+      '老龄化 3.8 亿（2030）→ 慢性病监测刚需爆发',
+      'CGM / 心电监护 / 脑电采集三大细分高增速',
+      '王侃课题组微针方向是"明星细分"',
+      '国产替代赛道确定性极高（联影、迈瑞、三诺、微创）',
+      '2029 年毕业正好赶上可穿戴医疗第二波上市潮'
+    ]
+  },
+  {
+    cls: 'auto',
+    name: '汽车电子 · 智能驾驶座舱',
+    w: '你辅修方向 30% · 小米实习延伸',
+    stats: [
+      {l:'中国新能源渗透率', v:'>50%（2025）'},
+      {l:'2029年预测', v:'>75%'},
+      {l:'智能驾驶市场', v:'CAGR 25%+'},
+      {l:'座舱 OS 渗透', v:'>80%'}
+    ],
+    body: '**行业进入淘汰赛**。新势力前三 + 比亚迪 + 特斯拉占据 70% 份额，头部化加剧。小米汽车为国内新势力第三强增速，你实习背景适配。智能驾驶 + 座舱 OS 是未来 5 年核心技术栈。',
+    bullets: [
+      '小米汽车 SU7 月销破 2 万，后续车型持续放量',
+      '地平线/黑芝麻车规 AI 芯片国产替代',
+      'AUTOSAR + 域控制器嵌入式技术栈稀缺',
+      '风险：2027-2029 可能出现新势力二次洗牌',
+      'DMS 疲劳检测与你生理信号处理技能交叉'
+    ]
+  },
+  {
+    cls: 'aiot',
+    name: 'AIoT · 边缘 AI',
+    w: '你辅修方向 10% · 技术栈深化',
+    stats: [
+      {l:'全球可穿戴技术', v:'1850亿美金'},
+      {l:'CAGR 2025-30', v:'15%'},
+      {l:'中国传感器份额', v:'35%'},
+      {l:'AI 推理边缘化', v:'CAGR 20%+'}
+    ],
+    body: '**边缘 AI + 可穿戴芯片是交叉增长点**。恒玄、华为海思是国产替代核心。TF Lite Micro + 1D-CNN 边缘部署与你实习/毕设完全重合。',
+    bullets: [
+      '恒玄科技智能手表芯片国内市占率第一',
+      '英伟达 Jetson 平台嵌入式 AI 黄金组合',
+      '小米/华为/字节 AIoT 生态持续扩张',
+      '风险：消费电子周期性较强',
+      '机会：AIoT × 医疗 → 可穿戴医疗是最大金矿'
+    ]
+  }
+];
+
+function renderIndustry() {
+  $('#indGrid').innerHTML = IND_DATA.map(i => `
+    <div class="ind-card ${i.cls}">
+      <h4>${i.name}</h4>
+      <div class="ind-w">${i.w}</div>
+      <div class="ind-stats">
+        ${i.stats.map(s => `<div class="is-cell"><div class="is-l">${s.l}</div><div class="is-v">${s.v}</div></div>`).join('')}
+      </div>
+      <div class="ind-body">${i.body.replace(/\*\*(.+?)\*\*/g, '<b style="color:var(--gold)">$1</b>')}</div>
+      <ul class="ind-bullets">${i.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+/* ═══ 主渲染 ═══ */
+function renderAll() {
+  renderHero();
+  renderWeights();
+  renderTierLegend();
+  renderRank();
+  renderHeatmap();
+  renderScatter();
+  renderCurve();
+}
+
+/* ═══ 事件绑定 ═══ */
+function setupEvents() {
+  $$('.fc[data-f]').forEach(b => {
+    b.addEventListener('click', e => {
+      const f = b.dataset.f;
+      const v = b.dataset.v;
+      $$(`.fc[data-f="${f}"]`).forEach(x => x.classList.remove('act'));
+      b.classList.add('act');
+      STATE['filter' + f.charAt(0).toUpperCase() + f.slice(1)] = v;
+      renderRank();
+    });
+  });
+
+  $('#sortSel').addEventListener('change', e => {
+    STATE.sortBy = e.target.value;
+    renderRank();
+  });
+
+  $('#searchInp').addEventListener('input', e => {
+    STATE.search = e.target.value;
+    renderRank();
+  });
+
+  // TOC 激活
+  const secs = ['persona','method','tier','rank','heatmap','scatter','curve','unitype','timeline','settle','industry','sources'];
+  const topLinks = $$('.topnav a');
+  window.addEventListener('scroll', () => {
+    let cur = 'persona';
+    secs.forEach(id => {
+      const s = document.getElementById(id);
+      if (s && window.scrollY >= s.offsetTop - 100) cur = id;
+    });
+    topLinks.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
+    $('#stt').classList.toggle('vis', window.scrollY > 400);
+  });
+
+  // 默认展开 Top 3
+  setTimeout(() => {
+    document.querySelectorAll('.cc[data-id]').forEach((el,i) => {
+      if (i < 3) el.classList.add('open');
+    });
+  }, 100);
+}
+
+/* ═══ 初始化 ═══ */
+window.addEventListener('DOMContentLoaded', () => {
+  recompute();
+  renderAll();
+  renderUnitType();
+  renderTimeline();
+  renderCalc();
+  renderIndustry();
+  setupEvents();
+});
+
+window.addEventListener('resize', () => {
+  renderScatter();
+  renderCurve();
+});
+
+</script>
+</body>
+</html>
