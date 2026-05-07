@@ -10,16 +10,13 @@
 
 ## 📚 页面索引
 
-| # | 页面标题 | 子目录 | 大小 | 访问 |
-|---|---|---|---|---|
-| 1 | **985 工科学院就业榜 · 2026-2030** | `985-gongke-jiuye-bang/` | 248K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/985-gongke-jiuye-bang/) |
-| 2 | 2029 届上海交大仪科硕士就业终极总榜 | `2028届就业终极总榜/` | 52K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/2028届就业终极总榜/) |
-| 3 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
-| 4 | 上海嵌入式领域大厂推荐排行榜 | `shanghai-embedded-rankings/` | 92K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/shanghai-embedded-rankings/) |
-| 5 | 输入物鲁棒性专项分析报告 | `shu-ru-wu-lu-bang-xing-fen-xi-bao-gao/` | 84K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/shu-ru-wu-lu-bang-xing-fen-xi-bao-gao/) |
-| 6 | 输入物鲁棒性修复报告 | `shu-ru-wu-lu-bang-xing-xiu-fu-bao-gao/` | 24K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/shu-ru-wu-lu-bang-xing-xiu-fu-bao-gao/) |
-| 7 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
-| 8 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
+| # | 页面标题 | 子目录 | 大小 | 定位 | 访问 |
+|---|---|---|---|---|---|
+| 1 | **985 工科学院就业榜 · 2026-2030** | `985-gongke-jiuye-bang/` | 248K | 公众视角 · 学院榜 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/985-gongke-jiuye-bang/) |
+| 2 | 2029 届上海交大仪科硕士就业终极总榜 | `2028届就业终极总榜/` | 52K | 个人视角 · 公司榜 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/2028届就业终极总榜/) |
+| 3 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | 工作成果展示 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
+| 4 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
+| 5 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
 
 ---
 
