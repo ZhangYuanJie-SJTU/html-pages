@@ -2927,6 +2927,8 @@ function setW(k, v) {
   renderTierLegend();
   renderRank();
   renderHeat();
+  renderScatter();
+  renderCurve();
 }
 
 function preset(name, ev) {
@@ -2946,6 +2948,8 @@ function preset(name, ev) {
   renderTierLegend();
   renderRank();
   renderHeat();
+  renderScatter();
+  renderCurve();
 }
 
 /* ═══ Tier legend ═══ */
@@ -3046,7 +3050,7 @@ function renderFirmCard(c) {
         <div class="dim-bars-head">NINE DIMENSIONS PROFILE</div>
         <div class="dim-bars-grid">
           ${['pay','tech_now','tech_future','geo','career','wlb','endow','industry','cohort'].map(k => {
-            const v = c[k] || 0;
+            const v = k === 'pay' ? derivePayFromSalary(c) : (c[k] || 0);
             const labels = {pay:'薪酬',tech_now:'现栈',tech_future:'未来',geo:'地缘',career:'职业',wlb:'WLB',endow:'禀赋',industry:'前景',cohort:'课题'};
             return `<div class="dim-bar" title="${labels[k]} ${v.toFixed(1)}">
               <div class="dim-bar-track"><i style="height:${v*10}%"></i></div>
@@ -3121,7 +3125,8 @@ function renderHeat() {
   rows.forEach((c, i) => {
     html += `<div class="h-name">${pad2(i+1)}. ${c.name}</div>`;
     dims.forEach(k => {
-      html += `<div class="${heatCls(c[k])}">${c[k].toFixed(1)}</div>`;
+      const val = k === 'pay' ? derivePayFromSalary(c) : c[k];
+      html += `<div class="${heatCls(val)}">${val.toFixed(1)}</div>`;
     });
     html += `<div class="${heatCls(c.score)}" style="font-weight:800">${c.score.toFixed(2)}</div>`;
   });
