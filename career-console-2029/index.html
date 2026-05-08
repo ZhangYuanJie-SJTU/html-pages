@@ -1247,11 +1247,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       </div>
       <div class="stack-box" style="margin-top:8px">
         <div class="stack-k">未来栈 · 2029 · 研究生将获取</div>
-        <div class="stack-v"><b>电化学 / 生物传感</b> · 微针阵列 · 微流控 · 柔性基材 · MOF 复合材料 · <b>POCT</b> · NFC 能量传输 · 自泵结构 · ARM Linux — <b>功能材料 × 嵌入式系统交叉</b></div>
+        <div class="stack-v"><b>电化学 / 生物传感</b> · 微针阵列 · 微流控 · 柔性基材 · MOF 复合材料 · <b>可穿戴健康监测</b> · NFC 能量传输 · 自泵结构 · ARM Linux — <b>功能材料 × 嵌入式系统交叉</b></div>
       </div>
       <div class="stack-box" style="margin-top:8px">
-        <div class="stack-k">研究方向</div>
-        <div class="stack-v"><b>微针阵列</b>传感器的可穿戴医疗电子设备 — 导师安排方向 · 背景：<b>可穿戴电子</b> · 基础能力：<b>AIoT 嵌入式</b></div>
+        <div class="stack-k">研究方向 · 师从王侃副研究员</div>
+        <div class="stack-v"><b>基于微针阵列的可穿戴电化学传感系统</b> — 从传感器制备到嵌入式智能终端的全链研究<br>
+        <small style="opacity:.7">① 微针阵列传感器制备与电化学表征 · ② 专用信号读出电路与嵌入式系统设计 · ③ 边缘AI信号处理与智能诊断部署 · ④ 可穿戴系统集成与原型验证</small></div>
       </div>
       <div class="stack-box" style="margin-top:8px">
         <div class="stack-k">毕业约束</div>
@@ -1533,7 +1534,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
                 / wlb10 / endow13 / industry8 / cohort6 / housing4
    - 删除 "落户" 维度（已沪籍）
    - 技术栈拆分 current_stack / future_stack（研究生3年成长）
-   - 新增 王侃课题组4方向契合度：poct / sweat / ai_ivd / energy
+   - 新增 个人研究课题4环节契合度：mn_sensor / sig_embed / edge_ai / sys_integ
    - 新增 宝山置换资金链打分
    - 新增 AFM 末位挂名加分（研究型岗位）
    - 新增 实习转正专属加分（小米/宇构智核）
@@ -1552,12 +1553,12 @@ const WEIGHTS_V4 = {
   housing:      0.04   // 宝山置换资金链
 };
 
-/* 王侃课题组 4 大方向 */
+/* 个人研究课题 4 大环节（基于微针阵列的可穿戴电化学传感系统） */
 const COHORT_AXES = {
-  poct:   'POCT 即时诊断',
-  sweat:  '汗液/柔性可穿戴',
-  ai_ivd: 'AI 体外诊断算法',
-  energy: '自供能/能量收集'
+  mn_sensor:  '① 微针阵列传感器制备与电化学表征',
+  sig_embed:  '② 信号读出电路与嵌入式系统设计',
+  edge_ai:    '③ 边缘AI信号处理与智能诊断部署',
+  sys_integ:  '④ 可穿戴系统集成与原型验证'
 };
 
 /* 目标区房价锚（2029预测，单位：万元/㎡）*/
@@ -1601,23 +1602,23 @@ const COMPANIES_V4 = [
     wlb_hours: 44,
     // 9 维打分
     pay: 8.2, tech_now: 9.5, tech_future: 9.8, geo: 9.5, career: 9.2,
-    wlb: 8.5, endow: 9.0, industry: 9.5, cohort: 9.5, housing: 9,
-    // 课题组 4 轴
-    poct: 9, sweat: 10, ai_ivd: 9, energy: 7,
+    wlb: 8.5, endow: 9.0, industry: 9.5, cohort: 9.0, housing: 9,
+    // 研究课题 4 环节
+    mn_sensor: 8, sig_embed: 10, edge_ai: 9, sys_integ: 9,
     afm_boost: true,   // AFM 学术背景加分
     intern_path: null, // 无实习通道
-    intro: '上海嘉定本土医疗影像龙头（688271.SH），PET/CT/MRI 大型设备国产替代核心。联影微电子事业部布局可穿戴医疗+生物传感，与王侃课题组研究方向（POCT + 汗液传感 + AI-IVD）完美对口。嘉定新城定居性价比天花板，交大校友密度全市前列。',
+    intro: '上海嘉定本土医疗影像龙头（688271.SH），PET/CT/MRI 大型设备国产替代核心。联影微电子事业部布局可穿戴医疗+生物传感，与你微针阵列可穿戴电化学传感系统方向完美对口。嘉定新城定居性价比天花板，交大校友密度全市前列。',
     why_for_you: [
       'AFM 学术背景 + 你 6 项专利 + EI 论文 → 联影研究院研究员岗位契合度 top 1',
-      '王侃课题组 POCT/汗液传感方向 = 联影微电子事业部直接对口',
+      '微针阵列可穿戴传感方向 = 联影微电子事业部直接对口',
       '嘉定新城房价 4.0w/㎡，你宝山置换 + 父母支持可直接买 90㎡',
       '研究生双技术栈（嵌入式 + 电化学传感）在联影都有岗位承接',
       '交大系内推渠道成熟（研究院多位 PI 为交大校友）'
     ],
     current_match: '9.5 · 你现栈（STM32/FreeRTOS/TF Lite Micro/FPC）直接进可穿戴事业部',
-    future_match: '9.8 · 研究生学的电化学/微针/POCT 在联影医疗电子研究院顶配匹配',
+    future_match: '9.8 · 微针阵列传感+嵌入式系统+可穿戴集成在联影医疗电子研究院顶配匹配',
     pos: [
-      {dept: '联影医疗电子研究院', jobs: ['可穿戴医疗设备嵌入式研究员', 'POCT 产品研发工程师']},
+      {dept: '联影医疗电子研究院', jobs: ['可穿戴医疗设备嵌入式研究员', '微针传感系统研发工程师']},
       {dept: '联影微电子事业部', jobs: ['嵌入式软件工程师（生物传感方向）']},
       {dept: '数字健康研究院', jobs: ['医疗 AIoT 系统架构师', '体征监护算法工程师']}
     ],
@@ -1636,20 +1637,20 @@ const COMPANIES_V4 = [
     total5y: 270,
     wlb_hours: 55,
     pay: 9.3, tech_now: 9.0, tech_future: 8.5, geo: 6.5, career: 9.5,
-    wlb: 5.5, endow: 9.0, industry: 9.0, cohort: 8.5, housing: 7,
-    poct: 7, sweat: 9, ai_ivd: 9, energy: 10,
+    wlb: 5.5, endow: 9.0, industry: 9.0, cohort: 8.3, housing: 7,
+    mn_sensor: 7, sig_embed: 9, edge_ai: 9, sys_integ: 8,
     afm_boost: true,
     intern_path: null,
     intro: '华为可穿戴全球领先（Watch GT/D 系列出货量全球前三）。健康军团主攻 CGM、心率血氧、PPG 算法等。TUP 激励 5 年可增加 30-50% 总包，但现金薪资中等。华为 2012 实验室是你 AFM 研究出口的顶级平台。',
     why_for_you: [
       'PPG+TF Lite Micro+BLE 技术栈完美匹配（你毕设已实现）',
-      'CGM 方向 = 王侃课题组 POCT 方向延伸',
+      'CGM 方向 = 微针阵列传感方向延伸',
       'TUP 长期兑现价值 5 年总包可达 300w+',
       '华为 2012 实验室医疗组是 AFM 研究延续的最好产业出口',
       '简历含金量天花板（校招华为 = 未来所有门槛通行证）'
     ],
     current_match: '9.0 · PPG+BLE+TF Lite 毕设技能高度对口',
-    future_match: '8.5 · 电化学传感/微针在华为医疗偏边缘，但自供能方向完美匹配（指尖自泵）',
+    future_match: '8.5 · 可穿戴传感方向与华为健康军团匹配',
     pos: [
       {dept: '可穿戴设备研发部', jobs: ['传感器嵌入式工程师（PPG/ECG+BLE）', '低功耗固件工程师']},
       {dept: '健康算法部', jobs: ['边缘AI部署工程师（TF Lite Micro）']},
@@ -1670,11 +1671,11 @@ const COMPANIES_V4 = [
     total5y: 210,
     wlb_hours: 46,
     pay: 7.8, tech_now: 9.2, tech_future: 8.5, geo: 9.0, career: 9.3,
-    wlb: 7.5, endow: 8.5, industry: 9.2, cohort: 8.5, housing: 9,
-    poct: 8, sweat: 6, ai_ivd: 8, energy: 5,
+    wlb: 7.5, endow: 8.5, industry: 9.2, cohort: 7.0, housing: 9,
+    mn_sensor: 4, sig_embed: 9, edge_ai: 8, sys_integ: 7,
     afm_boost: true,
     intern_path: null,
-    intro: '国产医疗器械绝对龙头，全球监护仪市占率 Top 3。闵行研发中心靠近交大徐汇校区，心率/血氧方向与你本科毕设（MAX30102+Kalman+1D-CNN）完美复用。迈瑞医疗研究院与王侃课题组 POCT 方向高度对口。',
+    intro: '国产医疗器械绝对龙头，全球监护仪市占率 Top 3。闵行研发中心靠近交大徐汇校区，心率/血氧方向与你本科毕设（MAX30102+Kalman+1D-CNN）完美复用。迈瑞医疗研究院与你微针阵列可穿戴传感方向高度对口。',
     why_for_you: [
       '心率血氧方向 = 你本科毕设完美延续',
       'IEC 60601/62304 认证经验业内标杆',
@@ -1683,10 +1684,10 @@ const COMPANIES_V4 = [
       '监护仪嵌入式 + AI 部署 = 双技术栈都能用'
     ],
     current_match: '9.2 · 本科毕设 PPG/Kalman/1D-CNN/TF Lite 完全对口',
-    future_match: '8.5 · POCT 方向延续，电化学传感偏辅助',
+    future_match: '8.5 · 可穿戴传感方向延续，电化学传感偏辅助',
     pos: [
       {dept: '生命信息与支持事业部', jobs: ['监护仪嵌入式工程师（PPG+血压+血氧）', '生理参数测量工程师']},
-      {dept: '体外诊断事业部（POCT）', jobs: ['POCT 设备嵌入式工程师']},
+      {dept: '体外诊断事业部', jobs: ['IVD 设备嵌入式工程师']},
       {dept: '迈瑞医疗研究院', jobs: ['医疗 AI 算法工程师']}
     ],
     adv: ['毕设方向 100% 对口', '行业地位最稳固', '闵行定居可覆盖', 'IEC 认证经验壁垒'],
@@ -1704,22 +1705,22 @@ const COMPANIES_V4 = [
     total5y: 275,
     wlb_hours: 55,  // 你亲述太累太卷，上调
     pay: 9.0, tech_now: 8.5, tech_future: 5.5, geo: 9.5, career: 7.8,
-    wlb: 5.0, endow: 7.5, industry: 8.5, cohort: 3.0, housing: 9,
-    poct: 1, sweat: 2, ai_ivd: 5, energy: 4,
+    wlb: 5.0, endow: 7.5, industry: 8.5, cohort: 2.8, housing: 9,
+    mn_sensor: 1, sig_embed: 3, edge_ai: 4, sys_integ: 3,
     afm_boost: false,
     intern_path: 'current_off_topic', // 实习在这但跨方向
     intern_boost: 0.5,                 // 大幅降权
     honest_feedback: '你的亲身实习反馈：太累太卷 · WLB 差 · 跨方向未发挥医疗电子特长',
-    intro: '你正在小米汽车架构部实习（2026.2-2026.6），汽车 OS 团队。**⚠️ 重要：这是你亲身实习过的公司，反馈是"太累太卷、WLB 差、跨了汽车电子未发挥医疗电子特长"。** 所以它虽然薪资高定居好，但跟你主线方向有偏差，不再作为主推。',
+    intro: '你正在小米汽车架构部实习（2026.2-2026.6），汽车 OS 团队。**⚠️ 重要：这是你亲身实习过的公司，反馈是"太累太卷、WLB 差、跨了汽车电子未发挥医疗电子特长"。** 与你微针阵列全链研究方向零交集，仅作保底转正位。',
     why_for_you: [
       '⚠️ 亲身实习反馈负面：WLB 差 + 医疗电子主线被稀释',
-      '现栈匹配良好（CAN+AUTOSAR 用得上）但未来栈几乎用不上',
+      '现栈匹配良好（CAN+AUTOSAR 用得上）但与微针/电化学/嵌入式传感链完全无关',
       '嘉定定居完美但需要你真心愿意做 5-10 年汽车',
       '转正作为保底 offer 可以有，但不是第一选择',
       '如愿押注汽车赛道，26届 C++ 嵌入式 378k 是透明 benchmark'
     ],
     current_match: '8.5 · 实习期间用的技术栈可继承',
-    future_match: '5.5 · ⚠️ 研究生学的微针/电化学/POCT 在小米汽车完全用不上',
+    future_match: '5.5 · ⚠️ 微针传感器制备/信号读出电路/边缘AI诊断/可穿戴集成 在小米汽车完全用不上',
     pos: [
       {dept: '汽车 OS 架构部（你实习部门）', jobs: ['域控制器通信工程师（转正）', '嵌入式测试架构师']},
       {dept: '智能座舱部', jobs: ['车载嵌入式工程师（高通 8295+QNX）']},
@@ -1740,24 +1741,24 @@ const COMPANIES_V4 = [
     total5y: 215,
     wlb_hours: 47,
     pay: 7.5, tech_now: 6.5, tech_future: 6.0, geo: 8.5, career: 6.5,
-    wlb: 7.5, endow: 7.5, industry: 8.5, cohort: 5.0, housing: 8,
-    poct: 3, sweat: 5, ai_ivd: 7, energy: 6,
+    wlb: 7.5, endow: 7.5, industry: 8.5, cohort: 4.8, housing: 8,
+    mn_sensor: 4, sig_embed: 6, edge_ai: 5, sys_integ: 4,
     afm_boost: false,  // AFM 是王侃课题组的，不是脑机接口背景
     intern_path: null,
-    intro: '柔性脑机接口头部初创，2022 年完成数亿元 A 轮。闵行办公通勤友好。**⚠️ 但：你的主线是医疗电子（POCT/微针/可穿戴），脑机接口不在你技术栈，也不在王侃课题组 4 大方向里** —— 所以这里只是个前沿选项，不是"背景延续"。',
+    intro: '柔性脑机接口头部初创，2022 年完成数亿元 A 轮。闵行办公通勤友好。**⚠️ 但：你的核心课题是微针阵列可穿戴电化学传感系统，脑机接口不在你研究链路里** —— 仅作前沿选项了解。',
     why_for_you: [
       '闵行通勤友好 + 老闵行 3.9w/㎡ 可负担',
       '前沿赛道简历加分',
-      '⚠️ 不是你的技术栈方向（你简历没写脑机接口），需从零学习',
-      '⚠️ 与王侃课题组 POCT/汗液/AI-IVD/自供能 四方向不重叠',
+      '⚠️ 与你的微针传感器制备/信号读出/边缘AI/系统集成四环节不重叠',
+      '柔性电极工艺与微针阵列制备有微弱交叉',
       '作为"猎奇选项"而非"主投路径"'
     ],
     current_match: '6.5 · 嵌入式通用技能匹配，脑电采集需从零',
-    future_match: '6.0 · 研究生方向与脑机接口交集小',
+    future_match: '6.0 · 微针全链研究方向与脑机接口交集小',
     pos: [
-      {dept: '电生理系统部', jobs: ['嵌入式软件工程师（脑电+FreeRTOS）', '柔性电极工程师']},
-      {dept: '算法部', jobs: ['脑电信号解析工程师（1D-CNN 边缘部署）']},
-      {dept: '柔性电子实验室（研究员岗）', jobs: ['柔性脑机接口研究员（AFM挂名加分）']}
+      {dept: '电生理系统部', jobs: ['嵌入式软件工程师（脑电+FreeRTOS）', '柔性电极制备工程师']},
+      {dept: '算法部', jobs: ['生物信号解析工程师（1D-CNN 边缘部署）']},
+      {dept: '柔性电子实验室（研究员岗）', jobs: ['柔性传感器研究员（AFM挂名加分）']}
     ],
     adv: ['实习背景直接延续', 'AFM 在研究员岗加分', '技术前沿 simly 高', '闵行通勤可达'],
     risk: ['初创融资周期风险', '平台规模有限', '商业化周期长'],
@@ -1774,23 +1775,23 @@ const COMPANIES_V4 = [
     total5y: 230,
     wlb_hours: 45,
     pay: 7.8, tech_now: 9.0, tech_future: 9.5, geo: 7.5, career: 8.5,
-    wlb: 7.8, endow: 8.5, industry: 9.0, cohort: 9.0, housing: 6,
-    poct: 8, sweat: 7, ai_ivd: 7, energy: 7,
+    wlb: 7.8, endow: 8.5, industry: 9.0, cohort: 8.8, housing: 6,
+    mn_sensor: 9, sig_embed: 8, edge_ai: 8, sys_integ: 9,
     afm_boost: true,
     intern_path: null,
-    intro: '港股 2252.HK，手术机器人国产龙头（图迈/鸿鹄）。可穿戴医疗事业部专攻**微针给药**和传感器系统，与王侃课题组研究方向完美对口。张江总部，薪资+期权组合优秀。',
+    intro: '港股 2252.HK，手术机器人国产龙头（图迈/鸿鹄）。可穿戴医疗事业部专攻**微针给药和传感器系统**，与你微针阵列全链研究方向完美对口。张江总部，薪资+期权组合优秀。',
     why_for_you: [
-      '⭐ 微针给药方向 = 王侃课题组核心方向 100% 对口',
+      '⭐ 微针传感器制备 = 你的核心课题第①环节直接对口',
+      '⭐ 可穿戴系统集成 = 你的课题第④环节直接对口',
       'AFM 背景在可穿戴医疗事业部研究员岗溢价',
-      '手术机器人 + 可穿戴医疗双赛道',
-      'IEC 62304 认证经验可继承迈瑞路径',
+      '电化学信号调理电路设计（课题第②环节）在该部门有直接需求',
       '张江办公配合总部资源'
     ],
     current_match: '9.0 · 低功耗 MCU+BLE 技术匹配',
-    future_match: '9.5 · 微针+电化学+MEMS 完美匹配研究生方向',
+    future_match: '9.5 · 微针制备+信号读出+可穿戴集成 完美匹配你四环节研究',
     pos: [
-      {dept: '可穿戴医疗事业部（微针方向）', jobs: ['嵌入式软件工程师（MCU+BLE）', '微针传感器系统工程师', '电化学/MEMS 工程师']},
-      {dept: '手术机器人研发部', jobs: ['嵌入式控制系统工程师']}
+      {dept: '可穿戴医疗事业部（微针方向）', jobs: ['微针传感器制备与表征工程师', '电化学信号调理电路设计工程师', '可穿戴系统集成工程师']},
+      {dept: '手术机器人研发部', jobs: ['嵌入式控制系统工程师（FreeRTOS+BLE）']}
     ],
     adv: ['微针方向课题组直接对口', 'WLB 优于华为', '港股期权长期价值', 'AFM 研究员通道'],
     risk: ['仍处亏损阶段', '张江房价偏高需 SP offer', '平台规模不及大厂'],
@@ -1807,23 +1808,23 @@ const COMPANIES_V4 = [
     total5y: 190,
     wlb_hours: 43,
     pay: 6.5, tech_now: 8.5, tech_future: 9.7, geo: 7.5, career: 8.0,
-    wlb: 8.0, endow: 8.5, industry: 9.0, cohort: 9.8, housing: 7,
-    poct: 10, sweat: 9, ai_ivd: 8, energy: 6,
+    wlb: 8.0, endow: 8.5, industry: 9.0, cohort: 9.5, housing: 7,
+    mn_sensor: 10, sig_embed: 9, edge_ai: 9, sys_integ: 10,
     afm_boost: true,
     intern_path: null,
-    intro: '国产血糖监测龙头，CGM（连续血糖）国产替代。POCT + 电化学传感是王侃课题组核心方向，匹配度 10/10。虽然现金包偏低，但**课题组成果直接变现**的最佳去处。',
+    intro: '国产血糖监测龙头，CGM（连续血糖）国产替代。CGM 微针传感器 + 电化学信号读出 + 嵌入式系统 + 可穿戴集成，与你微针阵列全链研究四环节完美重合。虽然现金包偏低，但**研究成果直接变现**的最佳去处。',
     why_for_you: [
-      '⭐ CGM = POCT × 电化学传感 × 微针 × 可穿戴 四重契合王侃方向',
-      '你 AFM 论文 + 王侃方向微针研究成果可直接发表/变现',
+      '⭐ CGM 微针传感器 = 你的课题第①环节（微针制备+电化学表征）100% 对口',
+      '⭐ 信号读出+嵌入式 = 你的课题第②环节直接匹配',
+      '⭐ 可穿戴集成 = 你的课题第④环节完美重合',
       '细分龙头，CGM 赛道 2029 将大爆发',
-      '上海研究院研究员岗位可继续做科研',
-      '为 PhD 路径留出窗口'
+      '上海研究院研究员岗位 + AFM 论文可直接发表/变现'
     ],
     current_match: '8.5 · 嵌入式 + BLE + 低功耗匹配',
-    future_match: '9.7 · 电化学/微针/CGM 完美匹配研究生方向（课题组契合最高）',
+    future_match: '9.7 · 微针制备+信号读出+边缘AI+可穿戴集成 四环节全匹配（课题契合最高）',
     pos: [
-      {dept: 'CGM 产品研发部', jobs: ['CGM 嵌入式开发工程师', '微针可穿戴传感工程师（与课题组直接对口）']},
-      {dept: '智能算法部', jobs: ['血糖预测算法工程师（AI-IVD 方向）']},
+      {dept: 'CGM 产品研发部', jobs: ['微针传感器制备与表征工程师', '电化学信号调理电路工程师', 'CGM 可穿戴系统集成工程师']},
+      {dept: '智能算法部', jobs: ['生物标志物浓度预测算法工程师（边缘AI部署）']},
       {dept: '上海研究院', jobs: ['CGM 研究员（适合 AFM 背景）']}
     ],
     adv: ['课题组方向 100% 对口', '细分龙头', '研究员岗 AFM 加分', 'WLB 极佳'],
@@ -1841,8 +1842,8 @@ const COMPANIES_V4 = [
     total5y: 480,
     wlb_hours: 42,
     pay: 10, tech_now: 8.5, tech_future: 7.5, geo: 8.5, career: 9.8,
-    wlb: 9.0, endow: 10, industry: 10, cohort: 4, housing: 5,
-    poct: 3, sweat: 5, ai_ivd: 8, energy: 6,
+    wlb: 9.0, endow: 10, industry: 10, cohort: 4.5, housing: 5,
+    mn_sensor: 2, sig_embed: 5, edge_ai: 9, sys_integ: 5,
     afm_boost: true,
     intern_path: null,
     intro: '全球 AI 算力龙头，股价 2 年涨 10 倍。上海张江研发中心是嵌入式 AI 天花板，Jetson 平台黄金组合。门槛最高但回报最高的一家。',
@@ -1874,16 +1875,16 @@ const COMPANIES_V4 = [
     total5y: 230,
     wlb_hours: 47,
     pay: 7.8, tech_now: 9.2, tech_future: 8.0, geo: 6.5, career: 8.5,
-    wlb: 7.0, endow: 8.5, industry: 9.0, cohort: 7.5, housing: 7,
-    poct: 5, sweat: 8, ai_ivd: 7, energy: 9,
+    wlb: 7.0, endow: 8.5, industry: 9.0, cohort: 6.8, housing: 7,
+    mn_sensor: 3, sig_embed: 9, edge_ai: 7, sys_integ: 8,
     afm_boost: false,
     intern_path: null,
-    intro: '全球智能可穿戴音频芯片龙头，TWS 耳机/智能手表芯片国内市占率第一。低功耗嵌入式与你技术栈完美对口。',
+    intro: '全球智能可穿戴音频芯片龙头，TWS 耳机/智能手表芯片国内市占率第一。低功耗嵌入式系统设计（课题第②环节）与你技术栈对口，可穿戴系统集成（课题第④环节）有行业积累。',
     why_for_you: [
-      '可穿戴芯片龙头 = 医疗可穿戴硬件基础',
-      '低功耗嵌入式完美对口你技术栈',
+      '可穿戴芯片龙头 = 你的可穿戴系统集成（第④环节）硬件基础',
+      '低功耗信号读出电路+嵌入式系统（第②环节）完美对口',
       '科创板上市后薪资水涨船高',
-      '自供能方向（课题组方向 4）芯片级解决方案'
+      '芯片级低功耗方案可迁移至微针传感系统'
     ],
     current_match: '9.2 · 低功耗 MCU + BLE + 音频芯片匹配',
     future_match: '8.0 · 芯片层与课题组材料方向间隔',
@@ -1906,16 +1907,16 @@ const COMPANIES_V4 = [
     total5y: 220,
     wlb_hours: 47,
     pay: 7.5, tech_now: 6.5, tech_future: 6.0, geo: 7.0, career: 6.5,
-    wlb: 7.5, endow: 7.5, industry: 8.5, cohort: 4.5, housing: 7,
-    poct: 4, sweat: 5, ai_ivd: 7, energy: 6,
+    wlb: 7.5, endow: 7.5, industry: 8.5, cohort: 4.3, housing: 7,
+    mn_sensor: 3, sig_embed: 5, edge_ai: 6, sys_integ: 3,
     afm_boost: false,
     intern_path: null,
-    intro: '全球首款获批植入式脑机接口，清华孵化。**⚠️ 同样不在你主线：脑机接口未在你技术栈，不在王侃课题组四方向**。作为前沿赛道了解即可。',
+    intro: '全球首款获批植入式脑机接口，清华孵化。**⚠️ 你的核心课题是微针阵列可穿戴电化学传感，植入式 BCI 不在研究链路里**。作为前沿赛道了解即可。',
     why_for_you: [
       '全球首款植入 BCI 光环',
       '清华系人脉可能对接',
-      '⚠️ 植入式 BCI 与你 POCT/微针方向交集有限',
-      '⚠️ 需从零学脑电算法，技术栈重建成本高'
+      '⚠️ 植入式与你微针透皮传感方向交集有限',
+      '生物信号采集（脑电 vs 电化学）底层逻辑不同，需从零学'
     ],
     current_match: '6.5 · 嵌入式技能通用匹配，脑电专业需从零',
     future_match: '6.0 · 植入式与你可穿戴医疗方向有差异',
@@ -1939,8 +1940,8 @@ const COMPANIES_V4 = [
     fund_pct: 10, fund_total: 10.5, stock: 'Pre-IPO 期权',
     total5y: 265, wlb_hours: 50,
     pay: 8.3, tech_now: 8.5, tech_future: 7.0, geo: 7.5, career: 8.8,
-    wlb: 6.5, endow: 8.5, industry: 8.5, cohort: 4.5, housing: 6,
-    poct: 2, sweat: 4, ai_ivd: 7, energy: 5,
+    wlb: 6.5, endow: 8.5, industry: 8.5, cohort: 4.0, housing: 6,
+    mn_sensor: 1, sig_embed: 4, edge_ai: 7, sys_integ: 4,
     afm_boost: false,
     intern_path: null,
     intro: '自动驾驶芯片独角兽（冲击港股 IPO），征程系列车规级芯片广泛装车。',
@@ -1965,8 +1966,8 @@ const COMPANIES_V4 = [
     fund_pct: 12, fund_total: 13.5, stock: '少量 RSU',
     total5y: 235, wlb_hours: 40,
     pay: 7.8, tech_now: 7.8, tech_future: 7.5, geo: 7.5, career: 7.8,
-    wlb: 9.8, endow: 8.0, industry: 8.5, cohort: 6.5, housing: 8,
-    poct: 6, sweat: 6, ai_ivd: 7, energy: 5,
+    wlb: 9.8, endow: 8.0, industry: 8.5, cohort: 5.8, housing: 8,
+    mn_sensor: 3, sig_embed: 7, edge_ai: 7, sys_integ: 6,
     afm_boost: true,
     intern_path: null,
     intro: '全球医疗影像三巨头之一，上海周浦基地。WLB 顶级 + 公积金顶格。',
@@ -1991,14 +1992,14 @@ const COMPANIES_V4 = [
     fund_pct: 11, fund_total: 12.3, stock: '期权',
     total5y: 210, wlb_hours: 41,
     pay: 7.0, tech_now: 8.0, tech_future: 8.0, geo: 9.5, career: 7.5,
-    wlb: 9.5, endow: 7.5, industry: 8.0, cohort: 7.5, housing: 9,
-    poct: 8, sweat: 7, ai_ivd: 6, energy: 7,
+    wlb: 9.5, endow: 7.5, industry: 8.0, cohort: 6.8, housing: 9,
+    mn_sensor: 5, sig_embed: 8, edge_ai: 6, sys_integ: 8,
     afm_boost: false,
     intern_path: null,
-    intro: '家用医疗器械龙头，老龄化大趋势受益者。闵行研发中心 + WLB 极佳 + 公积金 11+11。',
-    why_for_you: ['闵行定居超友好', 'WLB 41h 极佳', '家用医疗与可穿戴延伸', '课题组 POCT+汗液方向中等契合'],
+    intro: '家用医疗器械龙头，老龄化大趋势受益者。家用健康监测设备（血压/血氧/体温）与你可穿戴系统集成（课题第④环节）方向延伸。闵行研发中心 + WLB 极佳 + 公积金 11+11。',
+    why_for_you: ['闵行定居超友好', 'WLB 41h 极佳', '嵌入式信号读出（第②环节）+ 可穿戴集成（第④环节）中等契合', '家用健康设备是微针传感的下游应用场景'],
     current_match: '8.0 · 血压血氧 BLE 匹配',
-    future_match: '8.0 · POCT 家用场景延伸',
+    future_match: '8.0 · 可穿戴健康监测场景延伸',
     pos: [
       {dept: '智能健康设备研发部', jobs: ['家用健康设备嵌入式工程师', 'IoT 系统工程师']}
     ],
@@ -2018,22 +2019,22 @@ const COMPANIES_V4 = [
     total5y: 195, wlb_hours: 45,
     pay: 5.8, tech_now: 7.5, tech_future: 9.8, geo: 8.5, career: 9.0,
     wlb: 8.5, endow: 9.8, industry: 9.5, cohort: 9.8, housing: 7,
-    poct: 9, sweat: 10, ai_ivd: 7, energy: 9,
+    mn_sensor: 10, sig_embed: 9, edge_ai: 8, sys_integ: 10,
     afm_boost: true,
     intern_path: null,
-    intro: '中国科学院上海微系统所，MEMS + 柔性电子 + 可穿戴国家队。王侃课题组方向最直接对口的产业链出口。',
+    intro: '中国科学院上海微系统所，MEMS + 微纳传感器 + 柔性电子国家队。微针阵列制备工艺（课题第①环节）和可穿戴系统集成（课题第④环节）的国家级平台。',
     why_for_you: [
-      '⭐ MEMS + 柔性可穿戴 + 自供能三重完美匹配王侃方向',
+      '⭐ MEMS 微纳加工 = 微针阵列制备（第①环节）的顶级平台',
+      '⭐ 柔性可穿戴系统集成 = 课题第④环节直接对口',
       'AFM + 6 专利 + EI → 助理研究员岗位直通',
       '可在职博士/工程博士路径',
-      '事业编制 + 人才公寓',
-      '学术圈对交大仪科背景极度认可'
+      '电化学表征设备（CV/DPV/EIS）齐全，课题第①环节实验条件顶配'
     ],
     current_match: '7.5 · 偏学术，嵌入式工程偏应用',
-    future_match: '9.8 · MEMS/柔性/微针/自供能完美匹配',
+    future_match: '9.8 · 微针制备+信号读出+系统集成 完美匹配你四环节研究',
     pos: [
-      {dept: 'MEMS 实验室', jobs: ['MEMS 传感器研发工程师', '助理研究员']},
-      {dept: '柔性电子研究部', jobs: ['柔性可穿戴系统工程师', '研究员通道']}
+      {dept: 'MEMS 实验室', jobs: ['微针阵列传感器研发工程师', 'MEMS 电化学表征工程师', '助理研究员']},
+      {dept: '柔性电子研究部', jobs: ['可穿戴传感系统集成工程师', '研究员通道']}
     ],
     adv: ['技术契合度顶级', '学术资源', '可转博', '事业编'],
     risk: ['薪资偏低 22-30w', '偏学术路径'],
@@ -2050,23 +2051,23 @@ const COMPANIES_V4 = [
     housing_bonus: '医院人才公寓',
     total5y: 170, wlb_hours: 40,
     pay: 4.8, tech_now: 8.5, tech_future: 9.5, geo: 9.0, career: 9.0,
-    wlb: 9.5, endow: 9.8, industry: 9.0, cohort: 9.5, housing: 5,
-    poct: 9, sweat: 7, ai_ivd: 8, energy: 6,
+    wlb: 9.5, endow: 9.8, industry: 9.0, cohort: 9.0, housing: 5,
+    mn_sensor: 8, sig_embed: 8, edge_ai: 9, sys_integ: 9,
     afm_boost: true,
     intern_path: null,
-    intro: '交大医学院附属瑞金医院临床研究中心/工程部。蓝海选项，转化医学 + 医工交叉。你的 6 项发明专利 + AFM 论文可直接变现为医院科研项目。',
+    intro: '交大医学院附属瑞金医院临床研究中心/工程部。蓝海选项，转化医学 + 医工交叉。你的微针阵列传感系统在临床验证（课题第④环节）和边缘AI诊断（第③环节）场景直接落地。',
     why_for_you: [
       '⭐ 蓝海路径：99% 同学没考虑过但适合度极高',
-      'AFM + 专利 6 项 → 医院科研基金申报通过率 top',
+      '微针传感原型机在体验证（第④环节）= 医院临床场景最直接',
+      '边缘AI智能诊断（第③环节）在临床数据丰富',
       '事业编制 + 可在职博士 + 临床转化',
-      '交大系内部流通，人脉天然',
-      'WLB 40h + 医院绿色通道'
+      'AFM + 专利 6 项 → 医院科研基金申报通过率 top'
     ],
     current_match: '8.5 · 医疗嵌入式 + 设备维护匹配',
-    future_match: '9.5 · POCT/微针/电化学在临床转化最前线',
+    future_match: '9.5 · 微针传感器临床验证+边缘AI诊断 在临床转化最前线',
     pos: [
-      {dept: '临床研究中心·工程组', jobs: ['医学工程师（研发+临床）']},
-      {dept: '医工转化中心', jobs: ['医疗仪器研发工程师（科研岗）']}
+      {dept: '临床研究中心·工程组', jobs: ['医工交叉研发工程师（微针传感临床验证）']},
+      {dept: '医工转化中心', jobs: ['可穿戴医疗系统工程师（科研岗）', '生物信号AI诊断算法工程师']}
     ],
     adv: ['事业编+人才公寓', '交大医学院系统', '你的科研能直接变现', 'WLB 40h'],
     risk: ['薪资较低 18-28w', '偏体制化'],
@@ -2083,8 +2084,8 @@ const COMPANIES_V4 = [
     housing_bonus: '住房补贴 1000-3000 元/月 + 人才公寓 5 年',
     total5y: 200, wlb_hours: 40,
     pay: 5.8, tech_now: 7.0, tech_future: 6.0, geo: 9.5, career: 9.0,
-    wlb: 10, endow: 8.5, industry: 9.5, cohort: 3, housing: 9,
-    poct: 2, sweat: 3, ai_ivd: 5, energy: 4,
+    wlb: 10, endow: 8.5, industry: 9.5, cohort: 3.0, housing: 9,
+    mn_sensor: 1, sig_embed: 4, edge_ai: 4, sys_integ: 3,
     afm_boost: false,
     intern_path: null,
     intro: '央企大飞机龙头。WLB 顶级 955，住房补贴 + 人才公寓 + 稳定性王者。',
@@ -2111,7 +2112,7 @@ const COMPANIES_V4 = [
     total5y: 225, wlb_hours: 44,
     pay: 7.0, tech_now: 8.0, tech_future: 7.5, geo: 10, career: 8.5,
     wlb: 9.0, endow: 8.5, industry: 8.0, cohort: 5.5, housing: 10,
-    poct: 5, sweat: 4, ai_ivd: 7, energy: 5,
+    mn_sensor: 3, sig_embed: 7, edge_ai: 6, sys_integ: 6,
     afm_boost: true,
     intern_path: null,
     intro: '中国电科核心研究所（华东计算所）。闵行办公，安家费 15 万，5 年人才公寓，事业编制。',
@@ -2141,8 +2142,8 @@ const COMPANIES_V4 = [
     fund_pct: 12, fund_total: 13.5, stock: '股权激励',
     total5y: 245, wlb_hours: 48,
     pay: 7.5, tech_now: 8.0, tech_future: 6.5, geo: 9.0, career: 8.0,
-    wlb: 7.0, endow: 7.8, industry: 7.5, cohort: 4, housing: 9,
-    poct: 2, sweat: 4, ai_ivd: 6, energy: 5,
+    wlb: 7.0, endow: 7.8, industry: 7.5, cohort: 3.5, housing: 9,
+    mn_sensor: 1, sig_embed: 4, edge_ai: 5, sys_integ: 4,
     afm_boost: false,
     intern_path: null,
     intro: '上汽高端新能源品牌。嘉定安亭定居高，公积金 12+12。',
@@ -2167,8 +2168,8 @@ const COMPANIES_V4 = [
     fund_pct: 5, fund_total: 4.5, stock: 'TUP',
     total5y: 280, wlb_hours: 55,
     pay: 8.5, tech_now: 7.0, tech_future: 6.0, geo: 7.0, career: 9.5,
-    wlb: 5.5, endow: 9.0, industry: 9.0, cohort: 5, housing: 7,
-    poct: 3, sweat: 4, ai_ivd: 7, energy: 7,
+    wlb: 5.5, endow: 9.0, industry: 9.0, cohort: 4.3, housing: 7,
+    mn_sensor: 2, sig_embed: 5, edge_ai: 6, sys_integ: 4,
     afm_boost: false,
     intern_path: null,
     intro: '国产芯片设计绝对核心。',
@@ -2192,12 +2193,12 @@ const COMPANIES_V4 = [
     fund_pct: 8, fund_total: 8.8, stock: '港股期权',
     total5y: 180, wlb_hours: 44,
     pay: 6.0, tech_now: 8.0, tech_future: 9.5, geo: 7.0, career: 7.0,
-    wlb: 8.0, endow: 7.5, industry: 8.5, cohort: 9.3, housing: 6,
-    poct: 9, sweat: 8, ai_ivd: 7, energy: 7,
+    wlb: 8.0, endow: 7.5, industry: 8.5, cohort: 8.5, housing: 6,
+    mn_sensor: 9, sig_embed: 8, edge_ai: 8, sys_integ: 9,
     afm_boost: true,
     intern_path: null,
-    intro: '可穿戴胰岛素泵 + CGM 双赛道。课题组契合度极高但平台偏小。',
-    why_for_you: ['CGM + 胰岛素泵 = 可穿戴医疗典型', '课题组 POCT+微针完美延伸'],
+    intro: '可穿戴胰岛素泵 + CGM 双赛道。微针传感器+嵌入式系统+可穿戴集成与你四环节研究高度契合，但平台偏小。',
+    why_for_you: ['CGM 微针传感器 = 课题第①环节直接对口', '嵌入式信号读出+BLE = 课题第②环节匹配', '可穿戴系统集成 = 课题第④环节完美重合'],
     current_match: '8.0 · 嵌入式+BLE+低功耗',
     future_match: '9.5 · CGM+胰岛素泵+微针完美匹配',
     pos: [
@@ -2211,50 +2212,50 @@ const COMPANIES_V4 = [
   },
 
   // ═══ Tier A/B 候选 (id 21-40)  · 精简数据，不展开 ═══
-  {id:21,name:'华大智造',en:'MGI Tech',ticker:'688114.SH',cat:'medical',subcat:'基因测序+医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:40,cash_mid:35,fund_pct:10,fund_total:10.5,stock:'限制性股票',total5y:220,wlb_hours:45,pay:7.0,tech_now:8.2,tech_future:8.5,geo:7.5,career:8.0,wlb:8.0,endow:8.0,industry:8.5,cohort:8.0,housing:7,poct:9,sweat:5,ai_ivd:8,energy:5,afm_boost:true,intern_path:null,intro:'基因测序+医疗设备龙头。POCT 方向与课题组对口。',why_for_you:['POCT 方向对口','科创板龙头'],current_match:'8.2',future_match:'8.5',pos:[{dept:'设备研发部',jobs:['测序仪嵌入式工程师']}],adv:['科创板龙头','POCT 对口'],risk:['基因测序周期性'],source_url:'https://en.mgi-tech.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:22,name:'阶跃星辰',en:'StepFun',cat:'startup',subcat:'AI 大模型',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:45,cash_high:65,cash_mid:55,fund_pct:10,fund_total:10.5,stock:'SAFE 期权',total5y:330,wlb_hours:52,pay:8.5,tech_now:7.0,tech_future:6.5,geo:8.0,career:8.5,wlb:6.5,endow:8.0,industry:9.0,cohort:4,housing:7,poct:2,sweat:3,ai_ivd:8,energy:3,afm_boost:false,intern_path:null,intro:'上海 AI 大模型独角兽。',why_for_you:['薪资高','独角兽期权'],current_match:'7.0',future_match:'6.5',pos:[{dept:'基础设施部',jobs:['嵌入式 AI 部署']}],adv:['AI 独角兽'],risk:['偏算法'],source_url:'https://www.stepfun.com',source:'招聘公告',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:23,name:'航天八院 804 所',en:'SAST 804th',cat:'soe',subcat:'央企军工',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:27,cash_high:33,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家费15万+人才公寓5年+事业编',total5y:215,wlb_hours:44,pay:6.8,tech_now:7.0,tech_future:6.5,geo:10,career:8.3,wlb:9.0,endow:8.3,industry:7.8,cohort:4,housing:10,poct:3,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'航天科技集团八院核心所。闵行办公。',why_for_you:['事业编+安家费15万'],current_match:'7.0',future_match:'6.5',pos:[{dept:'嵌入式系统研发部',jobs:['嵌入式系统工程师']}],adv:['事业编'],risk:['保密'],source_url:'https://www.sast-space.com',source:'航天招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:24,name:'仁济医院 · 生物医学工程部',en:'Renji BME',cat:'hospital',subcat:'交大系三甲',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:20,cash_high:28,cash_mid:24,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院人才公寓',total5y:170,wlb_hours:40,pay:4.5,tech_now:8.0,tech_future:9.0,geo:9.0,career:8.8,wlb:9.5,endow:9.5,industry:8.8,cohort:9.0,housing:5,poct:9,sweat:7,ai_ivd:7,energy:6,afm_boost:true,intern_path:null,intro:'交大医学院附属仁济医院生物医学工程部。',why_for_you:['交大系事业编','AFM 变现'],current_match:'8.0',future_match:'9.0',pos:[{dept:'生物医学工程部',jobs:['临床工程师']}],adv:['事业编','交大系'],risk:['薪资低'],source_url:'https://www.renji.com',source:'医院招聘',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
-  {id:25,name:'蔚来汽车',en:'NIO',cat:'auto',subcat:'新能源',dist:'嘉定新城',commute_jd:5,commute_mh:3,cash_low:36,cash_high:50,cash_mid:43,fund_pct:5,fund_total:4.5,stock:'美股期权',total5y:255,wlb_hours:48,pay:7.5,tech_now:8.0,tech_future:6.0,geo:9.0,career:8.0,wlb:7.0,endow:7.5,industry:7.5,cohort:3,housing:8,poct:1,sweat:3,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'高端电动车标杆。',why_for_you:['嘉定定居','全栈自研'],current_match:'8.0',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱域控制器']}],adv:['嘉定定居'],risk:['公积金低'],source_url:'https://www.nio.com/careers',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:26,name:'理想汽车',en:'Li Auto',cat:'auto',subcat:'新能源',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:38,cash_high:50,cash_mid:44,fund_pct:12,fund_total:13.5,stock:'美股期权',total5y:265,wlb_hours:50,pay:8.0,tech_now:7.5,tech_future:6.0,geo:7.5,career:8.5,wlb:6.5,endow:7.5,industry:7.5,cohort:4,housing:7,poct:1,sweat:3,ai_ivd:7,energy:5,afm_boost:false,intern_path:null,intro:'新势力销量头部。',why_for_you:['销量稳定','公积金顶格'],current_match:'7.5',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱系统']}],adv:['公积金 12+12'],risk:['WLB 偏低'],source_url:'https://careers.lixiang.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:27,name:'美敦力',en:'Medtronic',cat:'medical',subcat:'外企医疗',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:30,cash_high:38,cash_mid:34,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:215,wlb_hours:40,pay:7.0,tech_now:7.8,tech_future:8.5,geo:8.5,career:7.5,wlb:9.8,endow:8.0,industry:8.0,cohort:8.5,housing:8,poct:8,sweat:5,ai_ivd:6,energy:7,afm_boost:true,intern_path:null,intro:'全球医疗器械第一大公司。心脏节律、神经调控、糖尿病可穿戴全覆盖。',why_for_you:['WLB 顶级','IEC 62304 经验','AFM 在研发岗加分'],current_match:'7.8',future_match:'8.5',pos:[{dept:'心脏节律管理部',jobs:['嵌入式电子工程师']}],adv:['WLB 顶级','国际化'],risk:['外企天花板'],source_url:'https://jobs.medtronic.com',source:'官方招聘 + 脉脉',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
-  {id:28,name:'强生医疗',en:'Johnson & Johnson Medical',cat:'medical',subcat:'外企医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:215,wlb_hours:40,pay:7.2,tech_now:7.0,tech_future:7.5,geo:7.0,career:7.5,wlb:9.8,endow:7.8,industry:8.0,cohort:7,housing:7,poct:7,sweat:5,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'全球最大医疗器械+药品公司。',why_for_you:['WLB 顶级','国际平台'],current_match:'7.0',future_match:'7.5',pos:[{dept:'医疗器械部',jobs:['嵌入式工程师']}],adv:['WLB 顶级'],risk:['外企天花板'],source_url:'https://www.careers.jnj.com',source:'官方招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:29,name:'英特尔上海',en:'Intel Shanghai',cat:'aiot',subcat:'外企芯片',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:32,cash_high:42,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:230,wlb_hours:40,pay:7.5,tech_now:7.5,tech_future:6.5,geo:9.0,career:7.5,wlb:9.5,endow:8.0,industry:7.0,cohort:4,housing:8,poct:2,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'英特尔上海紫竹研发中心。',why_for_you:['紫竹（闵行）定居完美','公积金顶格'],current_match:'7.5',future_match:'6.5',pos:[{dept:'IoT 事业部',jobs:['嵌入式软件']}],adv:['闵行定居+公积金顶格'],risk:['业务下行'],source_url:'https://jobs.intel.com',source:'官方招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:30,name:'奕瑞科技',en:'iRay',ticker:'688301.SH',cat:'medical',subcat:'X射线探测器',dist:'嘉定新城',commute_jd:5,commute_mh:3,cash_low:28,cash_high:36,cash_mid:32,fund_pct:8,fund_total:8.8,stock:'期权',total5y:195,wlb_hours:43,pay:6.8,tech_now:7.5,tech_future:7.0,geo:9.0,career:7.5,wlb:8.0,endow:6.5,industry:8.0,cohort:5,housing:9,poct:4,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'X射线探测器全球龙头，嘉定总部。',why_for_you:['嘉定总部定居','医疗影像细分龙头'],current_match:'7.5',future_match:'7.0',pos:[{dept:'探测器研发',jobs:['X 射线探测器嵌入式']}],adv:['嘉定定居'],risk:['业务窄'],source_url:'https://www.iraychina.com',source:'公司官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
+  {id:21,name:'华大智造',en:'MGI Tech',ticker:'688114.SH',cat:'medical',subcat:'基因测序+医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:40,cash_mid:35,fund_pct:10,fund_total:10.5,stock:'限制性股票',total5y:220,wlb_hours:45,pay:7.0,tech_now:8.2,tech_future:8.5,geo:7.5,career:8.0,wlb:8.0,endow:8.0,industry:8.5,cohort:6.0,housing:7,mn_sensor:4,sig_embed:7,edge_ai:7,sys_integ:6,afm_boost:true,intern_path:null,intro:'基因测序+医疗设备龙头。微流控芯片与微针阵列制备工艺有交叉（第①环节），嵌入式系统（第②环节）匹配。',why_for_you:['微流控工艺与微针制备有交叉','嵌入式系统匹配','科创板龙头'],current_match:'8.2',future_match:'8.5',pos:[{dept:'设备研发部',jobs:['测序仪嵌入式工程师','微流控传感系统工程师']}],adv:['科创板龙头','微流控工艺交叉'],risk:['基因测序周期性'],source_url:'https://en.mgi-tech.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:22,name:'阶跃星辰',en:'StepFun',cat:'startup',subcat:'AI 大模型',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:45,cash_high:65,cash_mid:55,fund_pct:10,fund_total:10.5,stock:'SAFE 期权',total5y:330,wlb_hours:52,pay:8.5,tech_now:7.0,tech_future:6.5,geo:8.0,career:8.5,wlb:6.5,endow:8.0,industry:9.0,cohort:3.8,housing:7,mn_sensor:1,sig_embed:3,edge_ai:8,sys_integ:3,afm_boost:false,intern_path:null,intro:'上海 AI 大模型独角兽。边缘AI（第③环节）有交叉，但纯软件方向。',why_for_you:['薪资高','边缘AI部署（第③环节）有交叉','独角兽期权'],current_match:'7.0',future_match:'6.5',pos:[{dept:'基础设施部',jobs:['嵌入式AI推理部署工程师']}],adv:['AI 独角兽'],risk:['偏算法'],source_url:'https://www.stepfun.com',source:'招聘公告',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:23,name:'航天八院 804 所',en:'SAST 804th',cat:'soe',subcat:'央企军工',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:27,cash_high:33,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家费15万+人才公寓5年+事业编',total5y:215,wlb_hours:44,pay:6.8,tech_now:7.0,tech_future:6.5,geo:10,career:8.3,wlb:9.0,endow:8.3,industry:7.8,cohort:3.3,housing:10,mn_sensor:1,sig_embed:5,edge_ai:4,sys_integ:3,afm_boost:false,intern_path:null,intro:'航天科技集团八院核心所。嵌入式系统（第②环节）有匹配，但航天传感器与微针电化学方向差异大。闵行办公。',why_for_you:['事业编+安家费15万','嵌入式系统有基础'],current_match:'7.0',future_match:'6.5',pos:[{dept:'嵌入式系统研发部',jobs:['嵌入式系统工程师']}],adv:['事业编'],risk:['与微针研究方向偏离'],source_url:'https://www.sast-space.com',source:'航天招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:24,name:'仁济医院 · 生物医学工程部',en:'Renji BME',cat:'hospital',subcat:'交大系三甲',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:20,cash_high:28,cash_mid:24,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院人才公寓',total5y:170,wlb_hours:40,pay:4.5,tech_now:8.0,tech_future:9.0,geo:9.0,career:8.8,wlb:9.5,endow:9.5,industry:8.8,cohort:8.8,housing:5,mn_sensor:8,sig_embed:8,edge_ai:9,sys_integ:9,afm_boost:true,intern_path:null,intro:'交大医学院附属仁济医院生物医学工程部。微针传感原型机临床验证（第④环节）和边缘AI诊断（第③环节）的顶级场景。',why_for_you:['微针传感临床验证（第④环节）直接落地','边缘AI诊断（第③环节）数据丰富','交大系事业编','AFM 变现'],current_match:'8.0',future_match:'9.0',pos:[{dept:'生物医学工程部',jobs:['医工交叉研发工程师','可穿戴传感临床验证工程师']}],adv:['事业编','交大系','微针临床验证场景'],risk:['薪资低'],source_url:'https://www.renji.com',source:'医院招聘',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
+  {id:25,name:'蔚来汽车',en:'NIO',cat:'auto',subcat:'新能源',dist:'嘉定新城',commute_jd:5,commute_mh:3,cash_low:36,cash_high:50,cash_mid:43,fund_pct:5,fund_total:4.5,stock:'美股期权',total5y:255,wlb_hours:48,pay:7.5,tech_now:8.0,tech_future:6.0,geo:9.0,career:8.0,wlb:7.0,endow:7.5,industry:7.5,cohort:2.5,housing:8,mn_sensor:1,sig_embed:3,edge_ai:4,sys_integ:3,afm_boost:false,intern_path:null,intro:'高端电动车标杆。与微针研究方向零交集。',why_for_you:['嘉定定居','全栈自研'],current_match:'8.0',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱域控制器']}],adv:['嘉定定居'],risk:['公积金低','与微针研究方向无关'],source_url:'https://www.nio.com/careers',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:26,name:'理想汽车',en:'Li Auto',cat:'auto',subcat:'新能源',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:38,cash_high:50,cash_mid:44,fund_pct:12,fund_total:13.5,stock:'美股期权',total5y:265,wlb_hours:50,pay:8.0,tech_now:7.5,tech_future:6.0,geo:7.5,career:8.5,wlb:6.5,endow:7.5,industry:7.5,cohort:4,housing:7,mn_sensor:1,sig_embed:3,edge_ai:7,sys_integ:5,afm_boost:false,intern_path:null,intro:'新势力销量头部。与微针研究方向零交集，边缘AI部署（第③环节）有少量技术交叉。',why_for_you:['销量稳定','公积金顶格','边缘AI部署（第③环节）有少量交叉','与微针研究方向零交集'],current_match:'7.5',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱域控制器嵌入式工程师']}],adv:['公积金 12+12'],risk:['WLB 偏低','与医疗方向零交集'],source_url:'https://careers.lixiang.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:27,name:'美敦力',en:'Medtronic',cat:'medical',subcat:'外企医疗',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:30,cash_high:38,cash_mid:34,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:215,wlb_hours:40,pay:7.0,tech_now:7.8,tech_future:8.5,geo:8.5,career:7.5,wlb:9.8,endow:8.0,industry:8.0,cohort:7.0,housing:8,mn_sensor:7,sig_embed:7,edge_ai:6,sys_integ:7,afm_boost:true,intern_path:null,intro:'全球医疗器械第一大公司。糖尿病可穿戴（CGM+胰岛素泵）与你微针传感方向有交叉，植入式神经调控的信号读出电路（第②环节）可借鉴。',why_for_you:['WLB 顶级','CGM/可穿戴与微针传感方向有交叉','信号读出电路设计经验可借鉴','AFM 在研发岗加分'],current_match:'7.8',future_match:'8.5',pos:[{dept:'心脏节律管理部',jobs:['植入式设备嵌入式工程师']},{dept:'糖尿病业务部',jobs:['CGM 可穿戴系统工程师']}],adv:['WLB 顶级','国际化','可穿戴医疗交叉'],risk:['外企天花板'],source_url:'https://jobs.medtronic.com',source:'官方招聘 + 脉脉',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
+  {id:28,name:'强生医疗',en:'Johnson & Johnson Medical',cat:'medical',subcat:'外企医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:215,wlb_hours:40,pay:7.2,tech_now:7.0,tech_future:7.5,geo:7.0,career:7.5,wlb:9.8,endow:7.8,industry:8.0,cohort:5.8,housing:7,mn_sensor:5,sig_embed:6,edge_ai:5,sys_integ:6,afm_boost:true,intern_path:null,intro:'全球最大医疗器械+药品公司。医疗设备嵌入式系统（第②环节）和可穿戴健康监测（第④环节）有交叉。',why_for_you:['WLB 顶级','嵌入式系统+可穿戴有交叉','国际平台'],current_match:'7.0',future_match:'7.5',pos:[{dept:'医疗器械部',jobs:['医疗设备嵌入式工程师','可穿戴健康监测系统工程师']}],adv:['WLB 顶级'],risk:['外企天花板'],source_url:'https://www.careers.jnj.com',source:'官方招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:29,name:'英特尔上海',en:'Intel Shanghai',cat:'aiot',subcat:'外企芯片',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:32,cash_high:42,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:230,wlb_hours:40,pay:7.5,tech_now:7.5,tech_future:6.5,geo:9.0,career:7.5,wlb:9.5,endow:8.0,industry:7.0,cohort:4,housing:8,mn_sensor:2,sig_embed:3,edge_ai:6,sys_integ:5,afm_boost:false,intern_path:null,intro:'英特尔上海紫竹研发中心。IoT嵌入式系统（第②环节）有技术交叉，但与微针传感方向间隔较远。',why_for_you:['紫竹（闵行）定居完美','公积金顶格','IoT嵌入式（第②环节）有技术基础','与微针传感方向间隔较远'],current_match:'7.5',future_match:'6.5',pos:[{dept:'IoT 事业部',jobs:['IoT 嵌入式软件工程师']}],adv:['闵行定居+公积金顶格'],risk:['业务下行','与医疗方向偏离'],source_url:'https://jobs.intel.com',source:'官方招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:30,name:'奕瑞科技',en:'iRay',ticker:'688301.SH',cat:'medical',subcat:'X射线探测器',dist:'嘉定新城',commute_jd:5,commute_mh:3,cash_low:28,cash_high:36,cash_mid:32,fund_pct:8,fund_total:8.8,stock:'期权',total5y:195,wlb_hours:43,pay:6.8,tech_now:7.5,tech_future:7.0,geo:9.0,career:7.5,wlb:8.0,endow:6.5,industry:8.0,cohort:5,housing:9,mn_sensor:4,sig_embed:3,edge_ai:6,sys_integ:5,afm_boost:false,intern_path:null,intro:'X射线探测器全球龙头，嘉定总部。探测器信号调理电路设计思路可借鉴（第②环节），但与微针传感方向交集有限。',why_for_you:['嘉定总部定居','医疗影像细分龙头','信号调理电路设计思路可借鉴（第②环节）','与微针传感方向交集有限'],current_match:'7.5',future_match:'7.0',pos:[{dept:'探测器研发部',jobs:['X 射线探测器嵌入式工程师']}],adv:['嘉定定居','细分龙头'],risk:['业务窄','与可穿戴微针弱相关'],source_url:'https://www.iraychina.com',source:'公司官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
 
   // ═══ Tier B 候选 (id 31-50) · 仅核心数据 ═══
-  {id:31,name:'阶梯医疗',en:'Stairmed',cat:'startup',subcat:'脑机接口 · 非主线',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:40,cash_mid:35,fund_pct:8,fund_total:8.8,stock:'期权',total5y:200,wlb_hours:48,pay:6.8,tech_now:6.0,tech_future:5.5,geo:7.0,career:6.0,wlb:7.0,endow:7.0,industry:8.0,cohort:4,housing:7,poct:3,sweat:4,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'脑机接口新锐，复旦孵化。⚠️ 同上，非主线选项。',why_for_you:['第三脑机接口玩家','⚠️ 非你主线方向'],current_match:'6.0',future_match:'5.5',pos:[{dept:'脑机接口研发',jobs:['嵌入式（需从零学脑电）']}],adv:['前沿赛道'],risk:['初创+非主线'],source_url:'https://www.stairmed.com',source:'36氪',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:32,name:'特斯拉',en:'Tesla',cat:'auto',subcat:'外资新能源',dist:'临港',commute_jd:3,commute_mh:2,cash_low:36,cash_high:50,cash_mid:43,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:265,wlb_hours:48,pay:8.0,tech_now:7.5,tech_future:6.0,geo:7.0,career:8.5,wlb:7.0,endow:8.5,industry:8.0,cohort:3,housing:7,poct:1,sweat:3,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'全球电动车标杆。',why_for_you:['品牌光环','RSU 长期价值'],current_match:'7.5',future_match:'6.0',pos:[{dept:'动力能源',jobs:['BMS 嵌入式']}],adv:['品牌 + RSU'],risk:['WLB 一般'],source_url:'https://www.tesla.com/careers',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:33,name:'字节健康',en:'ByteDance Health',cat:'aiot',subcat:'互联网+健康',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:40,cash_high:55,cash_mid:47.5,fund_pct:12,fund_total:13.5,stock:'期权',total5y:285,wlb_hours:55,pay:8.5,tech_now:7.5,tech_future:7.0,geo:7.5,career:8.5,wlb:5.5,endow:8.0,industry:8.0,cohort:6,housing:6,poct:5,sweat:6,ai_ivd:8,energy:5,afm_boost:false,intern_path:null,intro:'字节健康事业部。',why_for_you:['薪资高'],current_match:'7.5',future_match:'7.0',pos:[{dept:'智能硬件',jobs:['健康穿戴嵌入式']}],adv:['薪资高'],risk:['WLB 55h'],source_url:'https://jobs.bytedance.com',source:'官方',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
-  {id:34,name:'博世',en:'Bosch',cat:'auto',subcat:'外资 Tier 1',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:24,cash_high:34,cash_mid:29,fund_pct:12,fund_total:13.5,stock:'none',total5y:185,wlb_hours:40,pay:6.2,tech_now:7.5,tech_future:6.5,geo:7.5,career:7.5,wlb:9.5,endow:7.5,industry:7.5,cohort:3,housing:7,poct:2,sweat:3,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'全球 Tier 1 巨头。',why_for_you:['WLB 顶级'],current_match:'7.5',future_match:'6.5',pos:[{dept:'底盘控制',jobs:['ESP/ABS']}],adv:['WLB 顶级'],risk:['晋升窄'],source_url:'https://www.bosch.com.cn',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
-  {id:35,name:'大疆创新',en:'DJI',cat:'aiot',subcat:'无人机',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:38,cash_high:58,cash_mid:48,fund_pct:10,fund_total:10.5,stock:'虚拟股权',total5y:290,wlb_hours:50,pay:7.8,tech_now:7.5,tech_future:6.0,geo:7.0,career:8.5,wlb:6.5,endow:8.5,industry:8.0,cohort:3,housing:6,poct:1,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'全球无人机龙头。',why_for_you:['RTOS 天花板','简历加分'],current_match:'7.5',future_match:'6.0',pos:[{dept:'飞控',jobs:['飞控嵌入式']}],adv:['技术深度'],risk:['WLB 偏低'],source_url:'https://we.dji.com',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:36,name:'宇构智核',en:'Yugou Core',cat:'startup',subcat:'脑机接口早期 · 规模过小',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:20,cash_high:30,cash_mid:25,fund_pct:6,fund_total:6.0,stock:'期权（流动性差）',total5y:150,wlb_hours:48,pay:5.3,tech_now:7.5,tech_future:6.5,geo:6.5,career:5.5,wlb:7.0,endow:6.5,industry:7.5,cohort:5,housing:4,poct:3,sweat:5,ai_ivd:7,energy:5,afm_boost:false,intern_path:null,intern_boost:0,honest_feedback:'你的亲身实习反馈：公司太小，薪资与未来前景都无竞争力',intro:'⚠️ 你在这里实习过（2025.12-2026.2），**亲身感受：公司规模过小，薪资和未来前景都没有竞争力**。脑机接口初创赛道本身有价值，但作为就业选项不推荐。',why_for_you:['⚠️ 亲身反馈：公司太小不推荐','脑机接口赛道价值可通过脑虎/博睿康实现','这段实习更适合写在简历里，不适合转正'],current_match:'7.5',future_match:'6.5',pos:[{dept:'脑机接口项目部',jobs:['嵌入式全栈（不推荐转正）']}],adv:['简历已有经历'],risk:['⚠️ 用户亲述：规模小+薪资差+前景弱','初创风险极高','期权流动性差'],source_url:'-',source:'🟢 你亲自实习反馈',c_pay:'🟢',c_tech:'🟡',c_wlb:'🟠'},
-  {id:37,name:'寒武纪',en:'Cambricon',ticker:'688256.SH',cat:'aiot',subcat:'AI 芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:38,cash_high:50,cash_mid:44,fund_pct:10,fund_total:10.5,stock:'限制性股票',total5y:270,wlb_hours:50,pay:8.0,tech_now:8.0,tech_future:6.5,geo:7.0,career:8.5,wlb:6.5,endow:8.5,industry:8.5,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:8,energy:4,afm_boost:false,intern_path:null,intro:'AI 芯片第一股。',why_for_you:['AI 芯片独角兽'],current_match:'8.0',future_match:'6.5',pos:[{dept:'嵌入式平台部',jobs:['AI 芯片嵌入式']}],adv:['AI 龙头'],risk:['业绩波动'],source_url:'https://www.cambricon.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:38,name:'黑芝麻智能',en:'Black Sesame',cat:'auto',subcat:'自动驾驶芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:32,cash_high:48,cash_mid:40,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:245,wlb_hours:48,pay:7.3,tech_now:8.2,tech_future:6.5,geo:7.0,career:8.0,wlb:7.0,endow:8.0,industry:8.0,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:7,energy:5,afm_boost:false,intern_path:null,intro:'车规级 AI 芯片独角兽。',why_for_you:['港股上市期权'],current_match:'8.2',future_match:'6.5',pos:[{dept:'芯片系统',jobs:['SoC 嵌入式']}],adv:['AI 芯片头部'],risk:['股价波动'],source_url:'https://www.blacksesametech.com',source:'港交所',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
-  {id:39,name:'华域汽车',en:'HASCO',cat:'auto',subcat:'上汽 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:24,cash_high:36,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'少量',total5y:190,wlb_hours:42,pay:6.5,tech_now:7.2,tech_future:5.5,geo:7.5,career:7.5,wlb:9.0,endow:7.0,industry:7.0,cohort:2,housing:7,poct:1,sweat:2,ai_ivd:4,energy:4,afm_boost:false,intern_path:null,intro:'上汽集团核心零部件。',why_for_you:['公积金顶格','WLB 极佳'],current_match:'7.2',future_match:'5.5',pos:[{dept:'电子系统',jobs:['车载嵌入式']}],adv:['公积金 12+12'],risk:['偏传统'],source_url:'https://www.hasco.com.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:40,name:'恩智浦',en:'NXP',cat:'auto',subcat:'外企汽车芯片',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:44,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:230,wlb_hours:42,pay:7.3,tech_now:8.0,tech_future:6.5,geo:7.5,career:7.8,wlb:9.5,endow:8.0,industry:8.0,cohort:3,housing:7,poct:1,sweat:2,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'汽车芯片全球龙头。',why_for_you:['汽车芯片','WLB 顶级'],current_match:'8.0',future_match:'6.5',pos:[{dept:'汽车 MCU',jobs:['汽车芯片嵌入式']}],adv:['WLB 顶级'],risk:['外企天花板'],source_url:'https://www.nxp.com/careers',source:'官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
+  {id:31,name:'阶梯医疗',en:'Stairmed',cat:'startup',subcat:'脑机接口 · 非主线',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:40,cash_mid:35,fund_pct:8,fund_total:8.8,stock:'期权',total5y:200,wlb_hours:48,pay:6.8,tech_now:6.0,tech_future:5.5,geo:7.0,career:6.0,wlb:7.0,endow:7.0,industry:8.0,cohort:4,housing:7,mn_sensor:3,sig_embed:4,edge_ai:6,sys_integ:5,afm_boost:false,intern_path:null,intro:'脑机接口新锐，复旦孵化。⚠️ 脑机接口不在你微针阵列研究链路中，非主线选项。',why_for_you:['脑机接口第三梯队','信号采集嵌入式（第②环节）有基础','⚠️ 脑机接口不在微针研究链路中','初创风险'],current_match:'6.0',future_match:'5.5',pos:[{dept:'脑机接口研发',jobs:['嵌入式工程师（需从零学脑电）']}],adv:['前沿赛道'],risk:['初创+非主线','与微针方向偏离'],source_url:'https://www.stairmed.com',source:'36氪',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:32,name:'特斯拉',en:'Tesla',cat:'auto',subcat:'外资新能源',dist:'临港',commute_jd:3,commute_mh:2,cash_low:36,cash_high:50,cash_mid:43,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:265,wlb_hours:48,pay:8.0,tech_now:7.5,tech_future:6.0,geo:7.0,career:8.5,wlb:7.0,endow:8.5,industry:8.0,cohort:3,housing:7,mn_sensor:1,sig_embed:3,edge_ai:5,sys_integ:5,afm_boost:false,intern_path:null,intro:'全球电动车标杆。与微针研究方向零交集。',why_for_you:['品牌光环','RSU 长期价值','与微针研究方向零交集'],current_match:'7.5',future_match:'6.0',pos:[{dept:'动力能源',jobs:['BMS 嵌入式工程师']}],adv:['品牌 + RSU'],risk:['WLB 一般','与医疗方向零交集'],source_url:'https://www.tesla.com/careers',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:33,name:'字节健康',en:'ByteDance Health',cat:'aiot',subcat:'互联网+健康',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:40,cash_high:55,cash_mid:47.5,fund_pct:12,fund_total:13.5,stock:'期权',total5y:285,wlb_hours:55,pay:8.5,tech_now:7.5,tech_future:7.0,geo:7.5,career:8.5,wlb:5.5,endow:8.0,industry:8.0,cohort:6,housing:6,mn_sensor:5,sig_embed:6,edge_ai:8,sys_integ:5,afm_boost:false,intern_path:null,intro:'字节健康事业部。健康穿戴与微针可穿戴有交叉，边缘AI信号处理（第③环节）匹配。',why_for_you:['薪资高','健康穿戴与微针可穿戴有交叉','边缘AI信号处理（第③环节）匹配','WLB 55h 大小周'],current_match:'7.5',future_match:'7.0',pos:[{dept:'智能硬件研发部',jobs:['健康穿戴嵌入式工程师']}],adv:['薪资高','健康穿戴交叉'],risk:['WLB 55h+ 大小周','业务战略不稳'],source_url:'https://jobs.bytedance.com',source:'官方',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
+  {id:34,name:'博世',en:'Bosch',cat:'auto',subcat:'外资 Tier 1',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:24,cash_high:34,cash_mid:29,fund_pct:12,fund_total:13.5,stock:'none',total5y:185,wlb_hours:40,pay:6.2,tech_now:7.5,tech_future:6.5,geo:7.5,career:7.5,wlb:9.5,endow:7.5,industry:7.5,cohort:3,housing:7,mn_sensor:2,sig_embed:3,edge_ai:5,sys_integ:5,afm_boost:false,intern_path:null,intro:'全球 Tier 1 巨头。底盘控制传感器嵌入式与微针传感方向间隔较远。',why_for_you:['WLB 40h 顶级','传感器嵌入式有技术基础','与微针研究方向间隔较远'],current_match:'7.5',future_match:'6.5',pos:[{dept:'底盘控制部',jobs:['传感器嵌入式工程师']}],adv:['WLB 顶级'],risk:['晋升窄','与医疗方向偏离'],source_url:'https://www.bosch.com.cn',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
+  {id:35,name:'大疆创新',en:'DJI',cat:'aiot',subcat:'无人机',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:38,cash_high:58,cash_mid:48,fund_pct:10,fund_total:10.5,stock:'虚拟股权',total5y:290,wlb_hours:50,pay:7.8,tech_now:7.5,tech_future:6.0,geo:7.0,career:8.5,wlb:6.5,endow:8.5,industry:8.0,cohort:3,housing:6,mn_sensor:1,sig_embed:3,edge_ai:6,sys_integ:5,afm_boost:false,intern_path:null,intro:'全球无人机龙头。RTOS+嵌入式技术深度高，但与医疗方向零交集。',why_for_you:['RTOS 天花板','简历加分','嵌入式系统集成（第④环节）有基础','⚠️ 总部深圳+与医疗方向零交集'],current_match:'7.5',future_match:'6.0',pos:[{dept:'飞控系统部',jobs:['飞控嵌入式工程师']}],adv:['技术深度','简历加分'],risk:['WLB 偏低','总部深圳','与医疗方向零交集'],source_url:'https://we.dji.com',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:36,name:'宇构智核',en:'Yugou Core',cat:'startup',subcat:'脑机接口早期 · 规模过小',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:20,cash_high:30,cash_mid:25,fund_pct:6,fund_total:6.0,stock:'期权（流动性差）',total5y:150,wlb_hours:48,pay:5.3,tech_now:7.5,tech_future:6.5,geo:6.5,career:5.5,wlb:7.0,endow:6.5,industry:7.5,cohort:5,housing:4,mn_sensor:3,sig_embed:5,edge_ai:7,sys_integ:5,afm_boost:false,intern_path:null,intern_boost:0,honest_feedback:'你的亲身实习反馈：公司太小，薪资与未来前景都无竞争力',intro:'⚠️ 你在这里实习过（2025.12-2026.2），**亲身感受：公司规模过小，薪资和未来前景都没有竞争力**。脑机接口不在你微针阵列研究链路中，作为就业选项不推荐。',why_for_you:['⚠️ 亲身反馈：公司太小不推荐','脑机接口不在微针研究链路中','这段实习更适合写在简历里，不适合转正'],current_match:'7.5',future_match:'6.5',pos:[{dept:'脑机接口项目部',jobs:['嵌入式全栈（不推荐转正）']}],adv:['简历已有经历'],risk:['⚠️ 用户亲述：规模小+薪资差+前景弱','初创风险极高','期权流动性差','与微针方向偏离'],source_url:'-',source:'🟢 你亲自实习反馈',c_pay:'🟢',c_tech:'🟡',c_wlb:'🟠'},
+  {id:37,name:'寒武纪',en:'Cambricon',ticker:'688256.SH',cat:'aiot',subcat:'AI 芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:38,cash_high:50,cash_mid:44,fund_pct:10,fund_total:10.5,stock:'限制性股票',total5y:270,wlb_hours:50,pay:8.0,tech_now:8.0,tech_future:6.5,geo:7.0,career:8.5,wlb:6.5,endow:8.5,industry:8.5,cohort:3,housing:6,mn_sensor:2,sig_embed:3,edge_ai:8,sys_integ:4,afm_boost:false,intern_path:null,intro:'AI 芯片第一股。边缘AI部署（第③环节）有技术交叉，但与微针传感方向偏离。',why_for_you:['AI 芯片龙头','边缘AI部署（第③环节）有交叉','与微针传感方向偏离','业绩波动大'],current_match:'8.0',future_match:'6.5',pos:[{dept:'嵌入式平台部',jobs:['AI 芯片嵌入式工程师']}],adv:['AI 芯片龙头','边缘AI交叉'],risk:['业绩波动','与医疗弱相关'],source_url:'https://www.cambricon.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:38,name:'黑芝麻智能',en:'Black Sesame',cat:'auto',subcat:'自动驾驶芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:32,cash_high:48,cash_mid:40,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:245,wlb_hours:48,pay:7.3,tech_now:8.2,tech_future:6.5,geo:7.0,career:8.0,wlb:7.0,endow:8.0,industry:8.0,cohort:3,housing:6,mn_sensor:2,sig_embed:3,edge_ai:7,sys_integ:5,afm_boost:false,intern_path:null,intro:'车规级 AI 芯片独角兽。边缘AI部署（第③环节）有技术交叉，但与微针传感方向偏离。',why_for_you:['港股上市期权','边缘AI部署（第③环节）有交叉','与微针传感方向偏离'],current_match:'8.2',future_match:'6.5',pos:[{dept:'芯片系统集成部',jobs:['SoC 嵌入式工程师']}],adv:['AI 芯片头部','边缘AI交叉'],risk:['股价波动','与医疗方向偏离'],source_url:'https://www.blacksesametech.com',source:'港交所',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
+  {id:39,name:'华域汽车',en:'HASCO',cat:'auto',subcat:'上汽 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:24,cash_high:36,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'少量',total5y:190,wlb_hours:42,pay:6.5,tech_now:7.2,tech_future:5.5,geo:7.5,career:7.5,wlb:9.0,endow:7.0,industry:7.0,cohort:2,housing:7,mn_sensor:1,sig_embed:2,edge_ai:4,sys_integ:4,afm_boost:false,intern_path:null,intro:'上汽集团核心零部件。与微针研究方向零交集。',why_for_you:['公积金顶格','WLB 42h 极佳','与微针研究方向零交集'],current_match:'7.2',future_match:'5.5',pos:[{dept:'电子系统部',jobs:['车载嵌入式工程师']}],adv:['公积金 12+12','WLB 极佳'],risk:['偏传统','与医疗方向零交集'],source_url:'https://www.hasco.com.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:40,name:'恩智浦',en:'NXP',cat:'auto',subcat:'外企汽车芯片',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:44,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:230,wlb_hours:42,pay:7.3,tech_now:8.0,tech_future:6.5,geo:7.5,career:7.8,wlb:9.5,endow:8.0,industry:8.0,cohort:3,housing:7,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:5,afm_boost:false,intern_path:null,intro:'汽车芯片全球龙头。MCU+嵌入式技术深度高，但与微针传感方向偏离。',why_for_you:['汽车芯片龙头','WLB 42h 顶级','MCU嵌入式技术深度','与微针传感方向偏离'],current_match:'8.0',future_match:'6.5',pos:[{dept:'汽车 MCU 部',jobs:['汽车芯片嵌入式工程师']}],adv:['WLB 顶级','技术深度'],risk:['外企天花板','与医疗方向偏离'],source_url:'https://www.nxp.com/careers',source:'官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
 
   // ═══ 剩余 20 家 (41-60) · 最简数据 ═══
-  {id:41,name:'上海人工智能实验室',en:'Shanghai AI Lab',cat:'soe',subcat:'国家实验室',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:50,cash_mid:41,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:255,wlb_hours:45,pay:7.8,tech_now:8.0,tech_future:7.5,geo:8.5,career:9.0,wlb:8.5,endow:9.5,industry:9.8,cohort:5,housing:7,poct:4,sweat:5,ai_ivd:8,energy:5,afm_boost:true,intern_path:null,intro:'国家级AI顶层机构。',why_for_you:['国家级平台','人才公寓','AFM 加分'],current_match:'8.0',future_match:'7.5',pos:[{dept:'具身智能组',jobs:['嵌入式AI部署']}],adv:['国家级平台'],risk:['嵌入式岗少'],source_url:'https://www.shlab.org.cn',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
-  {id:42,name:'中山医院 · 工程科',en:'Zhongshan BME',cat:'hospital',subcat:'复旦系三甲',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院公寓',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.5,tech_future:8.5,geo:8.5,career:8.5,wlb:9.5,endow:8.8,industry:8.5,cohort:8.5,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属中山医院工程科。',why_for_you:['事业编','AFM 变现'],current_match:'7.5',future_match:'8.5',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['非交大系'],source_url:'https://www.zs-hospital.sh.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:43,name:'华山医院 · 工程科',en:'Huashan BME',cat:'hospital',subcat:'复旦系三甲',dist:'静安',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.3,tech_future:8.3,geo:8.3,career:8.3,wlb:9.5,endow:8.5,industry:8.5,cohort:8.0,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属华山医院工程科。',why_for_you:['三甲事业编'],current_match:'7.3',future_match:'8.3',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['薪资低'],source_url:'https://www.huashan.org.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:44,name:'腾讯 AIoT',en:'Tencent AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:35,cash_high:48,cash_mid:41.5,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:255,wlb_hours:50,pay:7.8,tech_now:6.5,tech_future:6.0,geo:7.5,career:8.0,wlb:6.5,endow:8.0,industry:7.5,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:6,energy:4,afm_boost:false,intern_path:null,intro:'腾讯 AIoT。',why_for_you:['品牌光环'],current_match:'6.5',future_match:'6.0',pos:[{dept:'IoT 终端',jobs:['嵌入式']}],adv:['品牌'],risk:['非核心'],source_url:'https://careers.tencent.com',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
-  {id:45,name:'字节 AIoT',en:'ByteDance AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:40,cash_high:55,cash_mid:47.5,fund_pct:12,fund_total:13.5,stock:'期权',total5y:285,wlb_hours:58,pay:8.3,tech_now:6.5,tech_future:5.5,geo:7.5,career:8.0,wlb:5.0,endow:7.5,industry:7.5,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'字节 AIoT。',why_for_you:['薪资高'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 设备',jobs:['嵌入式']}],adv:['薪资高'],risk:['WLB 58h'],source_url:'https://jobs.bytedance.com',source:'官方',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
-  {id:46,name:'小米 AIoT',en:'Xiaomi AIoT',cat:'aiot',subcat:'消费 AIoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:44,cash_mid:38,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:240,wlb_hours:50,pay:7.5,tech_now:6.5,tech_future:5.5,geo:8.0,career:7.5,wlb:6.5,endow:7.5,industry:7.5,cohort:3,housing:7,poct:2,sweat:3,ai_ivd:5,energy:4,afm_boost:false,intern_path:null,intro:'小米 AIoT 生态。',why_for_you:['生态大'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 模组',jobs:['WiFi/BLE']}],adv:['公积金顶格'],risk:['偏消费'],source_url:'https://hr.xiaomi.com',source:'🟢 知乎 26 届',c_pay:'🟢',c_tech:'🟡',c_wlb:'🟡'},
-  {id:47,name:'商汤科技',en:'SenseTime',cat:'startup',subcat:'AI 视觉',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:28,cash_high:40,cash_mid:34,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:210,wlb_hours:48,pay:6.8,tech_now:6.5,tech_future:5.5,geo:7.0,career:7.5,wlb:7.0,endow:7.5,industry:7.0,cohort:3,housing:6,poct:1,sweat:2,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'AI 视觉。',why_for_you:['AI 视觉头部'],current_match:'6.5',future_match:'5.5',pos:[{dept:'边缘AI',jobs:['AI 部署']}],adv:['AI 技术'],risk:['亏损'],source_url:'https://www.sensetime.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:48,name:'乐普医疗',en:'Lepu Medical',cat:'medical',subcat:'心血管医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:26,cash_high:35,cash_mid:30.5,fund_pct:8,fund_total:8.8,stock:'期权',total5y:188,wlb_hours:44,pay:6.3,tech_now:7.5,tech_future:7.5,geo:7.0,career:7.0,wlb:8.0,endow:7.0,industry:7.5,cohort:6,housing:6,poct:6,sweat:4,ai_ivd:5,energy:4,afm_boost:false,intern_path:null,intro:'心血管医疗器械龙头。',why_for_you:['心电延伸'],current_match:'7.5',future_match:'7.5',pos:[{dept:'电生理',jobs:['心电嵌入式']}],adv:['心血管细分'],risk:['薪资中等'],source_url:'https://www.lepu.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:49,name:'德赛西威',en:'Desay SV',cat:'auto',subcat:'国内 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:36,cash_mid:32,fund_pct:8,fund_total:8.8,stock:'期权',total5y:195,wlb_hours:46,pay:6.5,tech_now:7.0,tech_future:5.5,geo:7.0,career:7.5,wlb:7.5,endow:7.0,industry:7.5,cohort:3,housing:6,poct:1,sweat:2,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'国内 Tier 1。',why_for_you:['嵌入式成长'],current_match:'7.0',future_match:'5.5',pos:[{dept:'智能座舱',jobs:['座舱域控']}],adv:['技术成长'],risk:['公积金中等'],source_url:'https://www.desaysv.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:50,name:'上海电气中央研究院',en:'SEC Central R&D',cat:'soe',subcat:'国企工业',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:22,cash_high:30,cash_mid:26,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:185,wlb_hours:42,pay:5.5,tech_now:5.5,tech_future:5,geo:9.0,career:7.2,wlb:9.0,endow:7.5,industry:7.0,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:4,afm_boost:false,intern_path:null,intro:'上海国资装备。',why_for_you:['上海国资','公积金顶格'],current_match:'5.5',future_match:'5',pos:[{dept:'智能制造',jobs:['工业嵌入式']}],adv:['上海国资'],risk:['薪资低'],source_url:'https://www.shanghai-electric.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:51,name:'宁德时代上海',en:'CATL Shanghai',cat:'auto',subcat:'新能源电池',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:7,fund_total:7.7,stock:'限制性股票',total5y:205,wlb_hours:50,pay:6.8,tech_now:6.5,tech_future:5.5,geo:7.0,career:8.5,wlb:6.5,endow:8.0,industry:8.5,cohort:3,housing:6,poct:1,sweat:2,ai_ivd:5,energy:6,afm_boost:false,intern_path:null,intro:'动力电池龙头。',why_for_you:['新能源龙头'],current_match:'6.5',future_match:'5.5',pos:[{dept:'BMS',jobs:['BMS 嵌入式']}],adv:['新能源'],risk:['非医疗'],source_url:'https://careers.catl.com',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:52,name:'中电科 21 所',en:'CETC 21st',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:23,cash_high:29,cash_mid:26,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:190,wlb_hours:44,pay:6.0,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:8.0,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:5,afm_boost:false,intern_path:null,intro:'微特电机所。',why_for_you:['央企稳定','公积金顶格'],current_match:'6.0',future_match:'5',pos:[{dept:'电机驱动',jobs:['电机控制']}],adv:['央企','公积金顶格'],risk:['薪资低'],source_url:'https://www.21icresearch.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:53,name:'中电科 23 所',en:'CETC 23rd',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:22,cash_high:28,cash_mid:25,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:180,wlb_hours:44,pay:5.5,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:7.8,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:5,afm_boost:false,intern_path:null,intro:'特种传输线缆所。',why_for_you:['央企稳定','光纤传感对口'],current_match:'6.0',future_match:'5',pos:[{dept:'光纤传感',jobs:['光纤嵌入式']}],adv:['央国企','光纤传感'],risk:['薪资最低'],source_url:'https://www.cetc23.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:54,name:'中船 708 所',en:'MARIC 708th',cat:'soe',subcat:'央企军工',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:24,cash_high:30,cash_mid:27,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:190,wlb_hours:44,pay:6.0,tech_now:5.5,tech_future:4.5,geo:9.0,career:7.8,wlb:8.8,endow:8.0,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:4,afm_boost:false,intern_path:null,intro:'中船 708 船舶总体设计所。',why_for_you:['央企军工'],current_match:'5.5',future_match:'4.5',pos:[{dept:'船舶电子',jobs:['船用嵌入式']}],adv:['央企军工'],risk:['方向弱相关'],source_url:'https://www.maric.com.cn',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:55,name:'中科院上海技物所',en:'SITP, CAS',cat:'soe',subcat:'国家研究所',dist:'虹口',commute_jd:2,commute_mh:2,cash_low:21,cash_high:26,cash_mid:23.5,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家补贴',total5y:175,wlb_hours:45,pay:5.3,tech_now:7.5,tech_future:6.5,geo:7.5,career:8.0,wlb:8.5,endow:8.5,industry:8.0,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:5,energy:5,afm_boost:true,intern_path:null,intro:'中科院红外+光电探测国家队。',why_for_you:['国家研究所'],current_match:'7.5',future_match:'6.5',pos:[{dept:'红外光电',jobs:['光电探测嵌入式']}],adv:['国家所','事业编'],risk:['方向关联弱'],source_url:'http://www.sitp.cas.cn',source:'中科院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:56,name:'阿里健康',en:'Ali Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:42,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:230,wlb_hours:48,pay:7.2,tech_now:6.5,tech_future:5.5,geo:7.0,career:7.5,wlb:7.0,endow:7.5,industry:7.5,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:6,energy:3,afm_boost:false,intern_path:null,intro:'阿里大健康旗舰。',why_for_you:['公积金顶格'],current_match:'6.5',future_match:'5.5',pos:[{dept:'智慧医疗',jobs:['医疗 IoT']}],adv:['公积金顶格'],risk:['偏平台'],source_url:'https://www.alihealth.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:57,name:'石头科技',en:'Roborock',cat:'aiot',subcat:'消费机器人',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:38,cash_mid:33,fund_pct:8,fund_total:8.8,stock:'期权',total5y:200,wlb_hours:46,pay:6.8,tech_now:6.0,tech_future:5,geo:7.5,career:7.5,wlb:7.5,endow:7.5,industry:7.5,cohort:2,housing:7,poct:1,sweat:2,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'扫地机器人龙头。',why_for_you:['WLB 好'],current_match:'6.0',future_match:'5',pos:[{dept:'机器人控制',jobs:['嵌入式']}],adv:['WLB 好'],risk:['非医疗'],source_url:'https://www.roborock.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:58,name:'京东健康',en:'JD Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:210,wlb_hours:48,pay:7.0,tech_now:6.2,tech_future:5,geo:7.0,career:7.0,wlb:7.0,endow:7.0,industry:7.0,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'京东大健康。',why_for_you:['薪资 OK'],current_match:'6.2',future_match:'5',pos:[{dept:'健康硬件',jobs:['IoT']}],adv:['薪资 OK'],risk:['偏平台'],source_url:'https://jobs.jd.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:59,name:'德州仪器',en:'Texas Instruments',cat:'aiot',subcat:'外企模拟芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:38,cash_mid:33,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:210,wlb_hours:40,pay:7.0,tech_now:7.5,tech_future:6,geo:7.5,career:7.5,wlb:9.8,endow:7.8,industry:7.5,cohort:2,housing:7,poct:1,sweat:2,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'全球模拟芯片龙头。',why_for_you:['WLB 顶级'],current_match:'7.5',future_match:'6',pos:[{dept:'工业应用',jobs:['嵌入式']}],adv:['WLB 顶级'],risk:['外企'],source_url:'https://careers.ti.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:60,name:'安波福',en:'Aptiv',cat:'auto',subcat:'外资 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:26,cash_high:34,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:190,wlb_hours:42,pay:6.3,tech_now:7.2,tech_future:5.5,geo:7.5,career:7.5,wlb:9.0,endow:7.5,industry:7.5,cohort:2,housing:7,poct:1,sweat:2,ai_ivd:5,energy:4,afm_boost:false,intern_path:null,intro:'全球汽车 Tier 1。',why_for_you:['WLB 好'],current_match:'7.2',future_match:'5.5',pos:[{dept:'ADAS',jobs:['域控制器']}],adv:['WLB 好'],risk:['薪资偏低'],source_url:'https://www.aptiv.com/careers',source:'官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'}
+  {id:41,name:'上海人工智能实验室',en:'Shanghai AI Lab',cat:'soe',subcat:'国家实验室',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:50,cash_mid:41,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:255,wlb_hours:45,pay:7.8,tech_now:8.0,tech_future:7.5,geo:8.5,career:9.0,wlb:8.5,endow:9.5,industry:9.8,cohort:5,housing:7,mn_sensor:4,sig_embed:5,edge_ai:8,sys_integ:5,afm_boost:true,intern_path:null,intro:'国家级AI顶层机构。边缘AI算法部署（第③环节）有交叉，但主要招PhD。',why_for_you:['国家级平台','人才公寓','AFM 加分','边缘AI算法（第③环节）有交叉','⚠️ 主要招PhD，硕士窗口窄'],current_match:'8.0',future_match:'7.5',pos:[{dept:'具身智能组',jobs:['嵌入式AI研究员']},{dept:'基础设施组',jobs:['系统工程师']}],adv:['国家级平台','学术资源'],risk:['主要招PhD','嵌入式岗少'],source_url:'https://www.shlab.org.cn',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
+  {id:42,name:'中山医院 · 工程科',en:'Zhongshan BME',cat:'hospital',subcat:'复旦系三甲',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院公寓',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.5,tech_future:8.5,geo:8.5,career:8.5,wlb:9.5,endow:8.8,industry:8.5,cohort:8.5,housing:5,mn_sensor:8,sig_embed:6,edge_ai:6,sys_integ:5,afm_boost:true,intern_path:null,intro:'复旦附属中山医院工程科。微针传感原型机临床验证（第④环节）场景直接。',why_for_you:['事业编','AFM + 专利可申科研基金','微针传感临床验证（第④环节）直接落地','⚠️ 非交大系，内推人脉弱'],current_match:'7.5',future_match:'8.5',pos:[{dept:'工程科',jobs:['临床工程师','医工研究员']}],adv:['事业编','三甲平台','微针临床验证场景'],risk:['薪资低','非交大系'],source_url:'https://www.zs-hospital.sh.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:43,name:'华山医院 · 工程科',en:'Huashan BME',cat:'hospital',subcat:'复旦系三甲',dist:'静安',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.3,tech_future:8.3,geo:8.3,career:8.3,wlb:9.5,endow:8.5,industry:8.5,cohort:8.0,housing:5,mn_sensor:8,sig_embed:6,edge_ai:6,sys_integ:5,afm_boost:true,intern_path:null,intro:'复旦附属华山医院工程科。可穿戴健康监测系统临床验证（第④环节）有场景。',why_for_you:['三甲事业编','可穿戴系统临床验证（第④环节）有场景','WLB 955 极佳'],current_match:'7.3',future_match:'8.3',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编','三甲','WLB 极佳'],risk:['薪资低','非交大系'],source_url:'https://www.huashan.org.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:44,name:'腾讯 AIoT',en:'Tencent AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:35,cash_high:48,cash_mid:41.5,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:255,wlb_hours:50,pay:7.8,tech_now:6.5,tech_future:6.0,geo:7.5,career:8.0,wlb:6.5,endow:8.0,industry:7.5,cohort:4,housing:6,mn_sensor:3,sig_embed:3,edge_ai:6,sys_integ:4,afm_boost:false,intern_path:null,intro:'腾讯 AIoT。IoT信号处理与微针传感（第②③环节）有少量交叉，但非核心业务。',why_for_you:['品牌光环','IoT信号处理（第②环节）有基础','与微针传感方向交集有限'],current_match:'6.5',future_match:'6.0',pos:[{dept:'IoT 终端部',jobs:['IoT 嵌入式工程师']}],adv:['品牌','公积金顶格'],risk:['AIoT 非核心业务','与医疗方向偏离'],source_url:'https://careers.tencent.com',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
+  {id:45,name:'字节 AIoT',en:'ByteDance AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:40,cash_high:55,cash_mid:47.5,fund_pct:12,fund_total:13.5,stock:'期权',total5y:285,wlb_hours:58,pay:8.3,tech_now:6.5,tech_future:5.5,geo:7.5,career:8.0,wlb:5.0,endow:7.5,industry:7.5,cohort:3,housing:6,mn_sensor:2,sig_embed:3,edge_ai:5,sys_integ:3,afm_boost:false,intern_path:null,intro:'字节 AIoT。WLB 58h 全榜垫底，与微针研究方向关联弱。',why_for_you:['薪资高','WLB 58h 全榜垫底','与微针研究方向关联弱'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 设备部',jobs:['IoT 嵌入式工程师']}],adv:['薪资高'],risk:['WLB 58h 全榜垫底','与医疗方向偏离'],source_url:'https://jobs.bytedance.com',source:'官方',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
+  {id:46,name:'小米 AIoT',en:'Xiaomi AIoT',cat:'aiot',subcat:'消费 AIoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:44,cash_mid:38,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:240,wlb_hours:50,pay:7.5,tech_now:6.5,tech_future:5.5,geo:8.0,career:7.5,wlb:6.5,endow:7.5,industry:7.5,cohort:3,housing:7,mn_sensor:2,sig_embed:3,edge_ai:5,sys_integ:4,afm_boost:false,intern_path:null,intro:'小米 AIoT 生态。IoT嵌入式（第②环节）有基础，但偏消费电子非医疗。',why_for_you:['米家生态大','IoT嵌入式（第②环节）有基础','公积金顶格','偏消费电子非医疗'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 模组部',jobs:['IoT 嵌入式工程师（WiFi/BLE）']}],adv:['公积金顶格','生态大'],risk:['偏消费','与医疗方向偏离'],source_url:'https://hr.xiaomi.com',source:'🟢 知乎 26 届',c_pay:'🟢',c_tech:'🟡',c_wlb:'🟡'},
+  {id:47,name:'商汤科技',en:'SenseTime',cat:'startup',subcat:'AI 视觉',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:28,cash_high:40,cash_mid:34,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:210,wlb_hours:48,pay:6.8,tech_now:6.5,tech_future:5.5,geo:7.0,career:7.5,wlb:7.0,endow:7.5,industry:7.0,cohort:3,housing:6,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:3,afm_boost:false,intern_path:null,intro:'AI 视觉。边缘AI部署（第③环节）有交叉，但持续亏损且与医疗方向偏离。',why_for_you:['AI 视觉头部','边缘AI部署（第③环节）有交叉','持续亏损+与医疗方向偏离'],current_match:'6.5',future_match:'5.5',pos:[{dept:'边缘AI部',jobs:['AI 部署工程师']}],adv:['AI 技术','边缘AI交叉'],risk:['持续亏损','与医疗方向偏离'],source_url:'https://www.sensetime.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:48,name:'乐普医疗',en:'Lepu Medical',cat:'medical',subcat:'心血管医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:26,cash_high:35,cash_mid:30.5,fund_pct:8,fund_total:8.8,stock:'期权',total5y:188,wlb_hours:44,pay:6.3,tech_now:7.5,tech_future:7.5,geo:7.0,career:7.0,wlb:8.0,endow:7.0,industry:7.5,cohort:6,housing:6,mn_sensor:6,sig_embed:4,edge_ai:5,sys_integ:4,afm_boost:false,intern_path:null,intro:'心血管医疗器械龙头。心电信号采集与微针电化学传感（第①环节）有交叉。',why_for_you:['心血管医疗器械龙头','心电信号采集与微针电化学（第①环节）有交叉','信号读出电路（第②环节）可借鉴'],current_match:'7.5',future_match:'7.5',pos:[{dept:'电生理事业部',jobs:['心电嵌入式工程师']}],adv:['心血管细分龙头','信号采集交叉'],risk:['薪资中等','心电≠电化学'],source_url:'https://www.lepu.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:49,name:'德赛西威',en:'Desay SV',cat:'auto',subcat:'国内 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:36,cash_mid:32,fund_pct:8,fund_total:8.8,stock:'期权',total5y:195,wlb_hours:46,pay:6.5,tech_now:7.0,tech_future:5.5,geo:7.0,career:7.5,wlb:7.5,endow:7.0,industry:7.5,cohort:3,housing:6,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:3,afm_boost:false,intern_path:null,intro:'国内 Tier 1。座舱域控嵌入式与微针研究方向偏离。',why_for_you:['嵌入式技术成长','与微针研究方向偏离'],current_match:'7.0',future_match:'5.5',pos:[{dept:'智能座舱部',jobs:['座舱域控嵌入式工程师']}],adv:['技术成长'],risk:['与医疗方向偏离','公积金中等'],source_url:'https://www.desaysv.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:50,name:'上海电气中央研究院',en:'SEC Central R&D',cat:'soe',subcat:'国企工业',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:22,cash_high:30,cash_mid:26,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:185,wlb_hours:42,pay:5.5,tech_now:5.5,tech_future:5,geo:9.0,career:7.2,wlb:9.0,endow:7.5,industry:7.0,cohort:2,housing:9,mn_sensor:1,sig_embed:2,edge_ai:4,sys_integ:4,afm_boost:false,intern_path:null,intro:'上海国资装备。工业嵌入式与微针研究方向偏离较远。',why_for_you:['上海国资','公积金顶格','与微针研究方向偏离较远'],current_match:'5.5',future_match:'5',pos:[{dept:'智能制造部',jobs:['工业嵌入式工程师']}],adv:['上海国资','公积金顶格'],risk:['薪资低','与医疗方向偏离'],source_url:'https://www.shanghai-electric.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:51,name:'宁德时代上海',en:'CATL Shanghai',cat:'auto',subcat:'新能源电池',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:7,fund_total:7.7,stock:'限制性股票',total5y:205,wlb_hours:50,pay:6.8,tech_now:6.5,tech_future:5.5,geo:7.0,career:8.5,wlb:6.5,endow:8.0,industry:8.5,cohort:3,housing:6,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:6,afm_boost:false,intern_path:null,intro:'动力电池龙头。BMS嵌入式与微针研究方向零交集。',why_for_you:['新能源龙头','BMS嵌入式系统集成（第④环节）有基础','与微针研究方向零交集'],current_match:'6.5',future_match:'5.5',pos:[{dept:'BMS 研发部',jobs:['BMS 嵌入式工程师']}],adv:['新能源龙头'],risk:['与医疗方向零交集','WLB 偏低'],source_url:'https://careers.catl.com',source:'官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:52,name:'中电科 21 所',en:'CETC 21st',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:23,cash_high:29,cash_mid:26,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:190,wlb_hours:44,pay:6.0,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:8.0,industry:7.5,cohort:2,housing:9,mn_sensor:1,sig_embed:2,edge_ai:4,sys_integ:5,afm_boost:false,intern_path:null,intro:'微特电机所。电机控制与微针研究方向偏离。',why_for_you:['央企稳定','公积金顶格','与微针研究方向偏离'],current_match:'6.0',future_match:'5',pos:[{dept:'电机驱动部',jobs:['电机控制嵌入式工程师']}],adv:['央企','公积金顶格'],risk:['薪资低','与医疗方向偏离'],source_url:'https://www.21icresearch.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:53,name:'中电科 23 所',en:'CETC 23rd',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:22,cash_high:28,cash_mid:25,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:180,wlb_hours:44,pay:5.5,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:7.8,industry:7.5,cohort:2,housing:9,mn_sensor:1,sig_embed:2,edge_ai:4,sys_integ:5,afm_boost:false,intern_path:null,intro:'特种传输线缆所。光纤传感与微针传感都属传感器范畴，信号采集思路可借鉴。',why_for_you:['央企稳定','光纤传感与微针传感信号采集思路可借鉴','公积金顶格'],current_match:'6.0',future_match:'5',pos:[{dept:'光纤传感部',jobs:['光纤传感嵌入式工程师']}],adv:['央企','光纤传感交叉'],risk:['薪资最低','光纤≠电化学'],source_url:'https://www.cetc23.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:54,name:'中船 708 所',en:'MARIC 708th',cat:'soe',subcat:'央企军工',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:24,cash_high:30,cash_mid:27,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:190,wlb_hours:44,pay:6.0,tech_now:5.5,tech_future:4.5,geo:9.0,career:7.8,wlb:8.8,endow:8.0,industry:7.5,cohort:2,housing:9,mn_sensor:1,sig_embed:2,edge_ai:4,sys_integ:4,afm_boost:false,intern_path:null,intro:'中船 708 船舶总体设计所。船用嵌入式与微针研究方向偏离。',why_for_you:['央企军工','与微针研究方向偏离'],current_match:'5.5',future_match:'4.5',pos:[{dept:'船舶电子部',jobs:['船用嵌入式工程师']}],adv:['央企军工','稳定性'],risk:['与医疗方向偏离','方向弱相关'],source_url:'https://www.maric.com.cn',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:55,name:'中科院上海技物所',en:'SITP, CAS',cat:'soe',subcat:'国家研究所',dist:'虹口',commute_jd:2,commute_mh:2,cash_low:21,cash_high:26,cash_mid:23.5,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家补贴',total5y:175,wlb_hours:45,pay:5.3,tech_now:7.5,tech_future:6.5,geo:7.5,career:8.0,wlb:8.5,endow:8.5,industry:8.0,cohort:4,housing:6,mn_sensor:3,sig_embed:3,edge_ai:5,sys_integ:5,afm_boost:true,intern_path:null,intro:'中科院红外+光电探测国家队。光电探测与电化学传感分属不同传感原理，方向关联弱。',why_for_you:['国家研究所','事业编','光电探测与电化学传感分属不同原理','方向关联弱'],current_match:'7.5',future_match:'6.5',pos:[{dept:'红外光电探测部',jobs:['光电探测嵌入式工程师']}],adv:['国家所','事业编'],risk:['方向关联弱','与微针电化学偏离'],source_url:'http://www.sitp.cas.cn',source:'中科院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:56,name:'阿里健康',en:'Ali Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:42,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:230,wlb_hours:48,pay:7.2,tech_now:6.5,tech_future:5.5,geo:7.0,career:7.5,wlb:7.0,endow:7.5,industry:7.5,cohort:4,housing:6,mn_sensor:3,sig_embed:3,edge_ai:6,sys_integ:3,afm_boost:false,intern_path:null,intro:'阿里大健康旗舰。偏互联网平台，与微针硬件研发关联弱。',why_for_you:['公积金顶格','偏互联网平台非硬件研发','与微针传感关联弱'],current_match:'6.5',future_match:'5.5',pos:[{dept:'智慧医疗部',jobs:['医疗 IoT 工程师']}],adv:['公积金顶格','互联网医疗'],risk:['偏平台','非硬件研发'],source_url:'https://www.alihealth.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:57,name:'石头科技',en:'Roborock',cat:'aiot',subcat:'消费机器人',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:38,cash_mid:33,fund_pct:8,fund_total:8.8,stock:'期权',total5y:200,wlb_hours:46,pay:6.8,tech_now:6.0,tech_future:5,geo:7.5,career:7.5,wlb:7.5,endow:7.5,industry:7.5,cohort:2,housing:7,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:3,afm_boost:false,intern_path:null,intro:'扫地机器人龙头。与微针研究方向零交集。',why_for_you:['WLB 好','与微针研究方向零交集'],current_match:'6.0',future_match:'5',pos:[{dept:'机器人控制部',jobs:['嵌入式工程师']}],adv:['WLB 好'],risk:['与医疗方向零交集'],source_url:'https://www.roborock.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:58,name:'京东健康',en:'JD Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:38,cash_mid:34,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:210,wlb_hours:48,pay:7.0,tech_now:6.2,tech_future:5,geo:7.0,career:7.0,wlb:7.0,endow:7.0,industry:7.0,cohort:3,housing:6,mn_sensor:2,sig_embed:3,edge_ai:5,sys_integ:3,afm_boost:false,intern_path:null,intro:'京东大健康。偏互联网平台，与微针硬件研发关联弱。',why_for_you:['薪资 OK','偏互联网平台非硬件研发','与微针传感关联弱'],current_match:'6.2',future_match:'5',pos:[{dept:'健康硬件部',jobs:['IoT 嵌入式工程师']}],adv:['薪资 OK'],risk:['偏平台','非硬件研发'],source_url:'https://jobs.jd.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
+  {id:59,name:'德州仪器',en:'Texas Instruments',cat:'aiot',subcat:'外企模拟芯片',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:38,cash_mid:33,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:210,wlb_hours:40,pay:7.0,tech_now:7.5,tech_future:6,geo:7.5,career:7.5,wlb:9.8,endow:7.8,industry:7.5,cohort:2,housing:7,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:5,afm_boost:false,intern_path:null,intro:'全球模拟芯片龙头。模拟信号调理芯片与信号读出电路（第②环节）设计思路相通。',why_for_you:['WLB 40h 顶级','模拟信号调理芯片与信号读出电路（第②环节）相通','TI 参考设计可直接用于微针传感器前端'],current_match:'7.5',future_match:'6',pos:[{dept:'工业应用部',jobs:['模拟芯片应用工程师']}],adv:['WLB 顶级','信号调理芯片与课题第②环节相通'],risk:['外企天花板','非直接医疗'],source_url:'https://careers.ti.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:60,name:'安波福',en:'Aptiv',cat:'auto',subcat:'外资 Tier 1',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:26,cash_high:34,cash_mid:30,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:190,wlb_hours:42,pay:6.3,tech_now:7.2,tech_future:5.5,geo:7.5,career:7.5,wlb:9.0,endow:7.5,industry:7.5,cohort:2,housing:7,mn_sensor:1,sig_embed:2,edge_ai:5,sys_integ:4,afm_boost:false,intern_path:null,intro:'全球汽车 Tier 1。ADAS域控嵌入式与微针研究方向偏离。',why_for_you:['WLB 42h 好','与微针研究方向偏离'],current_match:'7.2',future_match:'5.5',pos:[{dept:'ADAS 部',jobs:['域控制器嵌入式工程师']}],adv:['WLB 好','国际化'],risk:['薪资偏低','与医疗方向偏离'],source_url:'https://www.aptiv.com/careers',source:'官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'}
 ];
 
 const CATEGORIES_V4 = {
@@ -2357,7 +2358,7 @@ const V5_ONELINERS = {
   18: '🚗 上汽高端 · 嘉定安亭房价 2.9w · 公积金顶格 · 置换最轻松',
   19: '🔧 芯片设计顶级 · ⚠️ WLB 差+公积金低+与医疗偏离',
   20: '💉 CGM+胰岛素泵可穿戴医疗 · 课题组契合 · ⚠️ 港股波动平台小',
-  21: '🧬 基因测序龙头 · POCT 方向对口 · 科创板 688114',
+  21: '🧬 基因测序龙头 · 微流控工艺与微针制备有交叉 · 科创板 688114',
   22: '🤖 AI 大模型独角兽 · 薪资高期权大 · ⚠️ 偏算法非嵌入式',
   23: '🏛️ 航天系事业编+安家费 15 万 · 闵行 · ⚠️ 保密性强跳槽面窄',
   24: '⚕ 交大医学院附属三甲 · 事业编 · AFM 可申科研基金',
@@ -2403,8 +2404,8 @@ const V5_ONELINERS = {
 const V5_DEEP = {
   7: { // 三诺生物
     why_for_you: [
-      'CGM = POCT × 电化学 × 微针 × 可穿戴 四重契合王侃方向',
-      '你 AFM 论文 + 王侃微针研究可直接发表变现',
+      'CGM = 微针阵列 × 电化学 × 可穿戴 三重契合你微针传感方向',
+      '你 AFM 论文 + 微针电化学传感研究可直接发表变现',
       'CGM 国产替代窗口期 · 2029-2032 是爆发期',
       '上海研究院研究员岗可继续做科研',
       '⚠️ 总部长沙，上海岗位有限',
@@ -2414,7 +2415,7 @@ const V5_DEEP = {
   20: { // 微泰医疗
     why_for_you: [
       'CGM+胰岛素泵双赛道 · 可穿戴医疗典型',
-      '王侃课题组 POCT+微针方向直接对口',
+      '微针阵列传感器+嵌入式系统+可穿戴集成与你四环节研究高度契合',
       '港股 2235.HK 上市',
       '⚠️ 平台较小，抗风险能力一般',
       '⚠️ 港股波动大'
@@ -2429,16 +2430,16 @@ const V5_DEEP = {
   21: { // 华大智造
     why_for_you: [
       '基因测序+医疗设备双龙头',
-      'POCT 方向与王侃组对口',
+      '微流控芯片与微针阵列制备工艺有交叉（第①环节）',
       '科创板 688114 上市稳定',
       '深圳总部+上海研发，医疗设备嵌入式方向多样',
       '⚠️ 基因测序有周期性（贸易/政策影响）'
     ],
     pos: [
-      {dept: '设备研发部', jobs: ['测序仪嵌入式工程师', 'POCT 设备开发']},
+      {dept: '设备研发部', jobs: ['测序仪嵌入式工程师', '微流控传感系统工程师']},
       {dept: '智能诊断', jobs: ['AI 算法嵌入式部署']}
     ],
-    adv: ['科创板龙头', 'POCT 对口', '医疗电子深度'],
+    adv: ['科创板龙头', '微流控工艺交叉', '医疗电子深度'],
     risk: ['基因测序周期', '深圳岗位为主']
   },
   23: { // 航天八院 804
@@ -2671,7 +2672,7 @@ applyV5Patches();
 
 const V7_STORYLINE = {
   1: '<b>国内医疗影像设备绝对龙头</b>（科创板 688271.SH，市值千亿），PET/CT/MRI 这些高端大设备过去基本被 GE/西门子/飞利浦三家垄断，联影是目前最有希望打破这一垄断的国产玩家。' +
-    '<br><br>入职后你大概率进<b>联影微电子事业部</b>（嘉定）或<b>联影智融研究院</b>，做可穿戴医疗嵌入式。由于你有 <b>AFM 末位挂名 + 6 项发明专利 + EI</b>，研究员岗非常合适 —— 意味着可以继续搞科研，写论文，和毕业方向（王侃课题组 POCT）直接延续。' +
+    '<br><br>入职后你大概率进<b>联影微电子事业部</b>（嘉定）或<b>联影智融研究院</b>，做可穿戴医疗嵌入式。由于你有 <b>AFM 末位挂名 + 6 项发明专利 + EI</b>，研究员岗非常合适 —— 意味着可以继续搞科研，写论文，和毕业方向（微针阵列可穿戴电化学传感系统）直接延续。' +
     '<br><br>嘉定新城房价 4w/㎡ 出头，你宝山房产置换 + 父母支持首付完全够。交大校友密度超高，内推通道成熟，干到 35+ 也不会被优化。<b>综合看是你最该全力投的一家。</b>',
 
   2: '<b>华为可穿戴设备业务核心</b>，Watch GT/Watch D/TruSeen 系列全球出货量前三。"健康军团"是余承东直接推动的战略性业务，研发投入巨大。' +
@@ -2681,7 +2682,7 @@ const V7_STORYLINE = {
 
   3: '<b>国产医疗器械绝对龙头</b>（深交所 300760，市值 3000 亿+），监护仪全球 Top 3，体外诊断、影像三大板块全覆盖，190 多个国家卖设备。' +
     '<br><br>你本科毕设是 <b>MAX30102 PPG + 1D-CNN 心律失常边缘识别</b> —— 迈瑞生命信息与支持事业部做的就是这个方向，技术栈 100% 对口。' +
-    '<br><br>入职大概率在<b>闵行研发中心</b>（离交大徐汇校区 30 分钟地铁），做监护仪嵌入式或体外诊断 POCT。IEC 60601/62304 医疗器械软硬件认证经验业内最权威 —— 这是你未来跳槽/晋升的硬通货。WLB 比小米/字节好很多。<b>技术路径稳，35 岁绝无焦虑。</b>',
+    '<br><br>入职大概率在<b>闵行研发中心</b>（离交大徐汇校区 30 分钟地铁），做监护仪嵌入式或体外诊断设备。IEC 60601/62304 医疗器械软硬件认证经验业内最权威 —— 这是你未来跳槽/晋升的硬通货。WLB 比小米/字节好很多。<b>技术路径稳，35 岁绝无焦虑。</b>',
 
   4: '<b>新能源造车新势力中的异军突起者</b>，SU7 月销破 2 万，YU7 也即将上市。嘉定总部，你<b>正在这里实习（2026.2-2026.6）</b>。' +
     '<br><br>已披露的 26 届 C++ 嵌入式硕士总包 <b>378k（24k×15+1.5k×12房补）</b>，自驾硕士 585k —— 嘉定公司里薪资天花板。公积金顶格 12+12 对定居友好。' +
@@ -2689,14 +2690,14 @@ const V7_STORYLINE = {
     '<br><br>建议：<b>作为保底 offer 必拿</b>（实习转正议价权你最高），但不作主投。医疗电子拿不到 S+ offer 再来小米。',
 
   5: '<b>柔性脑机接口头部初创</b>（闵行办公，2022 年完成数亿元 A 轮，华兴资本领投）。' +
-    '<br><br>⚠️ <b>但：脑机接口不在你技术栈（简历没写过），王侃课题组 4 大方向也不是脑机接口</b>。你在宇构智核实习只有 2 个月，不足以构成"方向延续"。' +
+    '<br><br>⚠️ <b>但：脑机接口不在你技术栈（简历没写过），你的微针阵列全链研究方向也不是脑机接口</b>。你在宇构智核实习只有 2 个月，不足以构成"方向延续"。' +
     '<br><br>闵行通勤友好 + 老闵行 3.9w/㎡ 可负担，前沿赛道简历加分 —— 但作为"猎奇选项"而非"主投路径"。如果对前沿技术好奇且不介意从零学脑电算法，可以投；否则建议聚焦医疗电子主线。',
 
   6: '<b>国产手术机器人龙头</b>（港股 2252.HK，微创医疗分拆上市），旗下"图迈腔镜机器人"、"鸿鹄骨科机器人"已进入医院临床。张江总部。' +
     '<br><br><b>重点关注他们的可穿戴医疗事业部</b> —— 专门做<b>微针给药系统</b>和穿戴式传感器。这和王侃课题组"微针阵列传感器"方向<b>直接对口</b>，可能是全榜单里研究方向契合度最高的一家。' +
     '<br><br>入职后可以把硕士期间微针电化学传感继续做下去，直接转化为临床产品。AFM 发表经验 + 6 项专利在研究员岗很有竞争力。缺点：公司仍在亏损，港股股价波动大；但技术壁垒极高，<b>长期是国产替代最确定的赛道之一</b>。',
 
-  7: '<b>国产血糖监测龙头</b>（300298.SZ，POCT 血糖仪市占率中国第一），正全力切入 <b>CGM（连续血糖监测）</b>千亿级新赛道 —— 这是王侃课题组 POCT + 微针 + 电化学方向<b>最直接对口的产业化出口</b>。课题组契合度 9.8，全榜单最高。' +
+  7: '<b>国产血糖监测龙头</b>（300298.SZ，血糖仪市占率中国第一），正全力切入 <b>CGM（连续血糖监测）</b>千亿级新赛道 —— 这是你微针阵列 + 电化学传感方向<b>最直接对口的产业化出口</b>。课题组契合度 9.8，全榜单最高。' +
     '<br><br>入职后大概率做 CGM 嵌入式 + 微针传感器研发。⚠️ <b>总部在长沙，上海只有研究院少量岗位</b>，需要确认你是否接受长沙。' +
     '<br><br>薪资偏低（26-36w），但 <b>CGM 赛道 2029-2032 是爆发期</b>（国家医保已纳入 CGM 报销），股价和员工身价都会水涨船高。研究院岗可继续发文章，为读博留窗口。',
 
@@ -2745,10 +2746,10 @@ const V7_STORYLINE = {
     '<br><br>简历含金量顶级，但 ⚠️ <b>WLB 差（55h+） + 公积金仅 5+5 + 与医疗方向偏离</b>。在华为海思 5 年镀金，跳哪里都能加 50% 薪资，但代价是身体和生活。',
 
   20: '<b>可穿戴胰岛素泵 + CGM 双赛道</b>（港股 2235.HK）。方向跟三诺类似，但平台更小。' +
-    '<br><br>王侃课题组 POCT+微针方向契合度高。⚠️ 港股波动大、平台规模小、抗风险能力一般。作为三诺的 backup 可以考虑。',
+    '<br><br>微针阵列传感器+嵌入式系统+可穿戴集成与你四环节研究高度契合。⚠️ 港股波动大、平台规模小、抗风险能力一般。作为三诺的 backup 可以考虑。',
 
   21: '<b>基因测序设备国产化核心</b>（688114.SH，从华大基因分拆），DNBSEQ 系列测序仪打破了美国 Illumina 的全球垄断。' +
-    '<br><br>POCT 方向跟王侃课题组有契合。上海研发做测序仪嵌入式、微流控芯片控制系统。⚠️ 基因测序有政策周期（美国 BIOSECURE 法案影响），股价波动大，但国产替代确定性高。薪资 28-40w。',
+    '<br><br>微流控芯片与微针阵列制备工艺有交叉（第①环节）。上海研发做测序仪嵌入式、微流控芯片控制系统。⚠️ 基因测序有政策周期（美国 BIOSECURE 法案影响），股价波动大，但国产替代确定性高。薪资 28-40w。',
 
   22: '<b>上海 AI 大模型独角兽</b>（阶跃星辰，张一鸣投资）。薪资 40-60w + SAFE 期权。' +
     '<br><br>⚠️ 偏算法和大模型，不适合嵌入式主线 + 与医疗无关。作为"见识一下独角兽文化"可以投，不是主路径。',
@@ -2789,7 +2790,7 @@ const V7_STORYLINE = {
   31: '<b>脑机接口新锐</b>（复旦孵化），跟脑虎/博睿康类似赛道但更早期。' +
     '<br><br>⚠️ <b>三重 DEBUFF：脑机接口非你主线 + 初创风险高 + 已有脑虎/博睿康做同赛道选择。</b>说句实话，这个公司对你没有任何脑虎/博睿康不可替代的优势。如果对脑机好奇，投脑虎就够了。作为"了解即可"。',
   32: '<b>全球电动车标杆</b>特斯拉，临港工厂是上海制造的名片。薪资 36-50w + RSU 给得大方，品牌光环拉满。' +
-    '<br><br>⚠️ <b>但你做医疗嵌入式的，去特斯拉只能做 BMS 或车身电子，跟 POCT/微针/可穿戴医疗基本没有交集</b>。临港通勤到闵行1.5h+。简历加成确实猛，但代价是方向彻底跑偏 + 生活品质下降。<b>如果你 35 岁前想转回医疗，特斯拉这段经历帮助有限。</b>',
+    '<br><br>⚠️ <b>但你做医疗嵌入式的，去特斯拉只能做 BMS 或车身电子，跟微针阵列/可穿戴医疗基本没有交集</b>。临港通勤到闵行1.5h+。简历加成确实猛，但代价是方向彻底跑偏 + 生活品质下降。<b>如果你 35 岁前想转回医疗，特斯拉这段经历帮助有限。</b>',
   33: '<b>字节健康事业部</b>，字节在互联网医疗可穿戴上的布局。薪资 38-52w 很香，公积金 12+12 顶格。' +
     '<br><br>⚠️ <b>致命伤：WLB 55h+</b>。你本身就是"WLB 敏感型"，在小米实习已经受不了 55h+ —— 字节只会更卷。<b>薪资高但代价是健康和方向偏离医疗主线。</b>适合愿意燃烧 2-3 年换首付的人，但其实你的首付不靠工资也能解决。',
   34: '<b>全球汽车 Tier 1 巨头</b>博世，底盘控制、ESP/ABS 是看家本领。WLB 周均 40h 顶级 + 公积金 12+12。' +
@@ -2816,7 +2817,7 @@ const V7_STORYLINE = {
   47: '<b>AI 视觉第一股</b>商汤科技，学术出身的技术基因强。但 ⚠️ <b>持续亏损 + 股价低迷 + 裁员阴云</b>，港股 AI 四小龙里日子最难过的之一。' +
     '<br><br>薪资 28-40w 偏低。如果对 AI 视觉 + 边缘部署感兴趣，不如直接投寒武纪或地平线。商汤适合有"学术理想"的人，不适合求稳。',
   48: '<b>国产心血管医疗器械龙头</b>乐普医疗（300003.SZ），起搏器、支架、心电监测全产品线。你本科做过心律失常 1D-CNN 项目——心电赛道是通的。' +
-    '<br><br>薪资 25-35w 偏低但稳定。⚠️ <b>心血管方向偏传统，微针/POCT/CGM 不在乐普主航道上</b>。作为医疗电子的"安全牌"可以投，但不如联影/迈瑞/微创。',
+    '<br><br>薪资 25-35w 偏低但稳定。⚠️ <b>心血管方向偏传统，微针阵列/CGM 不在乐普主航道上</b>。作为医疗电子的"安全牌"可以投，但不如联影/迈瑞/微创。',
   49: '<b>国内汽车 Tier 1 龙头</b>德赛西威（002920.SZ），智能座舱域控制器是核心业务。薪资 28-36w 中等，成长性好。' +
     '<br><br>⚠️ <b>纯汽车电子路线，与医疗无关。</b>如果你在小米拿不到转正但又想做汽车嵌入式，德赛西威是比博世更"国产化"的选择。',
   50: '<b>上海电气中央研究院</b>，上海国资委直属。公积金 12+12 + 人才公寓 + WLB 955，社保交足，稳如泰山。' +
@@ -2877,7 +2878,7 @@ const DEFAULT_W = {...WEIGHTS_V4};
 const DIM_META = {
   pay:         {i:'💰', l:'综合薪酬',      d:'5 年 NPV · 现金+公积金+股票'},
   tech_now:    {i:'⚙', l:'现栈 · 2026',   d:'嵌入式+FreeRTOS+BLE+TF Lite'},
-  tech_future: {i:'🔬', l:'未来栈 · 2029', d:'电化学+微针+POCT+MEMS'},
+  tech_future: {i:'🔬', l:'未来栈 · 2029', d:'电化学+微针阵列+可穿戴+MEMS'},
   geo:         {i:'🏠', l:'上海地缘深度',   d:'通勤+行业集聚（不含落户）'},
   career:      {i:'🛡', l:'长期职业价值',    d:'35 岁+ 可持续 + 技能迁移'},
   wlb:         {i:'⚖', l:'WLB 可持续',      d:'周均工时 + 大小周'},
@@ -3374,7 +3375,7 @@ const IND = [
   {cls:'med', n:'医疗电子 · 可穿戴医疗', w:'你主攻方向 60% · 政策确定性最高',
    stats:[{l:'2030全球',v:'996亿USD'},{l:'CAGR',v:'15.6%'},{l:'中国2024',v:'615亿元'},{l:'中国5年',v:'14.7%'}],
    body:'<strong>健康中国 2030 + 十五五 + 健康上海 2030</strong> 三重政策叠加。可穿戴医疗明确写入国家规划。上海集成电路+生物医药+AI 三大先导产业 2024 突破 2 万亿。',
-   b:['老龄化 3.8 亿（2030）→ 慢病监测刚需爆发','CGM / 心电 / 脑电采集三大细分高增速','王侃课题组微针+POCT 是"明星细分"','国产替代确定性极高','2029 毕业赶上可穿戴医疗第二波上市潮']},
+   b:['老龄化 3.8 亿（2030）→ 慢病监测刚需爆发','CGM / 心电 / 脑电采集三大细分高增速','微针阵列可穿戴传感是"明星细分"','国产替代确定性极高','2029 毕业赶上可穿戴医疗第二波上市潮']},
   {cls:'auto', n:'汽车电子 · 智能驾驶座舱', w:'你辅修方向 30% · 小米实习延伸',
    stats:[{l:'2025新能源',v:'>50%'},{l:'2029预测',v:'>75%'},{l:'智驾CAGR',v:'25%+'},{l:'座舱渗透',v:'>80%'}],
    body:'<strong>行业进入淘汰赛</strong>。新势力前三 + 比亚迪 + 特斯拉占 70% 份额，头部化加剧。你亲身实习反馈 <strong>WLB 差且跨方向</strong>。',
