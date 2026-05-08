@@ -12,7 +12,7 @@
 
 | # | 页面标题 | 子目录 | 大小 | 定位 | 访问 |
 |---|---|---|---|---|---|
-| 1 | **张元杰就业决策榜单** | `career-console-2029/` | ~350K | 2029届交大仪科硕 · 微针阵列方向 · 9维评分 · 60家公司 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
+| 1 | **2029 届 交大仪科硕 就业决策台** | `career-console-2029/` | ~350K | 张元杰 · 微针阵列方向 · 9维定制评分 · 60家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
 | 2 | 985 工科学院就业榜 · 2026-2030 | `985-gongke-jiuye-bang/` | 248K | 公众视角 · 学院榜 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/985-gongke-jiuye-bang/) |
 | 3 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | 工作成果展示 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
 | 4 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
@@ -22,7 +22,7 @@
 
 ## 🚀 最新部署
 
-### 张元杰就业决策榜单（2026-05-08 最终版）
+### 2029 届 交大仪科硕 就业决策台（2026-05-08 最终版）
 
 面向 2029 届上海交大仪器科学与技术硕士（王侃课题组）的个人就业决策工具。研究方向：**基于微针阵列的可穿戴电化学传感系统**。
 
