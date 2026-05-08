@@ -2248,11 +2248,19 @@ const CATEGORIES_V4 = {
   startup: {name:'独角兽·前沿初创',     color:'#a63d2a', icon:'◆'}
 };
 
+/* 薪资 → pay 评分动态映射（cash_mid → 1-10 分）*/
+function derivePayFromSalary(c) {
+  const mid = c.cash_mid || ((c.cash_low + c.cash_high) / 2);
+  // 15w → 3.0, 25w → 5.0, 35w → 6.5, 45w → 7.8, 55w → 8.8, 65w → 9.5
+  return Math.min(10, Math.max(1, 2.0 + mid * 0.12));
+}
+
 /* 综合总分（含 AFM 加分 + 实习通道加分）*/
 function computeTotalScore(c, weights) {
   const W = weights || WEIGHTS_V4;
+  const payScore = derivePayFromSalary(c);
   let base = (
-    c.pay * W.pay + c.tech_now * W.tech_now + c.tech_future * W.tech_future +
+    payScore * W.pay + c.tech_now * W.tech_now + c.tech_future * W.tech_future +
     c.geo * W.geo + c.career * W.career + c.wlb * W.wlb +
     c.endow * W.endow + c.industry * W.industry +
     c.cohort * W.cohort + c.housing * W.housing
@@ -3134,7 +3142,7 @@ function renderScatter() {
   const W = plot.offsetWidth, H = plot.offsetHeight;
   const pad = 50;
   COMPANIES_V4.forEach(c => {
-    const x = pad + (c.pay / 10) * (W - 2 * pad);
+    const x = pad + (derivePayFromSalary(c) / 10) * (W - 2 * pad);
     const y = H - pad - (c.wlb / 10) * (H - 2 * pad);
     const size = 8 + (c.score - 6) * 2.2;
     const color = CATEGORIES_V4[c.cat].color;
@@ -3144,7 +3152,7 @@ function renderScatter() {
     d.setAttribute('aria-label', c.name);
     d.addEventListener('mouseenter', () => {
       const tip = $('#scTip');
-      tip.innerHTML = `<b>${c.name}</b>薪酬: ${c.pay.toFixed(1)} · WLB: ${c.wlb.toFixed(1)}<br>总分: ${c.score.toFixed(2)} · ${c.tier}`;
+      tip.innerHTML = `<b>${c.name}</b>薪酬: ${derivePayFromSalary(c).toFixed(1)} · WLB: ${c.wlb.toFixed(1)}<br>总分: ${c.score.toFixed(2)} · ${c.tier}`;
       tip.style.display = 'block';
       tip.style.left = (x + 12) + 'px';
       tip.style.top = (y - 30) + 'px';
