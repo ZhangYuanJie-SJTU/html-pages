@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Career Decision Console · 张元杰 · v7.0</title>
+<title>Career Decision Console · 张元杰 · v7.2</title>
 <meta name="description" content="2029届交大仪科硕士·嵌入式工程师·就业决策工具 · 9维评分 · 60家候选 · 个性化推荐">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +65,7 @@
   --t-s:   #1e3a5f;
   --t-a:   #4d7a5a;
   --t-b:   #8a8f9e;
-  --t-gem: #7c4d7c;
+
 
   /* ═══ 字体 · 衬线+无衬线+等宽 三级对比 ═══ */
   --f-display: 'Fraunces', 'Noto Serif SC', 'Source Han Serif SC', Georgia, serif;
@@ -258,12 +258,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .stat-card.col-ss  { color: var(--t-ss); }
 .stat-card.col-s   { color: var(--t-s); }
 .stat-card.col-a   { color: var(--t-a); }
-.stat-card.col-gem { color: var(--t-gem); }
 .stat-card .sv.sss { color: var(--t-sss); }
 .stat-card .sv.ss  { color: var(--t-ss); }
 .stat-card .sv.s   { color: var(--t-s); }
 .stat-card .sv.a   { color: var(--t-a); }
-.stat-card .sv.gem { color: var(--t-gem); }
 .stat-card .sdesc {
   font-family: var(--f-mono);
   font-size: 11px; color: var(--ink-3); margin-top: 6px;
@@ -528,7 +526,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .tgroup-badge.s { background: var(--t-s); }
 .tgroup-badge.a { background: var(--t-a); }
 .tgroup-badge.b { background: var(--t-b); }
-.tgroup-badge.gem { background: var(--t-gem); }
 .tgroup-title { font-size: 15px; font-weight: 600; }
 .tgroup-count { margin-left: auto; font-size: 12px; color: var(--ink-3); font-family: var(--f-mono); }
 
@@ -580,7 +577,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-radius: var(--r-sm); color: #fff;
   letter-spacing: 0.06em; text-transform: uppercase;
 }
-.firm-badge.gem { background: linear-gradient(135deg, var(--plum), var(--t-gem)); }
 .firm-badge.warn { background: var(--coral); }
 .firm-badge.intern { background: var(--ink-2); }
 .firm-sub {
@@ -1165,7 +1161,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <!-- ════════ TOPBAR ════════ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <span class="brand">就业决策台<span class="sub">v7.0</span></span>
+    <span class="brand">就业决策台<span class="sub">v7.2</span></span>
     <nav id="topnav">
       <a href="#persona">个人画像</a>
       <a href="#method">评分体系</a>
@@ -1503,7 +1499,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 </section>
 
 <footer class="footer">
-  <h3>2029 届交大仪科硕 · 就业决策台 v7.0</h3>
+  <h3>2029 届交大仪科硕 · 就业决策台 v7.2</h3>
   <p>60 家候选 · 9 维评分 · 王侃课题组方向对齐 · 2026.05.07 更新</p>
   <p style="margin-top:12px;font-size:11px">A decision tool for personal use · Built with care</p>
 </footer>
@@ -1996,7 +1992,7 @@ const COMPANIES_V4 = [
   },
   {
     id: 14, name: '中科院上海微系统所', en: 'SIMIT, CAS',
-    cat: 'soe', subcat: '国家研究所', tag: '⭐隐藏福地',
+    cat: 'soe', subcat: '国家研究所',
     dist: '长宁', commute_jd: 2, commute_mh: 3,
     cash_low: 22, cash_high: 30, cash_mid: 26,
     fund_pct: 12, fund_total: 13.5, stock: 'none',
@@ -2029,7 +2025,7 @@ const COMPANIES_V4 = [
   },
   {
     id: 15, name: '瑞金医院 · 生物医学工程部', en: 'Ruijin Hospital BME',
-    cat: 'hospital', subcat: '交大系三甲', tag: '⭐隐藏福地',
+    cat: 'hospital', subcat: '交大系三甲',
     dist: '黄浦', commute_jd: 2, commute_mh: 3,
     cash_low: 18, cash_high: 28, cash_mid: 23,
     fund_pct: 12, fund_total: 13.5, stock: 'none',
@@ -2062,7 +2058,7 @@ const COMPANIES_V4 = [
   },
   {
     id: 16, name: '中国商飞', en: 'COMAC',
-    cat: 'soe', subcat: '央企航空', tag: '⭐隐藏福地',
+    cat: 'soe', subcat: '央企航空',
     dist: '浦东新区', commute_jd: 4, commute_mh: 3,
     cash_low: 23, cash_high: 30, cash_mid: 26.5,
     fund_pct: 12, fund_total: 13.5, stock: 'none',
@@ -2089,7 +2085,7 @@ const COMPANIES_V4 = [
   },
   {
     id: 17, name: '中电科 32 所', en: 'CETC 32nd',
-    cat: 'soe', subcat: '央企研究所', tag: '⭐隐藏福地',
+    cat: 'soe', subcat: '央企研究所',
     dist: '闵行老闵行', commute_jd: 4, commute_mh: 5,
     cash_low: 28, cash_high: 36, cash_mid: 32,
     fund_pct: 12, fund_total: 13.5, stock: 'none',
@@ -2199,8 +2195,8 @@ const COMPANIES_V4 = [
   // ═══ Tier A/B 候选 (id 21-40)  · 精简数据，不展开 ═══
   {id:21,name:'华大智造',en:'MGI Tech',ticker:'688114.SH',cat:'medical',subcat:'基因测序+医疗',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:40,cash_mid:34,fund_pct:10,fund_total:10.5,stock:'限制性股票',total5y:215,wlb_hours:45,pay:7.0,tech_now:8.2,tech_future:8.5,geo:7.5,career:8.0,wlb:8.0,endow:8.0,industry:8.5,cohort:8.0,housing:7,poct:9,sweat:5,ai_ivd:8,energy:5,afm_boost:true,intern_path:null,intro:'基因测序+医疗设备龙头。POCT 方向与课题组对口。',why_for_you:['POCT 方向对口','科创板龙头'],current_match:'8.2',future_match:'8.5',pos:[{dept:'设备研发部',jobs:['测序仪嵌入式工程师']}],adv:['科创板龙头','POCT 对口'],risk:['基因测序周期性'],source_url:'https://en.mgi-tech.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
   {id:22,name:'阶跃星辰',en:'StepFun',cat:'startup',subcat:'AI 大模型',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:40,cash_high:60,cash_mid:50,fund_pct:10,fund_total:10.5,stock:'SAFE 期权',total5y:305,wlb_hours:52,pay:8.5,tech_now:7.0,tech_future:6.5,geo:8.0,career:8.5,wlb:6.5,endow:8.0,industry:9.0,cohort:4,housing:7,poct:2,sweat:3,ai_ivd:8,energy:3,afm_boost:false,intern_path:null,intro:'上海 AI 大模型独角兽。',why_for_you:['薪资高','独角兽期权'],current_match:'7.0',future_match:'6.5',pos:[{dept:'基础设施部',jobs:['嵌入式 AI 部署']}],adv:['AI 独角兽'],risk:['偏算法'],source_url:'https://www.stepfun.com',source:'招聘公告',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:23,name:'航天八院 804 所',en:'SAST 804th',cat:'soe',subcat:'央企军工',tag:'⭐隐藏福地',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:27,cash_high:35,cash_mid:31,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家费15万+人才公寓5年+事业编',total5y:220,wlb_hours:44,pay:6.8,tech_now:7.0,tech_future:6.5,geo:10,career:8.3,wlb:9.0,endow:8.3,industry:7.8,cohort:4,housing:10,poct:3,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'航天科技集团八院核心所。闵行办公。',why_for_you:['事业编+安家费15万'],current_match:'7.0',future_match:'6.5',pos:[{dept:'嵌入式系统研发部',jobs:['嵌入式系统工程师']}],adv:['事业编'],risk:['保密'],source_url:'https://www.sast-space.com',source:'航天招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
-  {id:24,name:'仁济医院 · 生物医学工程部',en:'Renji BME',cat:'hospital',subcat:'交大系三甲',tag:'⭐隐藏福地',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:18,cash_high:28,cash_mid:23,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院人才公寓',total5y:165,wlb_hours:40,pay:4.5,tech_now:8.0,tech_future:9.0,geo:9.0,career:8.8,wlb:9.5,endow:9.5,industry:8.8,cohort:9.0,housing:5,poct:9,sweat:7,ai_ivd:7,energy:6,afm_boost:true,intern_path:null,intro:'交大医学院附属仁济医院生物医学工程部。',why_for_you:['交大系事业编','AFM 变现'],current_match:'8.0',future_match:'9.0',pos:[{dept:'生物医学工程部',jobs:['临床工程师']}],adv:['事业编','交大系'],risk:['薪资低'],source_url:'https://www.renji.com',source:'医院招聘',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
+  {id:23,name:'航天八院 804 所',en:'SAST 804th',cat:'soe',subcat:'央企军工',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:27,cash_high:35,cash_mid:31,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家费15万+人才公寓5年+事业编',total5y:220,wlb_hours:44,pay:6.8,tech_now:7.0,tech_future:6.5,geo:10,career:8.3,wlb:9.0,endow:8.3,industry:7.8,cohort:4,housing:10,poct:3,sweat:3,ai_ivd:6,energy:5,afm_boost:false,intern_path:null,intro:'航天科技集团八院核心所。闵行办公。',why_for_you:['事业编+安家费15万'],current_match:'7.0',future_match:'6.5',pos:[{dept:'嵌入式系统研发部',jobs:['嵌入式系统工程师']}],adv:['事业编'],risk:['保密'],source_url:'https://www.sast-space.com',source:'航天招聘',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
+  {id:24,name:'仁济医院 · 生物医学工程部',en:'Renji BME',cat:'hospital',subcat:'交大系三甲',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:18,cash_high:28,cash_mid:23,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院人才公寓',total5y:165,wlb_hours:40,pay:4.5,tech_now:8.0,tech_future:9.0,geo:9.0,career:8.8,wlb:9.5,endow:9.5,industry:8.8,cohort:9.0,housing:5,poct:9,sweat:7,ai_ivd:7,energy:6,afm_boost:true,intern_path:null,intro:'交大医学院附属仁济医院生物医学工程部。',why_for_you:['交大系事业编','AFM 变现'],current_match:'8.0',future_match:'9.0',pos:[{dept:'生物医学工程部',jobs:['临床工程师']}],adv:['事业编','交大系'],risk:['薪资低'],source_url:'https://www.renji.com',source:'医院招聘',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
   {id:25,name:'蔚来汽车',en:'NIO',cat:'auto',subcat:'新能源',dist:'嘉定新城',commute_jd:5,commute_mh:3,cash_low:34,cash_high:48,cash_mid:41,fund_pct:5,fund_total:4.5,stock:'美股期权',total5y:245,wlb_hours:48,pay:7.5,tech_now:8.0,tech_future:6.0,geo:9.0,career:8.0,wlb:7.0,endow:7.5,industry:7.5,cohort:3,housing:8,poct:1,sweat:3,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'高端电动车标杆。',why_for_you:['嘉定定居','全栈自研'],current_match:'8.0',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱域控制器']}],adv:['嘉定定居'],risk:['公积金低'],source_url:'https://www.nio.com/careers',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
   {id:26,name:'理想汽车',en:'Li Auto',cat:'auto',subcat:'新能源',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:35,cash_high:48,cash_mid:41.5,fund_pct:12,fund_total:13.5,stock:'美股期权',total5y:255,wlb_hours:50,pay:8.0,tech_now:7.5,tech_future:6.0,geo:7.5,career:8.5,wlb:6.5,endow:7.5,industry:7.5,cohort:4,housing:7,poct:1,sweat:3,ai_ivd:7,energy:5,afm_boost:false,intern_path:null,intro:'新势力销量头部。',why_for_you:['销量稳定','公积金顶格'],current_match:'7.5',future_match:'6.0',pos:[{dept:'智能座舱',jobs:['座舱系统']}],adv:['公积金 12+12'],risk:['WLB 偏低'],source_url:'https://careers.lixiang.com',source:'公司官网',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟡'},
   {id:27,name:'美敦力',en:'Medtronic',cat:'medical',subcat:'外企医疗',dist:'闵行老闵行',commute_jd:4,commute_mh:5,cash_low:28,cash_high:38,cash_mid:33,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:210,wlb_hours:40,pay:7.0,tech_now:7.8,tech_future:8.5,geo:8.5,career:7.5,wlb:9.8,endow:8.0,industry:8.0,cohort:8.5,housing:8,poct:8,sweat:5,ai_ivd:6,energy:7,afm_boost:true,intern_path:null,intro:'全球医疗器械第一大公司。心脏节律、神经调控、糖尿病可穿戴全覆盖。',why_for_you:['WLB 顶级','IEC 62304 经验','AFM 在研发岗加分'],current_match:'7.8',future_match:'8.5',pos:[{dept:'心脏节律管理部',jobs:['嵌入式电子工程师']}],adv:['WLB 顶级','国际化'],risk:['外企天花板'],source_url:'https://jobs.medtronic.com',source:'官方招聘 + 脉脉',c_pay:'🟡',c_tech:'🟡',c_wlb:'🟢'},
@@ -2221,9 +2217,9 @@ const COMPANIES_V4 = [
   {id:40,name:'恩智浦',en:'NXP',cat:'auto',subcat:'外企汽车芯片',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:42,cash_mid:36,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:225,wlb_hours:42,pay:7.3,tech_now:8.0,tech_future:6.5,geo:7.5,career:7.8,wlb:9.5,endow:8.0,industry:8.0,cohort:3,housing:7,poct:1,sweat:2,ai_ivd:5,energy:5,afm_boost:false,intern_path:null,intro:'汽车芯片全球龙头。',why_for_you:['汽车芯片','WLB 顶级'],current_match:'8.0',future_match:'6.5',pos:[{dept:'汽车 MCU',jobs:['汽车芯片嵌入式']}],adv:['WLB 顶级'],risk:['外企天花板'],source_url:'https://www.nxp.com/careers',source:'官网',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟠'},
 
   // ═══ 剩余 20 家 (41-60) · 最简数据 ═══
-  {id:41,name:'上海人工智能实验室',en:'Shanghai AI Lab',cat:'soe',subcat:'国家实验室',tag:'⭐隐藏福地',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:50,cash_mid:41,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:255,wlb_hours:45,pay:7.8,tech_now:8.0,tech_future:7.5,geo:8.5,career:9.0,wlb:8.5,endow:9.5,industry:9.8,cohort:5,housing:7,poct:4,sweat:5,ai_ivd:8,energy:5,afm_boost:true,intern_path:null,intro:'国家级AI顶层机构。',why_for_you:['国家级平台','人才公寓','AFM 加分'],current_match:'8.0',future_match:'7.5',pos:[{dept:'具身智能组',jobs:['嵌入式AI部署']}],adv:['国家级平台'],risk:['嵌入式岗少'],source_url:'https://www.shlab.org.cn',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
-  {id:42,name:'中山医院 · 工程科',en:'Zhongshan BME',cat:'hospital',subcat:'复旦系三甲',tag:'⭐隐藏福地',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院公寓',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.5,tech_future:8.5,geo:8.5,career:8.5,wlb:9.5,endow:8.8,industry:8.5,cohort:8.5,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属中山医院工程科。',why_for_you:['事业编','AFM 变现'],current_match:'7.5',future_match:'8.5',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['非交大系'],source_url:'https://www.zs-hospital.sh.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
-  {id:43,name:'华山医院 · 工程科',en:'Huashan BME',cat:'hospital',subcat:'复旦系三甲',tag:'⭐隐藏福地',dist:'静安',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.3,tech_future:8.3,geo:8.3,career:8.3,wlb:9.5,endow:8.5,industry:8.5,cohort:8.0,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属华山医院工程科。',why_for_you:['三甲事业编'],current_match:'7.3',future_match:'8.3',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['薪资低'],source_url:'https://www.huashan.org.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:41,name:'上海人工智能实验室',en:'Shanghai AI Lab',cat:'soe',subcat:'国家实验室',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:50,cash_mid:41,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:255,wlb_hours:45,pay:7.8,tech_now:8.0,tech_future:7.5,geo:8.5,career:9.0,wlb:8.5,endow:9.5,industry:9.8,cohort:5,housing:7,poct:4,sweat:5,ai_ivd:8,energy:5,afm_boost:true,intern_path:null,intro:'国家级AI顶层机构。',why_for_you:['国家级平台','人才公寓','AFM 加分'],current_match:'8.0',future_match:'7.5',pos:[{dept:'具身智能组',jobs:['嵌入式AI部署']}],adv:['国家级平台'],risk:['嵌入式岗少'],source_url:'https://www.shlab.org.cn',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
+  {id:42,name:'中山医院 · 工程科',en:'Zhongshan BME',cat:'hospital',subcat:'复旦系三甲',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'医院公寓',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.5,tech_future:8.5,geo:8.5,career:8.5,wlb:9.5,endow:8.8,industry:8.5,cohort:8.5,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属中山医院工程科。',why_for_you:['事业编','AFM 变现'],current_match:'7.5',future_match:'8.5',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['非交大系'],source_url:'https://www.zs-hospital.sh.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:43,name:'华山医院 · 工程科',en:'Huashan BME',cat:'hospital',subcat:'复旦系三甲',dist:'静安',commute_jd:3,commute_mh:3,cash_low:18,cash_high:26,cash_mid:22,fund_pct:12,fund_total:13.5,stock:'none',total5y:160,wlb_hours:40,pay:4.3,tech_now:7.3,tech_future:8.3,geo:8.3,career:8.3,wlb:9.5,endow:8.5,industry:8.5,cohort:8.0,housing:5,poct:8,sweat:6,ai_ivd:6,energy:5,afm_boost:true,intern_path:null,intro:'复旦附属华山医院工程科。',why_for_you:['三甲事业编'],current_match:'7.3',future_match:'8.3',pos:[{dept:'工程科',jobs:['临床工程师']}],adv:['事业编'],risk:['薪资低'],source_url:'https://www.huashan.org.cn',source:'医院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
   {id:44,name:'腾讯 AIoT',en:'Tencent AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:35,cash_high:48,cash_mid:41.5,fund_pct:12,fund_total:13.5,stock:'RSU',total5y:255,wlb_hours:50,pay:7.8,tech_now:6.5,tech_future:6.0,geo:7.5,career:8.0,wlb:6.5,endow:8.0,industry:7.5,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:6,energy:4,afm_boost:false,intern_path:null,intro:'腾讯 AIoT。',why_for_you:['品牌光环'],current_match:'6.5',future_match:'6.0',pos:[{dept:'IoT 终端',jobs:['嵌入式']}],adv:['品牌'],risk:['非核心'],source_url:'https://careers.tencent.com',source:'官网',c_pay:'🟡',c_tech:'🟠',c_wlb:'🟠'},
   {id:45,name:'字节 AIoT',en:'ByteDance AIoT',cat:'aiot',subcat:'互联网+IoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:38,cash_high:52,cash_mid:45,fund_pct:12,fund_total:13.5,stock:'期权',total5y:275,wlb_hours:58,pay:8.3,tech_now:6.5,tech_future:5.5,geo:7.5,career:8.0,wlb:5.0,endow:7.5,industry:7.5,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'字节 AIoT。',why_for_you:['薪资高'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 设备',jobs:['嵌入式']}],adv:['薪资高'],risk:['WLB 58h'],source_url:'https://jobs.bytedance.com',source:'官方',c_pay:'🟠',c_tech:'🟡',c_wlb:'🟡'},
   {id:46,name:'小米 AIoT',en:'Xiaomi AIoT',cat:'aiot',subcat:'消费 AIoT',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:44,cash_mid:38,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:240,wlb_hours:50,pay:7.5,tech_now:6.5,tech_future:5.5,geo:8.0,career:7.5,wlb:6.5,endow:7.5,industry:7.5,cohort:3,housing:7,poct:2,sweat:3,ai_ivd:5,energy:4,afm_boost:false,intern_path:null,intro:'小米 AIoT 生态。',why_for_you:['生态大'],current_match:'6.5',future_match:'5.5',pos:[{dept:'IoT 模组',jobs:['WiFi/BLE']}],adv:['公积金顶格'],risk:['偏消费'],source_url:'https://hr.xiaomi.com',source:'🟢 知乎 26 届',c_pay:'🟢',c_tech:'🟡',c_wlb:'🟡'},
@@ -2235,7 +2231,7 @@ const COMPANIES_V4 = [
   {id:52,name:'中电科 21 所',en:'CETC 21st',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:23,cash_high:31,cash_mid:27,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:195,wlb_hours:44,pay:6.0,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:8.0,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:5,afm_boost:false,intern_path:null,intro:'微特电机所。',why_for_you:['央企稳定','公积金顶格'],current_match:'6.0',future_match:'5',pos:[{dept:'电机驱动',jobs:['电机控制']}],adv:['央企','公积金顶格'],risk:['薪资低'],source_url:'https://www.21icresearch.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
   {id:53,name:'中电科 23 所',en:'CETC 23rd',cat:'soe',subcat:'央企研究所',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:22,cash_high:30,cash_mid:26,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:185,wlb_hours:44,pay:5.5,tech_now:6.0,tech_future:5,geo:9.0,career:7.5,wlb:9.0,endow:7.8,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:5,afm_boost:false,intern_path:null,intro:'特种传输线缆所。',why_for_you:['央企稳定','光纤传感对口'],current_match:'6.0',future_match:'5',pos:[{dept:'光纤传感',jobs:['光纤嵌入式']}],adv:['央国企','光纤传感'],risk:['薪资最低'],source_url:'https://www.cetc23.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
   {id:54,name:'中船 708 所',en:'MARIC 708th',cat:'soe',subcat:'央企军工',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:24,cash_high:32,cash_mid:28,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'人才公寓',total5y:195,wlb_hours:44,pay:6.0,tech_now:5.5,tech_future:4.5,geo:9.0,career:7.8,wlb:8.8,endow:8.0,industry:7.5,cohort:2,housing:9,poct:1,sweat:2,ai_ivd:4,energy:4,afm_boost:false,intern_path:null,intro:'中船 708 船舶总体设计所。',why_for_you:['央企军工'],current_match:'5.5',future_match:'4.5',pos:[{dept:'船舶电子',jobs:['船用嵌入式']}],adv:['央企军工'],risk:['方向弱相关'],source_url:'https://www.maric.com.cn',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
-  {id:55,name:'中科院上海技物所',en:'SITP, CAS',cat:'soe',subcat:'国家研究所',tag:'⭐隐藏福地',dist:'虹口',commute_jd:2,commute_mh:2,cash_low:22,cash_high:28,cash_mid:25,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家补贴',total5y:180,wlb_hours:45,pay:5.3,tech_now:7.5,tech_future:6.5,geo:7.5,career:8.0,wlb:8.5,endow:8.5,industry:8.0,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:5,energy:5,afm_boost:true,intern_path:null,intro:'中科院红外+光电探测国家队。',why_for_you:['国家研究所'],current_match:'7.5',future_match:'6.5',pos:[{dept:'红外光电',jobs:['光电探测嵌入式']}],adv:['国家所','事业编'],risk:['方向关联弱'],source_url:'http://www.sitp.cas.cn',source:'中科院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
+  {id:55,name:'中科院上海技物所',en:'SITP, CAS',cat:'soe',subcat:'国家研究所',dist:'虹口',commute_jd:2,commute_mh:2,cash_low:22,cash_high:28,cash_mid:25,fund_pct:12,fund_total:13.5,stock:'none',housing_bonus:'安家补贴',total5y:180,wlb_hours:45,pay:5.3,tech_now:7.5,tech_future:6.5,geo:7.5,career:8.0,wlb:8.5,endow:8.5,industry:8.0,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:5,energy:5,afm_boost:true,intern_path:null,intro:'中科院红外+光电探测国家队。',why_for_you:['国家研究所'],current_match:'7.5',future_match:'6.5',pos:[{dept:'红外光电',jobs:['光电探测嵌入式']}],adv:['国家所','事业编'],risk:['方向关联弱'],source_url:'http://www.sitp.cas.cn',source:'中科院',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟡'},
   {id:56,name:'阿里健康',en:'Ali Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:32,cash_high:42,cash_mid:37,fund_pct:12,fund_total:13.5,stock:'港股期权',total5y:230,wlb_hours:48,pay:7.2,tech_now:6.5,tech_future:5.5,geo:7.0,career:7.5,wlb:7.0,endow:7.5,industry:7.5,cohort:4,housing:6,poct:3,sweat:3,ai_ivd:6,energy:3,afm_boost:false,intern_path:null,intro:'阿里大健康旗舰。',why_for_you:['公积金顶格'],current_match:'6.5',future_match:'5.5',pos:[{dept:'智慧医疗',jobs:['医疗 IoT']}],adv:['公积金顶格'],risk:['偏平台'],source_url:'https://www.alihealth.cn',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
   {id:57,name:'石头科技',en:'Roborock',cat:'aiot',subcat:'消费机器人',dist:'浦东新区',commute_jd:3,commute_mh:3,cash_low:28,cash_high:38,cash_mid:33,fund_pct:8,fund_total:8.8,stock:'期权',total5y:200,wlb_hours:46,pay:6.8,tech_now:6.0,tech_future:5,geo:7.5,career:7.5,wlb:7.5,endow:7.5,industry:7.5,cohort:2,housing:7,poct:1,sweat:2,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'扫地机器人龙头。',why_for_you:['WLB 好'],current_match:'6.0',future_match:'5',pos:[{dept:'机器人控制',jobs:['嵌入式']}],adv:['WLB 好'],risk:['非医疗'],source_url:'https://www.roborock.com',source:'官网',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
   {id:58,name:'京东健康',en:'JD Health',cat:'aiot',subcat:'互联网医疗',dist:'徐汇',commute_jd:3,commute_mh:3,cash_low:30,cash_high:40,cash_mid:35,fund_pct:10,fund_total:10.5,stock:'港股期权',total5y:215,wlb_hours:48,pay:7.0,tech_now:6.2,tech_future:5,geo:7.0,career:7.0,wlb:7.0,endow:7.0,industry:7.0,cohort:3,housing:6,poct:2,sweat:3,ai_ivd:5,energy:3,afm_boost:false,intern_path:null,intro:'京东大健康。',why_for_you:['薪资 OK'],current_match:'6.2',future_match:'5',pos:[{dept:'健康硬件',jobs:['IoT']}],adv:['薪资 OK'],risk:['偏平台'],source_url:'https://jobs.jd.com',source:'招聘',c_pay:'🟠',c_tech:'🟠',c_wlb:'🟠'},
@@ -2762,7 +2758,63 @@ const V7_STORYLINE = {
   42: '<b>复旦附属中山医院工程科</b>（徐汇）。复旦系三甲。路径类似瑞金/仁济。' +
     '<br><br>⚠️ 非交大系，内推人脉弱。但中山在消化科、心脏科实力强，医工交叉有机会。事业编 + 人才公寓。',
 
-  43: '<b>复旦附属华山医院工程科</b>（静安）。复旦系三甲 + 神经外科国内顶级。事业编 + WLB 955。'
+  43: '<b>复旦附属华山医院工程科</b>（静安）。复旦系三甲 + 神经外科国内顶级。事业编 + WLB 955。',
+
+  31: '<b>脑机接口新锐</b>（复旦孵化），跟脑虎/博睿康类似赛道但更早期。' +
+    '<br><br>⚠️ <b>三重 DEBUFF：脑机接口非你主线 + 初创风险高 + 已有脑虎/博睿康做同赛道选择。</b>说句实话，这个公司对你没有任何脑虎/博睿康不可替代的优势。如果对脑机好奇，投脑虎就够了。作为"了解即可"。',
+  32: '<b>全球电动车标杆</b>特斯拉，临港工厂是上海制造的名片。薪资 36-50w + RSU 给得大方，品牌光环拉满。' +
+    '<br><br>⚠️ <b>但你做医疗嵌入式的，去特斯拉只能做 BMS 或车身电子，跟 POCT/微针/可穿戴医疗基本没有交集</b>。临港通勤到闵行1.5h+。简历加成确实猛，但代价是方向彻底跑偏 + 生活品质下降。<b>如果你 35 岁前想转回医疗，特斯拉这段经历帮助有限。</b>',
+  33: '<b>字节健康事业部</b>，字节在互联网医疗可穿戴上的布局。薪资 38-52w 很香，公积金 12+12 顶格。' +
+    '<br><br>⚠️ <b>致命伤：WLB 55h+</b>。你本身就是"WLB 敏感型"，在小米实习已经受不了 55h+ —— 字节只会更卷。<b>薪资高但代价是健康和方向偏离医疗主线。</b>适合愿意燃烧 2-3 年换首付的人，但其实你的首付不靠工资也能解决。',
+  34: '<b>全球汽车 Tier 1 巨头</b>博世，底盘控制、ESP/ABS 是看家本领。WLB 周均 40h 顶级 + 公积金 12+12。' +
+    '<br><br>薪资 26-34w 偏低但生活质量拉满。⚠️ 技术栈偏传统汽车电子（CAN/LIN/AUTOSAR），跟可穿戴医疗完全是两个世界。<b>适合追求"稳稳的幸福"且不执着医疗主线的人。</b>',
+  35: '<b>全球无人机绝对霸主</b>大疆，飞控、RTOS、传感器融合是嵌入式天花板。薪资 32-48w + 虚拟股权，简历镀金能力强。' +
+    '<br><br>⚠️ <b>问题是：大疆做的东西和医疗可穿戴基本不沾边。</b>RTOS 经验通用，但行业知识（飞控算法/云台控制）跳医疗 = 清零。<b>如果你哪天想转回医疗，简历上"大疆飞控"不如"联影 PET 嵌入式"有说服力。</b>',
+  36: '<b>⚠️ 你亲口反馈过的公司。</b>2025.12-2026.2 你在宇构智核实习了 2 个月，结论非常明确：<b>公司规模过小，薪资低（22-32w），期权流动性差，未来前景没有竞争力</b>。' +
+    '<br><br>这段实习可以写在简历上当"脑机接口入门经历"，但<b>转正绝对不推荐</b>。你在脑机接口赛道也完全不需要靠宇构来入门——脑虎/博睿康比它靠谱得多。',
+  37: '<b>科创板 AI 芯片第一股</b>寒武纪（688256.SH），思元系列 AI 加速卡是国内 AI 算力核心标的。薪资 35-50w 有竞争力。' +
+    '<br><br>⚠️ <b>跟医疗方向无关</b>。做 AI 芯片嵌入式底层，技术深度高但赛道孤——跳槽回医疗几乎等于从零开始。<b>适合铁了心转 AI 芯片方向的人</b>，不适合医疗电子主线。',
+  38: '<b>车规级自动驾驶 AI 芯片</b>黑芝麻智能（已港股上市），征程系列芯片对标地平线。薪资 32-46w + 港股期权。' +
+    '<br><br>⚠️ <b>跟地平线（id 11）同样的问题：汽车 AI 芯片跟医疗可穿戴是两个方向。</b>如果地平线是"汽车 AI 芯片首选"，黑芝麻就是备选。对你来说，投地平线就够了。',
+  39: '<b>上汽集团核心零部件企业</b>华域汽车，国内 Tier 1 巨头。公积金 12+12 良心，WLB 周均 42h 非常舒适。' +
+    '<br><br>⚠️ 技术栈偏传统汽车电子（车身控制器/灯光/空调），<b>技术天花板明显、创新空间有限</b>。薪资 26-36w 偏低但稳定。适合追求"不加班 + 稳定 + 离家近"的佛系选手。',
+  40: '<b>全球汽车 MCU 芯片龙头</b>恩智浦（NXP），S32K/i.MX 系列是汽车嵌入式的必修课。WLB 40h 顶级 + 公积金 12+12 + RSU。' +
+    '<br><br>薪资 30-42w 中等。⚠️ <b>汽车芯片≠医疗芯片</b>，外企晋升天花板存在。适合"技术积累 + 生活品质"并重的人，但方向不是医疗主线。',
+
+  44: '<b>腾讯 AIoT 事业部</b>，做 IoT 终端设备。品牌光环 + 薪资 35-48w + RSU。' +
+    '<br><br>⚠️ <b>非核心业务</b>（腾讯主业是游戏/社交/云），IoT 在腾讯是边缘部门。能去当然简历好看，但跟医疗可穿戴还是隔了一层。',
+  45: '<b>字节 AIoT</b>，同理腾讯但更卷。薪资 38-52w 是真香，但 ⚠️ <b>WLB 58h 是全榜单最差之一</b>（比华为健康还狠）。' +
+    '<br><br>你在小米已经领教过 55h+ 的生活了——字节 58h 是什么概念？每周比小米多 3h，几乎全年无休。<b>不推荐，除非你愿意赌身体。</b>',
+  46: '<b>小米 AIoT 平台</b>，做 WiFi/BLE 模组和 IoT 生态。你正在小米实习，对内部文化已经很清楚。' +
+    '<br><br>如果拿了实习转正 offer，<b>可以保底</b>，但 AIoT 方向跟你医疗主线还是有差距。建议当做"万一医疗方向全落空"的最后一道防线。',
+  47: '<b>AI 视觉第一股</b>商汤科技，学术出身的技术基因强。但 ⚠️ <b>持续亏损 + 股价低迷 + 裁员阴云</b>，港股 AI 四小龙里日子最难过的之一。' +
+    '<br><br>薪资 28-40w 偏低。如果对 AI 视觉 + 边缘部署感兴趣，不如直接投寒武纪或地平线。商汤适合有"学术理想"的人，不适合求稳。',
+  48: '<b>国产心血管医疗器械龙头</b>乐普医疗（300003.SZ），起搏器、支架、心电监测全产品线。你本科做过心律失常 1D-CNN 项目——心电赛道是通的。' +
+    '<br><br>薪资 25-35w 偏低但稳定。⚠️ <b>心血管方向偏传统，微针/POCT/CGM 不在乐普主航道上</b>。作为医疗电子的"安全牌"可以投，但不如联影/迈瑞/微创。',
+  49: '<b>国内汽车 Tier 1 龙头</b>德赛西威（002920.SZ），智能座舱域控制器是核心业务。薪资 28-36w 中等，成长性好。' +
+    '<br><br>⚠️ <b>纯汽车电子路线，与医疗无关。</b>如果你在小米拿不到转正但又想做汽车嵌入式，德赛西威是比博世更"国产化"的选择。',
+  50: '<b>上海电气中央研究院</b>，上海国资委直属。公积金 12+12 + 人才公寓 + WLB 955，社保交足，稳如泰山。' +
+    '<br><br>⚠️ <b>薪资 22-30w 是全榜单最低档之一</b>。做工业嵌入式（PLC/SCADA），跟可穿戴医疗是完全不同的技术栈。<b>适合图"上海编制 + 不加班"的人。</b>',
+  51: '<b>动力电池全球龙头</b>宁德时代上海研发中心，BMS（电池管理系统）嵌入式是核心岗。薪资 28-38w + 限制性股票。' +
+    '<br><br>⚠️ <b>BMS≠可穿戴医疗</b>。新能源赛道热度高，但对你来说方向跑偏了——除非你愿意从医疗跨界到能源。<b>不太推荐，除非你明确想转行新能源。</b>',
+  52: '<b>中电科 21 所</b>（微特电机研究所），央企事业编 + 公积金 12+12。薪资 23-31w。' +
+    '<br><br>⚠️ <b>做电机控制 DSP 嵌入式，和医疗八竿子打不着。</b>如果你要央企编制又不在乎方向，32 所、微系统所比 21 所更适合你。',
+  53: '<b>中电科 23 所</b>（特种传输线缆/光纤传感所），央企事业编。薪资 22-30w 偏低但公积金顶格。' +
+    '<br><br>⚠️ <b>光纤传感方向偏光电子，跟你的可穿戴医疗嵌入式交集很小。</b>比起 32 所（有医疗电子事业部），23 所对你来说性价比低。',
+  54: '<b>中船 708 所</b>（中国船舶及海洋工程设计研究院），央企军工。薪资 24-32w + 公积金顶格 + 事业编。' +
+    '<br><br>⚠️ <b>船舶电子嵌入式方向跟你完全不是一个赛道。</b>除非你想体验"造航母的感觉"，否则从职业发展角度不推荐。',
+  55: '<b>中科院上海技物所</b>（红外+光电探测国家队），事业编 + 安家补贴。薪资 22-28w 低但稳定。' +
+    '<br><br>⚠️ <b>光电探测方向跟你可穿戴医疗交集有限。</b> AFM 论文在光电方向加分有限。如果你要进国家级研究所走研究员路线，微系统所（id 14）比技物所更适合你——至少微系统所有 MEMS+柔性电子。',
+  56: '<b>阿里健康</b>，阿里大健康旗舰平台。薪资 32-42w + 港股期权 + 公积金 12+12。做医疗 IoT。' +
+    '<br><br>⚠️ <b>偏平台和互联网，嵌入式岗位少且非核心。</b>如果你能接受转产品/运营方向，阿里健康平台不错；如果坚持嵌入式主线，不如投联影/迈瑞。',
+  57: '<b>扫地机器人全球龙头</b>石头科技（688169.SH），SLAM 导航 + 路径规划嵌入式。薪资 28-38w，WLB 好。' +
+    '<br><br>⚠️ <b>消费机器人≠医疗机器人。</b>如果你要把机器人技术用到医疗——等 5-8 年后医疗器械机器人化，你的石头经验可能用得上。但现在入职就等于"暂时离开医疗赛道"。',
+  58: '<b>京东健康</b>，跟阿里健康类似的互联网医疗平台。薪资 30-40w，港股期权。' +
+    '<br><br>⚠️ <b>同理阿里健康：偏平台、嵌入式岗位稀缺。</b>作为见识互联网医疗的不错，但不要当主攻方向。',
+  59: '<b>全球模拟芯片绝对龙头</b>德州仪器（TI），WLB 40h 顶级 + 公积金 12+12 + RSU。薪资 28-38w 中等。' +
+    '<br><br>外企养老圣地——朝九晚五、年休 20+ 天、不加班。<b>但：芯片公司做嵌入式偏底层（驱动/验证），和可穿戴医疗的应用层有距离。</b>适合图"稳定+生活品质"的人。',
+  60: '<b>全球汽车 Tier 1</b>安波福（Aptiv），ADAS 域控制器、车辆电气架构全球头部。WLB 42h 好 + 公积金 12+12。' +
+    '<br><br>薪资 26-34w 偏低。⚠️ <b>纯汽车嵌入式路线。</b>如果你最后实在拿不到医疗 offer 转汽车方向，安波福是比华域/德赛西威更"国际化"的保底选项。'
 };
 
 function applyV7Storylines() {
@@ -2833,13 +2885,11 @@ function tierCount() {
 /* ═══ Hero stats ═══ */
 function renderHero() {
   const cnt = tierCount();
-  const gems = COMPANIES_V4.filter(c => c.tag).length;
   $('#heroStats').innerHTML = `
     <div class="stat-card"><div class="sk">SSS · 必投</div><div class="sv sss">${cnt.SSS}</div><div class="sdesc">拿到即去</div></div>
     <div class="stat-card"><div class="sk">SS · 强推</div><div class="sv ss">${cnt.SS}</div><div class="sdesc">次优先级</div></div>
     <div class="stat-card"><div class="sk">S · 推荐</div><div class="sv s">${cnt.S}</div><div class="sdesc">主投池</div></div>
     <div class="stat-card"><div class="sk">A+B · 保底</div><div class="sv a">${cnt.A + cnt.B}</div><div class="sdesc">广撒 + 避坑</div></div>
-    <div class="stat-card"><div class="sk">⭐ 福地</div><div class="sv gem">${gems}</div><div class="sdesc">蓝海选项</div></div>
   `;
 }
 
@@ -2913,7 +2963,6 @@ function renderFirmCard(c) {
   const tcls = c.tier.toLowerCase();
   const cat = CATEGORIES_V4[c.cat];
   const badges = [];
-  if (c.tag) badges.push('<span class="firm-badge gem">⭐ 福地</span>');
   if (c.intern_path === 'current') badges.push('<span class="firm-badge intern">实习中</span>');
   if (c.intern_path === 'current_off_topic') badges.push('<span class="firm-badge warn">实习 · 跨方向</span>');
 
@@ -3037,17 +3086,14 @@ function renderRank() {
     B:'Avoid · 后 25%'
   };
 
-  // V7.1: 福地不再独立列，按分数融入各 Tier，卡片内用⭐标签标识
   let html = '';
   tiers.forEach(t => {
     const g = list.filter(c => c.tier === t);
     if (!g.length) return;
-    const gemCount = g.filter(c => c.tag).length;
-    const gemHint = gemCount ? ` · 含 ${gemCount} 家 ⭐ 隐藏福地` : '';
     html += `<section class="tgroup">
       <div class="tgroup-head">
         <span class="tgroup-badge ${t.toLowerCase()}">${t}</span>
-        <span class="tgroup-title">${tn[t]} · ${ti[t]}${gemHint}</span>
+        <span class="tgroup-title">${tn[t]} · ${ti[t]}</span>
         <span class="tgroup-count">${g.length} 家</span>
       </div>
       ${g.map(renderFirmCard).join('')}
