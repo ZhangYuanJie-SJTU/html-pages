@@ -1169,7 +1169,7 @@ async function gbSubmit(e) {
     try {
       const r = await fetch(GB_API, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: 'add', name, content })
       });
       const res = await r.json();
