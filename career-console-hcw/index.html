@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>胡程玮 · 2028届就业决策控制台</title>
+<meta name="description" content="胡程玮·2028届清华材料与化工专硕·金属相变/高铁钢轨/材料基因工程方向·个人就业决策台·10维定制评分·61家目标雇主">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=LXGW+WenKai:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -68,9 +69,12 @@ body{font-family:var(--ff-body);background:var(--bg);color:var(--text);line-heig
 /* WEIGHT CONSOLE */
 .weight-console{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem}
 .preset-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.preset-btn{padding:.35rem .9rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--gray-300);background:var(--bg-card);color:var(--text2);transition:all .2s}
+.preset-btn{padding:.35rem .9rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--gray-300);background:var(--bg-card);color:var(--text2);transition:all .2s;min-width:110px;text-align:left}
 .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
 .preset-btn.active{background:var(--accent);color:var(--text-inv);border-color:var(--accent)}
+.preset-btn .preset-desc{display:block;font-size:.6rem;font-weight:400;color:var(--text3);line-height:1.2;margin-top:.15rem}
+.preset-btn:hover .preset-desc{color:var(--accent);opacity:.7}
+.preset-btn.active .preset-desc{color:rgba(255,255,255,.65)}
 .weight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem}
 .weight-item{display:flex;align-items:center;gap:.6rem}
 .weight-label{min-width:80px;font-size:.78rem;font-weight:500;color:var(--text2);text-align:right}
@@ -481,9 +485,10 @@ function renderStats() {
 // ═══ RENDER: PRESETS ═══
 function renderPresets() {
   let labels = {default:'默认均衡',salary:'薪资优先',tech:'技术优先',settle:'定居优先',cohort:'课题优先'};
+  let descs = {default:'薪酬18% · 技术20% · 地缘12% · 综合均衡',salary:'薪酬32% · 看重现金总包和5年收益',tech:'技术栈40% · 现栈20%+未来栈20%',settle:'地缘22% · 购房24% · 通勤+房价友好',cohort:'课题18% · 未来栈15% · 相变×贝氏体×钢轨×材料基因'};
   let html = '';
   Object.keys(PRESETS).forEach(k => {
-    html += `<button class="preset-btn ${k===activePreset?'active':''}" data-preset="${k}">${labels[k]||k}</button>`;
+    html += `<button class="preset-btn ${k===activePreset?'active':''}" data-preset="${k}">${labels[k]||k}<span class="preset-desc">${descs[k]||''}</span></button>`;
   });
   document.getElementById('presetRow').innerHTML = html;
   document.querySelectorAll('.preset-btn').forEach(btn => {
