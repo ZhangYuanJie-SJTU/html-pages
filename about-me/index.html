@@ -498,6 +498,110 @@ a { color: inherit; text-decoration: none; }
 .sk.hi { background: var(--ox); color: var(--white); border-color: transparent; }
 .sk.hi:hover { background: #e65800; }
 
+/* ═══ GUESTBOOK ══════════════════════════════════════════════════════════ */
+.guestbook-sec { background: var(--coal); }
+.guestbook-sec .eyebrow { color: rgba(255,97,0,.65); }
+.gb-wrap {
+  display: grid; grid-template-columns: 380px 1fr;
+  gap: 48px; align-items: start;
+}
+.gb-form-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r2); padding: 36px 32px;
+  position: sticky; top: 88px;
+}
+.gb-form-card h3 {
+  font-family: var(--f-disp); font-size: 22px; font-weight: 900;
+  font-style: italic; color: var(--white); margin-bottom: 6px;
+}
+.gb-form-card p {
+  font-size: 13px; color: rgba(255,255,255,.35); margin-bottom: 28px;
+  line-height: 1.6;
+}
+.gb-field { margin-bottom: 16px; }
+.gb-field label {
+  display: block; font-family: var(--f-mono); font-size: 10px;
+  font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,.4);
+  margin-bottom: 7px;
+}
+.gb-field input, .gb-field textarea {
+  width: 100%; background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 10px; padding: 12px 16px;
+  font-family: var(--f-ui); font-size: 14px;
+  color: var(--white); outline: none;
+  transition: border-color .2s, background .2s;
+}
+.gb-field input::placeholder, .gb-field textarea::placeholder {
+  color: rgba(255,255,255,.2);
+}
+.gb-field input:focus, .gb-field textarea:focus {
+  border-color: var(--ox); background: rgba(255,97,0,.06);
+}
+.gb-field textarea { resize: vertical; min-height: 100px; line-height: 1.7; }
+.gb-submit {
+  width: 100%; padding: 14px; border: none; border-radius: 100px;
+  background: var(--ox); color: var(--white);
+  font-family: var(--f-mono); font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.gb-submit:hover { background: #e65800; }
+.gb-submit:active { transform: scale(.97); }
+.gb-submit:disabled { opacity: .5; cursor: not-allowed; }
+.gb-hint {
+  margin-top: 14px; text-align: center;
+  font-family: var(--f-mono); font-size: 10px;
+  color: rgba(255,255,255,.18); letter-spacing: .5px;
+}
+.gb-list { display: flex; flex-direction: column; gap: 14px; }
+.gb-empty {
+  text-align: center; padding: 60px 20px;
+  font-family: var(--f-body); font-size: 15px;
+  color: rgba(255,255,255,.2); font-style: italic;
+}
+.gb-msg {
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 22px 26px;
+  transition: background .2s, border-color .2s;
+}
+.gb-msg:hover { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.10); }
+.gb-msg-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+}
+.gb-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-disp); font-size: 15px; font-weight: 900;
+  color: var(--white); flex-shrink: 0;
+}
+.gb-msg-name {
+  font-family: var(--f-ui); font-size: 14px; font-weight: 700;
+  color: var(--white);
+}
+.gb-msg-time {
+  font-family: var(--f-mono); font-size: 10px;
+  color: rgba(255,255,255,.22); letter-spacing: .3px;
+  margin-left: auto;
+}
+.gb-msg-body {
+  font-family: var(--f-body); font-size: 14.5px;
+  color: rgba(255,255,255,.6); line-height: 1.85;
+  white-space: pre-wrap; word-break: break-word;
+}
+.gb-toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--ox); color: var(--white);
+  padding: 14px 32px; border-radius: 100px;
+  font-family: var(--f-mono); font-size: 13px; font-weight: 600;
+  letter-spacing: .5px; z-index: 999;
+  opacity: 0; transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+.gb-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
 /* ═══ FOOTER ═════════════════════════════════════════════════════════════ */
 .footer {
   background: var(--ox); padding: 100px 60px 72px;
@@ -591,6 +695,8 @@ a { color: inherit; text-decoration: none; }
   .work-card { grid-template-columns: 1fr; gap: 24px; padding: 34px 26px; }
   .proj-grid { grid-template-columns: 1fr; }
   .awards-grid { grid-template-columns: 1fr 1fr; }
+  .gb-wrap { grid-template-columns: 1fr; }
+  .gb-form-card { position: static; }
   .contact-zone { flex-direction: column; align-items: center; }
 }
 @media (max-width: 580px) {
@@ -621,6 +727,7 @@ a { color: inherit; text-decoration: none; }
     <a href="#work">实习</a>
     <a href="#projects">项目</a>
     <a href="#footer">联系</a>
+    <a href="#guestbook">留言</a>
   </div>
 </nav>
 
@@ -925,6 +1032,35 @@ a { color: inherit; text-decoration: none; }
   <p class="footer-copy r d4">张元杰 · 武汉理工大学 → 上海交通大学 · 2026</p>
 </footer>
 
+<!-- ── GUESTBOOK ─────────────────────────────────────────── -->
+<section class="sec guestbook-sec" id="guestbook">
+  <div class="eyebrow r">留言板</div>
+  <h2 class="htitle htitle--w r d1">来<em>聊聊</em>吧</h2>
+  <div class="gb-wrap">
+    <div class="gb-form-card r d1">
+      <h3>留下你的足迹 ✍️</h3>
+      <p>不用登录，想说什么就说。<br>交个朋友、聊技术、推荐馆子都行。</p>
+      <form id="gb-form" onsubmit="return gbSubmit(event)">
+        <div class="gb-field">
+          <label>昵称</label>
+          <input type="text" id="gb-name" placeholder="怎么称呼你？" maxlength="30" required>
+        </div>
+        <div class="gb-field">
+          <label>留言</label>
+          <textarea id="gb-content" placeholder="随便写点什么…" maxlength="500" required></textarea>
+        </div>
+        <button type="submit" class="gb-submit" id="gb-btn">发 送</button>
+      </form>
+      <p class="gb-hint">⚡ 匿名留言 · 实时显示 · 无需登录</p>
+    </div>
+    <div class="gb-list r d2" id="gb-list">
+      <div class="gb-empty" id="gb-empty">还没有留言，来做第一个吧 :)</div>
+    </div>
+  </div>
+</section>
+
+<div class="gb-toast" id="gb-toast"></div>
+
 <script>
 // Scroll reveal
 const io = new IntersectionObserver(entries => {
@@ -950,6 +1086,110 @@ window.addEventListener('scroll', () => {
   if (scrollY < innerHeight * 1.2)
     bg.style.transform = `scale(1) translateY(${scrollY * 0.22}px)`;
 }, { passive: true });
+
+// ═══ GUESTBOOK ═══════════════════════════════════════════════════════
+// ▶ 替换为你自己部署的 Google Apps Script Web App URL
+const GB_API = 'https://script.google.com/macros/s/AKfycbx8cM_z7a7JyXOKTlzub8fsv-1OfDGOEmlc-mZ-LkP8AYLy75apPAYaiiiduKxDjdzv/exec';
+const GB_COLORS = ['#FF6100','#E74C3C','#8E44AD','#2980B9','#27AE60','#F39C12','#1ABC9C','#D35400'];
+const gbToast = document.getElementById('gb-toast');
+
+function gbShowToast(msg, ms = 2400) {
+  gbToast.textContent = msg;
+  gbToast.classList.add('show');
+  setTimeout(() => gbToast.classList.remove('show'), ms);
+}
+
+function gbAvatarColor(name) {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+  return GB_COLORS[Math.abs(h) % GB_COLORS.length];
+}
+
+function gbRenderMsg(item) {
+  const d = document.createElement('div');
+  d.className = 'gb-msg';
+  const c = gbAvatarColor(item.name);
+  const t = item.time ? new Date(item.time).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+  d.innerHTML = `
+    <div class="gb-msg-head">
+      <div class="gb-avatar" style="background:${c}">${item.name[0]}</div>
+      <span class="gb-msg-name">${item.name}</span>
+      <span class="gb-msg-time">${t}</span>
+    </div>
+    <div class="gb-msg-body">${item.content}</div>`;
+  return d;
+}
+
+function gbRenderList(data) {
+  const list = document.getElementById('gb-list');
+  const empty = document.getElementById('gb-empty');
+  list.innerHTML = '';
+  if (!data.length) { list.appendChild(empty); return; }
+  data.forEach(item => list.appendChild(gbRenderMsg(item)));
+}
+
+// Load from localStorage first (instant), then try backend
+function gbLoadLocal() {
+  try { return JSON.parse(localStorage.getItem('gb_messages') || '[]'); } catch { return []; }
+}
+function gbSaveLocal(data) {
+  try { localStorage.setItem('gb_messages', JSON.stringify(data.slice(0, 200))); } catch {}
+}
+
+async function gbLoad() {
+  gbRenderList(gbLoadLocal());
+  if (!GB_API) return;
+  try {
+    const r = await fetch(GB_API + '?action=list');
+    const data = await r.json();
+    if (Array.isArray(data) && data.length) {
+      gbSaveLocal(data);
+      gbRenderList(data);
+    }
+  } catch {}
+}
+
+async function gbSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('gb-name').value.trim();
+  const content = document.getElementById('gb-content').value.trim();
+  if (!name || !content) return false;
+  const btn = document.getElementById('gb-btn');
+  btn.disabled = true; btn.textContent = '发送中…';
+  const item = { name, content, time: new Date().toISOString() };
+
+  // Always save locally first
+  const local = gbLoadLocal();
+  local.unshift(item);
+  gbSaveLocal(local);
+  gbRenderList(local);
+  document.getElementById('gb-content').value = '';
+
+  if (GB_API) {
+    try {
+      const r = await fetch(GB_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'add', name, content })
+      });
+      const res = await r.json();
+      if (res.ok) {
+        gbShowToast('留言成功 ✨');
+        gbLoad(); // refresh from server
+      } else {
+        gbShowToast('已本地保存，同步待恢复');
+      }
+    } catch {
+      gbShowToast('已本地保存，同步待恢复');
+    }
+  } else {
+    gbShowToast('已保存到本地（部署后端后可跨设备同步）');
+  }
+  btn.disabled = false; btn.textContent = '发 送';
+  return false;
+}
+
+gbLoad();
 </script>
 </body>
 </html>
