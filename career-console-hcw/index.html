@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>胡程玮 · 2028届就业决策控制台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=LXGW+WenKai:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#FAF6F1;--bg2:#F5EDE3;--bg3:#EDE4D8;--bg-card:#FFFCF8;--bg-card-hover:#FFF9F2;
+--gray-50:#F8F5F0;--gray-100:#F0EBE3;--gray-200:#E8E0D5;--gray-300:#D4C9BA;--gray-400:#B8A896;--gray-500:#9C8B78;--gray-600:#7D6E5E;--gray-700:#5E5145;--gray-800:#3F362F;--gray-900:#201D19;
+--text:#2D2A26;--text2:#5C5549;--text3:#8A8075;--text-inv:#FFFCF8;
+--accent:#B44D6E;--accent2:#4A8B7F;--accent3:#D4A853;--accent4:#7B6BA5;--accent5:#C4784A;
+--success:#3D8B6A;--success-bg:#EBF5F0;--warning:#D4A853;--warning-bg:#FDF6E3;--link:#4A8B7F;--link-hover:#3A7B6F;
+--glass:rgba(255,252,248,.72);--glass-border:rgba(180,170,155,.25);--shadow-sm:0 1px 3px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.08);--shadow-xl:0 20px 60px rgba(0,0,0,.1);
+--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;
+--ff-display:'Fraunces',serif;--ff-body:'Plus Jakarta Sans','LXGW WenKai',sans-serif;--ff-zh:'LXGW WenKai',serif;--ff-mono:'JetBrains Mono',monospace;
+--hero-gradient:linear-gradient(135deg,#FAF6F1 0%,#F0E8DD 50%,#E8DDD0 100%)
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--text-inv)}
+.container{max-width:1320px;margin:0 auto;padding:0 clamp(1rem,3vw,2.5rem)}
+
+/* ══ NAV ══ */
+.top-nav{position:sticky;top:0;z-index:100;background:var(--glass);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border);padding:.6rem 0}
+.nav-inner{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.nav-brand{font-family:var(--ff-display);font-size:1.1rem;font-weight:600;color:var(--accent);white-space:nowrap}
+.nav-links{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto}
+.nav-link{padding:.35rem .7rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:500;color:var(--text2);text-decoration:none;cursor:pointer;transition:all .2s;border:1px solid transparent}
+.nav-link:hover,.nav-link.active{background:var(--bg2);color:var(--accent);border-color:var(--glass-border)}
+
+/* ══ HERO ══ */
+.hero{background:var(--hero-gradient);padding:clamp(2rem,5vw,4rem) 0 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(180,77,110,.06) 0%,transparent 70%);pointer-events:none}
+.persona-card{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start}
+@media(max-width:700px){.persona-card{grid-template-columns:1fr;justify-items:center}}
+.avatar-wrap{width:clamp(120px,15vw,180px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid var(--bg-card);box-shadow:var(--shadow-lg)}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover}
+.persona-info h1{font-family:var(--ff-display);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--text);margin-bottom:.3rem}
+.persona-info .subtitle{font-family:var(--ff-zh);font-size:clamp(.9rem,1.5vw,1.05rem);color:var(--text2);line-height:1.7;margin-bottom:.8rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .65rem;border-radius:99px;font-size:.72rem;font-weight:500;border:1px solid var(--glass-border);background:var(--bg-card)}
+.tag .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ══ STATS BAR ══ */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;padding:1.5rem 0}
+.stat-item{text-align:center;padding:1rem .5rem;border-radius:var(--radius-md);background:var(--bg-card);border:1px solid var(--glass-border)}
+.stat-val{font-family:var(--ff-mono);font-size:1.6rem;font-weight:600;color:var(--accent)}
+.stat-lbl{font-size:.72rem;color:var(--text3);margin-top:.2rem}
+
+/* ══ SECTION ══ */
+.section{padding:2.5rem 0}
+.section-header{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.section-header h2{font-family:var(--ff-display);font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:600;color:var(--text)}
+.section-header .badge{font-size:.7rem;padding:.2rem .6rem;border-radius:99px;background:var(--accent);color:var(--text-inv);font-weight:600}
+.section-desc{font-size:.85rem;color:var(--text2);line-height:1.7;max-width:800px;margin-bottom:1.5rem}
+
+/* ══ WEIGHT CONSOLE ══ */
+.weight-console{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem}
+.preset-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.preset-btn{padding:.35rem .9rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--gray-300);background:var(--bg-card);color:var(--text2);transition:all .2s}
+.preset-btn:hover{border-color:var(--accent);color:var(--accent)}
+.preset-btn.active{background:var(--accent);color:var(--text-inv);border-color:var(--accent)}
+.weight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem}
+.weight-item{display:flex;align-items:center;gap:.6rem}
+.weight-label{min-width:80px;font-size:.78rem;font-weight:500;color:var(--text2);text-align:right}
+.weight-slider{flex:1;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--gray-200);outline:none}
+.weight-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--bg-card);box-shadow:var(--shadow-sm)}
+.weight-pct{min-width:38px;font-family:var(--ff-mono);font-size:.75rem;color:var(--text2);text-align:right}
+
+/* ══ FILTER ROW ══ */
+.filter-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.filter-btn{padding:.3rem .7rem;border-radius:var(--radius-sm);font-size:.73rem;font-weight:500;cursor:pointer;border:1.5px solid var(--gray-200);background:var(--bg-card);color:var(--text2);transition:all .2s}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);color:var(--text-inv);border-color:var(--accent)}
+
+/* ══ FIRM CARDS ══ */
+.firm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+.firm-card{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;cursor:pointer}
+.firm-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.firm-head{padding:1rem 1.2rem;display:flex;gap:.8rem;align-items:flex-start}
+.firm-rank{font-family:var(--ff-mono);font-size:1.4rem;font-weight:600;color:var(--accent);min-width:2.5rem;text-align:center;line-height:1}
+.firm-title{flex:1;min-width:0}
+.firm-name{font-size:.95rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.firm-sub{font-size:.72rem;color:var(--text3);margin-top:.1rem}
+.firm-scores{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.4rem}
+.firm-score{font-family:var(--ff-mono);font-size:.65rem;padding:.15rem .4rem;border-radius:var(--radius-sm);background:var(--bg2);color:var(--text2)}
+.firm-score.highlight{background:var(--accent);color:var(--text-inv)}
+.firm-tier{font-family:var(--ff-mono);font-size:.7rem;padding:.2rem .5rem;border-radius:var(--radius-sm);font-weight:700;white-space:nowrap}
+.tier-SSS{background:#FFD700;color:#7B6600}.tier-SS{background:#FFC0CB;color:#8B3A62}.tier-S{background:#FFE4B5;color:#8B6914}.tier-A{background:#E0F0E0;color:#2E7D32}.tier-B{background:#E0E0E0;color:#616161}
+.firm-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.firm-card.open .firm-body{max-height:2000px}
+.firm-detail{padding:0 1.2rem 1.2rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.8rem}
+.detail-item{font-size:.78rem;color:var(--text2)}.detail-item strong{color:var(--text);font-weight:600}
+.detail-item.full{grid-column:1/-1}
+.why-list{list-style:none;margin:.5rem 0}.why-list li{font-size:.78rem;color:var(--text2);padding:.2rem 0;padding-left:1.2rem;position:relative}.why-list li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.position-box{background:var(--bg2);border-radius:var(--radius-sm);padding:.6rem .8rem;margin:.4rem 0}
+.position-box .dept{font-size:.75rem;font-weight:600;color:var(--accent)}.position-box .jobs{font-size:.75rem;color:var(--text2);margin-top:.2rem}
+.adv-risk{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.adv-list,.risk-list{list-style:none}.adv-list li,.risk-list li{font-size:.73rem;padding:.15rem 0;padding-left:1rem;position:relative}.adv-list li::before{content:'✓';position:absolute;left:0;color:var(--success);font-weight:700}.risk-list li::before{content:'!';position:absolute;left:0;color:var(--warning);font-weight:700}
+.source-line{font-size:.68rem;color:var(--text3);margin-top:.6rem;padding-top:.4rem;border-top:1px solid var(--gray-100)}
+
+/* ══ TIER LEGEND ══ */
+.tier-legend{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:1rem;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--glass-border)}
+.tier-legend-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--text2)}
+.tier-dot{width:10px;height:10px;border-radius:3px}
+
+/* ══ HEATMAP ══ */
+.heatmap-wrap{overflow-x:auto;margin-bottom:1.5rem}
+.heatmap{border-collapse:separate;border-spacing:3px;width:100%}
+.heatmap th{font-size:.7rem;color:var(--text3);padding:.4rem;white-space:nowrap;text-align:center;font-weight:500}
+.heatmap td{text-align:center;padding:.4rem;border-radius:var(--radius-sm);font-family:var(--ff-mono);font-size:.72rem;font-weight:500;cursor:pointer;transition:transform .15s;min-width:40px}
+.heatmap td:hover{transform:scale(1.15);box-shadow:var(--shadow-md)}
+
+/* ══ SCATTER ══ */
+.scatter-wrap{position:relative;height:400px;background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);overflow:hidden}
+.scatter-dot{position:absolute;width:12px;height:12px;border-radius:50%;cursor:pointer;transition:all .2s;z-index:2;border:2px solid var(--bg-card)}
+.scatter-dot:hover{transform:scale(1.6);z-index:10;box-shadow:var(--shadow-lg)}
+.scatter-label{position:absolute;font-size:.6rem;color:var(--text3);pointer-events:none;white-space:nowrap}
+.axis-label{position:absolute;font-size:.7rem;color:var(--text3)}
+.scatter-quadrant{position:absolute;font-size:.65rem;color:var(--gray-400);font-style:italic}
+
+/* ══ TIMELINE ══ */
+.timeline{position:relative;padding:2rem 0 1rem}
+.timeline-line{position:absolute;top:50%;left:0;right:0;height:2px;background:var(--gray-200)}
+.timeline-items{display:flex;justify-content:space-between;position:relative}
+.timeline-item{display:flex;flex-direction:column;align-items:center;position:relative;width:calc(100% / 13)}
+.timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--gray-300);border:3px solid var(--bg);z-index:2;transition:all .3s}
+.timeline-item.now .timeline-dot{background:var(--accent);box-shadow:0 0 0 4px rgba(180,77,110,.2);width:16px;height:16px}
+.timeline-item.ms .timeline-dot{background:var(--accent2)}
+.timeline-date{font-family:var(--ff-mono);font-size:.6rem;color:var(--text3);margin-top:.4rem;white-space:nowrap}
+.timeline-label{font-size:.6rem;color:var(--text2);text-align:center;max-width:80px;margin-top:.2rem;line-height:1.3}
+
+/* ══ SETTLEMENT CALC ══ */
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.calc-card{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.2rem}
+.calc-card h4{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.8rem}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;font-size:.78rem}
+.calc-row .label{color:var(--text2)}.calc-row .val{font-family:var(--ff-mono);font-weight:500;color:var(--text)}
+.calc-bar{height:8px;border-radius:4px;background:var(--gray-200);margin:.5rem 0;overflow:hidden}
+.calc-bar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.calc-verdict{font-size:.78rem;padding:.5rem;border-radius:var(--radius-sm);margin-top:.5rem;text-align:center;font-weight:500}
+
+/* ══ UNIT TYPE ══ */
+.ut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.ut-card{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.2rem;transition:all .3s}
+.ut-card:hover{box-shadow:var(--shadow-md)}
+.ut-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.ut-icon{font-size:1.4rem}.ut-name{font-weight:600;font-size:.85rem}.ut-num{font-family:var(--ff-mono);font-size:.7rem;color:var(--accent);background:var(--bg2);padding:.1rem .4rem;border-radius:var(--radius-sm)}
+.ut-tag{font-size:.7rem;color:var(--text3);margin-bottom:.4rem}
+.ut-body{font-size:.78rem;color:var(--text2);line-height:1.6;margin-bottom:.6rem}
+.ut-list{list-style:none}.ut-list li{font-size:.73rem;color:var(--text2);padding:.15rem 0;padding-left:1rem;position:relative}.ut-list li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.ut-rec{font-size:.75rem;font-weight:600;margin-top:.5rem;padding:.4rem .6rem;border-radius:var(--radius-sm);background:var(--bg2)}
+
+/* ══ INDUSTRY ══ */
+.ind-card{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.ind-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}
+.ind-name{font-weight:600;font-size:.95rem}.ind-weight{font-size:.7rem;padding:.2rem .5rem;border-radius:99px;background:var(--accent);color:var(--text-inv);font-weight:600}
+.ind-stats{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem}
+.ind-stat{text-align:center}.ind-stat .v{font-family:var(--ff-mono);font-size:1rem;font-weight:600;color:var(--accent)}.ind-stat .l{font-size:.65rem;color:var(--text3)}
+.ind-body{font-size:.82rem;color:var(--text2);line-height:1.7;margin-bottom:.6rem}
+.ind-list{list-style:none}.ind-list li{font-size:.78rem;color:var(--text2);padding:.2rem 0;padding-left:1.2rem;position:relative}.ind-list li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+
+/* ══ LIFE PLAN ══ */
+.life-card{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.life-card h3{font-family:var(--ff-display);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.8rem}
+.life-card p,.life-card li{font-size:.82rem;color:var(--text2);line-height:1.7}
+.life-card ul{list-style:none;margin:.5rem 0}.life-card li{padding:.2rem 0;padding-left:1.2rem;position:relative}.life-card li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+
+/* ══ SOURCES ══ */
+.source-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.6rem}
+.source-item{font-size:.75rem;color:var(--text2);padding:.4rem .6rem;background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--glass-border)}
+.source-item .cred{font-size:.65rem;padding:.1rem .3rem;border-radius:99px;margin-right:.3rem;font-weight:600}
+.cred-green{background:#E8F5E9;color:#2E7D32}.cred-yellow{background:#FFF8E1;color:#F57F17}.cred-red{background:#FFEBEE;color:#C62828}
+
+/* ══ FOOTER ══ */
+.footer{text-align:center;padding:2rem 0;font-size:.72rem;color:var(--text3);border-top:1px solid var(--gray-100);margin-top:2rem}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:768px){
+.firm-grid{grid-template-columns:1fr}
+.detail-grid,.adv-risk{grid-template-columns:1fr}
+.calc-grid{grid-template-columns:1fr}
+.timeline-items{flex-wrap:wrap;gap:.5rem;justify-content:center}
+.timeline-item{width:auto}
+}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.firm-card{animation:fadeIn .3s ease both}
+.firm-card:nth-child(n){animation-delay:calc(var(--i,0) * 30ms)}
+
+/* ══ TOOLTIP ══ */
+.tooltip{position:absolute;background:var(--gray-800);color:var(--text-inv);padding:.4rem .7rem;border-radius:var(--radius-sm);font-size:.7rem;pointer-events:none;z-index:100;white-space:nowrap;opacity:0;transition:opacity .2s}
+.tooltip.show{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav"><div class="container nav-inner">
+<div class="nav-brand">胡程玮 · 就业控制台</div>
+<div class="nav-links">
+<a class="nav-link active" data-section="hero">概览</a>
+<a class="nav-link" data-section="rankings">排名</a>
+<a class="nav-link" data-section="heatmap">热力图</a>
+<a class="nav-link" data-section="scatter">散点图</a>
+<a class="nav-link" data-section="timeline">时间线</a>
+<a class="nav-link" data-section="settlement">定居</a>
+<a class="nav-link" data-section="industry">行业</a>
+<a class="nav-link" data-section="life">人生</a>
+<a class="nav-link" data-section="sources">数据</a>
+</div></div></nav>
+
+<!-- HERO -->
+<section class="hero" id="hero"><div class="container">
+<div class="persona-card">
+<div class="avatar-wrap"><img src="avatar.png" alt="胡程玮" onerror="this.style.background='linear-gradient(135deg,var(--accent),var(--accent2))';this.alt='HCW'"></div>
+<div class="persona-info">
+<h1>胡程玮</h1>
+<p class="subtitle">
+清华大学 · 材料与化工专硕（2026–2028）<br>
+本科：武汉理工大学 · 材料成型及控制工程<br>
+研究方向：金属相变机理 · 纳米铜析出强化 · 高铁钢轨材料 · 材料基因工程
+</p>
+<div class="tag-row">
+<span class="tag"><span class="dot" style="background:var(--accent)"></span>女 · 2004年9月 · 山东</span>
+<span class="tag"><span class="dot" style="background:var(--accent2)"></span>清华材料学院</span>
+<span class="tag"><span class="dot" style="background:var(--accent3)"></span>铁科院合作课题</span>
+<span class="tag"><span class="dot" style="background:var(--accent4)"></span>材料基因工程中心(乌镇)</span>
+<span class="tag"><span class="dot" style="background:var(--accent5)"></span>求职窗口 2027.09–2028.10</span>
+</div>
+</div></div>
+<div class="stats-bar" id="statsBar"></div>
+</div></section>
+
+<!-- WEIGHT CONSOLE -->
+<section class="section" id="weights"><div class="container">
+<div class="section-header"><h2>权重配置</h2><span class="badge">10维度</span></div>
+<div class="section-desc">拖动滑块调整10个维度的权重占比，排名将实时更新。选择预设方案快速切换视角。</div>
+<div class="weight-console">
+<div class="preset-row" id="presetRow"></div>
+<div class="weight-grid" id="weightGrid"></div>
+</div>
+</div></section>
+
+<!-- RANKINGS -->
+<section class="section" id="rankings"><div class="container">
+<div class="section-header"><h2>雇主排名</h2><span class="badge" id="rankCount">61家</span></div>
+<div class="tier-legend">
+<span class="tier-legend-item"><span class="tier-dot" style="background:#FFD700"></span>SSS · 顶尖匹配</span>
+<span class="tier-legend-item"><span class="tier-dot" style="background:#FFC0CB"></span>SS · 强力推荐</span>
+<span class="tier-legend-item"><span class="tier-dot" style="background:#FFE4B5"></span>S · 优选</span>
+<span class="tier-legend-item"><span class="tier-dot" style="background:#E0F0E0"></span>A · 可选</span>
+<span class="tier-legend-item"><span class="tier-dot" style="background:#E0E0E0"></span>B · 备选</span>
+</div>
+<div class="filter-row" id="filterRow"></div>
+<div class="firm-grid" id="firmGrid"></div>
+</div></section>
+
+<!-- UNIT TYPES -->
+<section class="section" id="unittypes"><div class="container">
+<div class="section-header"><h2>单位类型分析</h2><span class="badge">6类</span></div>
+<div class="ut-grid" id="utGrid"></div>
+</div></section>
+
+<!-- HEATMAP -->
+<section class="section" id="heatmap"><div class="container">
+<div class="section-header"><h2>维度热力图</h2><span class="badge">TOP 20</span></div>
+<div class="section-desc">颜色越深得分越高，可快速识别各企业在10个维度上的优劣势。</div>
+<div class="heatmap-wrap"><table class="heatmap" id="heatmapTable"></table></div>
+</div></section>
+
+<!-- SCATTER -->
+<section class="section" id="scatter"><div class="container">
+<div class="section-header"><h2>战略散点图</h2><span class="badge">二维定位</span></div>
+<div class="section-desc">X轴 = 薪酬综合分，Y轴 = 课题组契合度。右上角 = 最佳选择。</div>
+<div class="scatter-wrap" id="scatterPlot"></div>
+</div></section>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline"><div class="container">
+<div class="section-header"><h2>关键时间线</h2><span class="badge">2026–2028</span></div>
+<div class="timeline" id="timelineWrap"></div>
+</div></section>
+
+<!-- SETTLEMENT CALC -->
+<section class="section" id="settlement"><div class="container">
+<div class="section-header"><h2>定居可行性分析</h2><span class="badge">4城</span></div>
+<div class="section-desc">基于清华硕士落户政策 + 公积金贷款 + 目标企业薪资，评估四城定居可行性。</div>
+<div class="calc-grid" id="calcGrid"></div>
+</div></section>
+
+<!-- INDUSTRY OUTLOOK -->
+<section class="section" id="industry"><div class="container">
+<div class="section-header"><h2>行业前景展望</h2><span class="badge">2028–2035</span></div>
+<div class="section-desc">结合国家产业政策、技术趋势、市场规模数据，分析与胡程玮研究方向相关的行业前景。</div>
+<div id="industryCards"></div>
+</div></section>
+
+<!-- LIFE PLAN -->
+<section class="section" id="life"><div class="container">
+<div class="section-header"><h2>人生规划视角</h2><span class="badge">2028–2033</span></div>
+<div class="section-desc">从职业起步、定居门槛、行业选择对生活的影响等维度，给出基于事实的分析。</div>
+<div id="lifeCards"></div>
+</div></section>
+
+<!-- SOURCES -->
+<section class="section" id="sources"><div class="container">
+<div class="section-header"><h2>数据来源</h2><span class="badge">可信度分级</span></div>
+<div class="source-grid" id="sourceGrid"></div>
+</div></section>
+
+<footer class="footer">
+<div class="container">
+<p>胡程玮 · 2028届就业决策控制台 · 数据截至2026年5月 · 仅供个人决策参考</p>
+<p style="margin-top:.3rem">Generated by AI · 薪资/政策数据以官方公告为准</p>
+</div></footer>
+
+<script>
+// ═══ DATA INJECTION ═══
+const COMPANIES = [{"id":1,"name":"中国宝武钢铁集团","en":"China Baowu Steel","ticker":"600019.SH","cat":"steel","subcat":"钢铁龙头","city":"上海宝山","dist":"宝山","cash_low":18,"cash_high":28,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"股权激励","total5y":150,"wlb_hours":42,"pay":6.5,"tech_now":8.0,"tech_future":9.0,"geo":9.5,"career":8.5,"wlb":8.0,"endow":7.0,"industry":8.5,"cohort":9.0,"housing":9,"phase_transformation":9,"alloy_design":9,"simulation":8,"rail_app":8,"intro":"全球最大钢企（600019.SH），宝钢股份中央研究院是最高研发平台。与清华有工程博士论坛合作，材料基因工程方向投入大。","why_for_you":["钢铁相变/析出强化/组织性能设计直接对口","清华-宝钢联合培养渠道成熟","六险两金福利完善，行业龙头地位稳固","材料基因工程方向投入大，与乌镇中心研究方向吻合","上海直接落户，宝山区位优势明显"],"current_match":"8.0 · 本科材料成型+硕士金属相变方向直接对口","future_match":"9.0 · 材料基因工程+贝氏体钢研究在宝武研究院完美延续","positions":[{"dept":"宝钢中央研究院","jobs":["高级研发工程师","材料科学家","数字化材料研发工程师"]},{"dept":"宝钢汽车板事业部","jobs":["汽车板研发工程师","产品工程师"]}],"adv":["全球最大钢企平台","清华-宝钢联合培养","六险两金","行业龙头地位稳固"],"risk":["薪资增速偏慢","钢铁行业周期波动","部分基地非一线城市"],"source":"2025宝钢校招公告+清华就业网","confidence":"🟢"},{"id":2,"name":"中信泰富特钢集团","en":"CITIC Pacific Special Steel","ticker":"000708","cat":"steel","subcat":"特钢龙头","city":"江苏江阴","dist":"江阴","cash_low":20,"cash_high":30,"cash_mid":25,"fund_pct":12,"fund_total":6,"stock":"员工持股","total5y":165,"wlb_hours":44,"pay":7.0,"tech_now":9.0,"tech_future":9.0,"geo":7.0,"career":8.5,"wlb":7.5,"endow":7.5,"industry":8.5,"cohort":9.5,"housing":8,"phase_transformation":10,"alloy_design":9,"simulation":8,"rail_app":8,"intro":"全球特钢龙头（000708），轴承钢/齿轮钢市占率超40%，盈利能力强。贝氏体相变、析出强化是高端特钢核心技术。","why_for_you":["贝氏体相变/析出强化是高端特钢核心技术","轴承钢/汽车钢/能源用钢管直接对口","全球特钢龙头，盈利能力强，人均薪酬23.5万","清华硕士竞争力强"],"current_match":"9.0 · 贝氏体+析出强化+合金设计完全对口","future_match":"9.0 · 材料基因工程在特钢成分-组织-性能设计中价值巨大","positions":[{"dept":"研发中心","jobs":["特种钢研发工程师","材料工艺工程师"]}],"adv":["全球特钢龙头","盈利能力强","技术壁垒高"],"risk":["总部黄石地理位置一般","部分子公司工作环境较差"],"source":"2025中信特钢年报+校招公告","confidence":"🟢"},{"id":3,"name":"鞍钢集团","en":"Ansteel Group","ticker":"000898","cat":"steel","subcat":"央企钢铁","city":"辽宁鞍山(总部)/北京(研究院)","dist":"鞍山/北京","cash_low":12,"cash_high":22,"cash_mid":17,"fund_pct":12,"fund_total":4,"stock":"","total5y":100,"wlb_hours":42,"pay":5.0,"tech_now":7.5,"tech_future":7.5,"geo":6.0,"career":7.0,"wlb":8.0,"endow":6.5,"industry":7.5,"cohort":7.5,"housing":9,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":8,"intro":"央企钢铁巨头，鞍钢北京研究院地理位置好。金属材料相变/组织调控对口，安家费4-10万元。","why_for_you":["金属材料相变/组织调控对口","央企稳定+安家费","北京研究院可解决少量户口","有人才公寓"],"current_match":"7.5 · 金属相变方向对口","future_match":"7.5 · 偏传统钢铁，AI交叉较少","positions":[{"dept":"鞍钢北京研究院","jobs":["材料研发工程师","冶金工艺工程师"]}],"adv":["央企稳定","安家费","人才公寓"],"risk":["东北经济一般","薪资偏低"],"source":"2025鞍钢校招公告+海投网","confidence":"🟢"},{"id":4,"name":"河钢集团","en":"HBIS Group","ticker":"000709","cat":"steel","subcat":"央企钢铁","city":"河北石家庄","dist":"石家庄","cash_low":14,"cash_high":20,"cash_mid":17,"fund_pct":12,"fund_total":4,"stock":"","total5y":110,"wlb_hours":44,"pay":5.0,"tech_now":7.5,"tech_future":7.5,"geo":5.5,"career":7.0,"wlb":7.5,"endow":6.0,"industry":7.5,"cohort":7.5,"housing":9,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":7,"intro":"国内第二大钢铁集团，有轨道交通用钢产品线。","why_for_you":["国内第二大钢铁集团","有轨道交通用钢产品线","落户无门槛"],"current_match":"7.5","future_match":"7.5","positions":[{"dept":"研发中心","jobs":["材料研发工程师","产品开发工程师"]}],"adv":["规模大","轨道交通用钢"],"risk":["河北环境一般","薪资中等"],"source":"2025河钢校招+前程无忧","confidence":"🟡"},{"id":5,"name":"太钢不锈","en":"TISCO","ticker":"000825","cat":"steel","subcat":"不锈钢龙头","city":"山西太原","dist":"太原","cash_low":15,"cash_high":22,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"","total5y":120,"wlb_hours":42,"pay":5.5,"tech_now":7.5,"tech_future":8.0,"geo":5.0,"career":7.5,"wlb":8.0,"endow":7.0,"industry":8.0,"cohort":7.5,"housing":9,"phase_transformation":8,"alloy_design":8,"simulation":7,"rail_app":7,"intro":"全球最大不锈钢企业（宝武体系），手撕钢等精密箔材国产化领先。铁路/航空用钢方向吻合。","why_for_you":["全球最大不锈钢企业","手撕钢国产化领先","铁路/航空用钢方向吻合"],"current_match":"7.5","future_match":"8.0","positions":[{"dept":"研发中心","jobs":["不锈钢研发工程师","材料工艺工程师"]}],"adv":["全球龙头","技术实力强"],"risk":["地理位置一般","薪资中等"],"source":"2025太钢校招+猎聘","confidence":"🟡"},{"id":6,"name":"沙钢集团","en":"Shagang Group","ticker":"002075","cat":"steel","subcat":"民营钢企","city":"江苏张家港","dist":"张家港","cash_low":16,"cash_high":24,"cash_mid":20,"fund_pct":10,"fund_total":4,"stock":"员工持股","total5y":135,"wlb_hours":47,"pay":6.0,"tech_now":7.0,"tech_future":7.0,"geo":6.5,"career":7.0,"wlb":6.5,"endow":6.0,"industry":7.5,"cohort":6.5,"housing":8,"phase_transformation":7,"alloy_design":6,"simulation":6,"rail_app":5,"intro":"国内最大民营钢铁企业，机制灵活，晋升快。","why_for_you":["国内最大民营钢企","机制灵活晋升快"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"研发中心","jobs":["材料研发工程师","工艺工程师"]}],"adv":["机制灵活","晋升快"],"risk":["工作强度大","民企稳定性稍差"],"source":"2025沙钢校招+看准网","confidence":"🟡"},{"id":7,"name":"山东钢铁集团","en":"Shandong Steel","ticker":"600022","cat":"steel","subcat":"省属国企","city":"山东济南","dist":"济南","cash_low":13,"cash_high":19,"cash_mid":16,"fund_pct":12,"fund_total":3.8,"stock":"","total5y":105,"wlb_hours":42,"pay":4.5,"tech_now":7.0,"tech_future":7.0,"geo":7.0,"career":6.5,"wlb":8.0,"endow":6.0,"industry":7.0,"cohort":7.0,"housing":9,"phase_transformation":7,"alloy_design":6,"simulation":6,"rail_app":6,"intro":"山东省属国企，工作稳定，有人才补贴。山东户籍优势。","why_for_you":["山东省属国企","山东户籍优势","工作稳定"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"研发中心","jobs":["材料研发工程师","冶金工艺工程师"]}],"adv":["省属国企稳定","人才补贴","山东户籍友好"],"risk":["薪资偏低"],"source":"2025山钢校招+海投网","confidence":"🟡"},{"id":8,"name":"新余钢铁集团","en":"Xinyu Steel","ticker":"600782","cat":"steel","subcat":"省属国企","city":"江西新余","dist":"新余","cash_low":14,"cash_high":20,"cash_mid":17,"fund_pct":12,"fund_total":4,"stock":"","total5y":110,"wlb_hours":42,"pay":5.0,"tech_now":7.0,"tech_future":7.0,"geo":4.5,"career":6.5,"wlb":8.0,"endow":6.0,"industry":7.0,"cohort":6.5,"housing":9,"phase_transformation":7,"alloy_design":6,"simulation":6,"rail_app":6,"intro":"有人才公寓(1人1间)、免费工作餐、名校毕业生5年津贴。","why_for_you":["人才公寓","免费工作餐","名校5年津贴"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"研发中心","jobs":["材料研发工程师","产品工程师"]}],"adv":["人才公寓","免费餐","名校津贴"],"risk":["地理位置一般"],"source":"2025新钢官网","confidence":"🟡"},{"id":9,"name":"抚顺特钢","en":"Fushun Special Steel","ticker":"600399","cat":"steel","subcat":"军工特钢","city":"辽宁抚顺","dist":"抚顺","cash_low":15,"cash_high":22,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"","total5y":120,"wlb_hours":42,"pay":5.5,"tech_now":8.0,"tech_future":8.0,"geo":4.5,"career":7.5,"wlb":8.0,"endow":7.0,"industry":8.0,"cohort":8.0,"housing":9,"phase_transformation":8,"alloy_design":8,"simulation":7,"rail_app":6,"intro":"国内重要军工特钢生产基地，航空航天用特钢与研究方向相关。","why_for_you":["军工特钢生产基地","航空航天用特钢方向相关","技术实力强"],"current_match":"8.0 · 航空特钢与金属相变相关","future_match":"8.0","positions":[{"dept":"研发中心","jobs":["特种钢研发工程师"]}],"adv":["军工特钢","技术强"],"risk":["地理位置一般","东北经济"],"source":"2025抚顺特钢校招","confidence":"🟡"},{"id":10,"name":"南京钢铁集团","en":"Nanjing Steel","ticker":"600282","cat":"steel","subcat":"民营钢企","city":"江苏南京","dist":"南京","cash_low":15,"cash_high":22,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"员工持股","total5y":120,"wlb_hours":42,"pay":5.5,"tech_now":7.0,"tech_future":7.5,"geo":7.5,"career":7.0,"wlb":8.0,"endow":6.5,"industry":7.5,"cohort":7.0,"housing":8,"phase_transformation":7,"alloy_design":7,"simulation":6,"rail_app":6,"intro":"南京地理位置好，机制灵活，有员工持股。","why_for_you":["南京地理位置好","机制灵活","员工持股"],"current_match":"7.0","future_match":"7.5","positions":[{"dept":"研发中心","jobs":["材料研发工程师","工艺工程师"]}],"adv":["南京区位","机制灵活"],"risk":["规模相对小"],"source":"2025南钢校招+前程无忧","confidence":"🟡"},{"id":11,"name":"宝钢股份中央研究院","en":"Baosteel Central Research Institute","ticker":"","cat":"steel","subcat":"钢铁最高研发平台","city":"上海宝山","dist":"宝山","cash_low":22,"cash_high":32,"cash_mid":27,"fund_pct":12,"fund_total":6.5,"stock":"科研成果转化奖励","total5y":185,"wlb_hours":44,"pay":7.5,"tech_now":9.0,"tech_future":9.5,"geo":9.5,"career":9.0,"wlb":7.5,"endow":8.0,"industry":9.0,"cohort":9.5,"housing":9,"phase_transformation":9,"alloy_design":10,"simulation":9,"rail_app":8,"intro":"宝钢最高研发平台，与清华有联合培养项目，科研经费充足。材料基因工程方向投入大。","why_for_you":["宝钢最高研发平台","清华联合培养项目","材料基因工程方向投入大","科研经费充足"],"current_match":"9.0","future_match":"9.5 · 材料基因工程在数字化材料研发中顶配匹配","positions":[{"dept":"中央研究院","jobs":["高级研发工程师","材料科学家","数字化材料研发工程师"]}],"adv":["最高研发平台","清华联培","科研经费充足"],"risk":["工作压力大","晋升竞争激烈"],"source":"2025宝钢中央研究院校招+清华就业网","confidence":"🟢"},{"id":12,"name":"中国铁道科学研究院","en":"China Academy of Railway Sciences","ticker":"","cat":"railway","subcat":"国家级铁路科研","city":"北京海淀","dist":"海淀","cash_low":18,"cash_high":30,"cash_mid":24,"fund_pct":12,"fund_total":5.8,"stock":"科研成果转化奖励","total5y":155,"wlb_hours":42,"pay":6.5,"tech_now":9.5,"tech_future":9.5,"geo":10,"career":9.5,"wlb":8.5,"endow":9.5,"industry":9.0,"cohort":10,"housing":6,"phase_transformation":10,"alloy_design":9,"simulation":9,"rail_app":10,"intro":"国家级铁路科研高地，参与CR450等国家重大项目。导师与铁科院大量合作，课题直接来源于铁科院横向项目。北京户口100%解决，事业编制。","why_for_you":["导师与铁科院大量合作，课题直接来源","高铁钢轨打磨/斜裂纹扩展是核心研究方向","北京户口100%解决+事业编制","清华硕士+导师推荐基本稳拿","参与CR450等国家重大项目"],"current_match":"9.5 · 课题直接来源于铁科院横向项目","future_match":"10 · 钢轨材料+相变+材料基因工程完美延续","positions":[{"dept":"工务工程研究所","jobs":["钢轨材料研发工程师","工务工程研究员"]},{"dept":"金属及化学研究所","jobs":["金属材料研究员"]}],"adv":["国家级科研高地","北京户口100%","事业编制","导师合作渠道"],"risk":["薪资天花板相对较低","部分岗位需出差"],"source":"2026铁科院校招+职友集+北京化工大学就业网","confidence":"🟢"},{"id":13,"name":"中国中车","en":"CRRC Corporation","ticker":"601766","cat":"railway","subcat":"轨交装备龙头","city":"北京丰台(总部)/青岛/株洲","dist":"丰台","cash_low":16,"cash_high":28,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"员工持股","total5y":145,"wlb_hours":44,"pay":6.0,"tech_now":9.0,"tech_future":9.0,"geo":9.0,"career":9.0,"wlb":7.5,"endow":8.0,"industry":9.0,"cohort":9.0,"housing":6,"phase_transformation":8,"alloy_design":8,"simulation":8,"rail_app":10,"intro":"全球最大轨道交通装备制造商（全球份额53%），高铁出海/CR450持续创造就业。","why_for_you":["全球最大轨交装备商","高铁钢轨/轮轨材料直接对口","央企事业编制路径清晰","高铁出海+CR450持续需求"],"current_match":"9.0 · 高铁钢轨/轮轨/轨道交通用钢直接对口","future_match":"9.0 · CR450对钢轨材料提出更高要求","positions":[{"dept":"材料研发部","jobs":["材料研发工程师","金属材料研发岗","工艺工程师"]},{"dept":"中车科创(北京)","jobs":["先进材料研发工程师"]}],"adv":["全球最大轨交商","央企编制","高铁出海需求"],"risk":["薪资天花板较低","部分岗位出差/驻厂"],"source":"2025中车校招+前程无忧","confidence":"🟢"},{"id":14,"name":"中车青岛四方","en":"CRRC Qingdao Sifang","ticker":"","cat":"railway","subcat":"中车核心子公司","city":"山东青岛","dist":"青岛","cash_low":18,"cash_high":26,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"员工持股","total5y":145,"wlb_hours":44,"pay":6.0,"tech_now":8.5,"tech_future":8.5,"geo":7.0,"career":8.5,"wlb":7.5,"endow":7.5,"industry":8.5,"cohort":8.5,"housing":8,"phase_transformation":8,"alloy_design":8,"simulation":7,"rail_app":9,"intro":"复兴号主要生产基地，清华天津高端装备研究院+中车四方已有暑期实践合作。","why_for_you":["复兴号主要生产基地","清华已有合作渠道","青岛城市环境好"],"current_match":"8.5","future_match":"8.5","positions":[{"dept":"车体材料部","jobs":["车体材料研发工程师","焊接工艺工程师"]}],"adv":["复兴号基地","清华合作","青岛宜居"],"risk":["薪资中等"],"source":"2025中车四方校招+海投网","confidence":"🟢"},{"id":15,"name":"中车株洲电力机车","en":"CRRC Zhuzhou Locomotive","ticker":"","cat":"railway","subcat":"中车子公司","city":"湖南株洲","dist":"株洲","cash_low":17,"cash_high":25,"cash_mid":21,"fund_pct":12,"fund_total":5,"stock":"员工持股","total5y":140,"wlb_hours":44,"pay":5.8,"tech_now":8.0,"tech_future":8.0,"geo":5.0,"career":8.0,"wlb":7.5,"endow":7.0,"industry":8.0,"cohort":8.0,"housing":9,"phase_transformation":7,"alloy_design":7,"simulation":7,"rail_app":8,"intro":"中国电力机车摇篮，技术实力雄厚。","why_for_you":["电力机车摇篮","技术实力强"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"材料研发部","jobs":["材料研发工程师","工艺工程师"]}],"adv":["技术实力强"],"risk":["地理位置一般"],"source":"2025中车株洲校招","confidence":"🟡"},{"id":16,"name":"铁科轨道科技","en":"CR Track Technology","ticker":"688569","cat":"railway","subcat":"铁科院控股上市","city":"北京海淀","dist":"海淀","cash_low":20,"cash_high":32,"cash_mid":26,"fund_pct":12,"fund_total":6.2,"stock":"股权激励","total5y":170,"wlb_hours":42,"pay":7.0,"tech_now":9.5,"tech_future":9.5,"geo":10,"career":9.0,"wlb":8.5,"endow":8.5,"industry":9.0,"cohort":10,"housing":6,"phase_transformation":10,"alloy_design":9,"simulation":9,"rail_app":10,"intro":"铁科院控股上市公司（688569），专注轨道工程，钢轨维护/斜裂纹扩展是核心业务。兼具央企稳定性和市场化薪酬。","why_for_you":["铁科院控股上市公司","钢轨维护/斜裂纹是核心业务","市场化薪资高于铁科院","北京户口指标"],"current_match":"9.5 · 钢轨维护/斜裂纹扩展直接对口","future_match":"10","positions":[{"dept":"研发中心","jobs":["钢轨材料研发工程师","轨道工程研究员"]}],"adv":["铁科院上市平台","核心业务100%对口","市场化薪资"],"risk":["公司规模相对小"],"source":"2025铁科轨道年报+校招","confidence":"🟢"},{"id":17,"name":"中国中铁","en":"China Railway Group","ticker":"601390","cat":"railway","subcat":"基建央企","city":"北京丰台","dist":"丰台","cash_low":15,"cash_high":25,"cash_mid":20,"fund_pct":12,"fund_total":4.8,"stock":"","total5y":130,"wlb_hours":50,"pay":5.5,"tech_now":7.0,"tech_future":7.0,"geo":9.0,"career":7.5,"wlb":5.5,"endow":6.5,"industry":8.0,"cohort":7.0,"housing":6,"phase_transformation":6,"alloy_design":6,"simulation":6,"rail_app":8,"intro":"央企基建巨头，项目资源丰富，但工作强度大、出差多。","why_for_you":["央企背景","项目资源丰富","北京总部有户口"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"工程材料部","jobs":["工程材料研发工程师","试验检测工程师"]}],"adv":["央企稳定","项目丰富"],"risk":["工作强度大","出差多","女生不友好"],"source":"2025中铁校招+前程无忧","confidence":"🟡"},{"id":18,"name":"中国铁建","en":"CRCC","ticker":"601186","cat":"railway","subcat":"基建央企","city":"北京海淀","dist":"海淀","cash_low":15,"cash_high":25,"cash_mid":20,"fund_pct":12,"fund_total":4.8,"stock":"","total5y":130,"wlb_hours":50,"pay":5.5,"tech_now":7.0,"tech_future":7.0,"geo":9.0,"career":7.5,"wlb":5.5,"endow":6.5,"industry":8.0,"cohort":7.0,"housing":6,"phase_transformation":6,"alloy_design":6,"simulation":6,"rail_app":8,"intro":"央企基建巨头，类似中铁。","why_for_you":["央企背景","北京总部有户口"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"工程材料部","jobs":["工程材料研发工程师"]}],"adv":["央企稳定"],"risk":["工作强度大","出差多","女生不友好"],"source":"2025中国铁建校招+海投网","confidence":"🟡"},{"id":19,"name":"包钢集团钢轨公司","en":"Baogang Rail","ticker":"","cat":"railway","subcat":"钢轨生产","city":"内蒙古包头","dist":"包头","cash_low":14,"cash_high":20,"cash_mid":17,"fund_pct":12,"fund_total":4,"stock":"","total5y":110,"wlb_hours":42,"pay":5.0,"tech_now":8.5,"tech_future":8.0,"geo":4.0,"career":7.0,"wlb":8.0,"endow":7.0,"industry":7.5,"cohort":9.0,"housing":9,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":10,"intro":"国内主要钢轨生产企业之一，产品供应全国高铁网络。","why_for_you":["钢轨生产核心企业","高铁钢轨直接对口"],"current_match":"8.5 · 钢轨生产与研究方向高度相关","future_match":"8.0","positions":[{"dept":"研发部","jobs":["钢轨材料研发工程师","工艺工程师"]}],"adv":["钢轨核心企业"],"risk":["地理位置一般","工作环境较差"],"source":"2025包钢校招+猎聘","confidence":"🟡"},{"id":20,"name":"鞍钢集团钢轨公司","en":"Ansteel Rail","ticker":"","cat":"railway","subcat":"钢轨生产","city":"辽宁鞍山","dist":"鞍山","cash_low":13,"cash_high":19,"cash_mid":16,"fund_pct":12,"fund_total":3.8,"stock":"","total5y":105,"wlb_hours":42,"pay":4.5,"tech_now":8.0,"tech_future":7.5,"geo":4.5,"career":6.5,"wlb":8.0,"endow":6.5,"industry":7.0,"cohort":8.5,"housing":9,"phase_transformation":8,"alloy_design":7,"simulation":6,"rail_app":9,"intro":"国内主要钢轨生产企业之一。","why_for_you":["钢轨生产企业","研究方向相关"],"current_match":"8.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["钢轨材料研发工程师"]}],"adv":["钢轨生产"],"risk":["地理位置一般","工作环境差"],"source":"2025鞍钢校招+海投网","confidence":"🟡"},{"id":21,"name":"武钢集团钢轨公司","en":"Wuhan Steel Rail","ticker":"","cat":"railway","subcat":"钢轨生产","city":"湖北武汉","dist":"武汉","cash_low":15,"cash_high":22,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"","total5y":120,"wlb_hours":42,"pay":5.5,"tech_now":8.0,"tech_future":8.0,"geo":7.0,"career":7.0,"wlb":8.0,"endow":6.5,"industry":7.5,"cohort":8.5,"housing":8,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":9,"intro":"国内主要钢轨生产企业之一，武汉城市发展好。本科母校所在城市。","why_for_you":["钢轨核心企业","武汉城市发展好","本科母校所在城市"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"研发部","jobs":["钢轨材料研发工程师"]}],"adv":["武汉区位","钢轨核心"],"risk":["工作环境差"],"source":"2025武钢校招+前程无忧","confidence":"🟡"},{"id":22,"name":"中车科技创新(北京)","en":"CRRC Innovation Beijing","ticker":"","cat":"railway","subcat":"中车创新平台","city":"北京丰台","dist":"丰台","cash_low":20,"cash_high":30,"cash_mid":25,"fund_pct":12,"fund_total":6,"stock":"员工持股","total5y":160,"wlb_hours":42,"pay":6.5,"tech_now":8.5,"tech_future":9.0,"geo":9.5,"career":9.0,"wlb":8.5,"endow":8.0,"industry":9.0,"cohort":8.5,"housing":6,"phase_transformation":8,"alloy_design":8,"simulation":8,"rail_app":9,"intro":"中国中车创新平台，专注前沿技术研发，北京地理位置好。","why_for_you":["中车创新平台","前沿技术研发","北京户口指标"],"current_match":"8.5","future_match":"9.0 · 先进材料+智能材料方向","positions":[{"dept":"先进材料部","jobs":["先进材料研发工程师","智能材料工程师"]}],"adv":["创新平台","北京区位","前沿研发"],"risk":["成立较短规模小"],"source":"2025中车科创校招+猎聘","confidence":"🟡"},{"id":23,"name":"中国航空工业集团","en":"AVIC","ticker":"多子公司上市","cat":"aerospace","subcat":"航空央企","city":"北京朝阳(总部)/西安/成都","dist":"朝阳","cash_low":16,"cash_high":30,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"科研成果转化奖励","total5y":150,"wlb_hours":45,"pay":6.0,"tech_now":8.0,"tech_future":8.5,"geo":9.0,"career":8.5,"wlb":7.0,"endow":7.5,"industry":9.0,"cohort":7.5,"housing":6,"phase_transformation":8,"alloy_design":8,"simulation":8,"rail_app":5,"intro":"央企航空巨头，金属材料相变/析出强化是航空材料核心技术。安家费5-10万。","why_for_you":["金属相变/析出强化是航空材料核心技术","央企稳定+安家费","参与国家重大航空项目"],"current_match":"8.0","future_match":"8.5","positions":[{"dept":"航空材料部","jobs":["航空材料研发工程师","工艺工程师"]}],"adv":["央企稳定","国家重大项目","安家费"],"risk":["薪资天花板","保密要求"],"source":"2025中航工业校招+牛客网","confidence":"🟢"},{"id":24,"name":"中国航发","en":"AECC","ticker":"","cat":"aerospace","subcat":"航发央企","city":"北京海淀(总部)/沈阳/西安","dist":"海淀","cash_low":20,"cash_high":36,"cash_mid":28,"fund_pct":12,"fund_total":6.7,"stock":"科研成果转化奖励","total5y":180,"wlb_hours":45,"pay":7.5,"tech_now":8.0,"tech_future":8.5,"geo":9.0,"career":9.0,"wlb":7.0,"endow":8.0,"industry":9.5,"cohort":7.5,"housing":6,"phase_transformation":9,"alloy_design":8,"simulation":8,"rail_app":4,"intro":"国家重点支持领域，高温合金研发是核心。材料专业是最紧缺专业之一。安家费15万。","why_for_you":["材料专业最紧缺","高温合金/相变核心技术","安家费15万","国家重点支持"],"current_match":"8.0 · 金属相变/析出强化是高温合金核心技术","future_match":"8.5","positions":[{"dept":"研发部","jobs":["高温合金研发工程师","材料工艺工程师"]}],"adv":["国家重点支持","安家费15万","材料紧缺专业"],"risk":["工作压力大","保密要求"],"source":"2025中国航发校招","confidence":"🟢"},{"id":25,"name":"中国航发航材院","en":"BIAM AECC","ticker":"","cat":"aerospace","subcat":"顶尖航空材料院","city":"北京海淀","dist":"海淀","cash_low":25,"cash_high":40,"cash_mid":32,"fund_pct":12,"fund_total":7.7,"stock":"科研成果转化奖励","total5y":205,"wlb_hours":45,"pay":8.5,"tech_now":8.0,"tech_future":8.5,"geo":10,"career":9.5,"wlb":7.0,"endow":9.0,"industry":9.5,"cohort":7.5,"housing":6,"phase_transformation":9,"alloy_design":8,"simulation":8,"rail_app":4,"intro":"国内顶尖航空材料研究院，硕士\"心计划\"补贴5万/年×3年。北京户口100%+事业编制。","why_for_you":["国内顶尖航空材料院","硕士心计划补贴5万/年","北京户口100%+事业编","薪资天花板极高"],"current_match":"8.0 · 高温合金/钛合金与金属材料相近","future_match":"8.5","positions":[{"dept":"金属材料部","jobs":["高温合金研发工程师","金属材料研究员"]}],"adv":["顶尖研究院","心计划补贴","北京户口100%","事业编"],"risk":["竞争极激烈","偏好博士"],"source":"2025航材院校招+北大/华科/哈工大就业网","confidence":"🟢"},{"id":26,"name":"中国航天科技集团","en":"CASC","ticker":"多子公司上市","cat":"aerospace","subcat":"航天央企","city":"北京海淀(总部)/上海/西安","dist":"海淀","cash_low":20,"cash_high":28,"cash_mid":24,"fund_pct":12,"fund_total":5.8,"stock":"科研成果转化奖励","total5y":155,"wlb_hours":45,"pay":6.5,"tech_now":7.5,"tech_future":8.0,"geo":9.0,"career":8.5,"wlb":7.0,"endow":7.5,"industry":9.0,"cohort":7.0,"housing":6,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"央企航天巨头，参与国家重大航天项目。","why_for_you":["央企稳定","国家重大项目","北京户口"],"current_match":"7.5","future_match":"8.0","positions":[{"dept":"材料研发部","jobs":["航天材料研发工程师"]}],"adv":["央企稳定","重大项目"],"risk":["薪资天花板","保密要求"],"source":"2025航天科技校招+牛客网","confidence":"🟢"},{"id":27,"name":"中国航天科工集团","en":"CASIC","ticker":"多子公司上市","cat":"aerospace","subcat":"航天央企","city":"北京海淀(总部)/武汉/南京","dist":"海淀","cash_low":16,"cash_high":30,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"科研成果转化奖励","total5y":150,"wlb_hours":45,"pay":6.0,"tech_now":7.5,"tech_future":8.0,"geo":9.0,"career":8.5,"wlb":7.0,"endow":7.5,"industry":9.0,"cohort":7.0,"housing":6,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"央企航天巨头，有免费人才公寓，安家费最高14.4万。","why_for_you":["央企稳定","免费人才公寓","安家费14.4万"],"current_match":"7.5","future_match":"8.0","positions":[{"dept":"材料研发部","jobs":["材料研发工程师"]}],"adv":["央企稳定","人才公寓","安家费"],"risk":["薪资中等","保密要求"],"source":"2025航天科工校招","confidence":"🟢"},{"id":28,"name":"中航工业成都飞机(成飞)","en":"AVIC Chengdu Aircraft","ticker":"","cat":"aerospace","subcat":"航空主机厂","city":"四川成都","dist":"成都","cash_low":20,"cash_high":35,"cash_mid":27,"fund_pct":12,"fund_total":6.5,"stock":"员工持股","total5y":175,"wlb_hours":50,"pay":7.0,"tech_now":7.5,"tech_future":8.0,"geo":6.5,"career":8.5,"wlb":5.5,"endow":7.5,"industry":9.0,"cohort":7.0,"housing":8,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"歼-20生产基地，中航工业薪酬天花板。成都城市环境好。","why_for_you":["歼-20生产基地","薪酬天花板","成都宜居"],"current_match":"7.5","future_match":"8.0","positions":[{"dept":"结构材料部","jobs":["飞机结构材料研发工程师"]}],"adv":["歼-20基地","薪酬高","成都宜居"],"risk":["工作强度大"],"source":"2025成飞校招+今日头条","confidence":"🟡"},{"id":29,"name":"中航工业西安飞机(西飞)","en":"AVIC Xi'an Aircraft","ticker":"","cat":"aerospace","subcat":"航空主机厂","city":"陕西西安","dist":"西安","cash_low":15,"cash_high":22,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"员工持股","total5y":120,"wlb_hours":44,"pay":5.5,"tech_now":7.5,"tech_future":8.0,"geo":6.0,"career":8.0,"wlb":7.5,"endow":7.0,"industry":8.5,"cohort":7.0,"housing":8,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"C919大飞机主要生产基地，工作稳定。","why_for_you":["C919生产基地","工作稳定"],"current_match":"7.5","future_match":"8.0","positions":[{"dept":"结构材料部","jobs":["飞机结构材料研发工程师"]}],"adv":["C919基地","稳定"],"risk":["薪资中等"],"source":"2025西飞校招+海投网","confidence":"🟡"},{"id":30,"name":"中科院金属研究所","en":"IMR CAS","ticker":"","cat":"aerospace","subcat":"顶尖金属材料所","city":"辽宁沈阳","dist":"沈阳","cash_low":18,"cash_high":28,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"科研成果转化奖励","total5y":150,"wlb_hours":42,"pay":6.5,"tech_now":9.5,"tech_future":9.5,"geo":5.5,"career":9.5,"wlb":8.0,"endow":9.0,"industry":9.0,"cohort":10,"housing":9,"phase_transformation":10,"alloy_design":10,"simulation":9,"rail_app":7,"intro":"国内顶尖金属材料研究所，金属材料领域国家队。相变/组织设计完全对口。事业编制住房补贴800元/月×6年。","why_for_you":["金属材料领域国家队","相变/组织设计完全对口","事业编制+住房补贴","沈阳区位降低竞争热度","学术资源丰富"],"current_match":"9.5 · 金属材料领域国家队，完全对口","future_match":"10 · 材料基因工程+相变研究天然对接","positions":[{"dept":"研究部","jobs":["助理研究员","科研工程师"]}],"adv":["顶尖金属材料所","事业编","住房补贴","学术资源丰富"],"risk":["地理位置一般","薪资天花板"],"source":"2025中科院金属所校招+前程无忧","confidence":"🟢"},{"id":31,"name":"中国航发沈阳发动机研究所","en":"AECC Shenyang","ticker":"","cat":"aerospace","subcat":"航发研究所","city":"辽宁沈阳","dist":"沈阳","cash_low":20,"cash_high":32,"cash_mid":26,"fund_pct":12,"fund_total":6.2,"stock":"科研成果转化奖励","total5y":165,"wlb_hours":45,"pay":7.0,"tech_now":8.0,"tech_future":8.5,"geo":5.5,"career":8.5,"wlb":7.0,"endow":7.5,"industry":9.0,"cohort":7.5,"housing":9,"phase_transformation":9,"alloy_design":8,"simulation":7,"rail_app":4,"intro":"国内顶尖航空发动机研究所，研发投入大。","why_for_you":["顶尖航发研究所","研发投入大"],"current_match":"8.0","future_match":"8.5","positions":[{"dept":"材料部","jobs":["高温合金研发工程师"]}],"adv":["顶尖研究所","研发投入大"],"risk":["地理位置一般"],"source":"2025航发沈阳所校招+猎聘","confidence":"🟡"},{"id":32,"name":"中航复合材料公司","en":"AVIC Composite","ticker":"","cat":"aerospace","subcat":"复合材料","city":"北京顺义","dist":"顺义","cash_low":16,"cash_high":24,"cash_mid":20,"fund_pct":12,"fund_total":4.8,"stock":"员工持股","total5y":135,"wlb_hours":44,"pay":5.5,"tech_now":6.5,"tech_future":7.0,"geo":8.5,"career":7.5,"wlb":7.5,"endow":7.0,"industry":8.5,"cohort":6.0,"housing":7,"phase_transformation":5,"alloy_design":5,"simulation":6,"rail_app":3,"intro":"中航工业旗下专业复合材料公司，北京地理位置好。","why_for_you":["北京区位","中航旗下"],"current_match":"6.5 · 复合材料与金属材料方向偏离","future_match":"7.0","positions":[{"dept":"研发部","jobs":["复合材料研发工程师","金属基复合材料工程师"]}],"adv":["北京区位","中航平台"],"risk":["与金属材料方向偏离"],"source":"2025中航复材校招+猎聘","confidence":"🟡"},{"id":33,"name":"华菱安赛乐米塔尔汽车板","en":"VAMA","ticker":"","cat":"auto_mat","subcat":"中外合资汽车板","city":"湖南娄底","dist":"娄底","cash_low":14,"cash_high":23,"cash_mid":18,"fund_pct":12,"fund_total":4.3,"stock":"利润分享","total5y":122,"wlb_hours":42,"pay":5.5,"tech_now":8.0,"tech_future":7.5,"geo":4.0,"career":7.5,"wlb":8.5,"endow":7.0,"industry":8.0,"cohort":7.0,"housing":9,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"中外合资汽车板企业，技术先进，WLB好。","why_for_you":["汽车用钢与研究方向相关","中外合资技术先进","WLB好"],"current_match":"8.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["汽车板研发工程师"]}],"adv":["中外合资","技术先进","WLB好"],"risk":["地理位置一般"],"source":"2026 VAMA校招+应届生求职网","confidence":"🟡"},{"id":34,"name":"蒂森克虏伯(中国)","en":"thyssenkrupp China","ticker":"","cat":"auto_mat","subcat":"外企材料巨头","city":"上海浦东","dist":"浦东","cash_low":18,"cash_high":28,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"","total5y":150,"wlb_hours":40,"pay":6.5,"tech_now":8.0,"tech_future":8.0,"geo":9.0,"career":8.0,"wlb":9.5,"endow":7.5,"industry":8.0,"cohort":7.0,"housing":7,"phase_transformation":7,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"德国老牌工业巨头，WLB极好(40h严格双休)，对女生非常友好。","why_for_you":["德国工业巨头","WLB极好40h","对女生非常友好","上海落户加分"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"研发部","jobs":["材料研发工程师","工艺工程师"]}],"adv":["WLB极好","对女生友好","技术先进"],"risk":["薪资天花板","晋升慢","英语要求高"],"source":"2025蒂森校招+猎聘","confidence":"🟡"},{"id":35,"name":"宝钢股份汽车板公司","en":"Baosteel Automotive Sheet","ticker":"","cat":"auto_mat","subcat":"汽车板龙头","city":"上海宝山","dist":"宝山","cash_low":20,"cash_high":30,"cash_mid":25,"fund_pct":12,"fund_total":6,"stock":"员工持股","total5y":160,"wlb_hours":42,"pay":7.0,"tech_now":8.5,"tech_future":8.5,"geo":9.5,"career":8.5,"wlb":8.0,"endow":7.5,"industry":8.5,"cohort":8.0,"housing":9,"phase_transformation":8,"alloy_design":8,"simulation":8,"rail_app":5,"intro":"国内最大汽车板供应商，上海地理位置好。","why_for_you":["国内最大汽车板供应商","上海区位","清华-宝钢合作渠道"],"current_match":"8.5","future_match":"8.5","positions":[{"dept":"研发部","jobs":["汽车板研发工程师","产品工程师"]}],"adv":["汽车板龙头","上海区位"],"risk":["部分岗位需倒班"],"source":"2025宝钢校招+清华就业网","confidence":"🟢"},{"id":36,"name":"本特勒汽车系统(上海)","en":"Benteler Shanghai","ticker":"","cat":"auto_mat","subcat":"外企零部件","city":"上海嘉定","dist":"嘉定","cash_low":16,"cash_high":26,"cash_mid":21,"fund_pct":12,"fund_total":5,"stock":"","total5y":140,"wlb_hours":40,"pay":6.0,"tech_now":7.0,"tech_future":7.0,"geo":8.5,"career":7.5,"wlb":9.5,"endow":6.5,"industry":7.5,"cohort":5.5,"housing":8,"phase_transformation":5,"alloy_design":5,"simulation":5,"rail_app":3,"intro":"德国汽车零部件巨头，WLB极好(40h严格双休)，对女生友好。","why_for_you":["WLB极好","对女生友好","上海区位"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"研发部","jobs":["材料研发工程师"]}],"adv":["WLB极好","对女生友好"],"risk":["薪资中等"],"source":"2025本特勒校招+前程无忧","confidence":"🟡"},{"id":37,"name":"麦格纳汽车系统(上海)","en":"Magna Shanghai","ticker":"","cat":"auto_mat","subcat":"外企零部件","city":"上海浦东","dist":"浦东","cash_low":17,"cash_high":27,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"","total5y":145,"wlb_hours":40,"pay":6.0,"tech_now":7.0,"tech_future":7.0,"geo":9.0,"career":7.5,"wlb":9.5,"endow":6.5,"industry":7.5,"cohort":5.5,"housing":7,"phase_transformation":5,"alloy_design":5,"simulation":5,"rail_app":3,"intro":"加拿大汽车零部件巨头，WLB极好，对女生友好。","why_for_you":["WLB极好","对女生友好","上海区位"],"current_match":"7.0","future_match":"7.0","positions":[{"dept":"研发部","jobs":["材料研发工程师"]}],"adv":["WLB极好","对女生友好"],"risk":["薪资中等"],"source":"2025麦格纳校招+猎聘","confidence":"🟡"},{"id":38,"name":"鞍钢蒂森克虏伯汽车钢","en":"Ansteel TK Automotive","ticker":"","cat":"auto_mat","subcat":"中外合资","city":"辽宁大连","dist":"大连","cash_low":14,"cash_high":20,"cash_mid":17,"fund_pct":12,"fund_total":4,"stock":"利润分享","total5y":112,"wlb_hours":42,"pay":5.0,"tech_now":8.0,"tech_future":7.5,"geo":6.0,"career":7.5,"wlb":8.5,"endow":7.0,"industry":7.5,"cohort":7.0,"housing":8,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"中外合资汽车钢企业，技术先进，大连城市环境好。","why_for_you":["中外合资","汽车钢与研究方向相关","大连宜居"],"current_match":"8.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["汽车钢研发工程师"]}],"adv":["中外合资","技术先进","大连宜居"],"risk":["地理位置一般"],"source":"2025鞍钢蒂森校招","confidence":"🟡"},{"id":39,"name":"宁德时代","en":"CATL","ticker":"300750","cat":"new_energy","subcat":"动力电池龙头","city":"福建宁德(总部)/上海/深圳","dist":"宁德/上海","cash_low":25,"cash_high":45,"cash_mid":35,"fund_pct":12,"fund_total":8.4,"stock":"股权激励·硕士10-20万","total5y":240,"wlb_hours":55,"pay":9.0,"tech_now":5.5,"tech_future":7.0,"geo":7.0,"career":8.0,"wlb":4.0,"endow":7.5,"industry":9.5,"cohort":5.0,"housing":7,"phase_transformation":3,"alloy_design":4,"simulation":6,"rail_app":2,"intro":"全球动力电池龙头，材料基因工程岗(AI for Material)与背景高度匹配。薪资极具吸引力但工作强度极大(大小周)。","why_for_you":["材料基因工程岗与背景匹配","薪资极具吸引力","全球龙头平台","股权激励"],"current_match":"5.5 · 金属材料与锂电差异大，需锁材料基因岗","future_match":"7.0 · 材料基因工程方向高度匹配","positions":[{"dept":"研发中心","jobs":["材料基因工程师(AI for Material)","电池材料研发工程师"]}],"adv":["全球龙头","薪资高","材料基因岗匹配"],"risk":["工作强度极大50-60h","大小周","总部地理位置差"],"source":"2026宁德校招+电子工程专辑+猎聘","confidence":"🟢"},{"id":40,"name":"比亚迪","en":"BYD","ticker":"002594","cat":"new_energy","subcat":"新能源龙头","city":"广东深圳","dist":"深圳","cash_low":20,"cash_high":35,"cash_mid":27,"fund_pct":5,"fund_total":2.7,"stock":"员工持股","total5y":175,"wlb_hours":52,"pay":7.0,"tech_now":5.0,"tech_future":6.5,"geo":8.5,"career":8.0,"wlb":4.5,"endow":7.0,"industry":9.0,"cohort":4.0,"housing":6,"phase_transformation":3,"alloy_design":3,"simulation":5,"rail_app":2,"intro":"新能源汽车龙头，全产业链布局，深圳地理位置好。2024年起大量扩招。","why_for_you":["新能源龙头","深圳区位","扩招中清华优势大"],"current_match":"5.0","future_match":"6.5","positions":[{"dept":"研发中心","jobs":["电池材料研发工程师","汽车材料研发工程师"]}],"adv":["新能源龙头","全产业链","深圳区位"],"risk":["工作强度大","公积金仅5+5"],"source":"2026比亚迪校招","confidence":"🟡"},{"id":41,"name":"隆基绿能","en":"LONGi Green Energy","ticker":"601012","cat":"new_energy","subcat":"光伏龙头","city":"陕西西安","dist":"西安","cash_low":20,"cash_high":28,"cash_mid":24,"fund_pct":12,"fund_total":5.8,"stock":"员工持股","total5y":155,"wlb_hours":47,"pay":6.5,"tech_now":4.0,"tech_future":5.0,"geo":6.0,"career":7.0,"wlb":6.5,"endow":6.0,"industry":8.5,"cohort":3.0,"housing":8,"phase_transformation":2,"alloy_design":2,"simulation":4,"rail_app":1,"intro":"全球光伏龙头，技术实力强。与研究方向匹配度一般。","why_for_you":["全球光伏龙头","薪资有竞争力"],"current_match":"4.0","future_match":"5.0","positions":[{"dept":"研发部","jobs":["光伏材料研发工程师"]}],"adv":["光伏龙头","技术强"],"risk":["与研究方向偏离"],"source":"2025隆基校招+今日头条","confidence":"🟡"},{"id":42,"name":"亿纬锂能","en":"EVE Energy","ticker":"300014","cat":"new_energy","subcat":"动力电池","city":"广东惠州","dist":"惠州","cash_low":22,"cash_high":38,"cash_mid":30,"fund_pct":12,"fund_total":7.2,"stock":"股权激励·硕士10万","total5y":200,"wlb_hours":52,"pay":8.0,"tech_now":4.0,"tech_future":5.0,"geo":5.5,"career":7.5,"wlb":4.5,"endow":6.5,"industry":9.0,"cohort":3.5,"housing":8,"phase_transformation":2,"alloy_design":2,"simulation":4,"rail_app":1,"intro":"国内领先动力电池企业，薪资水平高。","why_for_you":["薪资高","股权激励"],"current_match":"4.0","future_match":"5.0","positions":[{"dept":"研发中心","jobs":["动力电池材料研发工程师"]}],"adv":["薪资高","股权激励"],"risk":["与研究方向偏离","总部地理位置一般"],"source":"2026亿纬锂能校招","confidence":"🟡"},{"id":43,"name":"欣旺达","en":"Sunwoda","ticker":"300207","cat":"new_energy","subcat":"动力电池","city":"广东深圳","dist":"深圳","cash_low":25,"cash_high":40,"cash_mid":32,"fund_pct":12,"fund_total":7.7,"stock":"股权激励·硕士13万","total5y":210,"wlb_hours":52,"pay":8.5,"tech_now":4.0,"tech_future":5.0,"geo":8.5,"career":7.5,"wlb":4.5,"endow":6.5,"industry":9.0,"cohort":3.5,"housing":6,"phase_transformation":2,"alloy_design":2,"simulation":4,"rail_app":1,"intro":"国内领先动力电池企业，深圳地理位置好，薪资高。","why_for_you":["深圳区位","薪资高","股权激励"],"current_match":"4.0","future_match":"5.0","positions":[{"dept":"研发中心","jobs":["动力电池负极材料研发工程师"]}],"adv":["深圳区位","薪资高","股权激励"],"risk":["与研究方向偏离"],"source":"2026欣旺达校招","confidence":"🟡"},{"id":44,"name":"三一集团","en":"Sany Group","ticker":"600031","cat":"mfg","subcat":"工程机械龙头","city":"湖南长沙","dist":"长沙","cash_low":25,"cash_high":40,"cash_mid":32,"fund_pct":12,"fund_total":7.7,"stock":"利润分享","total5y":210,"wlb_hours":50,"pay":8.5,"tech_now":7.0,"tech_future":7.0,"geo":5.5,"career":7.5,"wlb":5.5,"endow":6.5,"industry":8.0,"cohort":6.0,"housing":9,"phase_transformation":5,"alloy_design":5,"simulation":8,"rail_app":3,"intro":"全球领先工程机械企业，人均薪酬41万元，薪资极具竞争力。CAE仿真方向与研究方向相关。","why_for_you":["薪资极具竞争力","CAE仿真方向相关","人均薪酬41万"],"current_match":"7.0 · 金属材料+有限元仿真相关","future_match":"7.0","positions":[{"dept":"研发部","jobs":["工程机械材料研发工程师","CAE仿真工程师"]}],"adv":["薪资高","全球龙头"],"risk":["工作强度大"],"source":"2026三一校招+职友集","confidence":"🟡"},{"id":45,"name":"中联重科","en":"Zoomlion","ticker":"000157","cat":"mfg","subcat":"工程机械龙头","city":"湖南长沙","dist":"长沙","cash_low":19,"cash_high":33,"cash_mid":26,"fund_pct":10,"fund_total":5.2,"stock":"科研项目奖","total5y":170,"wlb_hours":47,"pay":7.0,"tech_now":6.5,"tech_future":6.5,"geo":5.5,"career":7.0,"wlb":6.0,"endow":6.0,"industry":8.0,"cohort":5.5,"housing":9,"phase_transformation":4,"alloy_design":4,"simulation":7,"rail_app":2,"intro":"全球领先工程机械企业，长沙生活成本低。","why_for_you":["全球龙头","长沙生活成本低"],"current_match":"6.5","future_match":"6.5","positions":[{"dept":"研发部","jobs":["高端装备可靠性工程师","材料研发工程师"]}],"adv":["全球龙头","长沙低成本"],"risk":["薪资略低于三一"],"source":"2025中联重科校招","confidence":"🟡"},{"id":46,"name":"徐工集团","en":"XCMG","ticker":"000425","cat":"mfg","subcat":"工程机械","city":"江苏徐州","dist":"徐州","cash_low":16,"cash_high":26,"cash_mid":21,"fund_pct":12,"fund_total":5,"stock":"","total5y":140,"wlb_hours":47,"pay":6.0,"tech_now":6.5,"tech_future":6.5,"geo":5.5,"career":7.0,"wlb":6.0,"endow":6.0,"industry":7.5,"cohort":5.5,"housing":9,"phase_transformation":4,"alloy_design":4,"simulation":7,"rail_app":2,"intro":"国内领先工程机械企业，工作稳定。","why_for_you":["工作稳定","国内龙头"],"current_match":"6.5","future_match":"6.5","positions":[{"dept":"研发部","jobs":["结构设计工程师","材料研发工程师"]}],"adv":["工作稳定"],"risk":["地理位置一般","薪资中等"],"source":"2025徐工校招","confidence":"🟡"},{"id":47,"name":"安赛乐米塔尔中国","en":"ArcelorMittal China","ticker":"","cat":"foreign","subcat":"全球最大钢企","city":"上海浦东","dist":"浦东","cash_low":18,"cash_high":28,"cash_mid":23,"fund_pct":12,"fund_total":5.5,"stock":"利润分享","total5y":150,"wlb_hours":40,"pay":6.5,"tech_now":8.0,"tech_future":8.0,"geo":9.0,"career":8.0,"wlb":9.5,"endow":7.5,"industry":8.0,"cohort":7.5,"housing":7,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"全球最大钢铁企业，WLB极好(40h严格双休)，对女生非常友好。","why_for_you":["全球最大钢企","WLB极好","对女生非常友好","上海落户加分"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"研发部","jobs":["钢铁研发工程师","产品工程师"]}],"adv":["全球龙头","WLB极好","对女生友好"],"risk":["在华业务规模有限","晋升慢","英语要求高"],"source":"2025安赛乐米塔尔校招+前程无忧","confidence":"🟡"},{"id":48,"name":"奥钢联中国","en":"voestalpine China","ticker":"","cat":"foreign","subcat":"奥地利钢铁巨头","city":"上海浦东","dist":"浦东","cash_low":17,"cash_high":27,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"","total5y":145,"wlb_hours":40,"pay":6.0,"tech_now":8.0,"tech_future":8.0,"geo":9.0,"career":7.5,"wlb":9.5,"endow":7.5,"industry":7.5,"cohort":7.5,"housing":7,"phase_transformation":8,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"奥地利钢铁巨头，WLB极好，技术先进。苏州有焊接材料研发。","why_for_you":["WLB极好","技术先进","对女生友好"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"研发部","jobs":["特种钢研发工程师","焊接材料研发工程师"]}],"adv":["WLB极好","技术先进"],"risk":["在华业务有限","晋升慢","英语要求高"],"source":"2025奥钢联校招+猎聘","confidence":"🟡"},{"id":49,"name":"浦项(中国)","en":"POSCO China","ticker":"","cat":"foreign","subcat":"韩国钢铁巨头","city":"北京朝阳","dist":"朝阳","cash_low":15,"cash_high":25,"cash_mid":20,"fund_pct":12,"fund_total":4.8,"stock":"","total5y":130,"wlb_hours":40,"pay":5.5,"tech_now":8.0,"tech_future":7.5,"geo":9.0,"career":7.5,"wlb":9.0,"endow":7.0,"industry":7.5,"cohort":7.0,"housing":6,"phase_transformation":7,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"韩国钢铁巨头，WLB较好，会韩语有优势。","why_for_you":["韩国钢铁巨头","WLB好","北京区位"],"current_match":"8.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["钢铁研发工程师","技术支持工程师"]}],"adv":["WLB好","北京区位"],"risk":["薪资中等","晋升慢"],"source":"2025浦项校招+职友集","confidence":"🟡"},{"id":50,"name":"神户制钢中国","en":"Kobe Steel China","ticker":"","cat":"foreign","subcat":"日本钢铁巨头","city":"上海浦东","dist":"浦东","cash_low":16,"cash_high":26,"cash_mid":21,"fund_pct":12,"fund_total":5,"stock":"","total5y":140,"wlb_hours":40,"pay":6.0,"tech_now":8.0,"tech_future":7.5,"geo":9.0,"career":7.5,"wlb":9.5,"endow":7.0,"industry":7.5,"cohort":7.0,"housing":7,"phase_transformation":7,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"日本钢铁巨头，WLB极好，技术先进。","why_for_you":["日本钢铁巨头","WLB极好","技术先进"],"current_match":"8.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["特种钢研发工程师"]}],"adv":["WLB极好","技术先进"],"risk":["在华业务有限","英语要求高"],"source":"2025神户制钢校招+猎聘","confidence":"🟡"},{"id":51,"name":"中国钢研科技集团(钢铁研究总院)","en":"CISRI","ticker":"","cat":"research","subcat":"钢铁研究国家队","city":"北京海淀","dist":"海淀","cash_low":18,"cash_high":30,"cash_mid":24,"fund_pct":12,"fund_total":5.8,"stock":"科研成果转化奖励","total5y":155,"wlb_hours":42,"pay":6.5,"tech_now":9.5,"tech_future":9.5,"geo":10,"career":9.5,"wlb":8.5,"endow":9.0,"industry":9.0,"cohort":10,"housing":6,"phase_transformation":10,"alloy_design":10,"simulation":9,"rail_app":7,"intro":"中国最大的钢铁材料综合研究机构，相变/金属材料基因工程天然对接。北京户口100%解决，事业编制。","why_for_you":["最大钢铁材料研究机构","相变/材料基因工程天然对接","北京户口100%+事业编","金属材料基因组研发工程师岗位"],"current_match":"9.5 · 钢铁材料研究国家队，完美对口","future_match":"10 · 材料基因工程+相变研究天然对接","positions":[{"dept":"研发中心","jobs":["钢铁材料研发工程师","金属材料基因组研发工程师","科研助理"]}],"adv":["国家队","北京户口100%","事业编","科研经费充足"],"risk":["薪资天花板相对较低"],"source":"2025钢铁研究总院校招+清华就业网","confidence":"🟢"},{"id":52,"name":"钢研国际新材料创新中心(深圳)","en":"Steel Research Int'l Shenzhen","ticker":"","cat":"research","subcat":"材料+AI前沿","city":"深圳福田","dist":"福田","cash_low":25,"cash_high":40,"cash_mid":32,"fund_pct":12,"fund_total":7.7,"stock":"科研成果转化奖励","total5y":210,"wlb_hours":42,"pay":8.5,"tech_now":9.0,"tech_future":9.5,"geo":8.5,"career":9.0,"wlb":8.5,"endow":8.5,"industry":9.5,"cohort":9.5,"housing":6,"phase_transformation":8,"alloy_design":9,"simulation":10,"rail_app":5,"intro":"钢铁研究总院在深圳的创新平台，材料基因工程+AI方向完全匹配，薪资极具竞争力。","why_for_you":["材料基因工程+AI完全匹配","薪资极具竞争力","深圳落户友好","钢研总院前沿布局"],"current_match":"9.0","future_match":"9.5 · 材料基因工程+AI方向完全匹配","positions":[{"dept":"研发中心","jobs":["AI/材料计算研发工程师"]}],"adv":["材料+AI前沿","薪资高","深圳区位"],"risk":["成立较短规模小"],"source":"2026钢研国创校招+广东省人才市场","confidence":"🟡"},{"id":53,"name":"长三角先进材料研究院","en":"YRD Advanced Materials RI","ticker":"","cat":"research","subcat":"国家级材料平台","city":"江苏苏州","dist":"苏州","cash_low":20,"cash_high":30,"cash_mid":25,"fund_pct":12,"fund_total":6,"stock":"科研成果转化奖励","total5y":160,"wlb_hours":42,"pay":6.5,"tech_now":8.5,"tech_future":9.0,"geo":8.0,"career":8.5,"wlb":8.5,"endow":7.5,"industry":8.5,"cohort":8.5,"housing":7,"phase_transformation":8,"alloy_design":8,"simulation":9,"rail_app":5,"intro":"国家级先进材料研究平台，与清华有合作，苏州城市环境好。","why_for_you":["国家级平台","清华有合作","苏州宜居"],"current_match":"8.5","future_match":"9.0","positions":[{"dept":"研发部","jobs":["金属材料研发工程师","材料计算工程师"]}],"adv":["国家级平台","清华合作","苏州宜居"],"risk":["薪资天花板"],"source":"2025长三角材料院校招+清华就业网","confidence":"🟡"},{"id":54,"name":"广东省材料与加工研究所","en":"GIMP Guangdong","ticker":"","cat":"research","subcat":"省级研究院","city":"广东广州","dist":"广州","cash_low":18,"cash_high":26,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"科研成果转化奖励","total5y":145,"wlb_hours":42,"pay":6.0,"tech_now":8.0,"tech_future":8.0,"geo":8.0,"career":7.5,"wlb":8.5,"endow":7.0,"industry":7.5,"cohort":7.5,"housing":7,"phase_transformation":7,"alloy_design":7,"simulation":7,"rail_app":4,"intro":"省级重点研究院，广州地理位置好。","why_for_you":["广州区位","省级重点研究院"],"current_match":"8.0","future_match":"8.0","positions":[{"dept":"研发部","jobs":["金属材料研发工程师"]}],"adv":["广州区位","省级重点"],"risk":["科研实力略逊国家级"],"source":"2025广东省材料所校招+前程无忧","confidence":"🟡"},{"id":55,"name":"有研科技集团","en":"GRINM","ticker":"","cat":"research","subcat":"有色金属国家队","city":"北京海淀","dist":"海淀","cash_low":16,"cash_high":26,"cash_mid":21,"fund_pct":12,"fund_total":5,"stock":"科研成果转化奖励","total5y":140,"wlb_hours":42,"pay":6.0,"tech_now":7.0,"tech_future":7.5,"geo":10,"career":8.0,"wlb":8.5,"endow":7.0,"industry":8.0,"cohort":6.0,"housing":6,"phase_transformation":6,"alloy_design":6,"simulation":7,"rail_app":3,"intro":"国家级有色金属研究机构，北京地理位置好。与钢铁方向匹配度一般。","why_for_you":["北京区位","国家级机构"],"current_match":"7.0","future_match":"7.5","positions":[{"dept":"研发部","jobs":["有色金属材料研发工程师"]}],"adv":["北京区位","国家级"],"risk":["与钢铁方向偏离"],"source":"2025有研科技校招+猎聘","confidence":"🟡"},{"id":56,"name":"中冶赛迪技术研究中心","en":"CISDI Tech Research","ticker":"","cat":"materials_ai","subcat":"材料+AI","city":"重庆/上海","dist":"重庆/上海","cash_low":15,"cash_high":30,"cash_mid":22,"fund_pct":12,"fund_total":5.3,"stock":"科研成果转化奖励","total5y":145,"wlb_hours":42,"pay":6.0,"tech_now":9.0,"tech_future":9.5,"geo":7.5,"career":8.5,"wlb":8.5,"endow":8.0,"industry":9.0,"cohort":9.0,"housing":8,"phase_transformation":8,"alloy_design":8,"simulation":10,"rail_app":5,"intro":"中冶集团旗下顶级研究院，材料+AI方向投入大，八险两金。","why_for_you":["材料+AI方向投入大","金属材料+AI高度吻合","八险两金","仿真岗完全对口"],"current_match":"9.0 · 材料基因工程+AI+金属材料高度吻合","future_match":"9.5 · 材料信息学+仿真完全匹配","positions":[{"dept":"研发中心","jobs":["AI产品经理","金属材料研发工程师","仿真岗","材料信息学工程师"]}],"adv":["材料+AI前沿","八险两金","中冶平台"],"risk":["重庆地理位置一般"],"source":"2025中冶赛迪校招+猎聘","confidence":"🟡"},{"id":57,"name":"深圳屹艮科技","en":"Shenzhen Yigen Tech","ticker":"","cat":"materials_ai","subcat":"AI材料创业","city":"深圳南山","dist":"南山","cash_low":30,"cash_high":60,"cash_mid":45,"fund_pct":12,"fund_total":10.8,"stock":"期权激励","total5y":290,"wlb_hours":50,"pay":10,"tech_now":9.0,"tech_future":10,"geo":9.0,"career":8.0,"wlb":5.5,"endow":8.5,"industry":9.5,"cohort":9.0,"housing":5,"phase_transformation":8,"alloy_design":9,"simulation":10,"rail_app":4,"intro":"专注于AI+材料的创业公司，B轮融资，薪资水平极高(30-60万)。财富上限最高选择。","why_for_you":["AI+材料完全匹配","薪资天花板极高","B轮融资","材料基因工程核心岗位"],"current_match":"9.0 · 材料基因工程+AI完全匹配","future_match":"10","positions":[{"dept":"研发中心","jobs":["材料计算研发工程师"]}],"adv":["薪资极高","AI材料前沿","期权潜力"],"risk":["创业公司风险","工作压力大"],"source":"2026屹艮科技校招+猎聘","confidence":"🟡"},{"id":58,"name":"国家新材料大数据中心","en":"National New Materials Big Data Center","ticker":"","cat":"materials_ai","subcat":"国家级材料数据平台","city":"北京海淀","dist":"海淀","cash_low":20,"cash_high":30,"cash_mid":25,"fund_pct":12,"fund_total":6,"stock":"科研成果转化奖励","total5y":160,"wlb_hours":42,"pay":6.5,"tech_now":9.0,"tech_future":9.5,"geo":10,"career":9.0,"wlb":8.5,"endow":8.5,"industry":9.5,"cohort":9.0,"housing":6,"phase_transformation":8,"alloy_design":8,"simulation":10,"rail_app":5,"intro":"国家级新材料大数据平台，材料基因工程+大数据方向完全匹配。北京地理位置好。","why_for_you":["国家级平台","材料基因工程+大数据完全匹配","北京户口指标"],"current_match":"9.0","future_match":"9.5","positions":[{"dept":"研发部","jobs":["材料信息学工程师","数据科学家"]}],"adv":["国家级平台","北京区位","材料+大数据前沿"],"risk":["成立较短规模小"],"source":"2025国家新材料大数据中心校招+猎聘","confidence":"🟡"},{"id":59,"name":"清华大学材料学院博士后","en":"Tsinghua MSE Postdoc","ticker":"","cat":"academia","subcat":"顶尖高校博后","city":"北京海淀","dist":"海淀","cash_low":30,"cash_high":50,"cash_mid":40,"fund_pct":12,"fund_total":9.6,"stock":"","total5y":200,"wlb_hours":55,"pay":9.0,"tech_now":10,"tech_future":10,"geo":10,"career":9.0,"wlb":4.0,"endow":9.5,"industry":8.0,"cohort":10,"housing":6,"phase_transformation":10,"alloy_design":10,"simulation":10,"rail_app":8,"intro":"学术平台最高，有机会留校任教，北京户口有保障。但竞争极其激烈，留校难度极大。","why_for_you":["学术平台最高","北京户口有保障","研究方向完美匹配"],"current_match":"10","future_match":"10","positions":[{"dept":"博士后","jobs":["博士后研究人员"]}],"adv":["最高学术平台","北京户口","留校机会"],"risk":["竞争极激烈","博后临时工","留校极难"],"source":"2025清华博后招聘","confidence":"🟢"},{"id":60,"name":"中科院金属所博士后","en":"IMR CAS Postdoc","ticker":"","cat":"academia","subcat":"顶尖研究所博后","city":"辽宁沈阳","dist":"沈阳","cash_low":25,"cash_high":45,"cash_mid":35,"fund_pct":12,"fund_total":8.4,"stock":"","total5y":180,"wlb_hours":50,"pay":8.0,"tech_now":9.5,"tech_future":9.5,"geo":5.5,"career":9.0,"wlb":5.0,"endow":9.0,"industry":8.0,"cohort":10,"housing":9,"phase_transformation":10,"alloy_design":10,"simulation":9,"rail_app":7,"intro":"国内顶尖金属材料研究所，博士特别研究助理年收入30-45万起。","why_for_you":["顶尖金属材料所","研究方向完美匹配","收入有竞争力"],"current_match":"10","future_match":"10","positions":[{"dept":"博士后","jobs":["博士后研究人员"]}],"adv":["顶尖研究所","科研氛围好"],"risk":["地理位置一般","工作压力大"],"source":"2025金属所博后招聘","confidence":"🟢"},{"id":61,"name":"上海交通大学材料学院博士后","en":"SJTU MSE Postdoc","ticker":"","cat":"academia","subcat":"顶尖高校博后","city":"上海闵行","dist":"闵行","cash_low":28,"cash_high":45,"cash_mid":36,"fund_pct":12,"fund_total":8.6,"stock":"","total5y":185,"wlb_hours":55,"pay":8.5,"tech_now":9.5,"tech_future":9.5,"geo":9.0,"career":9.0,"wlb":4.0,"endow":8.5,"industry":8.0,"cohort":9.5,"housing":7,"phase_transformation":9,"alloy_design":9,"simulation":9,"rail_app":7,"intro":"国内顶尖材料学院，上海地理位置好。","why_for_you":["顶尖材料学院","上海区位"],"current_match":"9.5","future_match":"9.5","positions":[{"dept":"博士后","jobs":["博士后研究人员"]}],"adv":["顶尖学院","上海区位"],"risk":["竞争极激烈","留校难"],"source":"2025上交博后招聘","confidence":"🟢"}];
+const CATEGORIES = {"steel":{"name":"钢铁/特钢","color":"#4a5568","icon":"⚒"},"railway":{"name":"轨道交通","color":"#1a365d","icon":"🚄"},"aerospace":{"name":"航空航天材料","color":"#744210","icon":"✈"},"auto_mat":{"name":"汽车材料/零部件","color":"#2b6cb0","icon":"🚗"},"new_energy":{"name":"新能源材料","color":"#6b46c1","icon":"⚡"},"mfg":{"name":"高端装备制造","color":"#c05621","icon":"⚙"},"foreign":{"name":"外企材料巨头","color":"#2f855a","icon":"🌐"},"research":{"name":"研究院所","color":"#9b2c2c","icon":"🔬"},"materials_ai":{"name":"材料+AI","color":"#d69e2e","icon":"🤖"},"academia":{"name":"高校/博士后","color":"#805ad5","icon":"🎓"}};
+const WEIGHTS_DEFAULT = {"pay":0.18,"tech_now":0.1,"tech_future":0.1,"geo":0.12,"career":0.12,"wlb":0.1,"endow":0.08,"industry":0.1,"cohort":0.05,"housing":0.05};
+const COHORT_AXES = {"phase_transformation":"① 金属相变机理（析出相变/贝氏体相变）","alloy_design":"② 合金成分-组织-性能设计","simulation":"③ 仿真模拟（有限元/相场/CALPHAD）","rail_app":"④ 轨道交通用钢应用（钢轨/车轮/轴承）"};
+const DISTRICT_PRICE = {"北京海淀":8.5,"北京朝阳":7.0,"北京丰台":6.0,"北京昌平":4.5,"北京顺义":3.8,"上海宝山":3.5,"上海闵行":5.5,"上海嘉定":4.0,"上海浦东":6.5,"深圳南山":9.0,"深圳宝安":5.5,"深圳龙华":5.0,"深圳福田":8.0,"深圳光明":4.5,"广州天河":5.5,"广州黄埔":3.0,"广州番禺":3.5,"武汉洪山":2.0,"成都高新":2.2,"西安高新":1.8,"长沙岳麓":1.5,"沈阳浑南":1.2,"苏州园区":2.8,"重庆渝北":1.5,"张家港":1.2,"青岛崂山":2.2,"惠州":1.2,"宁德":1.0};
+const CAPITAL = {"family_support":50,"savings":0,"down_pct":0.15};
+const PRESETS = {"default":{"pay":0.18,"tech_now":0.1,"tech_future":0.1,"geo":0.12,"career":0.12,"wlb":0.1,"endow":0.08,"industry":0.1,"cohort":0.05,"housing":0.05},"salary":{"pay":0.32,"tech_now":0.06,"tech_future":0.06,"geo":0.1,"career":0.1,"wlb":0.08,"endow":0.06,"industry":0.08,"cohort":0.04,"housing":0.1},"tech":{"pay":0.1,"tech_now":0.2,"tech_future":0.2,"geo":0.06,"career":0.1,"wlb":0.06,"endow":0.08,"industry":0.08,"cohort":0.06,"housing":0.06},"settle":{"pay":0.1,"tech_now":0.06,"tech_future":0.06,"geo":0.22,"career":0.08,"wlb":0.1,"endow":0.05,"industry":0.06,"cohort":0.03,"housing":0.24},"cohort":{"pay":0.1,"tech_now":0.12,"tech_future":0.15,"geo":0.08,"career":0.1,"wlb":0.06,"endow":0.08,"industry":0.08,"cohort":0.18,"housing":0.05}};
+const DIM_META = {"pay":{"label":"综合薪酬","desc":"5年NPV · 年包中位数"},"tech_now":{"label":"现栈契合","desc":"本科+硕士已有技能匹配度"},"tech_future":{"label":"未来栈契合","desc":"硕士将获取技能的匹配度"},"geo":{"label":"地缘深度","desc":"一线城市/目标城市覆盖"},"career":{"label":"职业价值","desc":"10年视野的长期价值"},"wlb":{"label":"WLB","desc":"工作生活平衡可持续性"},"endow":{"label":"稀缺禀赋","desc":"清华+铁科院+材料基因变现"},"industry":{"label":"行业前景","desc":"2028-2035行业趋势"},"cohort":{"label":"课题组契合","desc":"4大研究方向匹配度"},"housing":{"label":"购房可行","desc":"定居购房经济可行性"}};
+const TL_DATA = [{"d":"2026.05","p":0.02,"l":"当前·本科毕业季","now":true,"above":true},{"d":"2026.06","p":0.06,"l":"本科毕业","above":false},{"d":"2026.09","p":0.14,"l":"清华入学","above":false,"ms":true},{"d":"2026.12","p":0.2,"l":"确定研究课题","above":true},{"d":"2027.01","p":0.24,"l":"寒假·首段实习?","above":false},{"d":"2027.06","p":0.36,"l":"研一结束·论文开题","above":true},{"d":"2027.07","p":0.4,"l":"暑期黄金实习","above":false,"ms":true},{"d":"2027.09","p":0.5,"l":"🎯 2028届秋招","above":true,"ms":true},{"d":"2027.12","p":0.6,"l":"论文投稿/面试","above":false},{"d":"2028.03","p":0.7,"l":"春招补录","above":true},{"d":"2028.06","p":0.8,"l":"硕士毕业答辩","above":false},{"d":"2028.07","p":0.9,"l":"签约三方","above":true},{"d":"2028.09","p":0.97,"l":"🎯 入职","above":false,"ms":true}];
+const UTG = [{"cls":"steel","num":"01","name":"钢铁/特钢","tag":"代表：宝武·中信特钢·鞍钢·钢研总院","body":"**存量升级，优者更优**。高端特种钢国产替代和技术升级需求确定。CAGR 8-10%，2030年高端市场突破5000亿元。","b":["薪资 15-32万（龙头研究院）","WLB 42-48h，央企典范","35岁+无年龄焦虑","核心：相变/析出强化/组织性能设计","趋势：材料基因工程加速研发"],"rec":"✓ 你的研究方向最直接对口的主战场"},{"cls":"railway","num":"02","name":"轨道交通","tag":"代表：铁科院·中车·铁科轨道","body":"**维保驱动，出口接力**。CR450对钢轨极致性能要求直接创造你的用武之地。CAGR 5.5%。","b":["薪资 18-35万（铁科院/中车科创）","WLB 42-45h","核心：钢轨材料/轮轨匹配/长寿命设计","高铁出海+维保+CR450三重驱动","铁科院100%解决北京户口"],"rec":"✓ 导师合作+课题来源，你的天然主战场"},{"cls":"aerospace","num":"03","name":"航空航天材料","tag":"代表：航材院·中航工业·中国航发·航天科技","body":"**高壁垒，高回报，黄金赛道**。CAGR 12.5%，材料是'两机'专项核心瓶颈。门槛高（偏爱博士），但薪资天花板极高。","b":["薪资 20-40万（航材院顶级）","WLB 45-50h，型号任务期加班多","核心：高温合金/钛合金/复合材料","材料基因组加速高温合金研发","进入门槛高，清华硕士是基本门槛"],"rec":"△ 冲刺目标，以材料基因组为切入点"},{"cls":"materials_ai","num":"04","name":"材料+AI","tag":"代表：屹艮科技·钢研国创·中冶赛迪·大数据中心","body":"**颠覆性工具，人才稀缺，未来基建**。CAGR 35%+，薪资溢价30-50%。赋能所有行业的'引擎'。","b":["薪资 25-60万（含期权）","WLB 灵活（项目导向）","核心：材料信息学/AI辅助合金设计","材料+AI交叉硕士供不应求","导师是乌镇中心=嫡系部队"],"rec":"⭐ 你的最具'护城河'价值的差异化标签"},{"cls":"new_energy","num":"05","name":"新能源材料","tag":"代表：宁德时代·比亚迪·欣旺达","body":"**体量巨大，节奏快**。CAGR 17.5+%，薪资高但工作强度大。可通过材料基因工程岗切入。","b":["薪资 25-45万（含股票）","WLB 50-55h，大小周常见","材料基因工程师岗与你背景匹配","非最匹配方向但薪资诱人","需评估高压工作承受力"],"rec":"○ 薪资备选，必须锁材料基因/AI岗"},{"cls":"foreign","num":"06","name":"外企材料巨头","tag":"代表：蒂森克虏伯·安赛乐米塔尔·奥钢联·神钢","body":"**WLB天花板，对女生友好**。薪资中等但生活质量拉满。英语能力是关键门槛。","b":["薪资 17-28万","WLB 40h，严格双休","对女生非常友好","上海落户加分","技术先进但晋升慢"],"rec":"⭐ WLB最佳选择，对女生非常友好"}];
+const IND = [{"cls":"steel","n":"先进钢铁材料·高端特钢","w":"主攻方向 50%","stats":[{"l":"2030高端市场","v":"5000亿+"},{"l":"CAGR","v":"8-10%"},{"l":"进口替代率","v":"40%→70%"},{"l":"政策","v":"十五五钢铁高质量发展"}],"body":"<strong>存量升级，优者更优</strong>。手撕钢、火车轮轴钢、汽车大梁钢已实现国产化。材料基因工程加速材料研发是核心趋势。","b":["高端特钢企业急需'金属材料+先进表征+计算设计'复合型人才","硕士是研发主力学历层级","纳米析出强化/贝氏体钢是性能提升核心技术","2000亿超长期国债支持设备更新","国产替代确定性高"]},{"cls":"railway","n":"轨道交通装备·钢轨维护","w":"课题组核心 25%","stats":[{"l":"2030市场规模","v":"1.2万亿"},{"l":"CAGR","v":"5.5%"},{"l":"全球中国占比","v":"35%+"},{"l":"动车五级修","v":"511-590组"}],"body":"<strong>维保驱动，出口接力</strong>。CR450时速400公里对钢轨材料提出更高要求。高铁出海持续推进。","b":["CR450对钢轨极致性能要求直接创造用武之地","高铁出海+维保+升级三重驱动","钢轨打磨/维护市场规模持续扩大","铁科院/中车每年招聘规模较大","你的硕士课题直接服务铁路钢轨延寿"]},{"cls":"aerospace","n":"航空航天材料","w":"延伸方向 15%","stats":[{"l":"2030市场规模","v":"6500亿"},{"l":"CAGR","v":"12.5%"},{"l":"材料瓶颈","v":"'两机'专项核心"},{"l":"人才需求","v":"爆发式增长"}],"body":"<strong>高壁垒，高回报，黄金赛道</strong>。国产大飞机量产+军用航空换代+商业航天爆发三轮驱动。","b":["材料是'两机'专项核心瓶颈","高温合金/钛合金人才需求爆发","门槛高但薪资天花板极高","材料基因组加速高温合金研发","博士更受青睐，清华硕士有机会"]},{"cls":"materials_ai","n":"材料基因工程·AI材料设计","w":"差异化王牌","stats":[{"l":"2030市场规模","v":"800亿"},{"l":"CAGR","v":"35%"},{"l":"薪资溢价","v":"30-50%"},{"l":"人才缺口","v":"巨大"}],"body":"<strong>颠覆性工具，人才稀缺</strong>。材料基因工程写入十五五规划，乌镇中心（你导师主政）是国家级战略方向。","b":["材料科学家懂AI的人极少，供不应求","薪资溢价30-50%是普遍现象","赋能钢铁/航空/新能源所有行业","导师是乌镇中心=国家级战略嫡系","掌握此技能=职业生涯的期权"]}];
+
+const DIM_KEYS = Object.keys(WEIGHTS_DEFAULT);
+const DIM_LABELS = {};
+DIM_KEYS.forEach(k => DIM_LABELS[k] = DIM_META[k].label);
+
+let weights = {...WEIGHTS_DEFAULT};
+let activePreset = 'default';
+let activeFilter = 'all';
+
+// ═══ SCORING ═══
+function scoreCompany(c) {
+  let s = 0;
+  DIM_KEYS.forEach(k => s += (c[k] || 0) * (weights[k] || 0));
+  return Math.round(s * 100) / 100;
+}
+
+function getRanked() {
+  let arr = COMPANIES.map(c => ({...c, score: scoreCompany(c)}));
+  arr.sort((a, b) => b.score - a.score);
+  let n = arr.length;
+  arr.forEach((c, i) => {
+    let pct = (i + 1) / n;
+    if (pct <= 0.08) c.tier = 'SSS';
+    else if (pct <= 0.22) c.tier = 'SS';
+    else if (pct <= 0.45) c.tier = 'S';
+    else if (pct <= 0.72) c.tier = 'A';
+    else c.tier = 'B';
+    c.rank = i + 1;
+  });
+  return arr;
+}
+
+function getStats(arr) {
+  let avg = arr.reduce((s, c) => s + c.score, 0) / arr.length;
+  let top = arr[0];
+  let cats = new Set(arr.map(c => c.cat));
+  return {
+    total: arr.length,
+    avg: avg.toFixed(1),
+    top: top.name,
+    topScore: top.score.toFixed(1),
+    cats: cats.size
+  };
+}
+
+// ═══ RENDER: STATS BAR ═══
+function renderStats() {
+  let arr = getRanked();
+  let st = getStats(arr);
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-item"><div class="stat-val">${arr.length}</div><div class="stat-lbl">目标雇主</div></div>
+    <div class="stat-item"><div class="stat-val">${st.cats}</div><div class="stat-lbl">覆盖行业</div></div>
+    <div class="stat-item"><div class="stat-val">${st.topScore}</div><div class="stat-lbl">最高综合分</div></div>
+    <div class="stat-item"><div class="stat-val">${st.avg}</div><div class="stat-lbl">平均综合分</div></div>
+    <div class="stat-item"><div class="stat-val">10</div><div class="stat-lbl">评价维度</div></div>
+  `;
+}
+
+// ═══ RENDER: WEIGHT CONSOLE ═══
+function renderPresets() {
+  let html = '';
+  Object.keys(PRESETS).forEach(k => {
+    let labels = {default:'默认均衡',salary:'薪资优先',tech:'技术优先',settle:'定居优先',cohort:'课题优先'};
+    html += `<button class="preset-btn ${k===activePreset?'active':''}" data-preset="${k}">${labels[k]||k}</button>`;
+  });
+  document.getElementById('presetRow').innerHTML = html;
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.onclick = () => {
+      activePreset = btn.dataset.preset;
+      weights = {...PRESETS[activePreset]};
+      renderPresets();
+      renderWeights();
+      refreshAll();
+    };
+  });
+}
+
+function renderWeights() {
+  let html = '';
+  DIM_KEYS.forEach(k => {
+    let v = weights[k];
+    html += `<div class="weight-item">
+      <span class="weight-label">${DIM_META[k].label}</span>
+      <input type="range" class="weight-slider" min="0" max="40" value="${Math.round(v*100)}" data-dim="${k}">
+      <span class="weight-pct">${Math.round(v*100)}%</span>
+    </div>`;
+  });
+  document.getElementById('weightGrid').innerHTML = html;
+  document.querySelectorAll('.weight-slider').forEach(sl => {
+    sl.oninput = () => {
+      let k = sl.dataset.dim;
+      weights[k] = parseInt(sl.value) / 100;
+      sl.nextElementSibling.textContent = sl.value + '%';
+      activePreset = '';
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      refreshAll();
+    };
+  });
+}
+
+// ═══ RENDER: FILTERS ═══
+function renderFilters() {
+  let html = '<button class="filter-btn active" data-cat="all">全部</button>';
+  Object.keys(CATEGORIES).forEach(k => {
+    let c = CATEGORIES[k];
+    html += `<button class="filter-btn" data-cat="${k}">${c.icon} ${c.name}</button>`;
+  });
+  document.getElementById('filterRow').innerHTML = html;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.onclick = () => {
+      activeFilter = btn.dataset.cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderFirmCards();
+    };
+  });
+}
+
+// ═══ RENDER: FIRM CARDS ═══
+function renderFirmCards() {
+  let arr = getRanked();
+  if (activeFilter !== 'all') arr = arr.filter(c => c.cat === activeFilter);
+  document.getElementById('rankCount').textContent = arr.length + '家';
+  let html = '';
+  arr.forEach((c, idx) => {
+    let catInfo = CATEGORIES[c.cat] || {};
+    let dimScores = '';
+    DIM_KEYS.forEach(k => {
+      let v = c[k] || 0;
+      let cls = v >= 8.5 ? ' highlight' : '';
+      dimScores += `<span class="firm-score${cls}">${DIM_LABELS[k]} ${v}</span>`;
+    });
+    let whyHtml = '';
+    if (c.why_for_you && c.why_for_you.length) {
+      whyHtml = '<ul class="why-list">' + c.why_for_you.map(w => `<li>${w}</li>`).join('') + '</ul>';
+    }
+    let posHtml = '';
+    if (c.positions) {
+      posHtml = c.positions.map(p => `<div class="position-box"><div class="dept">${p.dept}</div><div class="jobs">${p.jobs.join(' · ')}</div></div>`).join('');
+    }
+    let advHtml = c.adv ? c.adv.map(a => `<li>${a}</li>`).join('') : '';
+    let riskHtml = c.risk ? c.risk.map(r => `<li>${r}</li>`).join('') : '';
+    html += `
+    <div class="firm-card" style="--i:${idx}" data-id="${c.id}">
+      <div class="firm-head">
+        <div class="firm-rank">${c.rank}</div>
+        <div class="firm-title">
+          <div class="firm-name">${c.name}</div>
+          <div class="firm-sub">${catInfo.icon||''} ${catInfo.name||''} · ${c.city} · ${c.cash_low}-${c.cash_high}万</div>
+          <div class="firm-scores">
+            <span class="firm-score highlight">综合 ${c.score.toFixed(1)}</span>
+            ${dimScores}
+          </div>
+        </div>
+        <span class="firm-tier tier-${c.tier}">${c.tier}</span>
+      </div>
+      <div class="firm-body">
+        <div class="firm-detail">
+          <p style="font-size:.82rem;color:var(--text2);margin-bottom:.8rem">${c.intro}</p>
+          <div class="detail-grid">
+            <div class="detail-item"><strong>薪资范围：</strong>${c.cash_low}-${c.cash_high}万（中位${c.cash_mid}万）</div>
+            <div class="detail-item"><strong>公积金：</strong>${c.fund_pct}%·${c.fund_total}万/年</div>
+            <div class="detail-item"><strong>周均工时：</strong>${c.wlb_hours}h</div>
+            <div class="detail-item"><strong>5年累计：</strong>${c.total5y}万+</div>
+            <div class="detail-item"><strong>激励：</strong>${c.stock||'无'}</div>
+            <div class="detail-item"><strong>匹配度：</strong>相变${c.phase_transformation} · 合金${c.alloy_design} · 仿真${c.simulation} · 轨道${c.rail_app}</div>
+          </div>
+          <h4 style="font-size:.82rem;margin:.6rem 0 .3rem;color:var(--accent)">为什么适合你</h4>
+          ${whyHtml}
+          <h4 style="font-size:.82rem;margin:.6rem 0 .3rem;color:var(--accent)">在招岗位</h4>
+          ${posHtml}
+          <div class="adv-risk">
+            <div><h4 style="font-size:.82rem;margin-bottom:.3rem;color:var(--success)">优势</h4><ul class="adv-list">${advHtml}</ul></div>
+            <div><h4 style="font-size:.82rem;margin-bottom:.3rem;color:var(--warning)">风险</h4><ul class="risk-list">${riskHtml}</ul></div>
+          </div>
+          <div class="source-line">数据来源：${c.source} · 可信度：${c.confidence}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('firmGrid').innerHTML = html;
+  document.querySelectorAll('.firm-card').forEach(card => {
+    card.querySelector('.firm-head').onclick = () => card.classList.toggle('open');
+  });
+}
+
+// ═══ RENDER: UNIT TYPES ═══
+function renderUnitTypes() {
+  let html = '';
+  UTG.forEach(u => {
+    let bullets = u.b.map(b => `<li>${b}</li>`).join('');
+    html += `<div class="ut-card">
+      <div class="ut-header"><span class="ut-icon">${CATEGORIES[u.cls]?.icon||''}</span><span class="ut-name">${u.name}</span><span class="ut-num">#${u.num}</span></div>
+      <div class="ut-tag">${u.tag}</div>
+      <div class="ut-body">${u.body}</div>
+      <ul class="ut-list">${bullets}</ul>
+      <div class="ut-rec">${u.rec}</div>
+    </div>`;
+  });
+  document.getElementById('utGrid').innerHTML = html;
+}
+
+// ═══ RENDER: HEATMAP ═══
+function renderHeatmap() {
+  let arr = getRanked().slice(0, 20);
+  let dimLabels = DIM_KEYS.map(k => `<th>${DIM_META[k].label}</th>`).join('');
+  let html = `<thead><tr><th>排名</th><th>企业</th>${dimLabels}<th>综合</th></tr></thead><tbody>`;
+  arr.forEach(c => {
+    let cells = DIM_KEYS.map(k => {
+      let v = c[k] || 0;
+      let intensity = Math.round((v / 10) * 255);
+      let bg = `rgba(180,77,110,${(v/10).toFixed(2)})`;
+      let color = v > 6 ? '#fff' : 'var(--text)';
+      return `<td style="background:${bg};color:${color}">${v}</td>`;
+    }).join('');
+    let sc = c.score.toFixed(1);
+    html += `<tr><td style="font-weight:600">${c.rank}</td><td style="text-align:left;font-size:.72rem;font-weight:500;white-space:nowrap">${c.name}</td>${cells}<td style="font-weight:700;background:var(--accent);color:#fff">${sc}</td></tr>`;
+  });
+  html += '</tbody>';
+  document.getElementById('heatmapTable').innerHTML = html;
+}
+
+// ═══ RENDER: SCATTER ═══
+function renderScatter() {
+  let arr = getRanked();
+  let wrap = document.getElementById('scatterPlot');
+  let w = wrap.offsetWidth, h = wrap.offsetHeight;
+  let pad = 50;
+  let xMax = 10, yMax = 10;
+  let xKey = 'pay', yKey = 'cohort';
+
+  let html = '';
+  // axes
+  html += `<div class="axis-label" style="bottom:10px;left:50%;transform:translateX(-50%)">← 薪酬综合 →</div>`;
+  html += `<div class="axis-label" style="left:10px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:left center">← 课题组契合 →</div>`;
+  // quadrants
+  html += `<div class="scatter-quadrant" style="top:${pad}px;right:${pad}px">★ 最佳选择</div>`;
+  html += `<div class="scatter-quadrant" style="bottom:${pad}px;left:${pad}px">低薪·低匹配</div>`;
+
+  arr.forEach(c => {
+    let xVal = c[xKey] || 0;
+    let yVal = c[yKey] || 0;
+    let x = pad + (xVal / xMax) * (w - 2 * pad);
+    let y = h - pad - (yVal / yMax) * (h - 2 * pad);
+    let catInfo = CATEGORIES[c.cat] || {};
+    let color = catInfo.color || 'var(--accent)';
+    html += `<div class="scatter-dot" style="left:${x-6}px;top:${y-6}px;background:${color}" title="${c.name} ${c.score.toFixed(1)}"></div>`;
+    html += `<div class="scatter-label" style="left:${x+8}px;top:${y-6}px">${c.name.length>6?c.name.slice(0,6)+'…':c.name}</div>`;
+  });
+  wrap.innerHTML = html;
+}
+
+// ═══ RENDER: TIMELINE ═══
+function renderTimeline() {
+  let html = '<div class="timeline-line"></div><div class="timeline-items">';
+  TL_DATA.forEach(t => {
+    let cls = 'timeline-item';
+    if (t.now) cls += ' now';
+    if (t.ms) cls += ' ms';
+    html += `<div class="${cls}">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">${t.d}</div>
+      <div class="timeline-label">${t.l}</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('timelineWrap').innerHTML = html;
+}
+
+// ═══ RENDER: SETTLEMENT CALC ═══
+function renderSettlement() {
+  let cities = [
+    {name:'北京',key:'北京海淀',hukou:'清华硕士直接落户，指标充足',loan_max:120,rate:'3.1%',note:'央企/研究院集中，材料行业最密集'},
+    {name:'上海',key:'上海宝山',hukou:'清华硕士直接落户（72分制轻松达标）',loan_max:120,rate:'3.1%',note:'宝武/外企集中，生活便利'},
+    {name:'深圳',key:'深圳南山',hukou:'清华硕士秒批落户',loan_max:90,rate:'3.1%',note:'材料+AI创业活跃，薪资天花板高'},
+    {name:'广州',key:'广州天河',hukou:'清华硕士直接落户',loan_max:80,rate:'3.1%',note:'生活成本相对低，省级研究院'}
+  ];
+
+  let arr = getRanked();
+  let html = '';
+  cities.forEach(city => {
+    let price = DISTRICT_PRICE[city.key] || 3.0;
+    let area = 90;
+    let total = price * area;
+    let down = total * CAPITAL.down_pct;
+    let loan = total - down;
+    let monthly = loan * (0.031/12) * Math.pow(1+0.031/12, 360) / (Math.pow(1+0.031/12, 360) - 1);
+    let familyAvail = CAPITAL.family_support;
+    let needExtra = down > familyAvail ? (down - familyAvail) : 0;
+
+    // find top company in this city
+    let local = arr.filter(c => c.city.includes(city.name)).slice(0, 3);
+    let avgSalary = local.length ? (local.reduce((s, c) => s + c.cash_mid, 0) / local.length) : 20;
+    let monthlySalary = avgSalary * 10000 / 12;
+    let ratio = monthly / monthlySalary;
+    let barPct = Math.min(ratio * 100, 100);
+
+    let verdict, vColor;
+    if (ratio < 0.35) { verdict = '✓ 可承受'; vColor = 'var(--success)'; }
+    else if (ratio < 0.5) { verdict = '△ 需谨慎'; vColor = 'var(--warning)'; }
+    else { verdict = '✗ 压力大'; vColor = 'var(--accent)'; }
+
+    let topNames = local.map(c => c.name).join('、') || '暂无';
+
+    html += `<div class="calc-card">
+      <h4>${city.name} · ${city.key}</h4>
+      <div class="calc-row"><span class="label">房价均价</span><span class="val">${price}万/㎡</span></div>
+      <div class="calc-row"><span class="label">90㎡总价</span><span class="val">${total.toFixed(0)}万</span></div>
+      <div class="calc-row"><span class="label">首付(${CAPITAL.down_pct*100}%)</span><span class="val">${down.toFixed(0)}万</span></div>
+      <div class="calc-row"><span class="label">家庭支持</span><span class="val">${familyAvail}万${needExtra?' · 差额'+needExtra.toFixed(0)+'万':''}</span></div>
+      <div class="calc-row"><span class="label">公积金贷款上限</span><span class="val">${city.loan_max}万</span></div>
+      <div class="calc-row"><span class="label">月供(30年)</span><span class="val">${Math.round(monthly).toLocaleString()}元</span></div>
+      <div class="calc-row"><span class="label">当地TOP企业均薪</span><span class="val">${avgSalary.toFixed(0)}万/年</span></div>
+      <div class="calc-row"><span class="label">月薪</span><span class="val">${Math.round(monthlySalary).toLocaleString()}元</span></div>
+      <div class="calc-bar"><div class="calc-bar-fill" style="width:${barPct}%;background:${vColor}"></div></div>
+      <div class="calc-verdict" style="color:${vColor}">${verdict} · 月供占比 ${(ratio*100).toFixed(0)}%</div>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:.4rem">落户：${city.hukou}</div>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:.2rem">当地TOP：${topNames}</div>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:.2rem">${city.note}</div>
+    </div>`;
+  });
+  document.getElementById('calcGrid').innerHTML = html;
+}
+
+// ═══ RENDER: INDUSTRY ═══
+function renderIndustry() {
+  let html = '';
+  IND.forEach(ind => {
+    let statsHtml = ind.stats.map(s => `<div class="ind-stat"><div class="v">${s.v}</div><div class="l">${s.l}</div></div>`).join('');
+    let bullets = ind.b.map(b => `<li>${b}</li>`).join('');
+    html += `<div class="ind-card">
+      <div class="ind-header"><span class="ind-name">${ind.n}</span><span class="ind-weight">${ind.w}</span></div>
+      <div class="ind-stats">${statsHtml}</div>
+      <div class="ind-body">${ind.body}</div>
+      <ul class="ind-list">${bullets}</ul>
+    </div>`;
+  });
+  document.getElementById('industryCards').innerHTML = html;
+}
+
+// ═══ RENDER: LIFE PLAN ═══
+function renderLifePlan() {
+  let cards = [
+    {
+      title: '2028-2030 · 职业起步期（24-26岁）',
+      content: `<p>前两年的核心任务：<strong>扎根技术、建立口碑、完成从学生到工程师的转变</strong>。</p>
+      <ul>
+        <li>入职第一年全力熟悉业务，争取参与核心课题/型号任务</li>
+        <li>利用清华校友网络建立行业人脉，参加学术会议</li>
+        <li>如果在央企/研究院，前两年薪资较低但稳定性强，重在积累</li>
+        <li>24-26岁是试错成本最低的时期，可大胆尝试</li>
+        <li>建议在第一份工作确定前，先想清楚3年后想要什么</li>
+      </ul>`
+    },
+    {
+      title: '2030-2033 · 成长期（26-29岁）',
+      content: `<p>中期目标：<strong>成为细分领域的骨干，开始考虑定居和人生大事</strong>。</p>
+      <ul>
+        <li>26-28岁是材料行业跳槽的黄金窗口（有经验+年龄优势）</li>
+        <li>如果在宝武/钢研等平台好，建议深耕不跳；如果平台一般，果断跳</li>
+        <li>28岁左右考虑买房定居，首付积累需提前规划</li>
+        <li>材料行业女性29岁前生育对职业影响最小（产假+恢复）</li>
+        <li>在职博士可考虑（央企/研究院通常支持），提升长期天花板</li>
+      </ul>`
+    },
+    {
+      title: '一线城市定居经济门槛',
+      content: `<ul>
+        <li><strong>北京：</strong>90㎡约600-750万，首付90-113万，月供约2.5-3万。央企公积金高可部分覆盖月供。</li>
+        <li><strong>上海：</strong>90㎡约400-600万，首付60-90万，月供约1.8-2.5万。宝山等区域性价比高。</li>
+        <li><strong>深圳：</strong>90㎡约450-800万，首付68-120万，月供约2-3万。南山贵但企业多。</li>
+        <li><strong>广州：</strong>90㎡约250-500万，首付38-75万，月供约1.2-2万。性价比最高。</li>
+        <li><strong>建议：</strong>家庭支持50万 + 自己攒30-50万(3年) → 北京/上海首付勉强够。优先考虑公积金覆盖月供的企业。</li>
+      </ul>`
+    },
+    {
+      title: '材料行业女性的职业天花板与突破',
+      content: `<ul>
+        <li><strong>现实：</strong>钢铁/轨交/航空等传统工科领域女性占比约15-25%，但清华背景+技术实力可破局</li>
+        <li><strong>优势赛道：</strong>外企（蒂森/奥钢联等）对女性最友好；研究院所次之；央企总部好于基层</li>
+        <li><strong>突破路径：</strong>技术专家路线 > 管理路线（女性在技术岗更容易获得尊重和晋升）</li>
+        <li><strong>材料+AI方向：</strong>性别差异最小的赛道，凭实力说话</li>
+        <li><strong>生育影响：</strong>央企/国企产假保障好（6个月+），外企灵活度高。建议在28-30岁完成</li>
+      </ul>`
+    },
+    {
+      title: '读博 vs 就业的利弊',
+      content: `<ul>
+        <li><strong>直接就业：</strong>2年制专硕毕业即就业，年龄优势大(24岁)。央企/研究院入职即可参与项目。</li>
+        <li><strong>读博（全职）：</strong>4-5年时间成本，29岁毕业。学术路径天花板更高，但就业面更窄。</li>
+        <li><strong>在职博士：</strong>最佳平衡方案。央企/研究院通常支持，边工作边读。建议入职2年后申请。</li>
+        <li><strong>建议：</strong>先就业 → 在职博士。专硕2年出成果有限，全职博性价比不如在职博。</li>
+        <li><strong>材料基因工程方向：</strong>博士溢价不如传统材料方向大，硕士+工程经验更有竞争力。</li>
+      </ul>`
+    },
+    {
+      title: '行业选择对个人生活的影响',
+      content: `<ul>
+        <li><strong>最佳WLB：</strong>外企材料巨头（40h/周严格双休）、研究院所（弹性工作）</li>
+        <li><strong>最差WLB：</strong>新能源（50-55h大小周）、高端装备制造（50h+出差多）</li>
+        <li><strong>出差最少：</strong>研究院所、外企总部、高校</li>
+        <li><strong>出差最多：</strong>中铁/铁建（项目制）、中车子公司（驻厂）</li>
+        <li><strong>对女生友好度排序：</strong>外企 > 研究院 > 央企总部 > 央企基层 > 民企</li>
+        <li><strong>综合建议：</strong>追求生活质量选外企/研究院；追求发展选央企龙头/材料+AI方向</li>
+      </ul>`
+    }
+  ];
+
+  let html = '';
+  cards.forEach(c => {
+    html += `<div class="life-card"><h3>${c.title}</h3>${c.content}</div>`;
+  });
+  document.getElementById('lifeCards').innerHTML = html;
+}
+
+// ═══ RENDER: SOURCES ═══
+function renderSources() {
+  let sources = [
+    {cred:'green', text:'2025-2026各企业校招公告（官网/牛客/海投网）'},
+    {cred:'green', text:'各上市公司年报/半年报（巨潮资讯网）'},
+    {cred:'green', text:'清华大学就业信息网校招数据'},
+    {cred:'green', text:'国家统计局行业数据'},
+    {cred:'green', text:'《新材料产业发展指南》《钢铁行业高质量发展》等政策文件'},
+    {cred:'yellow', text:'BOSS直聘/猎聘/前程无忧薪资数据'},
+    {cred:'yellow', text:'看准网/职友集企业评价'},
+    {cred:'yellow', text:'行业研报（中信/国泰君安/华泰证券）'},
+    {cred:'yellow', text:'知乎/脉脉实名爆料'},
+    {cred:'yellow', text:'各高校就业质量报告'},
+    {cred:'red', text:'匿名论坛讨论（仅供参考）'},
+    {cred:'red', text:'基于行业趋势的推算和类比'},
+    {cred:'red', text:'AI模型综合分析（数据截至2026年5月）'},
+  ];
+  let html = '';
+  sources.forEach(s => {
+    let credLabel = s.cred === 'green' ? '🟢高' : s.cred === 'yellow' ? '🟡中' : '🔴低';
+    html += `<div class="source-item"><span class="cred cred-${s.cred}">${credLabel}</span>${s.text}</div>`;
+  });
+  document.getElementById('sourceGrid').innerHTML = html;
+}
+
+// ═══ NAV ═══
+function setupNav() {
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.onclick = () => {
+      let section = link.dataset.section;
+      let el = document.getElementById(section);
+      if (el) el.scrollIntoView({behavior:'smooth'});
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    };
+  });
+  // scroll spy
+  let sections = ['hero','rankings','heatmap','scatter','timeline','settlement','industry','life','sources'];
+  window.addEventListener('scroll', () => {
+    let scrollY = window.scrollY + 100;
+    sections.forEach(id => {
+      let el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY && el.offsetTop + el.offsetHeight > scrollY) {
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.toggle('active', l.dataset.section === id);
+        });
+      }
+    });
+  });
+}
+
+// ═══ REFRESH ALL ═══
+function refreshAll() {
+  renderStats();
+  renderFirmCards();
+  renderHeatmap();
+  renderScatter();
+}
+
+// ═══ INIT ═══
+function init() {
+  renderStats();
+  renderPresets();
+  renderWeights();
+  renderFilters();
+  renderFirmCards();
+  renderUnitTypes();
+  renderHeatmap();
+  renderScatter();
+  renderTimeline();
+  renderSettlement();
+  renderIndustry();
+  renderLifePlan();
+  renderSources();
+  setupNav();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
