@@ -13,7 +13,7 @@
 | # | 页面标题 | 子目录 | 大小 | 定位 | 访问 |
 |---|---|---|---|---|---|
 | 1 | **About Me \| 张元杰** | `about-me/` | ~600K | 小米实习生自我介绍页 · 嵌入式工程师 · 武汉理工→上交大 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/about-me/) |
-| 2 | **2029 届 交大仪科硕 就业决策台** | `career-console-2029/` | ~350K | 张元杰 · 微针阵列方向 · 9维定制评分 · 60家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
+| 2 | **2029 届 交大仪科硕 就业决策台** | `career-console-2029/` | ~3.9M | 张元杰 · 微针阵列方向 · 9维定制评分 · 60家目标雇主 · 自包含头像 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
 | 3 | 985 工科学院就业榜 · 2026-2030 | `985-gongke-jiuye-bang/` | 248K | 公众视角 · 学院榜 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/985-gongke-jiuye-bang/) |
 | 4 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | 工作成果展示 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
 | 5 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
@@ -33,9 +33,9 @@
 
 ---
 
-### 2029 届 交大仪科硕 就业决策台（2026-05-08 最终版 · 修复头像比例）
+### 2029 届 交大仪科硕 就业决策台（2026-05-11 · v7.2 · 自包含头像）
 
-面向 2029 届上海交大仪器科学与技术硕士（王侃课题组）的个人就业决策工具。研究方向：**基于微针阵列的可穿戴电化学传感系统**。
+面向 2029 届上海交大仪器科学与技术硕士（王侃课题组）的个人就业决策工具。研究方向：**基于微针阵列的可穿戴电化学传感系统**。头像已内嵌为 data URI，单文件自包含。
 
 **评分体系**
 - **9 维评分**：薪酬 · 现栈契合 · 未来栈契合 · 上海地缘 · 职业价值 · WLB · 禀赋变现 · 行业前景 · 课题组契合
@@ -85,4 +85,4 @@
 
 ---
 
-*Last updated: 2026-05-09*
+*Last updated: 2026-05-11*
