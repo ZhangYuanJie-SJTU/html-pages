@@ -1,14 +1,27 @@
 # html-pages · 静态 HTML 托管仓库
 
-集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。
+> **Static HTML Pages Hosted via GitHub Pages**
+> *集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。*
 
-- **访问域名**：[`zhangyuanjie-sjtu.github.io/html-pages/`](https://zhangyuanjie-sjtu.github.io/html-pages/)
-- **访问规则**：每个子目录对应一个独立页面，路径为 `域名/html-pages/<子目录>/`
-- **分支策略**：`main` 与 `gh-pages` 保持同步镜像；Pages 部署源为 `gh-pages`
+[![Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
+[![PagesCount](https://img.shields.io/badge/Pages-6-green)]()
+[![Domain](https://img.shields.io/badge/Domain-zhangyuanjie--sjtu.github.io-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
+[![Affiliation](https://img.shields.io/badge/Affiliation-SJTU-blue)](https://www.sjtu.edu.cn)
 
 ---
 
-## 📚 页面索引
+## 项目概览
+
+| 项目 | 内容 |
+|------|------|
+| **访问域名** | [`zhangyuanjie-sjtu.github.io/html-pages/`](https://zhangyuanjie-sjtu.github.io/html-pages/) |
+| **访问规则** | 每个子目录对应一个独立页面，路径为 `域名/html-pages/<子目录>/` |
+| **分支策略** | `main` 与 `gh-pages` 保持同步镜像；Pages 部署源为 `gh-pages` |
+| **部署工具** | Claude Code `/LoadHTML` skill |
+
+---
+
+## 页面索引
 
 | # | 页面标题 | 子目录 | 大小 | 定位 | 访问 |
 |---|---|---|---|---|---|
@@ -21,7 +34,7 @@
 
 ---
 
-## 🚀 最新部署
+## 最新部署
 
 ### About Me | 张元杰（2026-05-09）
 
@@ -62,7 +75,7 @@
 
 ---
 
-## 🛠️ 部署方式
+## 部署方式
 
 使用 Claude Code 的 `/LoadHTML` skill 一键部署，自动完成：
 - HTML 本地资源自包含化（图片/CSS/JS 转 data URI）
@@ -77,7 +90,22 @@
 
 ---
 
-## 🗂️ 仓库维护
+## 仓库结构
+
+```
+html-pages/
+├── README.md
+├── about-me/               # About Me 自我介绍页
+├── career-console-2029/    # 就业决策台
+├── 985-gongke-jiuye-bang/  # 985 工科就业榜
+├── cancom-ai-showcase/     # CAN_Com 测试报告复核展示
+├── summer-camp-school-details/  # 夏令营学校详情
+└── zhangxuefeng-quiz/      # 张雪峰智能志愿百科
+```
+
+---
+
+## 仓库维护
 
 - **所有页面都在子目录中**，仓库根目录只放 `README.md`
 - 如果出现陌生目录，大概率是历史测试残留，可安全删除
@@ -85,4 +113,12 @@
 
 ---
 
-*Last updated: 2026-05-11*
+## 作者
+
+| | 姓名 | 单位 | 联系方式 |
+|---|---|---|---|
+| **维护者** | 张元杰 | 上海交通大学 自动化与传感科学与工程学院 硕士生 | [GitHub](https://github.com/ZhangYuanJie-SJTU) |
+
+---
+
+*Last updated: 2026-05-15*
