@@ -4,7 +4,7 @@
 > *集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。*
 
 [![Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
-[![PagesCount](https://img.shields.io/badge/Pages-6-green)]()
+[![PagesCount](https://img.shields.io/badge/Pages-7-green)]()
 [![Domain](https://img.shields.io/badge/Domain-zhangyuanjie--sjtu.github.io-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
 [![Affiliation](https://img.shields.io/badge/Affiliation-SJTU-blue)](https://www.sjtu.edu.cn)
 
@@ -31,6 +31,7 @@
 | 4 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | 工作成果展示 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
 | 5 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
 | 6 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
+| 7 | **胡程玮 · 2028届就业决策控制台** | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
 
 ---
 
@@ -100,7 +101,8 @@ html-pages/
 ├── 985-gongke-jiuye-bang/  # 985 工科就业榜
 ├── cancom-ai-showcase/     # CAN_Com 测试报告复核展示
 ├── summer-camp-school-details/  # 夏令营学校详情
-└── zhangxuefeng-quiz/      # 张雪峰智能志愿百科
+├── zhangxuefeng-quiz/      # 张雪峰智能志愿百科
+└── career-console-hcw/     # 胡程玮·2028届就业决策控制台
 ```
 
 ---
