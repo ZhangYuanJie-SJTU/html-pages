@@ -25,13 +25,13 @@
 
 | # | 页面标题 | 子目录 | 大小 | 定位 | 访问 |
 |---|---|---|---|---|---|
-| 1 | **About Me \| 张元杰** | `about-me/` | ~600K | 小米实习生自我介绍页 · 嵌入式工程师 · 武汉理工→上交大 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/about-me/) |
-| 2 | **2029 届 交大仪科硕 就业决策台** | `career-console-2029/` | ~3.9M | 张元杰 · 微针阵列方向 · 9维定制评分 · 60家目标雇主 · 自包含头像 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
+| 1 | About Me \| 张元杰 | `about-me/` | ~600K | 小米实习生自我介绍页 · 嵌入式工程师 · 武汉理工→上交大 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/about-me/) |
+| 2 | 2029 届 交大仪科硕 就业决策台 | `career-console-2029/` | ~3.9M | 张元杰 · 微针阵列方向 · 9维定制评分 · 60家目标雇主 · 自包含头像 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-2029/) |
 | 3 | 985 工科学院就业榜 · 2026-2030 | `985-gongke-jiuye-bang/` | 248K | 公众视角 · 学院榜 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/985-gongke-jiuye-bang/) |
 | 4 | AI 驱动的 CAN_Com 测试报告智能复核 | `cancom-ai-showcase/` | 1.9M | 工作成果展示 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/cancom-ai-showcase/) |
 | 5 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
 | 6 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
-| 7 | **胡程玮 · 2028届就业决策控制台** | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
+| 7 | 胡程玮 · 2028届就业决策控制台 | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
 
 ---
 
