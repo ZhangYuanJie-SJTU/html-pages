@@ -4,7 +4,7 @@
 > *集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。*
 
 [![Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
-[![PagesCount](https://img.shields.io/badge/Pages-7-green)]()
+[![PagesCount](https://img.shields.io/badge/Pages-8-green)]()
 [![Domain](https://img.shields.io/badge/Domain-zhangyuanjie--sjtu.github.io-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
 [![Affiliation](https://img.shields.io/badge/Affiliation-SJTU-blue)](https://www.sjtu.edu.cn)
 
@@ -32,10 +32,26 @@
 | 5 | 夏令营报名学校详情 | `summer-camp-school-details/` | 44K | 升学参考 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/summer-camp-school-details/) |
 | 6 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
 | 7 | 胡程玮 · 2028届就业决策控制台 | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
+| 8 | ZYJ 定制版 · 就业规划 | `career-plan-2029/` | ~474K | 张元杰 · 水凝胶微针阵列方向 · 端侧 AI 嵌入式 · 224 家雇主 · 10 维 + S/A/B/C 档 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-plan-2029/) |
 
 ---
 
 ## 最新部署
+
+### ZYJ 定制版 · 就业规划（2026-10-18 · 源版 v5.0 · 224 家）
+
+2029 届上海交大仪器科学与技术硕士（王侃课题组）的定制版就业规划，研究方向已更新为 **水凝胶微针阵列电化学传感系统**。单文件自包含，无外部依赖。
+
+**核心内容**
+- **第一身份岗**：端侧 AI 嵌入式工程师（第二＝生理/生化信号感知算法）
+- **8 行业 β + 风口×壁垒四象限 + 十年天花板合成**（半导体/AIoT 领跑 · 医疗＝高壁垒主攻仓）
+- **10 维评分 + F1–F8 硬过滤**：S 档 7 家 / A 档 32 家（全样本 224 家）
+- **薪资**：全样本中位 25.3 万 · S+A 重点池 30.0 万；**三三制投递**（冲刺 30% / 主力 50% / 兜底 20%）
+- **决策**：乐鑫首选；含家庭财务三档、两年路线图与投递作战包
+
+📎 **[立即查看 →](https://zhangyuanjie-sjtu.github.io/html-pages/career-plan-2029/)**
+
+---
 
 ### About Me | 张元杰（2026-05-09）
 
@@ -97,7 +113,8 @@
 html-pages/
 ├── README.md
 ├── about-me/               # About Me 自我介绍页
-├── career-console-2029/    # 就业决策台
+├── career-plan-2029/       # ZYJ 定制版就业规划（v9.0 口径）
+├── career-console-2029/    # 就业决策台（历史）
 ├── 985-gongke-jiuye-bang/  # 985 工科就业榜
 ├── cancom-ai-showcase/     # CAN_Com 测试报告复核展示
 ├── summer-camp-school-details/  # 夏令营学校详情
@@ -123,4 +140,4 @@ html-pages/
 
 ---
 
-*Last updated: 2026-05-15*
+*Last updated: 2026-10-18*
