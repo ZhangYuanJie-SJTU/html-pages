@@ -4,7 +4,7 @@
 > *集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。*
 
 [![Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
-[![PagesCount](https://img.shields.io/badge/Pages-8-green)]()
+[![PagesCount](https://img.shields.io/badge/Pages-9-green)]()
 [![Domain](https://img.shields.io/badge/Domain-zhangyuanjie--sjtu.github.io-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
 [![Affiliation](https://img.shields.io/badge/Affiliation-SJTU-blue)](https://www.sjtu.edu.cn)
 
@@ -33,10 +33,27 @@
 | 6 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
 | 7 | 胡程玮 · 2028届就业决策控制台 | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
 | 8 | ZYJ 定制版 · 就业规划 | `career-plan-2029/` | ~474K | 张元杰 · 水凝胶微针阵列方向 · 端侧 AI 嵌入式 · 224 家雇主 · 10 维 + S/A/B/C 档 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-plan-2029/) |
+| 9 | ZYJ 就业去向榜 · 2028 秋招 | `zyj-jiuye-quxiang-bang/` | ~1.0M | 张元杰 · 224 家雇主 · 15 赛道 · 13 类岗位 · 模型 v10.0 · 十维评分 + 可支配包 + 抗替代双轨（**最新**） | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zyj-jiuye-quxiang-bang/) |
 
 ---
 
 ## 最新部署
+
+### ZYJ 就业去向榜（2026-10-19 · 模型 v10.0 · 224 家）
+
+2028 秋招去向榜（模型 v10.0）：2029 届上海交大仪器科学与技术硕士（王侃课题组）的**就业去向排行榜**。单文件自包含、无外部依赖，页面分四栏：**排行榜 / 岗位适配 / 赛道 / 方法与数据**。
+
+**核心内容**
+- **224 家雇主 · 15 赛道 · 13 类岗位**：先定岗位、再定公司——每行写清楚"哪家公司、什么行业、最推荐你投哪个岗、上海口径下你大概能拿多少"
+- **十维评分 + 可达性门槛修正**：`可达12 · 匹配15 · 薪资17 · 福利6 · WLB10 · 稳定7 · 成长11 · 平台8 · 抗替代6 · 通勤8`
+- **抗替代双层**：企业层（这家公司的生意被 AI 抬高还是被重构，0.45）＋ 岗位层（你这个岗多少活儿会被模型吃掉，0.55）
+- **薪资改「可支配包」**：公积金、福利、个税按上海 2026 口径归一化后折算——"25 万的院所和 30 万的民企，到手可能只差 1 万"
+- **档位 S 6 / A 29 / B 68 / C 121**；**扰动后第 1 名 300/300 次未变**（档位比名次可信）
+- **首选＝中微公司（#1，7.741）**；三三制投递（主力 6 · 冲刺 3 · 兜底 3）
+
+📎 **[立即查看 →](https://zhangyuanjie-sjtu.github.io/html-pages/zyj-jiuye-quxiang-bang/)**
+
+---
 
 ### ZYJ 定制版 · 就业规划（2026-10-18 · 源版 v5.0 · 224 家）
 
@@ -112,6 +129,7 @@
 ```
 html-pages/
 ├── README.md
+├── zyj-jiuye-quxiang-bang/  # ZYJ 就业去向榜（模型 v10.0 · 最新）
 ├── about-me/               # About Me 自我介绍页
 ├── career-plan-2029/       # ZYJ 定制版就业规划（v9.0 口径）
 ├── career-console-2029/    # 就业决策台（历史）
@@ -140,4 +158,4 @@ html-pages/
 
 ---
 
-*Last updated: 2026-10-18*
+*Last updated: 2026-10-19*
