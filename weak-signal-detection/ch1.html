@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一章 综述 · 微弱信号检测</title>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="ch1">
+<div class="progress"></div>
+<button class="menu-btn" aria-label="目录">☰</button>
+
+<aside class="side">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">SJTU · 2026 秋</span>
+    <span class="brand-title">微弱信号检测</span>
+    <span class="brand-sub">杨明 · 雷华明</span>
+  </a>
+
+  <a class="nav-chap" href="index.html"><span class="n">00</span>课程首页</a>
+  <a class="nav-chap on" href="ch1.html"><span class="n">01</span>综述</a>
+  <a class="nav-chap" href="ch2.html"><span class="n">02</span>噪声的基本概念</a>
+  <a class="nav-chap" href="ch3.html"><span class="n">03</span>物理噪声源</a>
+
+  <div class="side-label">本章</div>
+  <ul class="toc">
+    <li><a href="#position">1.1 这门课的位置</a></li>
+    <li><a href="#gw">1.2 引例：引力波</a></li>
+    <li><a href="#gw-noise">1.3 三类检测极限</a></li>
+    <li><a href="#syllabus">1.4 大纲：为什么先讲噪声</a></li>
+    <li><a href="#wrap">1.5 小结与讨论</a></li>
+  </ul>
+
+  <div class="side-note">
+    本章对应课件第一章（8 页），是整个学期的"问题陈述"：把信号小到什么程度、噪声大到什么程度，一次讲清楚。
+  </div>
+</aside>
+
+<main class="main">
+<div class="content">
+
+  <div class="kicker">第一章 · 综述</div>
+  <h1>先看清对手有多大
+    <span class="thin">课程定位、一个物理极限案例，以及整门课的路线图</span>
+  </h1>
+
+  <p class="lead">这一章几乎没有公式，但决定了后面所有章节的动机：如果信号永远比噪声大，这门课就不存在。真实情况恰好相反——信号总是先被噪声淹没。</p>
+
+  <h2 id="position"><span class="h2-num">1.1</span>这门课的位置</h2>
+
+  <p>仪器学科把"从物理量到可用数字"拆成三门课，各管一段：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:24%">课程</th><th>管什么</th><th>留下什么问题</th></tr></thead>
+    <tbody>
+      <tr><td data-l="课程">传感器及其原理</td><td data-l="管什么">敏感机理：把被测量变成电参量</td><td data-l="留下什么问题">输出信号往往只有 µV、nA 量级</td></tr>
+      <tr><td data-l="课程">测量电路</td><td data-l="管什么">接口与信号调理：放大、变换、数字化</td><td data-l="留下什么问题">放大倍数有上限，因为噪声一起被放大</td></tr>
+      <tr><td data-l="课程"><strong>微弱信号检测</strong></td><td data-l="管什么">噪声从哪来、怎么算、怎么压</td><td data-l="留下什么问题">——</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>本课不是"更精细的电路课"，而是给整条测量链定性能上限的那门课。课件把它拆成四个板块：</p>
+
+  <div class="cards">
+    <div class="card"><span class="k">Ⅰ</span><div class="t">电噪声基础</div>噪声的统计描述与物理来源（第 2、3 章）</div>
+    <div class="card"><span class="k">Ⅱ</span><div class="t">低电平信号检测</div>在噪声中提取信号的方法</div>
+    <div class="card"><span class="k">Ⅲ</span><div class="t">信号处理</div>相关、平均、滤波</div>
+    <div class="card"><span class="k">Ⅳ</span><div class="t">低噪声电路设计</div>器件选型与拓扑</div>
+  </div>
+
+  <div class="box key"><span class="t">一句话</span><p>四个板块是同一个问题的四个侧面：噪声有多大（Ⅰ）→ 用什么方法绕过它（Ⅱ、Ⅲ）→ 用什么电路实现（Ⅳ）。</p></div>
+
+  <h2 id="gw"><span class="h2-num">1.2</span>引例：引力波探测</h2>
+
+  <p>课件用引力波做开篇，因为它把"弱信号"推到了人类能做到的极限。</p>
+
+  <p>引力波是时空曲率的涟漪，以波的形式从源向外传播，在传播路径上表现为质量受到的起伏潮汐力——效果就是"距离被拉伸或压缩了一点点"。</p>
+
+  <p>用迈克尔逊干涉仪测：一束激光被分光镜劈成两路，各走一条臂、被反射镜反射回来、重新合光。两臂等长时两路光同相相长；臂长差一个波长量级时，合光相位就变了。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-interferometer.svg" alt="激光干涉仪示意图">
+    </div>
+    <figcaption>迈克尔逊干涉仪把长度变化 \(\Delta L\) 转成光强变化。真实探测器（LIGO）在每条臂上加法布里–珀罗腔，让光来回反射数百次，等效臂长从 4 km 放大到上千 km。</figcaption>
+  </figure>
+
+  <p>为什么说它是"弱信号"的极限？把数字摆出来就明白了：引力波对探测器的作用是一个无量纲的应变</p>
+
+  <div class="eq">
+    <div class="body">\[ h=\frac{\Delta L}{L}\ \sim\ 10^{-21} \]</div>
+    <div class="no">(1.1)</div>
+  </div>
+
+  <p>臂长 \(L=4\ \mathrm{km}\)，代进去得到 \(\Delta L\sim 4\times10^{-18}\ \mathrm{m}\)——比一个质子还小约两个数量级。而探测器要在这个尺度上分辨变化，同时还要承受地震、热运动、光子散粒噪声的冲击。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-interference.svg" alt="相长与相消干涉波形">
+    </div>
+    <figcaption>相位差为 0 时两臂光场相加（相长），光强最大；相位差为 \(\pi\) 时完全抵消，探测器读数为零。工作点就设在"零"附近，因为那里对相位变化最敏感。</figcaption>
+  </figure>
+
+  <div class="box intuition"><span class="t">为什么把工作点放在"无光"处</span><p>光强 \(I\propto\cos^2(\Delta\varphi/2)\)，在暗纹附近斜率最大，单位相位变化引起的光强变化最大——灵敏度最高。</p></div>
+
+  <h2 id="gw-noise"><span class="h2-num">1.3</span>三类检测极限</h2>
+
+  <p>课件列出的三条限制，恰好预告了本课后半部分要逐个对付的噪声类型：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:26%">噪声</th><th>物理来源</th><th>对应章节</th></tr></thead>
+    <tbody>
+      <tr><td data-l="噪声"><strong>地震噪声</strong><br>Seismic noise</td><td data-l="物理来源">地面微震动、人为活动；低频段最强，靠多级悬摆隔振压制</td><td data-l="对应章节">外部噪声（2.1.2）</td></tr>
+      <tr><td data-l="噪声"><strong>热噪声</strong><br>Thermal noise</td><td data-l="物理来源">测试质量与悬丝的内部共振；工作频段内的热噪声来自这些谐振模式的"尾巴"</td><td data-l="对应章节">3.2 热噪声</td></tr>
+      <tr><td data-l="噪声"><strong>光电子散粒噪声</strong><br>Shot noise</td><td data-l="物理来源">到达探测器的光子／光电子数目本身在随机涨落</td><td data-l="对应章节">3.4 散粒噪声</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>三条限制之间还要取舍：提高激光功率能压低散粒噪声的相对影响，但会加剧辐射压力噪声、并把更多热量带进镜片。这是典型的"噪声预算"问题。</p>
+
+  <div class="box eng">
+    <span class="t">工程含义</span>
+    <p>噪声不是"越小越好"的单一指标，而是<strong>一条谱曲线</strong>。设计者的工作是在目标频段上把这根曲线压到最低，而不是在所有频率上都追求最小值。</p>
+  </div>
+
+  <h2 id="syllabus"><span class="h2-num">1.4</span>大纲：为什么先讲噪声</h2>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:38%">模块</th><th style="width:12%">学时</th><th>解决的问题</th></tr></thead>
+    <tbody>
+      <tr><td data-l="模块">概述</td><td data-l="学时">1</td><td data-l="解决的问题">问题陈述与路线图（本章）</td></tr>
+      <tr><td data-l="模块">噪声的基本概念</td><td data-l="学时">3</td><td data-l="解决的问题">怎么用统计量描述噪声（第 2 章）</td></tr>
+      <tr><td data-l="模块">噪声源物理机制</td><td data-l="学时">8</td><td data-l="解决的问题">每种噪声的谱从哪来（第 3 章）</td></tr>
+      <tr><td data-l="模块">器件噪声模型</td><td data-l="学时">4</td><td data-l="解决的问题">把噪声折算成器件参数（后续）</td></tr>
+      <tr><td data-l="模块">微弱信号检测（低噪声电路、锁相放大、采样积分与数字平均）</td><td data-l="学时">16</td><td data-l="解决的问题">具体手段（后续）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>学时分配本身就是一条论证：噪声相关内容（3+8+4＝15 学时）占了近一半。原因很直接——不知道噪声的谱型和依赖量，任何降噪手段都是盲目的。</p>
+
+  <details>
+    <summary>为什么"低噪声电路"排在最后（16 学时）</summary>
+    <div class="inner">
+      <p>因为电路设计要同时用到三样东西：噪声源的谱密度（第 3 章）、噪声在各级之间的折算规则（第 2 章的功率相加、后续的 Friis 公式）、以及检测方法对带宽的要求（锁相放大、平均）。顺序反过来，就只能背结论。</p>
+    </div>
+  </details>
+
+  <h2 id="wrap"><span class="h2-num">1.5</span>小结与讨论</h2>
+
+  <div class="box key">
+    <span class="t">本章要记住的三件事</span>
+    <p>① 本课的任务是从噪声中提取信号，它决定整个测量链的性能上限；<br>
+    ② 引力波探测是这条主线的极限案例：\(\Delta L\sim10^{-18}\ \mathrm{m}\)，同时受地震、热、散粒三类噪声限制；<br>
+    ③ 噪声是一条<strong>谱</strong>，不是单个数字——后面所有方法都是在"谱"上做文章。</p>
+  </div>
+
+  <h3>课堂讨论（课件原题）</h3>
+  <ol>
+    <li>你对弱信号检测有什么看法？</li>
+    <li>从应用角度，你的观点是什么？</li>
+  </ol>
+
+  <h3>自测</h3>
+  <details>
+    <summary>1. 为什么暗纹处比亮纹处更适合做测量工作点？</summary>
+    <div class="inner"><p>因为 \(I\propto\cos^2(\Delta\varphi/2)\) 在暗纹附近斜率最大，单位相位变化引起的光强变化最大，灵敏度最高；亮纹处导数为零，一阶不敏感。</p></div>
+  </details>
+  <details>
+    <summary>2. 本课为什么把"噪声源物理机制"安排 8 学时，比"噪声基本概念"多得多？</summary>
+    <div class="inner"><p>基本概念只提供描述工具（统计量、谱密度），工具本身不产生结论；真正的设计依据是各类噪声的<strong>谱型与依赖量</strong>（依赖温度？依赖电流？依赖频率的几次方？）。只有知道这些，才能判断某个电路里哪一项占主导、该动哪个参数。</p></div>
+  </details>
+
+  <nav class="chapnav">
+    <a href="index.html"><span class="k">PREV</span><div class="v">课程首页</div></a>
+    <a class="next" href="ch2.html"><span class="k">NEXT</span><div class="v">第二章 · 噪声的基本概念</div></a>
+  </nav>
+
+  <div class="foot">
+    依据课件《第一章 综述》整理 · 图为按课件原理重绘 · 公式排版 KaTeX
+  </div>
+</div>
+</main>
+
+<script src="assets/vendor/katex/katex.min.js"></script>
+<script src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

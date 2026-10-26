@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>微弱信号检测 · 课程教学网页</title>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="progress"></div>
+<button class="menu-btn" aria-label="目录">☰</button>
+
+<aside class="side">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">SJTU · 2026 秋</span>
+    <span class="brand-title">微弱信号检测</span>
+    <span class="brand-sub">杨明 · 雷华明</span>
+  </a>
+
+  <a class="nav-chap on" href="index.html"><span class="n">00</span>课程首页</a>
+  <a class="nav-chap" href="ch1.html"><span class="n">01</span>综述</a>
+  <a class="nav-chap" href="ch2.html"><span class="n">02</span>噪声的基本概念</a>
+  <a class="nav-chap" href="ch3.html"><span class="n">03</span>物理噪声源</a>
+
+  <div class="side-label">本页</div>
+  <ul class="toc">
+    <li><a href="#why">这门课在解决什么</a></li>
+    <li><a href="#map">课程地图：四个板块</a></li>
+    <li><a href="#route">学习路线</a></li>
+    <li><a href="#info">课程信息</a></li>
+    <li><a href="#howto">阅读约定</a></li>
+  </ul>
+
+  <div class="side-note">
+    公式全部用 KaTeX 排版，图由课件结论重新绘制；每章末尾有自测题与速记卡。
+  </div>
+</aside>
+
+<main class="main">
+<div class="content">
+
+  <header class="hero">
+    <div class="en">Weak Signal Detection · Course Notes</div>
+    <h1>从噪声里把信号捞出来
+      <span class="thin">一条主线、三章内容、可推演的公式，而不是一页页抄下来的 PPT</span>
+    </h1>
+    <p>噪声不是"干扰"，而是一组有统计规律的随机过程。规律搞清楚了，就能算出信噪比、算出需要多长的平均时间、算出前端电路的极限。</p>
+  </header>
+
+  <h2 id="why"><span class="h2-num">WHY</span>这门课在解决什么</h2>
+
+  <p>仪器类课程有三门，分工很清楚：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:26%">课程</th><th>关注点</th><th style="width:30%">典型问题</th></tr></thead>
+    <tbody>
+      <tr><td data-l="课程">传感器及其原理</td><td data-l="关注点">敏感机理与可能的应用</td><td data-l="典型问题">这个物理量怎么变成电信号</td></tr>
+      <tr><td data-l="课程">测量电路</td><td data-l="关注点">接口电路、信号调理</td><td data-l="典型问题">信号怎么被干净地放大</td></tr>
+      <tr><td data-l="课程"><strong>微弱信号检测</strong></td><td data-l="关注点">噪声机制、降噪电路、消噪算法</td><td data-l="典型问题"><strong>信号比噪声还小，怎么测出来</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>第三行是本课的位置：不教你造传感器，而是教你在信号已被噪声淹没时仍能把信息取出来。整门课就三步：</p>
+
+  <div class="cards">
+    <div class="card"><span class="k">STEP 1</span><div class="t">噪声是什么</div>用统计量（均值、均方值、相关）和谱密度把随机过程描述清楚。</div>
+    <div class="card"><span class="k">STEP 2</span><div class="t">噪声从哪来</div>热噪声、扩散、散粒、量子、G-R、1/f、雪崩——各有各的谱型和依赖量。</div>
+    <div class="card"><span class="k">STEP 3</span><div class="t">怎么把它压下去</div>低噪声电路、窄带滤波、锁相放大、采样积分与数字平均。</div>
+  </div>
+
+  <h2 id="map"><span class="h2-num">MAP</span>课程地图：四个板块</h2>
+
+  <p>课件把课程分成四个板块，本网页覆盖其中前两块（对应第 1–3 章）。</p>
+
+  <div class="mapgrid">
+    <div class="m"><span class="n">BOARD 1</span><div class="t">电噪声基础</div>噪声的统计描述 + 物理噪声源<br><span style="color:#7d858c">第 2、3 章</span></div>
+    <div class="m"><span class="n">BOARD 2</span><div class="t">低电平信号检测</div>微弱信号的提取方法<br><span style="color:#7d858c">后续章节</span></div>
+    <div class="m"><span class="n">BOARD 3</span><div class="t">信号处理</div>相关检测、平均、滤波<br><span style="color:#7d858c">第 2 章已埋伏笔</span></div>
+    <div class="m"><span class="n">BOARD 4</span><div class="t">低噪声电路设计</div>器件选型与拓扑<br><span style="color:#7d858c">后续章节</span></div>
+  </div>
+
+  <h2 id="route"><span class="h2-num">ROUTE</span>学习路线</h2>
+
+  <div class="chapter-cards">
+    <a class="chapter-card" href="ch1.html">
+      <div class="n">01</div>
+      <div><div class="t">综述：问题从哪来</div><div class="d">课程定位、考核与教材、引力波案例——把"信号低于噪声"推到物理极限。</div></div>
+    </a>
+    <a class="chapter-card" href="ch2.html">
+      <div class="n">02</div>
+      <div><div class="t">噪声的基本概念</div><div class="d">两类不良影响 → 统计量（均值/均方值/相关）→ 分布律 → 能量谱与功率谱 → 维纳-辛钦。</div></div>
+    </a>
+    <a class="chapter-card" href="ch3.html">
+      <div class="n">03</div>
+      <div><div class="t">物理噪声源</div><div class="d">热、扩散、散粒、量子、G-R、1/f、雪崩：起源、谱密度、适用条件与判据。</div></div>
+    </a>
+  </div>
+
+  <h2 id="info"><span class="h2-num">INFO</span>课程信息</h2>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:24%">项目</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>授课</td><td>杨明（myang@sjtu.edu.cn）· 雷华明（hmlei@sjtu.edu.cn）</td></tr>
+      <tr><td>课程材料</td><td>Canvas</td></tr>
+      <tr><td>考核</td><td>大作业 <strong>60%</strong>（论文：量子传感 / 量子计量学 / 量子成像）+ 课堂测验 <strong>30%</strong> + 讨论与出勤 <strong>10%</strong></td></tr>
+      <tr><td>大纲学时</td><td>概述 1 · 噪声基本概念 3 · 噪声源物理机制 8 · 器件噪声模型 4 · 微弱信号检测 16</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>参考书</h3>
+  <ol>
+    <li>高晋占.《微弱信号检测》. 清华大学出版社, 2019.</li>
+    <li>G. Vasilescu. <em>Electronic Noise and Interfering Signals: Principles and Applications</em>. Springer, 2005.</li>
+    <li>I. Song, J. Bae, S. Y. Kim. <em>Advanced Theory of Signal Detection</em>. Springer, 2002.</li>
+    <li>刘国福, 杨俊.《微弱信号检测技术》. 机械工业出版社, 2014.</li>
+    <li>胡茑庆.《随机共振微弱信号检测理论与方法》. 国防工业出版社, 2012.</li>
+  </ol>
+
+  <h2 id="howto"><span class="h2-num">HOWTO</span>阅读约定</h2>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:22%">标记</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>带编号公式</td><td>核心结论，编号可被正文引用</td></tr>
+      <tr><td>绿色边注</td><td>直觉解释，不考但帮理解</td></tr>
+      <tr><td>红色边注</td><td>易错点或前提条件</td></tr>
+      <tr><td>赭色边注</td><td>工程含义，落到电路设计</td></tr>
+      <tr><td>折叠块</td><td>自测题答案，先想再看</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box warn"><span class="t">关于本网页</span><p>公式与结论均对照课件原文核对；课件未给出的补充式已单独标注。课堂录音转写稿中的错误（如把渡越时间 \(T\) 当成温度）已按原理纠正。</p></div>
+
+  <nav class="chapnav">
+    <a href="ch1.html"><span class="k">NEXT</span><div class="v">第一章 · 综述</div></a>
+    <a class="next" href="ch2.html"><span class="k">THEN</span><div class="v">第二章 · 噪声的基本概念</div></a>
+  </nav>
+
+  <div class="foot">
+    《微弱信号检测》教学网页 · 依据课程课件（第一至三章）整理 · 公式排版 KaTeX · 图表由课件结论重绘
+  </div>
+</div>
+</main>
+
+<script src="assets/vendor/katex/katex.min.js"></script>
+<script src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

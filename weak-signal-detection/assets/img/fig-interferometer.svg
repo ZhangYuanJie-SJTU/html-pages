@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 360" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#a8451f"/>
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="30" y="26" font-size="13" fill="#1b1f23">Michelson 干涉仪：把长度变化 ΔL 变成光强变化</text>
+  <text x="30" y="46" font-size="11.5" fill="#7d858c">臂长 4 km，探测到的应变仍只有 10⁻²¹ 量级</text>
+
+  <!-- 激光器 -->
+  <rect x="46" y="178" width="80" height="34" rx="4" fill="#1f3a5f" opacity="0.08" stroke="#1f3a5f" stroke-width="1.6"/>
+  <text x="86" y="200" text-anchor="middle" font-size="13" fill="#1f3a5f">激光器</text>
+
+  <!-- 入射光 -->
+  <line x1="126" y1="195" x2="316" y2="195" stroke="#0f5f5c" stroke-width="2.4"/>
+  <polygon points="306,191 316,195 306,199" fill="#0f5f5c"/>
+
+  <!-- 分光镜 -->
+  <line x1="310" y1="213" x2="344" y2="177" stroke="#1b1f23" stroke-width="4"/>
+  <text x="352" y="228" font-size="12" fill="#4a5259">分光镜</text>
+
+  <!-- 臂 1（竖直） -->
+  <line x1="327" y1="177" x2="327" y2="82" stroke="#0f5f5c" stroke-width="2"/>
+  <polygon points="323,92 327,82 331,92" fill="#0f5f5c"/>
+  <line x1="334" y1="82" x2="334" y2="177" stroke="#0f5f5c" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- 臂 2（水平） -->
+  <line x1="344" y1="190" x2="544" y2="190" stroke="#0f5f5c" stroke-width="2"/>
+  <polygon points="534,186 544,190 534,194" fill="#0f5f5c"/>
+  <line x1="544" y1="199" x2="344" y2="199" stroke="#0f5f5c" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- 镜 M1 -->
+  <line x1="303" y1="76" x2="357" y2="76" stroke="#1b1f23" stroke-width="4"/>
+  <text x="365" y="80" font-size="12" fill="#4a5259">反射镜 M₁</text>
+  <!-- 镜 M2 -->
+  <line x1="550" y1="167" x2="550" y2="221" stroke="#1b1f23" stroke-width="4"/>
+  <text x="550" y="243" text-anchor="middle" font-size="12" fill="#4a5259">反射镜 M₂</text>
+
+  <!-- 引力波导致的位移 -->
+  <line x1="566" y1="167" x2="566" y2="221" stroke="#a8451f" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="554" y1="150" x2="566" y2="150" stroke="#a8451f" stroke-width="1.4" marker-end="url(#arr)"/>
+  <text x="574" y="146" font-size="12" fill="#a8451f">ΔL ≈ 10⁻¹⁸ m</text>
+
+  <!-- 合光输出 -->
+  <line x1="327" y1="213" x2="327" y2="282" stroke="#0f5f5c" stroke-width="2.4"/>
+  <polygon points="323,272 327,282 331,272" fill="#0f5f5c"/>
+
+  <!-- 探测器 -->
+  <rect x="283" y="282" width="88" height="30" rx="3" fill="#a8451f" opacity="0.10" stroke="#a8451f" stroke-width="1.6"/>
+  <text x="327" y="302" text-anchor="middle" font-size="12" fill="#a8451f">光电探测器</text>
+  <text x="327" y="336" text-anchor="middle" font-size="11.5" fill="#4a5259">两束光干涉 → 光强随 2ΔL/λ 变化</text>
+
+  <!-- 臂长标注 -->
+  <line x1="290" y1="120" x2="290" y2="177" stroke="#8b9198" stroke-width="1"/>
+  <line x1="286" y1="120" x2="294" y2="120" stroke="#8b9198" stroke-width="1"/>
+  <line x1="286" y1="177" x2="294" y2="177" stroke="#8b9198" stroke-width="1"/>
+  <text x="278" y="153" text-anchor="end" font-size="12" fill="#4a5259">L</text>
+
+</svg>

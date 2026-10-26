@@ -1,0 +1,406 @@
+/* ===========================================================
+   《微弱信号检测》教学网页 · 统一样式
+   =========================================================== */
+:root {
+  --paper: #f7f4ee;
+  --paper-2: #fbf9f4;
+  --surface: #ffffff;
+  --ink: #1b1f23;
+  --ink-2: #4a5259;
+  --ink-3: #7d858c;
+  --line: #e2ddd2;
+  --line-2: #efeae0;
+  --accent: #1f3a5f;
+  --accent-soft: #eaeee9;
+  --teal: #0f5f5c;
+  --rust: #a8451f;
+  --amber: #b4762a;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
+  --sans: "Inter", "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --side: 274px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.86;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.ch1 { --accent: #1f3a5f; }
+body.ch2 { --accent: #0f5f5c; }
+body.ch3 { --accent: #a8451f; }
+
+/* ---------------- 进度条 ---------------- */
+.progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: var(--accent); z-index: 60; transition: width .1s linear;
+}
+
+/* ---------------- 侧边栏 ---------------- */
+.side {
+  position: fixed; inset: 0 auto 0 0; width: var(--side);
+  background: var(--paper-2);
+  border-right: 1px solid var(--line);
+  padding: 26px 20px 40px;
+  overflow-y: auto;
+  z-index: 40;
+}
+.side::-webkit-scrollbar { width: 6px; }
+.side::-webkit-scrollbar-thumb { background: #d8d2c6; border-radius: 3px; }
+
+.brand { display: block; text-decoration: none; color: var(--ink); margin-bottom: 22px; }
+.brand-mark {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em;
+  color: var(--ink-3); text-transform: uppercase;
+}
+.brand-title {
+  font-family: var(--serif); font-size: 19px; font-weight: 600;
+  line-height: 1.45; margin-top: 6px; letter-spacing: .01em;
+}
+.brand-sub { font-size: 11.5px; color: var(--ink-3); margin-top: 4px; }
+
+.nav-chap {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 7px 10px; border-radius: 6px;
+  text-decoration: none; color: var(--ink-2); font-size: 13.5px;
+  margin-bottom: 2px;
+}
+.nav-chap .n { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+.nav-chap:hover { background: #f1ece1; color: var(--ink); }
+.nav-chap.on { background: var(--accent); color: #fff; }
+.nav-chap.on .n { color: rgba(255,255,255,.7); }
+
+.side-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  color: var(--ink-3); text-transform: uppercase;
+  margin: 22px 0 8px 10px;
+}
+.toc { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+.toc li { margin: 0; }
+.toc a {
+  display: block; padding: 5px 10px 5px 12px; margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--ink-2); text-decoration: none; font-size: 13px; line-height: 1.5;
+}
+.toc a:hover { color: var(--ink); border-left-color: #cfc7b8; }
+.toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.toc .sub a { padding-left: 26px; font-size: 12.5px; color: var(--ink-3); }
+
+.side-note {
+  margin-top: 26px; padding: 12px 12px; border: 1px dashed var(--line);
+  border-radius: 8px; font-size: 11.5px; color: var(--ink-3); line-height: 1.7;
+}
+
+/* ---------------- 主内容 ---------------- */
+.main {
+  margin-left: var(--side); padding: 54px 44px 140px;
+  /* 兜底：KaTeX 根号的 400em SVG 会在窄屏撑出横向滚动条。
+     页面级只做裁切，公式与表格各自的滚动容器不受影响。 */
+  overflow-x: hidden; overflow-x: clip;
+}
+.content { max-width: 800px; margin: 0 auto; }
+
+.kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+}
+h1 {
+  font-family: var(--serif); font-weight: 600; font-size: 33px;
+  line-height: 1.34; margin: 0 0 14px; letter-spacing: .01em;
+}
+h1 .thin { display: block; font-size: 17px; color: var(--ink-2); font-weight: 400; margin-top: 10px; }
+
+.lead {
+  font-size: 17.5px; line-height: 1.85; color: var(--ink-2);
+  margin: 0 0 26px; padding-bottom: 26px; border-bottom: 1px solid var(--line);
+}
+
+h2 {
+  font-family: var(--serif); font-size: 23px; font-weight: 600;
+  margin: 62px 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  letter-spacing: .01em; scroll-margin-top: 24px;
+}
+h2 .h2-num {
+  display: block; font-family: var(--mono); font-size: 11px;
+  letter-spacing: .16em; color: var(--accent); margin-bottom: 6px; font-weight: 400;
+}
+h3 {
+  font-size: 17.5px; font-weight: 700; margin: 34px 0 10px;
+  scroll-margin-top: 24px; color: var(--ink);
+}
+h3::before { content: ""; display: inline-block; width: 3px; height: 15px; background: var(--accent); margin-right: 9px; vertical-align: -1px; }
+h4 { font-size: 15.5px; font-weight: 700; margin: 24px 0 8px; color: var(--ink); }
+
+p { margin: 0 0 14px; }
+strong { font-weight: 700; }
+em { font-style: normal; background: linear-gradient(transparent 62%, #f6e3b8 62%); padding: 0 1px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin: 5px 0; }
+li::marker { color: var(--accent); }
+
+/* ---------------- 公式 ----------------
+   排版基准：KaTeX 默认 .katex 为 1.21em，此处压到 1.12em 以与中文正文协调；
+   再小会让上下标与分式挤成一团（曾误设为 1.03em，是"公式看起来奇怪"的根因之一）。 */
+.katex { font-size: 1.12em; }
+
+/* 公式块：左右等宽留白 → 公式在正文列真正居中，编号落在右侧留白内（对齐 LaTeX 版面） */
+.eq {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 58px;
+  align-items: center;
+  margin: 20px 0; padding: 14px 10px;
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px;
+}
+.eq .body {
+  grid-column: 2; min-width: 0;
+  display: flex; justify-content: center;
+  overflow-x: auto; overflow-y: hidden;
+}
+.eq .no {
+  grid-column: 3; justify-self: end;
+  font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+  white-space: nowrap; padding-left: 8px;
+}
+.eq.center { grid-template-columns: minmax(0, 1fr); }
+.eq.center .body { grid-column: 1; }
+.eq.center .no { display: none; }
+
+/* 公式本体：桌面居中；内容超宽时靠 safe center 退化为起点对齐（不丢左侧） */
+.katex-display { margin: .2em 0; flex: 0 0 auto; }
+.eq .body > .katex-display { text-align: center; }
+@supports (justify-content: safe center) {
+  .eq .body { justify-content: safe center; }
+}
+.eq .body::-webkit-scrollbar, .tw::-webkit-scrollbar { height: 5px; }
+.eq .body::-webkit-scrollbar-thumb, .tw::-webkit-scrollbar-thumb { background: #d8d2c6; border-radius: 3px; }
+
+/* 表格单元格里的行内公式不许断行（否则会被拆成两行，读起来像排版错位）；
+   同时给列一个下限宽度，避免窄屏把首列挤成一字一行——放不下就让 .tw 横向滚动 */
+.tw td .katex, .tw th .katex, .card .katex, .calc .katex { white-space: nowrap; }
+.tw th, .tw td { min-width: 4.4em; }
+
+/* ---------------- 提示块 ---------------- */
+.box {
+  margin: 22px 0; padding: 16px 18px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--line-2);
+  border-left: 3px solid var(--accent);
+  font-size: 15.5px; line-height: 1.8;
+}
+.box > b:first-child, .box .t {
+  display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-weight: 600;
+}
+.box p:last-child { margin-bottom: 0; }
+.box.intuition { border-left-color: var(--teal); }
+.box.intuition .t { color: var(--teal); }
+.box.warn { border-left-color: var(--rust); background: #fdf6f2; }
+.box.warn .t { color: var(--rust); }
+.box.eng { border-left-color: var(--amber); background: #fdfaf2; }
+.box.eng .t { color: var(--amber); }
+.box.key { border-left-color: var(--accent); background: #f4f6f4; }
+
+/* ---------------- 表格 ---------------- */
+.tw { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: collapse; font-size: 14.8px; line-height: 1.65;
+  background: var(--surface);
+}
+th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line-2); }
+th {
+  background: #f2eee4; font-weight: 700; font-size: 13.5px; color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+tbody tr:hover { background: #fbfaf6; }
+td code, th code { font-size: 13px; }
+caption { caption-side: bottom; font-size: 12.8px; color: var(--ink-3); padding-top: 8px; text-align: left; }
+
+/* ---------------- 图 ---------------- */
+body { counter-reset: fig; }
+figure { margin: 26px 0; counter-increment: fig; }
+.fig-card {
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px;
+  padding: 16px 16px 10px;
+}
+.fig-card img { display: block; width: 100%; height: auto; }
+figcaption {
+  font-size: 13.2px; color: var(--ink-3); line-height: 1.7;
+  margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--line);
+}
+figcaption::before {
+  content: "图 " counter(fig); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .08em; color: var(--accent); margin-right: 8px;
+}
+figcaption b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------------- 步骤 / 卡片 ---------------- */
+.steps { list-style: none; counter-reset: s; padding: 0; margin: 22px 0; }
+.steps > li {
+  counter-increment: s; position: relative; padding-left: 40px; margin: 18px 0;
+}
+.steps > li::before {
+  content: counter(s); position: absolute; left: 0; top: 2px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-family: var(--mono); font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 24px 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px;
+  padding: 16px 17px; font-size: 14.5px; line-height: 1.72;
+}
+.card .t { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.card .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; color: var(--accent); display: block; margin-bottom: 6px; }
+
+/* ---------------- 折叠 ---------------- */
+details {
+  margin: 20px 0; border: 1px solid var(--line-2); border-radius: 8px;
+  background: var(--surface); padding: 0 16px;
+}
+details > summary {
+  cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 15px;
+  color: var(--accent); list-style: none;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "▸ "; font-size: 12px; }
+details[open] > summary::before { content: "▾ "; }
+details[open] > summary { border-bottom: 1px solid var(--line-2); margin-bottom: 14px; }
+details .inner { padding-bottom: 6px; }
+
+/* ---------------- 章末导航 ---------------- */
+.chapnav { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 70px 0 0; }
+.chapnav a {
+  display: block; text-decoration: none; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px;
+  padding: 14px 16px;
+}
+.chapnav a:hover { border-color: var(--accent); }
+.chapnav .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--ink-3); display: block; }
+.chapnav .v { font-family: var(--serif); font-size: 16px; margin-top: 4px; }
+.chapnav .next { text-align: right; }
+
+.foot {
+  margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink-3); line-height: 1.8;
+}
+
+/* ---------------- 首页专用 ---------------- */
+.hero { padding: 10px 0 30px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-size: 40px; }
+.hero .en { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--ink-3); text-transform: uppercase; }
+.hero p { font-size: 17.5px; color: var(--ink-2); max-width: 640px; }
+
+.chapter-cards { display: grid; gap: 16px; margin: 26px 0; }
+.chapter-card {
+  display: grid; grid-template-columns: 76px 1fr; gap: 18px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 12px;
+  padding: 20px 22px; text-decoration: none; color: var(--ink);
+  transition: border-color .15s, transform .15s;
+}
+.chapter-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.chapter-card .num {
+  font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--accent); opacity: .55;
+}
+.chapter-card h3 { margin: 0 0 6px; font-size: 18px; }
+.chapter-card h3::before { display: none; }
+.chapter-card p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.chapter-card .meta { margin-top: 10px; font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .06em; }
+
+.mapgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0; }
+.mapgrid .m {
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px; padding: 14px;
+  font-size: 13.5px; line-height: 1.65;
+}
+.mapgrid .m .t { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.mapgrid .m .n { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: .12em; }
+
+/* ---------------- 计算器 ---------------- */
+.calc { background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px; padding: 18px; margin: 24px 0; }
+.calc h4 { margin-top: 0; }
+.calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.calc label { display: block; font-size: 12.5px; color: var(--ink-3); margin-bottom: 4px; }
+.calc input, .calc select {
+  width: 100%; padding: 8px 10px; font-family: var(--mono); font-size: 14px;
+  border: 1px solid var(--line); border-radius: 6px; background: #fdfcf9; color: var(--ink);
+}
+.calc input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.calc-out { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.calc-out .o { background: #f4f6f4; border-radius: 8px; padding: 12px 14px; }
+.calc-out .o .l { font-size: 12px; color: var(--ink-3); }
+.calc-out .o .v { font-family: var(--mono); font-size: 18px; color: var(--accent); margin-top: 2px; }
+
+/* ---------------- 移动端 ---------------- */
+.menu-btn { display: none; }
+@media (max-width: 980px) {
+  .side { transform: translateX(-100%); transition: transform .22s ease; box-shadow: 0 0 30px rgba(0,0,0,.12); }
+  .side.open { transform: none; }
+  .main { margin-left: 0; padding: 64px 20px 100px; }
+  .menu-btn {
+    display: flex; position: fixed; top: 12px; left: 12px; z-index: 50;
+    width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--surface); align-items: center; justify-content: center;
+    font-size: 17px; color: var(--ink); cursor: pointer;
+  }
+  h1 { font-size: 27px; }
+  h2 { font-size: 20.5px; }
+  .mapgrid { grid-template-columns: repeat(2, 1fr); }
+  .chapnav { grid-template-columns: 1fr; }
+  .chapter-card { grid-template-columns: 52px 1fr; }
+  /* 宽表在窄屏不硬挤：保持列宽可读，由 .tw 横向滚动 */
+  .tw table.wide { min-width: 620px; }
+  .tw table.wide th, .tw table.wide td { font-size: 13.6px; }
+  /* 窄屏公式块：编号移到公式下方右侧，公式独占整行宽度 */
+  .eq { grid-template-columns: minmax(0, 1fr); padding: 12px 12px 8px; }
+  .eq .body { grid-column: 1; justify-content: flex-start; }
+  .eq .no { grid-column: 1; justify-self: end; align-self: end; font-size: 10px; padding-left: 0; margin-top: 2px; }
+  /* 窄屏一律左对齐：居中溢出会让公式左侧滚不到 */
+  .eq .body > .katex-display, .katex-display > .katex { text-align: left; }
+}
+/* 窄屏宽表：改为「每行一张卡」的堆叠布局，彻底取消横向滑动。
+   td 的 data-l 由构建脚本按表头自动写入，这里只负责渲染。 */
+@media (max-width: 700px) {
+  .tw { overflow-x: visible; }
+  .tw table.stack, .tw table.wide { min-width: 0; width: 100%; }
+  .tw table.stack, .tw table.stack thead, .tw table.stack tbody,
+  .tw table.stack tr, .tw table.stack td,
+  .tw table.wide, .tw table.wide thead, .tw table.wide tbody,
+  .tw table.wide tr, .tw table.wide td { display: block; }
+  .tw table.stack thead, .tw table.wide thead { display: none; }
+  .tw table.stack tr, .tw table.wide tr {
+    border: 1px solid var(--line-2); border-radius: 8px;
+    background: var(--surface); padding: 13px 15px; margin-bottom: 12px;
+  }
+  .tw table.stack tr:hover, .tw table.wide tr:hover { background: var(--surface); }
+  .tw table.stack td, .tw table.wide td {
+    min-width: 0; padding: 0 0 9px; border: 0;
+    font-size: 14.2px; line-height: 1.72;
+  }
+  .tw table.stack td:last-child, .tw table.wide td:last-child { padding-bottom: 0; }
+  .tw table.stack td::before, .tw table.wide td::before {
+    content: attr(data-l); display: block;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+    color: var(--accent); margin-bottom: 1px;
+  }
+  .tw table.stack td:first-child, .tw table.wide td:first-child {
+    font-size: 15.2px; font-weight: 600; padding-bottom: 7px;
+  }
+  .tw table.stack td:first-child::before, .tw table.wide td:first-child::before { display: none; }
+}
+
+@media print {
+  .side, .progress, .menu-btn, .chapnav { display: none; }
+  .main { margin: 0; padding: 0; }
+  body { background: #fff; font-size: 11pt; }
+}
