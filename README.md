@@ -4,7 +4,7 @@
 > *集中托管个人 HTML 文档、报告、榜单、可视化等静态页面，通过 GitHub Pages 对外提供永久分享链接。*
 
 [![Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
-[![PagesCount](https://img.shields.io/badge/Pages-9-green)]()
+[![PagesCount](https://img.shields.io/badge/Pages-10-green)]()
 [![Domain](https://img.shields.io/badge/Domain-zhangyuanjie--sjtu.github.io-blue)](https://zhangyuanjie-sjtu.github.io/html-pages/)
 [![Affiliation](https://img.shields.io/badge/Affiliation-SJTU-blue)](https://www.sjtu.edu.cn)
 
@@ -33,11 +33,23 @@
 | 6 | 张雪峰 · 智能志愿百科 | `zhangxuefeng-quiz/` | 68K | 交互测评 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zhangxuefeng-quiz/) |
 | 7 | 胡程玮 · 2028届就业决策控制台 | `career-console-hcw/` | 128K | 清华材料与化工专硕 · 10维定制评分 · 61家目标雇主 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-console-hcw/) |
 | 8 | ZYJ 定制版 · 就业规划 | `career-plan-2029/` | ~474K | 张元杰 · 水凝胶微针阵列方向 · 端侧 AI 嵌入式 · 224 家雇主 · 10 维 + S/A/B/C 档 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/career-plan-2029/) |
-| 9 | ZYJ 就业去向榜 · 2028 秋招 | `zyj-jiuye-quxiang-bang/` | ~1.0M | 张元杰 · 224 家雇主 · 15 赛道 · 13 类岗位 · 模型 v10.0 · 十维评分 + 可支配包 + 抗替代双轨（**最新**） | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zyj-jiuye-quxiang-bang/) |
+| 9 | ZYJ 就业去向榜 · 2028 秋招 | `zyj-jiuye-quxiang-bang/` | ~1.0M | 张元杰 · 224 家雇主 · 15 赛道 · 13 类岗位 · 模型 v10.0 · 十维评分 + 可支配包 + 抗替代双轨 | [→](https://zhangyuanjie-sjtu.github.io/html-pages/zyj-jiuye-quxiang-bang/) |
+| 10 | 微弱信号检测 · 教学站点 | `weak-signal-detection/` | ~1.4M | 三章教学站点 · 359 条 KaTeX 公式 · 17 张自绘 SVG · 噪声计算器（**最新**） | [→](https://zhangyuanjie-sjtu.github.io/html-pages/weak-signal-detection/) |
 
 ---
 
 ## 最新部署
+
+### 微弱信号检测 · 教学站点（2026-10-26）
+
+《微弱信号检测》（上海交大 2026 秋 · 杨明 / 雷华明）三章教学站点，逐节对照课件原文整理，公式与结论均回原文核过。
+
+- **结构**：`index.html`（课程定位与四板块地图）+ `ch1` 综述 / `ch2` 噪声的基本概念 / `ch3` 物理噪声源
+- **技术**：本地 KaTeX 渲染 359 条公式（断网可用）· 17 张自绘 SVG 图 · 侧栏随滚动定位 · 章末自测 + 噪声计算器
+- **规模**：46 文件 · 1.4 MB
+- **入口**：[https://zhangyuanjie-sjtu.github.io/html-pages/weak-signal-detection/](https://zhangyuanjie-sjtu.github.io/html-pages/weak-signal-detection/)
+
+---
 
 ### ZYJ 就业去向榜（2026-10-19 · 模型 v10.0 · 224 家）
 
@@ -129,7 +141,8 @@
 ```
 html-pages/
 ├── README.md
-├── zyj-jiuye-quxiang-bang/  # ZYJ 就业去向榜（模型 v10.0 · 最新）
+├── weak-signal-detection/  # 微弱信号检测教学站点（三章 · KaTeX 本地化）
+├── zyj-jiuye-quxiang-bang/  # ZYJ 就业去向榜（模型 v10.0）
 ├── about-me/               # About Me 自我介绍页
 ├── career-plan-2029/       # ZYJ 定制版就业规划（v9.0 口径）
 ├── career-console-2029/    # 就业决策台（历史）

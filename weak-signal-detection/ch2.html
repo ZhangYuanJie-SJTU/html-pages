@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第二章 噪声的基本概念 · 微弱信号检测</title>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="ch2">
+<div class="progress"></div>
+<button class="menu-btn" aria-label="目录">☰</button>
+
+<aside class="side">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">SJTU · 2026 秋</span>
+    <span class="brand-title">微弱信号检测</span>
+    <span class="brand-sub">杨明 · 雷华明</span>
+  </a>
+
+  <a class="nav-chap" href="index.html"><span class="n">00</span>课程首页</a>
+  <a class="nav-chap" href="ch1.html"><span class="n">01</span>综述</a>
+  <a class="nav-chap on" href="ch2.html"><span class="n">02</span>噪声的基本概念</a>
+  <a class="nav-chap" href="ch3.html"><span class="n">03</span>物理噪声源</a>
+
+  <div class="side-label">本章</div>
+  <ul class="toc">
+    <li><a href="#s21">2.1 噪声是什么</a></li>
+    <li class="sub"><a href="#s211">2.1.1 为什么值得担忧</a></li>
+    <li class="sub"><a href="#s212">2.1.2 内部与外部噪声</a></li>
+    <li class="sub"><a href="#s213">2.1.3 两类不良影响</a></li>
+    <li class="sub"><a href="#rti">2.1.4 从哪里衡量：RTI</a></li>
+    <li><a href="#s22">2.2 信号理论方法</a></li>
+    <li class="sub"><a href="#s221">2.2.1 平均值</a></li>
+    <li class="sub"><a href="#s222">2.2.2 均方值与有效值</a></li>
+    <li class="sub"><a href="#s223">2.2.3 相关性</a></li>
+    <li><a href="#s23">2.3 概率方法</a></li>
+    <li class="sub"><a href="#s231">2.3.1 随机变量</a></li>
+    <li class="sub"><a href="#s232">2.3.2 相关与自相关</a></li>
+    <li class="sub"><a href="#s233">2.3.3 能量谱与功率谱</a></li>
+    <li class="sub"><a href="#s234">2.3.4 维纳-辛钦定理</a></li>
+    <li><a href="#s25">2.4 讨论与自测</a></li>
+  </ul>
+
+  <div class="side-note">
+    本章两条腿：<strong>信号理论</strong>给统计量（有物理意义），<strong>概率方法</strong>给分布律（更完整）。缺一条都说不清噪声。
+  </div>
+</aside>
+
+<main class="main">
+<div class="content">
+
+  <div class="kicker">第二章 · 噪声的基本概念</div>
+  <h1>先把噪声描述清楚
+    <span class="thin">从"两类不良影响"到"功率谱密度"，一条从统计量走向频域的推理链</span>
+  </h1>
+
+  <p class="lead">噪声没有确定的时域波形，只能写统计量：均值＝直流，均方值＝功率，相关＝变化快慢。但这些还不够——真正决定"能测到多小的信号"的，是噪声在频域上的分布。</p>
+
+  
+
+  <!-- ============================================ 2.1 -->
+  <h2 id="s21"><span class="h2-num">2.1</span>噪声是什么</h2>
+
+  <h3 id="s211">2.1.1 为什么噪声值得担忧</h3>
+
+  <p>噪声是叠加在有用信号上、掩盖其信息内容的无用扰动。它的危害不是"听起来吵"，而是<strong>给整个系统设了一组硬上限</strong>：</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:32%">被限制的量</th><th>机理</th></tr></thead>
+    <tbody>
+      <tr><td>可被放大的信号幅度下限</td><td>信号小于噪声时，放大只是把两者一起放大，信噪比不变</td></tr>
+      <tr><td>放大器的增益上限</td><td>增益再大，输出端的噪声底也跟着抬高</td></tr>
+      <tr><td>探测器的最小可检测信号</td><td>由噪声等效功率（NEP）决定，与后续电路无关</td></tr>
+      <tr><td>微弱模拟量的测量误差</td><td>单次读数的随机误差由噪声 RMS 决定</td></tr>
+      <tr><td>存储器中二进制数据的可靠性</td><td>噪声导致误码，限制存储密度与速度</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>五条说的是同一件事：<em>噪声决定分辨率</em>。所以设计目标不是消灭噪声，而是在目标带宽内把噪声压得足够小。</p>
+
+  <h3 id="s212">2.1.2 内部噪声与外部噪声</h3>
+
+  <p>按来源分两类，对付它们的方法完全不同：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:18%">特征</th><th style="width:41%">内部噪声 Intrinsic</th><th>外部噪声 Extrinsic</th></tr></thead>
+    <tbody>
+      <tr><td data-l="特征">产生位置</td><td data-l="内部噪声">器件 / 电路内部</td><td data-l="外部噪声">电路外部，电路只是"接收天线"</td></tr>
+      <tr><td data-l="特征">物理根源</td><td data-l="内部噪声">载流子与电荷的离散性</td><td data-l="外部噪声">天空噪声、雷电放电、寄生耦合、工频干扰</td></tr>
+      <tr><td data-l="特征">行为</td><td data-l="内部噪声">随机，不可预测</td><td data-l="外部噪声">非随机、确定性（可重复、有规律）</td></tr>
+      <tr><td data-l="特征">频谱</td><td data-l="内部噪声">覆盖全工程频段</td><td data-l="外部噪声">频谱受限，集中在特定频率</td></tr>
+      <tr><td data-l="特征">典型幅度</td><td data-l="内部噪声">&lt; 1 µV，很少超过 mV 的几分之一</td><td data-l="外部噪声">可以很大</td></tr>
+      <tr><td data-l="特征">处理方法</td><td data-l="内部噪声"><strong>统计描述</strong>（本课重点）</td><td data-l="外部噪声">屏蔽、接地、滤波、差分、避开频段</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box warn"><span class="t">一句话</span><p>外部干扰是确定性的，用<strong>电路手段</strong>（屏蔽、平衡、共模抑制）解决；内部噪声是随机的，只能用<strong>统计手段</strong>（窄带、平均、相关）压制。把内部噪声当干扰去屏蔽，白费功夫。</p></div>
+
+  <h3 id="s213">2.1.3 一个例子：两类不良影响</h3>
+
+  <p>课件用它把"让结果变差的因素"分成两类，这是全课第一个分水岭：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:16%"></th><th style="width:42%">系统失真 Systematic distortions</th><th>随机噪声 Stochastic noise</th></tr></thead>
+    <tbody>
+      <tr><td>规律</td><td data-l="系统失真">确定、可复现、有函数关系</td><td data-l="随机噪声">随机、不可预测、无规律</td></tr>
+      <tr><td>来源</td><td data-l="系统失真">传感器的线性度、传递函数、动态特性；设计、加工、标定环节</td><td data-l="随机噪声">传感器、耦合匹配网络、放大器的<strong>第一级</strong></td></tr>
+      <tr><td>能否预测</td><td data-l="系统失真">能，可用模型描述</td><td data-l="随机噪声">不能，只能给概率分布</td></tr>
+      <tr><td>处理方式</td><td data-l="系统失真">标定、补偿（基线扣除、查表、反卷积）</td><td data-l="随机噪声">低噪声器件、相干检测、统计平均、滤波</td></tr>
+      <tr><td>多次测量</td><td data-l="系统失真"><strong>不能</strong>通过平均消除（每次都一样）</td><td data-l="随机噪声"><strong>可以</strong>通过平均压低（每次独立）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box key"><span class="t">分水岭</span><p>系统失真<strong>可建模 → 可补偿</strong>；随机噪声<strong>无规律 → 只能统计抑制</strong>。后面的窄带、平均、锁相，全属于后者。</p></div>
+
+  <p>为什么点名"第一级"？第一级噪声被后面所有增益一起放大，而它前面增益为零。低噪声设计的功夫几乎都花在第一级。</p>
+
+  <!-- ============================================ 2.1.4 RTI -->
+  <h3 id="rti">2.1.4 从哪里衡量噪声：输入参考噪声</h3>
+
+  <p class="box-note" style="font-size:13.5px;color:#7d858c;margin:-6px 0 14px">【课堂补充，课件该节未展开】</p>
+
+  <p>输出噪声随增益变化，只有折算到输入端的等效噪声才是器件固有属性，于是有了硬约定：</p>
+
+  <div class="cards">
+    <div class="card"><span class="k">RTI</span><div class="t">输入参考噪声</div>把运放内部<strong>所有</strong>噪声源等效成一个串在输入端的虚拟电压源（或并一个电流源），运放本体视为理想无噪声。</div>
+    <div class="card"><span class="k">RTO</span><div class="t">输出参考噪声</div>\(\overline{v_{n,\mathrm{out}}^2}=G_n^2\cdot\overline{v_{n,\mathrm{in}}^2}\)，其中 \(G_n\) 是<strong>噪声增益</strong>，不是信号增益。</div>
+    <div class="card"><span class="k">WHY</span><div class="t">为什么用 RTI</div>① 可与输入信号直接比；② 多级可按均方值相加（后级被前级增益压制）；③ 与增益无关，能横向比较器件。</div>
+  </div>
+
+  <div class="box warn">
+    <span class="t">易错：噪声增益 ≠ 信号增益</span>
+    <p>反相放大器的信号增益是 \(-R_f/R_g\)，但噪声增益是 \(1+R_f/R_g\)。因为噪声源等效在<strong>同相端</strong>，它看到的反馈网络与信号不同。选器件时若按信号增益折算输出噪声，会低估约 \((1+R_f/R_g)/(R_f/R_g)\) 倍。</p>
+  </div>
+
+  
+
+  
+
+  <!-- ============================================ 2.2 -->
+  <h2 id="s22"><span class="h2-num">2.2</span>信号理论方法：把噪声当信号处理</h2>
+
+  <p>核心思想一句：<strong>treat the noise as signal</strong>。像对待确定信号那样对它做平均、平方、积分、相关，结果就是真实的电压与功率。</p>
+
+  <div class="tw">
+  <table class="wide">
+    <thead><tr><th style="width:20%">方法</th><th>出发点</th><th>优点</th><th>局限</th></tr></thead>
+    <tbody>
+      <tr><td data-l="方法"><strong>信号理论</strong></td><td data-l="出发点">实测波形的时间域运算（平均、平方、积分）</td><td data-l="优点">物理意义强；结果直接是 V、V²</td><td data-l="局限">只给少数统计量，是"部分描述"</td></tr>
+      <tr><td data-l="方法">概率方法</td><td data-l="出发点">概率密度函数 \(p(x)\) 出发的纯数学推导</td><td data-l="优点">完整，能给出分布律</td><td data-l="局限">物理意义弱；PDF 往往测不到</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>本课以信号理论为主：实际噪声是多种机制的混合，没有单一模型可算，只能靠测量表征；而测量表征天然是时域的平均与平方。</p>
+
+  <h3 id="s221">2.2.1 平均值 Average Value</h3>
+
+  <div class="eq">
+    <div class="body">\[ I_0=\frac{1}{T}\int\limits_0^T i(t)\,\mathrm{d}t \]</div>
+    <div class="no">(2.1)</div>
+  </div>
+
+  <p>\(T\) 的含义取决于信号类型：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:24%">\(i(t)\) 类型</th><th style="width:26%">\(T\) 取什么</th><th>结果</th></tr></thead>
+    <tbody>
+      <tr><td data-l="类型">周期信号</td><td data-l="T 取什么">信号周期</td><td data-l="结果">精确的直流分量</td></tr>
+      <tr><td data-l="类型">随机信号</td><td data-l="T 取什么">实际观测时间</td><td data-l="结果">直流分量的<strong>估计值</strong>，\(T\) 越长越准</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>热噪声与散粒噪声都是零均值的：正负对称，长时间积分相互抵消。所以对纯噪声，<em>第一个有意义的量是均方值，不是均值</em>。</p>
+
+  <div class="box eng">
+    <span class="t">平均为什么能提高信噪比</span>
+    <p>信号在 \(N\) 次平均中保持不变（相干叠加），噪声每次独立、按功率相加，其 RMS 只增长 \(\sqrt{N}\)。于是</p>
+    <p>\[ \mathrm{SNR}_N=\frac{N\,v_s}{\sqrt{N}\,\sigma_n}=\sqrt{N}\cdot\mathrm{SNR}_1 \]</p>
+    <p>平均 \(N\) 次，SNR 提升 \(\sqrt{N}\) 倍——这就是信号平均器的全部原理。想要 SNR 提高 10 倍，就得平均 100 次。</p>
+  </div>
+
+  <h3 id="s222">2.2.2 均方值与有效值</h3>
+
+  <div class="eq">
+    <div class="body">\[ \overline{v^2}=\frac{1}{T}\int\limits_0^T v^2(t)\,\mathrm{d}t
+    \qquad\qquad
+    v_{\mathrm{rms}}=\sqrt{\overline{v^2}} \]</div>
+    <div class="no">(2.2)</div>
+  </div>
+
+  <p>均方值在数值上等于<strong>单位电阻上的平均功率</strong>（\(R=1\,\Omega\) 时 \(P=\overline{v^2}\)）；有效值则把量纲拉回伏特，可以理解成"产生同样热效应的直流电压"。</p>
+
+  <p>课件用一段周期波形把这两个量算了一遍：前半周期 4 V（1 ms），后半周期 −1 V（1 ms）。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-wave-example.svg" alt="均方值计算示例">
+    </div>
+    <figcaption>课件示例（Fig. 2.1）重绘：均值 \(=1.5\ \mathrm{V}\)，均方值 \(=8.5\ \mathrm{V^2}\)，有效值 \(=2.91\ \mathrm{V}\)。注意均值 1.5 V 完全不能代表这个波形——它一半时间在 4 V。</figcaption>
+  </figure>
+
+  <div class="eq">
+    <div class="body">\[ \overline{v}=\frac{4\times1+(-1)\times1}{2}=1.5\ \mathrm{V},
+    \qquad
+    \overline{v^2}=\frac{4^2\times1+(-1)^2\times1}{2}=8.5\ \mathrm{V^2},
+    \qquad
+    v_{\mathrm{rms}}=2.91\ \mathrm{V} \]</div>
+    <div class="no">(2.3)</div>
+  </div>
+
+  <div class="box warn">
+    <span class="t">易混：\(\overline{v^2}\neq(\overline{v})^2\)</span>
+    <p>\(\overline{v^2}\) 是"先平方再平均"，含交流功率；\((\overline{v})^2\) 是"先平均再平方"，只剩直流功率。两者之差是方差：</p>
+    <p>\[ \sigma^2=\overline{v^2}-(\overline{v})^2 \]</p>
+    <p>本例中 \(8.5-1.5^2=6.25\ \mathrm{V^2}\)，就是交流分量（偏离均值的那部分）的功率。</p>
+  </div>
+
+  <p><strong>多噪声源怎么合？</strong>独立噪声源之间不相关，交叉项均值为零，所以均方值可以直接相加：</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{v_n^2}\big|_{\text{total}}=\overline{v_{n1}^2}+\overline{v_{n2}^2}+\overline{v_{n3}^2}+\cdots \]</div>
+    <div class="no">(2.4)</div>
+  </div>
+
+  <p>这正是"噪声电压不能直接相加"的根源：相加的是功率，不是电压。<em>三个 10 nV/√Hz 的独立噪声源叠加，结果是 \(10\sqrt{3}\approx17.3\) nV/√Hz，而不是 30。</em></p>
+
+  <p>信噪比据此定义为 RMS 之比：</p>
+
+  <div class="eq">
+    <div class="body">\[ \mathrm{SNR}=\frac{v_{s,\mathrm{rms}}}{v_{n,\mathrm{rms}}} \]</div>
+    <div class="no">(2.5)</div>
+  </div>
+
+  <p>用 RMS 而不是峰值，是因为 RMS 与波形形状无关：正弦、方波、噪声，只要 RMS 相同，在电阻上产生的热量就相同。</p>
+
+  <h3 id="s223">2.2.3 相关性</h3>
+
+  <p>两个波形若表现出相似的行为，称为<em>相干</em>。完全相关要同时满足三条：① 数学函数相同；② 相位差为零；③ 幅度不必相等。</p>
+
+  <p>第二条最关键，也最容易漏。取两个同频正弦：</p>
+
+  <div class="eq">
+    <div class="body">\[ v_a=A\sin\omega t,\qquad v_b=B\sin(\omega t+\varphi) \]</div>
+    <div class="no">(2.6)</div>
+  </div>
+
+  <p>把 \(v_b\) 展开，它等于"与 \(v_a\) 同相的分量"加"正交分量"：</p>
+
+  <div class="eq">
+    <div class="body">\[ v_b=\underbrace{B\cos\varphi\,\sin\omega t}_{\text{与 }v_a\text{ 同相}}+\underbrace{B\sin\varphi\,\cos\omega t}_{\text{与 }v_a\text{ 正交}} \]</div>
+    <div class="no">(2.7)</div>
+  </div>
+
+  <p>把两个信号相加后求均方值（注意正交项的平均为零）：</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{v^2}=\overline{(v_a+v_b)^2}=\overline{v_a^2}+\overline{v_b^2}+2\overline{v_a v_b}
+    =\frac{A^2}{2}+\frac{B^2}{2}+AB\cos\varphi \]</div>
+    <div class="no">(2.8)</div>
+  </div>
+
+  <p>最后一项 \(2\overline{v_a v_b}=AB\cos\varphi\) 就是<strong>相关项</strong>。它的存在说明：两个信号叠加时，总功率不等于各自功率之和，多出来（或少了）的那部分，取决于它们有多"像"。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-corr-phase.svg" alt="不同相位差下的波形叠加">
+    </div>
+    <figcaption>同频、同幅（\(A=B\)）两信号在不同相位差下的合成。\(\varphi=0\) 时合成幅度翻倍（功率 4 倍于单个）；\(\varphi=90^\circ\) 时合成功率为两者之和；中间状态介于两者之间。</figcaption>
+  </figure>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:16%">相位差 \(\varphi\)</th><th style="width:20%">相关系数 \(C\)</th><th>物理结果</th></tr></thead>
+    <tbody>
+      <tr><td data-l="相位差">\(0\)</td><td data-l="相关系数">\(C=1\)</td><td data-l="物理结果">完全相关：总电压有效值 = 两者有效值<strong>之和</strong></td></tr>
+      <tr><td data-l="相位差">\(0\lt\varphi\lt\pi/2\)</td><td data-l="相关系数">\(0\lt C\lt 1\)</td><td data-l="物理结果">部分相关：总功率介于"和"与"平方和"之间</td></tr>
+      <tr><td data-l="相位差">\(\pi/2\)</td><td data-l="相关系数">\(C=0\)</td><td data-l="物理结果">不相关：总功率 = 各自功率<strong>之和</strong>（电压按 \(\sqrt{\ }\) 合成）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>把 (2.8) 归一化，就得到通用的<strong>相关系数</strong>定义：</p>
+
+  <div class="eq">
+    <div class="body">\[ C=\frac{\overline{v_a v_b}}{\sqrt{\overline{v_a^2}}\ \sqrt{\overline{v_b^2}}}
+    \quad\xrightarrow{\ \text{正弦信号}\ }\quad C=\cos\varphi \]</div>
+    <div class="no">(2.9)</div>
+  </div>
+
+  <div class="box key">
+    <span class="t">三条铁律（考试高频）</span>
+    <p>① 处理噪声时<strong>绝不能用基尔霍夫定律</strong>直接加减电压、电流；<br>
+    ② 噪声理论中<strong>只有功率（均方值）可以相加</strong>；<br>
+    ③ 相关可以用来判断两个噪声是否来自<strong>同一个物理源</strong>——相关即同源。</p>
+  </div>
+
+  <div class="box intuition"><span class="t">为什么"相关即同源"</span><p>不同物理机制产生的噪声彼此独立，交叉项趋于零；只有共享同一随机源，才有稳定的非零相关。所以测相关是一种溯源手段，也是锁相放大能工作的前提。</p></div>
+
+  <!-- ============================================ 2.3 -->
+  <h2 id="s23"><span class="h2-num">2.3</span>概率方法：补上"分布"这一块</h2>
+
+  <p>信号理论只给少数统计量，回答不了"噪声超过某个阈值的概率是多少"——而这正是误码率、虚警率要回答的。于是需要分布律。</p>
+
+  <h3 id="s231">2.3.1 随机变量</h3>
+
+  <p><strong>随机变量</strong>把随机试验的结果映射成数值。两类：</p>
+
+  <div class="cards">
+    <div class="card"><span class="k">DISCRETE</span><div class="t">离散随机变量</div>只取特定值，如抛硬币的正反面、单位时间内的光子数。</div>
+    <div class="card"><span class="k">CONTINUOUS</span><div class="t">连续随机变量</div>可取区间内任意值，如电阻上的噪声电压瞬时值。</div>
+  </div>
+
+  <p><strong>集合（ensemble）</strong>：一次试验得到一条<em>样本函数</em>，大量同类试验的全部样本函数构成一个集合。</p>
+
+  <p>有了集合，才能定义两个容易混淆的概念：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:22%">概念</th><th>定义</th><th style="width:26%">直观说法</th></tr></thead>
+    <tbody>
+      <tr><td data-l="概念"><strong>平稳</strong> Stationary</td><td data-l="定义">观测时间区间无论放在哪里，统计特性都相同</td><td data-l="直观说法">今天测和明天测，统计上没区别</td></tr>
+      <tr><td data-l="概念"><strong>各态历经</strong> Ergodic</td><td data-l="定义">单个样本在长时间上的统计 = 集合在某时刻的统计</td><td data-l="直观说法">测一颗电阻足够久，等于测一大批电阻</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box warn">
+    <span class="t">包含关系别记反</span>
+    <p><strong>各态历经 ⟹ 平稳，但平稳不必然各态历经。</strong>各态历经是更强的条件。课件特别指出：噪声产生的物理过程通常是各态历经的——这正是"用一台仪器测一段时间就能代表全体"的理论依据。</p>
+  </div>
+
+  <p><strong>概率密度函数 PDF</strong> 与<strong>累积分布函数 CDF</strong>：</p>
+
+  <div class="eq">
+    <div class="body">\[ f(x)=\lim_{\Delta x\to0}\frac{n}{N\,\Delta x},
+    \qquad
+    F(x_1)=\int\limits_{-\infty}^{x_1}f(x)\,\mathrm{d}x,
+    \qquad
+    f(x)=\frac{\mathrm{d}F}{\mathrm{d}x} \]</div>
+    <div class="no">(2.10)</div>
+  </div>
+
+  <p>\(N\) 是总采样点数，\(n\) 是落在 \(\Delta x\) 内的点数。但噪声的 PDF 一般测不出来（要无穷多样本），工程上只能退回基于平均量的"不完全描述"。</p>
+
+  <p><strong>矩、方差、标准差</strong>：</p>
+
+  <div class="eq">
+    <div class="body">\[ m_n=\overline{x^n}=\int\limits_{-\infty}^{+\infty}x^n f(x)\,\mathrm{d}x,
+    \qquad
+    \operatorname{var}(x)=\overline{(x-\overline{x})^2}=m_2-m_1^2,
+    \qquad
+    \sigma=\sqrt{\operatorname{var}(x)} \]</div>
+    <div class="no">(2.11)</div>
+  </div>
+
+  <p>最常用的是 \(m_1\)（均值）与 \(m_2\)（均方值）。对各态历经过程，这五个量就是后面所有"功率"讨论的坐标系：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:30%">统计量</th><th>物理意义</th><th style="width:26%">符号</th></tr></thead>
+    <tbody>
+      <tr><td data-l="统计量">均值</td><td data-l="物理意义">直流分量</td><td data-l="符号">\(\overline{x}\)</td></tr>
+      <tr><td data-l="统计量">均值的平方</td><td data-l="物理意义">归一化<strong>直流</strong>功率</td><td data-l="符号">\((\overline{x})^2\)</td></tr>
+      <tr><td data-l="统计量">二阶矩</td><td data-l="物理意义">归一化<strong>总</strong>功率</td><td data-l="符号">\(\overline{x^2}\)</td></tr>
+      <tr><td data-l="统计量">方差</td><td data-l="物理意义">归一化<strong>交流</strong>功率</td><td data-l="符号">\(\sigma^2=\overline{x^2}-(\overline{x})^2\)</td></tr>
+      <tr><td data-l="统计量">标准差</td><td data-l="物理意义">交流分量的有效值</td><td data-l="符号">\(\sigma\)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>三种常见分布律：<strong>二项分布</strong>（离散）、<strong>泊松分布</strong>（离散）、<strong>正态分布</strong>（离散与连续都适用）。正态分布的 PDF 为</p>
+
+  <div class="eq">
+    <div class="body">\[ f(n)=\frac{1}{\sigma\sqrt{2\pi}}\exp\!\left[-\frac{(n-\lambda)^2}{2\sigma^2}\right] \]</div>
+    <div class="no">(2.12)</div>
+  </div>
+
+  <p>其中 \(\lambda\) 是均值、\(\sigma^2\) 是方差。曲线的位置由均值决定，高矮宽窄由标准差决定。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-gauss.svg" alt="不同标准差的正态分布">
+    </div>
+    <figcaption>标准差决定"胖瘦"：\(\sigma\) 大则矮而宽（取值分散、噪声大），\(\sigma\) 小则高而窄（取值集中）。注意面积恒为 1——概率不会凭空增减。</figcaption>
+  </figure>
+
+  <p><strong>为什么噪声大多是正态的</strong>：一次涨落是大量微观独立随机量的叠加，由中心极限定理趋向正态，与单个微观事件的分布无关。所以可用 \(\pm3\sigma\) 估计峰值。</p>
+
+  <h3 id="s232">2.3.2 相关与自相关</h3>
+
+  <p>相关性描述两个噪声之间"相互影响的自然趋势"。统计独立必然不相关（逆命题不成立：不相关未必独立，只是没有线性关系）。</p>
+
+  <div class="eq">
+    <div class="body">\[ C=\frac{\operatorname{cov}(x,y)}{\sigma_x\sigma_y}
+    =\frac{\overline{(x-\overline{x})(y-\overline{y})}}{\sigma_x\sigma_y} \]</div>
+    <div class="no">(2.13)</div>
+  </div>
+
+  <p>判据：\(C=0\) 不相关；\(C=1\) 完全相关；\(0\lt C\lt 1\) 部分相关。用散点图可以一眼判断：</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-scatter.svg" alt="相关系数的散点图判据">
+    </div>
+    <figcaption>把 \((x,y)\) 全部画成二维点：均匀散布在整个平面 → 不相关；聚成一团 → 存在相关；沿一条直线分布 → 强线性相关。</figcaption>
+  </figure>
+
+  <p><strong>自相关函数</strong>回答的是另一个问题：同一个信号，此刻与 \(\tau\) 之后有多像？</p>
+
+  <div class="eq">
+    <div class="body">\[ R(\tau)=\overline{v(t)\,v(t+\tau)} \]</div>
+    <div class="no">(2.14)</div>
+  </div>
+
+  <p>四条性质（缺一不可）：</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:26%">性质</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>偶函数</td><td>\(R(\tau)=R(-\tau)\)</td></tr>
+      <tr><td>\(\tau=0\) 处取最大值</td><td>自己和自己最像</td></tr>
+      <tr><td>大 \(\tau\) 趋近于 0</td><td>时间隔得够远就"忘了"，即相关性消失</td></tr>
+      <tr><td>\(R(0)=\overline{v^2}\)</td><td>等于信号在单位电阻上的<strong>总功率</strong>（含交流与直流）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-autocorr.svg" alt="自相关函数与涨落快慢">
+    </div>
+    <figcaption>自相关峰宽是"记忆长度"的度量：涨落快（上左）→ 相隔很小就已不相关，主峰窄；涨落慢（上右）→ 相关性维持很久，主峰宽。下排为对应的一阶自回归过程 \(R(\tau)/R(0)=a^{|\tau|}\)。</figcaption>
+  </figure>
+
+  <div class="box key">
+    <span class="t">自相关的用途</span>
+    <p>它是<strong>噪声"时间尺度"的量化指标</strong>：主峰宽度直接告诉你，两次采样要间隔多久才算独立、平均时间取多长才有效。测不到 PSD 时，也可以先测 \(R(\tau)\) 再变换过去（2.3.4 节）。</p>
+  </div>
+
+  <!-- ============================================ 2.3.3 -->
+  <h3 id="s233">2.3.3 能量谱与功率谱</h3>
+
+  <p>时域统计量只说"噪声多大"，不说"噪声在哪些频率上"；而滤波、锁相、平均，本质都是在<strong>频率轴上做选择</strong>。</p>
+
+  <p><strong>傅里叶变换对</strong>：</p>
+
+  <div class="eq">
+    <div class="body">\[ F(f)=\int\limits_{-\infty}^{+\infty}f(t)\,e^{-j2\pi ft}\,\mathrm{d}t,
+    \qquad
+    f(t)=\int\limits_{-\infty}^{+\infty}F(f)\,e^{j2\pi ft}\,\mathrm{d}f \]</div>
+    <div class="no">(2.15)</div>
+  </div>
+
+  
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:26%">性质</th><th>表达式 / 结论</th><th>工程含义</th></tr></thead>
+    <tbody>
+      <tr><td data-l="性质">共轭对称</td><td data-l="表达式 结论">\(F^{*}(f)=F(-f)\)</td><td data-l="工程含义">实信号的正负频率能量对称，故常只算正频率再乘 2</td></tr>
+      <tr><td data-l="性质">周期性</td><td data-l="表达式 结论">周期信号 → 离散谱线；非周期信号 → 连续谱</td><td data-l="工程含义">看到离散谱线就说明信号里有周期成分</td></tr>
+      <tr><td data-l="性质">时移</td><td data-l="表达式 结论">\(y(t)=h(t-t_0)\Rightarrow Y(f)=H(f)e^{-j2\pi ft_0}\)</td><td data-l="工程含义">只改相位谱，<strong>幅度谱不变</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>功率谱密度（PSD）</strong>的定义是"在频域上积分后给出每欧姆的总平均功率"的函数。它有两种常用写法，注意单位：</p>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:26%">量</th><th style="width:22%">符号</th><th>单位</th></tr></thead>
+    <tbody>
+      <tr><td data-l="量">电压谱密度</td><td data-l="符号">\(D_V(f)\)</td><td data-l="单位">\(\mathrm{V/\sqrt{Hz}}\)</td></tr>
+      <tr><td data-l="量">电流谱密度</td><td data-l="符号">\(D_I(f)\)</td><td data-l="单位">\(\mathrm{A/\sqrt{Hz}}\)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>写成"每根号赫兹"是因为它是<em>密度</em>：真正的功率要乘带宽。所以数据手册上写 \(10\ \mathrm{nV/\sqrt{Hz}}\) 时，必须再问一句"在多大带宽内"。</p>
+
+  <p><strong>帕萨瓦尔定理</strong>建立时域与频域的能量对应：</p>
+
+  <div class="eq">
+    <div class="body">\[ \int\limits_{-\infty}^{+\infty}x_1(t)\,x_2(t)\,\mathrm{d}t=\int\limits_{-\infty}^{+\infty}X_1(f)\,X_2^{*}(f)\,\mathrm{d}f \]</div>
+    <div class="no">(2.16)</div>
+  </div>
+
+  <p>取 \(x_1=x_2=v\)，得到实信号的能量形式：</p>
+
+  <div class="eq">
+    <div class="body">\[ \int\limits_{-\infty}^{+\infty}\left|v(t)\right|^2\mathrm{d}t
+    =\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\left|F(j\omega)\right|^2\mathrm{d}\omega
+    =\int\limits_{-\infty}^{+\infty}\left|F(j\omega)\right|^2\mathrm{d}f \]</div>
+    <div class="no">(2.17)</div>
+  </div>
+
+  <div class="box warn"><span class="t">那个 \(1/2\pi\) 从哪来</span><p>中间一步对 \(\omega\) 积分，而 \(\mathrm{d}\omega=2\pi\,\mathrm{d}f\)；换成 \(f\) 积分后系数消失（见右边等号）。记不住时用"量纲必须是能量 \(\mathrm{V^2\cdot s}\)"反查。</p></div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-parseval.svg" alt="帕萨瓦尔定理的数值验证">
+    </div>
+    <figcaption>数值验证：对 \(v(t)=e^{-t}\sin(2\pi\cdot3t)\) 截断到 3 s，时域积分得 \(E=0.2487\)，频域积分（单边谱，双倍正频率分量）同样得 \(0.2487\)。两条路算出同一个数，这就是帕萨瓦尔。</figcaption>
+  </figure>
+
+  <p><strong>能量谱密度（ESD）</strong>描述能量在频率上的分布：</p>
+
+  <div class="eq">
+    <div class="body">\[ S(\omega)=\frac{1}{2\pi}\left|F(j\omega)\right|^2 \]</div>
+    <div class="no">(2.18)</div>
+  </div>
+
+  <p>三个性质必须记住：<strong>实函数、偶函数、非负</strong>。求某频段的能量必须积分，\(E=\int S(\omega)\mathrm{d}\omega\)——<em>曲线下的面积才是能量，纵坐标本身不是</em>。</p>
+
+  <h4>ESD 与 PSD：什么时候用哪个</h4>
+
+  <div class="tw">
+  <table class="stack">
+    <thead><tr><th style="width:20%"></th><th style="width:40%">能量谱密度 ESD</th><th>功率谱密度 PSD</th></tr></thead>
+    <tbody>
+      <tr><td>适用对象</td><td data-l="能量谱密度">能量信号：瞬态、单次脉冲、有限长信号</td><td data-l="功率谱密度">功率信号：随机噪声、周期信号、持续信号</td></tr>
+      <tr><td>时域条件</td><td data-l="能量谱密度">\(\int|x(t)|^2\mathrm{d}t\lt\infty\)</td><td data-l="功率谱密度">\(\lim_{T\to\infty}\frac{1}{T}\int\limits_{-T/2}^{T/2}|x(t)|^2\mathrm{d}t\lt\infty\)</td></tr>
+      <tr><td>数学来源</td><td data-l="能量谱密度">信号傅里叶变换的模平方</td><td data-l="功率谱密度">自相关的傅里叶变换（维纳-辛钦）；或截断极限</td></tr>
+      <tr><td>曲线下面积</td><td data-l="能量谱密度">总<strong>能量</strong>（J）</td><td data-l="功率谱密度">总<strong>平均功率</strong>（W）</td></tr>
+      <tr><td>单位</td><td data-l="能量谱密度">\(\mathrm{V^2\,s/Hz}\)</td><td data-l="功率谱密度">\(\mathrm{V^2/Hz}\)</td></tr>
+      <tr><td>比喻</td><td data-l="能量谱密度">烟花：砰一下就没了，总能量有限</td><td data-l="功率谱密度">路灯：一直亮着，只能谈每秒耗多少能</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-esd-psd.svg" alt="能量信号与功率信号">
+    </div>
+    <figcaption>① 能量信号有确定的傅里叶变换，谱密度可积；③ 持续噪声的能量随观测时间线性发散，傅里叶变换不存在，只能定义功率谱。两者形状可以相同，含义完全不同。</figcaption>
+  </figure>
+
+  <p>噪声持续存在、观测时间无限，总能量发散，ESD 直接失效；出路是把"无限能量"换成"有限功率"。桥梁是把信号截断为 \(x_T(t)\)，做集合平均再取极限（<em>补充式，课件未给出</em>）：</p>
+
+  <div class="eq">
+    <div class="body">\[ S_x(f)=2\lim_{T\to\infty}\frac{1}{T}\,\mathrm{E}\left\{\left|X_T(f)\right|^2\right\},
+    \qquad f>0 \]</div>
+    <div class="no">(2.19)</div>
+  </div>
+
+  <p>系数 2 表示<strong>单边</strong>谱：负频率能量折到正频，因此 \(\int_0^\infty S_x(f)\,\mathrm{d}f\) 就是总功率，与 \(4kTR\) 这类单边密度的口径一致。若改用双边谱，则去掉系数 2、积分区间改为 \((-\infty,\infty)\)——混用会差 2 倍（3 dB）。</p>
+
+  <div class="box key">
+    <span class="t">本课最重要的一条工程公式</span>
+    <p>噪声经带宽为 \(B\)、中心频率 \(f_0\) 的滤波器后，输出噪声功率是谱密度在该频段上的积分：</p>
+    <p>\[ P_{\text{noise}}=\int\limits_{f_0-B/2}^{f_0+B/2}S_n(f)\,\mathrm{d}f \]</p>
+    <p>若 \(S_n\) 在带内近似平坦，就简化为 \(P_{\text{noise}}\approx S_n\cdot B\)。<strong>收窄带宽 \(B\)，噪声功率等比例下降</strong>——这是窄带滤波、锁相放大、采样积分全部的理论根据。</p>
+  </div>
+
+  
+
+  <!-- ============================================ 2.3.4 -->
+  <h3 id="s234">2.3.4 维纳-辛钦定理</h3>
+
+  <p>自相关在时域，功率谱在频域，两者其实是一对傅里叶变换：</p>
+
+  <div class="eq">
+    <div class="body">\[ S_f(\omega)=\int\limits_{-\infty}^{+\infty}R(\tau)\,e^{-j\omega\tau}\,\mathrm{d}\tau,
+    \qquad
+    R(\tau)=\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}S_f(\omega)\,e^{j\omega\tau}\,\mathrm{d}\omega \]</div>
+    <div class="no">(2.20)</div>
+  </div>
+
+  <p>价值在<strong>可测性</strong>：测功率谱要窄带扫描，慢且难；测自相关只需乘法器加低通。实验上常先测 \(R(\tau)\)，再变换得 \(S(f)\)。</p>
+
+  <div class="box warn">
+    <span class="t">前提条件</span>
+    <p>用之前先检查 \(v(t)\) 是否<strong>平稳</strong>。非平稳过程的 \(R\) 与绝对时间有关，定理不成立。工程上表现为：谱估计随观测起点漂移，重复测量结果不一致。</p>
+  </div>
+
+  <!-- ============================================ 2.4 讨论与自测 -->
+  <h2 id="s25"><span class="h2-num">2.4</span>讨论与自测</h2>
+
+  <h3>课堂讨论（课件原题）</h3>
+  <ol>
+    <li>按在噪声问题中的重要性，写出本章的五个概念。</li>
+    <li>自相关与功率谱是否相关？为什么？</li>
+    <li>噪声为什么值得担忧？</li>
+    <li>摩尔定律（晶体管数每两年翻一番）的可能极限是什么？给出理由。</li>
+  </ol>
+
+  <h3>自测</h3>
+
+  <details>
+    <summary>1. 两个 \(10\ \mathrm{nV/\sqrt{Hz}}\) 的独立噪声源串联，总噪声密度是多少？</summary>
+    <div class="inner"><p>\(10\sqrt{2}\approx14.1\ \mathrm{nV/\sqrt{Hz}}\)。因为独立源的均方值相加：\(\overline{v^2}=\overline{v_1^2}+\overline{v_2^2}\)，开方后是 \(\sqrt{2}\) 倍，不是 2 倍。</p></div>
+  </details>
+
+  <details>
+    <summary>2. 为什么说"均值不足以描述一个信号"？用课件例子说明。</summary>
+    <div class="inner"><p>课件波形均值 1.5 V，但它一半时间在 4 V、一半在 −1 V，波动幅度远大于均值本身。另一个波形可以均值相同却几乎没有波动（恒定 1.5 V 直流）——两者的信息含量完全不同。所以必须再给均方值（或方差）来描述"偏离均值有多远"。</p></div>
+  </details>
+
+  <details>
+    <summary>3. 一个信号的自相关主峰很宽，说明什么？对测量有什么影响？</summary>
+    <div class="inner"><p>说明涨落随时间演化慢，噪声的"记忆"长。影响有两面：① 相邻采样高度相关，<strong>独立样本数变少</strong>，平均的效果比预期差（有效样本数 ≈ 观测时间 / 相关时间）；② 但若信号是缓慢变化的，则可以用更长的积分时间而不损失信号。所以平均时间必须与相关时间匹配。</p></div>
+  </details>
+
+  <details>
+    <summary>4. 为什么噪声必须用 PSD 而不能用 ESD？</summary>
+    <div class="inner"><p>噪声是持续存在的随机过程，观测时间 \(T\to\infty\) 时总能量发散，傅里叶变换不存在（ESD 无法定义）。改用"单位时间的能量"即功率，才得到有限的、可测的谱密度。数学上通过截断信号再取 \(T\to\infty\) 的极限来实现。</p></div>
+  </details>
+
+  <div class="box key">
+    <span class="t">速记卡</span>
+    <p><strong>两类</strong>：系统失真可补偿，随机噪声只能统计抑制。<br>
+    <strong>三统计量</strong>：均值＝DC，均方值＝总功率，相关＝相似度。<br>
+    <strong>一条铁律</strong>：只有功率能相加。<br>
+    <strong>两个谱</strong>：瞬态看 ESD，持续看 PSD；面积才是能量/功率。<br>
+    <strong>一个定理</strong>：\(R(\tau)\leftrightarrow S(f)\)，前提是平稳。<br>
+    <strong>一个用途</strong>：\(P=\int S\,\mathrm{d}f\)，压带宽就是降噪声。</p>
+  </div>
+
+  <nav class="chapnav">
+    <a href="ch1.html"><span class="k">PREV</span><div class="v">第一章 · 综述</div></a>
+    <a class="next" href="ch3.html"><span class="k">NEXT</span><div class="v">第三章 · 物理噪声源</div></a>
+  </nav>
+
+  <div class="foot">
+    依据课件《第二章 噪声的基本概念》（58 页）整理 · 2.1.4 输入参考噪声为课堂补充内容 · 各图为按课件结论重绘或数值计算 · 公式排版 KaTeX
+  </div>
+</div>
+</main>
+
+<script src="assets/vendor/katex/katex.min.js"></script>
+<script src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

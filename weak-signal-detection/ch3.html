@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三章 物理噪声源 · 微弱信号检测</title>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="ch3">
+<div class="progress"></div>
+<button class="menu-btn" aria-label="目录">☰</button>
+
+<aside class="side">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">SJTU · 2026 秋</span>
+    <span class="brand-title">微弱信号检测</span>
+    <span class="brand-sub">杨明 · 雷华明</span>
+  </a>
+
+  <a class="nav-chap" href="index.html"><span class="n">00</span>课程首页</a>
+  <a class="nav-chap" href="ch1.html"><span class="n">01</span>综述</a>
+  <a class="nav-chap" href="ch2.html"><span class="n">02</span>噪声的基本概念</a>
+  <a class="nav-chap on" href="ch3.html"><span class="n">03</span>物理噪声源</a>
+
+  <div class="side-label">本章</div>
+  <ul class="toc">
+    <li><a href="#s31">3.1 引言</a></li>
+    <li><a href="#s32">3.2 热噪声</a></li>
+    <li class="sub"><a href="#s321">3.2.1 起源与历史</a></li>
+    <li class="sub"><a href="#s322">3.2.2 能量流动的解释</a></li>
+    <li class="sub"><a href="#s324">3.2.4 奈奎斯特定理与推导</a></li>
+    <li class="sub"><a href="#s326">3.2.6 量子修正与任意阻抗</a></li>
+    <li class="sub"><a href="#s327">3.2.7 性质与场景</a></li>
+    <li><a href="#s33">3.3 扩散噪声</a></li>
+    <li><a href="#s34">3.4 散粒噪声</a></li>
+    <li><a href="#s35">3.5 量子噪声</a></li>
+    <li><a href="#s36">3.6 G-R 噪声</a></li>
+    <li><a href="#s37">3.7 1/f 噪声</a></li>
+    <li><a href="#s39">3.9 雪崩噪声</a></li>
+    <li><a href="#s310">3.10 全景与总表</a></li>
+    <li><a href="#s311">3.11 讨论与自测</a></li>
+  </ul>
+
+  <div class="side-note">
+    读本章的方法：每类噪声只问三件事——<strong>起源是什么、谱长什么样、什么时候它说了算</strong>。
+  </div>
+</aside>
+
+<main class="main">
+<div class="content">
+
+  <div class="kicker">第三章 · 物理噪声源</div>
+  <h1>噪声到底从哪来
+    <span class="thin">七类噪声源：起源、谱密度、适用条件</span>
+  </h1>
+
+  <p class="lead">上一章给了描述噪声的语言。这一章拆"源"：每类噪声对应一个具体物理过程，物理过程决定谱型，谱型决定它在哪个频段限制你。</p>
+
+  
+
+  <!-- ============================================ 3.1 -->
+  <h2 id="s31"><span class="h2-num">3.1</span>引言：为什么必须研究"源"</h2>
+
+  <p>通信接收机里，信号从天线进来，一路被放大，噪声也在这一路叠加。信号弱于噪声时信息就丢了——GPS 是最典型的例子：信号功率密度低于接收机噪声电平，仍能工作，靠的是从噪声里"积"出信号的技术。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-noise-map.svg" alt="各类噪声的谱分布">
+    </div>
+    <figcaption>本章的"地图"：低频段被 1/f 噪声占据，中频段是热噪声/散粒噪声构成的白噪声底，高频段因量子效应滚降；G-R 噪声在中间形成一个洛伦兹型肩部。纵轴为相对单位，只表达形状与相对位置。</figcaption>
+  </figure>
+
+  
+
+  <!-- ============================================ 3.2 -->
+  <h2 id="s32"><span class="h2-num">3.2</span>热噪声 Thermal Noise</h2>
+
+  <h3 id="s321">3.2.1 起源与历史</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:18%">年份</th><th>事件</th></tr></thead>
+    <tbody>
+      <tr><td>1906</td><td>爱因斯坦预言：金属内自由电子的布朗运动会在导体两端产生波动的电动势</td></tr>
+      <tr><td>1928</td><td>J. B. Johnson 首次实验观测到；同年 H. T. Nyquist 给出功率谱的理论计算</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>所以它有三个名字：<strong>热噪声</strong>（按成因）、<strong>Johnson 噪声</strong>（按发现者）、<strong>Nyquist 噪声</strong>（按理论）。</p>
+
+  <p><strong>起源</strong>：导电材料内部自由电子的热运动。电子随机游走，会在导体某一端暂时聚集，形成瞬间的电位差；但电荷不会永久累积，所以<em>平均电压为零，涨落不为零</em>。</p>
+
+  <h3 id="s322">3.2.2 能量流动的解释</h3>
+
+  <p>一个物理系统有大量自由度。宏观 → 热 是耗散（电流流过电阻发热）；热 → 宏观 是涨落（就是热噪声）。两者是同一件事的两个方向。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-energy-flow.svg" alt="宏观自由度与热自由度之间的能量流动">
+    </div>
+    <figcaption>宏观 → 热 的能量流是<strong>耗散</strong>（电流流过电阻发热）；热 → 宏观 的反向流是<strong>涨落</strong>（就是热噪声）。两者是同一种耦合的两个方向，所以"有耗散就必然有噪声"。</figcaption>
+  </figure>
+
+  <div class="box intuition"><span class="t">一句话记住</span><p>耗散与噪声是同一件事的两个方向，所以：① 纯电抗元件（理想 L、C）不产生热噪声；② 有耗散的地方必有噪声，损耗越小噪声越小。</p></div>
+
+  <p>还有一点常被误解：热噪声<strong>不依赖外加电压</strong>。常规电场下，电场传给自由电子的能量相对其热能可以忽略，所以加不加偏置，热噪声都在那里。</p>
+
+  <div class="box warn"><span class="t">"热运动与温度无关"怎么理解</span><p>课件原意：热运动是物质普遍属性，它的存在与温度无关（绝对零度以上就有）；但热噪声的<strong>幅度</strong>随 \(T\) 线性下降。别说成"温度不影响热噪声"。</p></div>
+
+  <h3 id="s324">3.2.4 奈奎斯特定理</h3>
+
+  <div class="eq">
+    <div class="body">\[ S_V(f)=\frac{\overline{v_n^2}}{\Delta f}=4kTR\ \ [\mathrm{V^2/Hz}]
+    \qquad\qquad
+    S_I(f)=\frac{\overline{i_n^2}}{\Delta f}=\frac{4kT}{R}=4kTG\ \ [\mathrm{A^2/Hz}] \]</div>
+    <div class="no">(3.1)</div>
+  </div>
+
+  <p>开路（电压源形式）用第一式，短路（电流源形式）用第二式，两者是同一个电阻的两种等效描述。\(k=1.380649\times10^{-23}\ \mathrm{J/K}\) 是玻尔兹曼常数，\(G=1/R\)。</p>
+
+  <div class="box eng">
+    <span class="t">室温下的速算</span>
+    <p>\(T=300\ \mathrm{K}\) 时，\(4kT\approx1.66\times10^{-20}\ \mathrm{J}\)，于是</p>
+    <p>\[ v_n=\sqrt{4kTR}\approx1.29\times10^{-10}\sqrt{R}\quad[\mathrm{V/\sqrt{Hz}},\ R\text{ 以 }\Omega\text{ 计}] \]</p>
+    <p>即 \(1\ \mathrm{k\Omega}\to4.1\ \mathrm{nV/\sqrt{Hz}}\)，\(1\ \mathrm{M\Omega}\to129\ \mathrm{nV/\sqrt{Hz}}\)，\(100\ \Omega\to1.3\ \mathrm{nV/\sqrt{Hz}}\)。<strong>电阻每增大 100 倍，噪声电压增大 10 倍。</strong></p>
+  </div>
+
+  <h4>推导：为什么是 \(4kTR\)</h4>
+
+  <p>思路很漂亮：把一个处于温度 \(T\) 的电阻 \(R\) 与电容 \(C\) 并联，用<strong>两种方法</strong>算电容上的均方电压，再令两者相等。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-rc-nyquist.svg" alt="RC 网络与传递函数">
+    </div>
+    <figcaption>左：把有噪声的电阻等效为"无噪声 \(R\) + 串联噪声源 \(v_n\)"，噪声经一阶低通出现在电容上。右：\(|H(f)|^2=1/[1+(f/f_c)^2]\) 在 \(0\sim\infty\) 上的积分有解析值 \(1/(4RC)\)——这是能把 \(S_V(0)\) 解出来的关键。</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li>
+      <strong>由统计物理写出电容电压的概率密度</strong><br>
+      电容储能 \(E=\tfrac12CV_C^2\)，系统处于能量 \(E\) 的概率正比于 \(e^{-E/kT}\)，所以
+      \[ p(V_C)=K_0\exp\!\left(-\frac{CV_C^2}{2kT}\right) \]
+      由归一化 \(\int p\,\mathrm{d}V_C=1\) 定出 \(K_0=\sqrt{C/(2\pi kT)}\)。
+    </li>
+    <li>
+      <strong>求均方电压</strong><br>
+      \[ \overline{V_C^2}=\int\limits_{-\infty}^{+\infty}V_C^2\,p(V_C)\,\mathrm{d}V_C=\frac{kT}{C} \]
+      这正是能量均分定理：每个二次型自由度平均携带 \(\tfrac12kT\) 能量，\(\tfrac12C\overline{V_C^2}=\tfrac12kT\)。
+    </li>
+    <li>
+      <strong>换到频域再算一次</strong><br>
+      噪声源 \(v_n\) 经 RC 分压，功率传递函数为 \(1/[1+(2\pi fRC)^2]\)，于是
+      \[ \overline{V_C^2}=S_V(0)\int\limits_0^{\infty}\frac{\mathrm{d}f}{1+(2\pi fRC)^2}=\frac{S_V(0)}{4RC} \]
+    </li>
+    <li>
+      <strong>两式相等，解出谱密度</strong><br>
+      \[ \frac{kT}{C}=\frac{S_V(0)}{4RC}\ \Longrightarrow\ S_V(0)=4kTR \]
+    </li>
+  </ol>
+
+  <div class="box intuition">
+    <span class="t">这个推导真正说明了什么</span>
+    <p>它把"统计物理的平衡态结论"和"电路理论的传输函数"对上，得到一个<strong>与材料、几何都无关</strong>的普适结果：热噪声只取决于 \(R\) 和 \(T\)。同阻值的碳膜电阻、金属膜电阻、绕线电阻，热噪声完全一样——它们的差别在 1/f 噪声上，不在热噪声上。</p>
+  </div>
+
+  <h4>等效电路</h4>
+
+  <p>一个有噪声的电阻 = 一个同阻值的无噪声电阻 + 一个集总噪声源。噪声源有两种接法，用哪种取决于后续电路：</p>
+
+  <div class="cards">
+    <div class="card"><span class="k">电压源</span><div class="t">串联 \(v_n\)</div>\(S_V=4kTR\)。适合与低阻源、串联网络配合，算分压方便。</div>
+    <div class="card"><span class="k">电流源</span><div class="t">并联 \(i_n\)</div>\(S_I=4kT/R\)。适合与高阻源、并联网络、节点分析配合。</div>
+  </div>
+
+  <p>两者等价，但<strong>不能同时用</strong>——同时放两个源会把功率算成两倍。</p>
+
+  <h3 id="s326">3.2.6 量子修正与任意阻抗</h3>
+
+  <p>奈奎斯特定理并非在任意高频率都成立。当 \(hf\) 与 \(kT\) 可比时，必须引入普朗克因子：</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{v_n^2}=4kT\int\limits_{f_1}^{f_2}R(f)\,\Re(f)\,\mathrm{d}f,
+    \qquad
+    \Re(f)=\frac{hf/kT}{e^{hf/kT}-1} \]</div>
+    <div class="no">(3.2)</div>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-quantum-corr.svg" alt="量子修正因子随频率变化">
+    </div>
+    <figcaption>普朗克因子 \(\Re(f)\) 的两个极限：低频 \(hf\ll kT\) 时 \(\Re\to1\)，退回经典 \(4kTR\)；高频 \(hf\gg kT\) 时 \(\Re\to0\)，谱密度指数滚降。温度越低，拐点越向低频移动。</figcaption>
+  </figure>
+
+  <div class="box key">
+    <span class="t">拐点在哪</span>
+    <p>令 \(hf=kT\)，得 \(f=kT/h\)。室温 \(T=300\ \mathrm{K}\) 时</p>
+    <p>\[ f=\frac{1.381\times10^{-23}\times300}{6.626\times10^{-34}}\approx6.25\ \mathrm{THz} \]</p>
+    <p>也就是说：<strong>在 6.25 THz 以下，经典公式 \(4kTR\) 足够准</strong>；常规电子学（GHz 以下）根本碰不到量子修正。这也是为什么量子噪声在第三章里显得"离得很远"——它只在红外以上的频段主导。</p>
+  </div>
+
+  <details>
+    <summary>推论：量子修正让总噪声功率变成有限值</summary>
+    <div class="inner">
+      <p>若不加修正，把 \(4kTR\) 从 0 积到 \(\infty\) 会得到无穷大功率（紫外灾难）。加上 \(\Re(f)\) 后：</p>
+      <p>\[ \overline{v_n^2}=4kTR\int\limits_0^{\infty}\frac{hf/kT}{e^{hf/kT}-1}\,\mathrm{d}f
+      \overset{u=hf/kT}{=}\frac{4R(kT)^2}{h}\int\limits_0^{\infty}\frac{u}{e^u-1}\,\mathrm{d}u
+      =\frac{2\pi^2}{3}\cdot\frac{R(kT)^2}{h} \]</p>
+      <p>用到的积分是 \(\int\limits_0^\infty \frac{u}{e^u-1}\mathrm{d}u=\frac{\pi^2}{6}\)。结果有限，且量级由 \(R(kT)^2/h\) 决定——物理上对应"每个模式最多 \(hf\) 的能量"这一量子限制。</p>
+    </div>
+  </details>
+
+  <p><strong>任意阻抗</strong>：若阻抗不是纯电阻而是 \(Z=R+jX\)，只有<strong>实部</strong>产生热噪声：</p>
+
+  <div class="eq">
+    <div class="body">\[ S(I_n)=4kT\,\mathrm{Re}\!\left\{\frac{1}{Z}\right\}=\frac{4kTR}{R^2+X^2} \]</div>
+    <div class="no">(3.3)</div>
+  </div>
+
+  <p>电抗部分不耗能，因而不产生噪声——这与"耗散与噪声同源"完全一致。</p>
+
+  <h3 id="s327">3.2.7 性质与适用场景</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:24%">性质</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>频率范围</td><td>从直流到量子修正起作用的频率（室温约 6.25 THz），中间近似"白"</td></tr>
+      <tr><td>幅度分布</td><td>瞬时振幅服从<strong>高斯分布</strong>（大量独立电子运动的叠加）</td></tr>
+      <tr><td>矩</td><td>均值为零；均方值由奈奎斯特定理给出</td></tr>
+      <tr><td>产生条件</td><td><strong>只在有耗（耗能）系统中产生</strong>；纯电抗器件没有热噪声</td></tr>
+      <tr><td>典型载体</td><td>所有电阻器、<strong>轻掺杂半导体层</strong>（沟道电阻）</td></tr>
+      <tr><td>与其他量的关系</td><td>与电流<strong>无关</strong>；只依赖 \(T\)、\(R\)、\(\Delta f\)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================ 3.3 -->
+  <h2 id="s33"><span class="h2-num">3.3</span>扩散噪声 Diffusion Noise</h2>
+
+  <h3>起源：碰撞，而不是热运动</h3>
+
+  <p>热噪声的根源是载流子的随机运动；扩散噪声的根源是载流子在运动中被随机碰撞。反直觉的一点：扩散噪声与温度有关，却<em>不是</em>热噪声的直接推广——它源于"有电流"这件事。</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:12%">步骤</th><th>发生什么</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>载流子分布<strong>非均匀</strong>（存在浓度梯度 \(n(x)\)）</td></tr>
+      <tr><td>②</td><td>电子在运动中与晶格、电离杂质原子发生<strong>碰撞散射</strong></td></tr>
+      <tr><td>③</td><td>每次碰撞都<strong>改变速度</strong>（大小与方向）</td></tr>
+      <tr><td>④</td><td>碰撞时刻与效果都是随机的 → 扩散电流的瞬时值随机涨落</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>模型：把半导体切成小盒</h3>
+
+  <p>把半导体体积分割成 \(\Delta x\Delta y\Delta z\) 的基本矩形盒，电子在相邻盒之间的跃迁视为一系列独立事件。对每个盒子做统计，得到电流谱密度：</p>
+
+  <div class="eq">
+    <div class="body">\[ S(I)=4q^2D_n\,n(x)\,\frac{\Delta y\,\Delta z}{\Delta x} \]</div>
+    <div class="no">(3.4)</div>
+  </div>
+
+  <p>其中 \(q=1.602\times10^{-19}\ \mathrm{C}\) 是元电荷，\(n(x)\) 是 \(x\) 方向的电子浓度，\(D_n\) 是电子扩散常数。</p>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-diffusion-box.svg" alt="扩散噪声的盒模型">
+    </div>
+    <figcaption>盒模型：浓度沿 \(x\) 递减，电子在相邻盒之间随机跃迁。净跃迁形成确定的扩散电流，跃迁次数的涨落形成扩散噪声。截面积 \(\Delta y\Delta z\) 越大、盒越薄（\(\Delta x\) 小），噪声电流越大——与"电导越大噪声越大"是同一件事。</figcaption>
+  </figure>
+
+  <h3>与热噪声的关系：一个漂亮的退化</h3>
+
+  <p>把<strong>爱因斯坦关系</strong>代进去：</p>
+
+  <div class="eq">
+    <div class="body">\[ D_n=\frac{kT}{q}\mu_n \]</div>
+    <div class="no">(3.5)</div>
+  </div>
+
+  <div class="eq">
+    <div class="body">\[ S(I)=4q^2\cdot\frac{kT}{q}\mu_n\,n(x)\frac{\Delta y\Delta z}{\Delta x}
+    =\frac{4kT}{\underbrace{\Delta x/\left(q\mu_n n(x)\Delta y\Delta z\right)}_{R}}
+    =\frac{4kT}{R} \]</div>
+    <div class="no">(3.6)</div>
+  </div>
+
+  <p>结果正是热噪声的电流形式。也就是说：爱因斯坦关系成立时，扩散噪声在微观上<strong>就是</strong>热噪声，两者不是独立的两类。</p>
+
+  <div class="box key"><span class="t">宏观判据（最实用的一条）</span><p>看器件 I–V：<strong>服从欧姆定律 → 用 \(4kTR\)（热噪声）</strong>；<strong>不服从（强场、速度饱和、非平衡）→ 用 \(4q^2D_nn\) 或 \(2qI\)（扩散/散粒）</strong>。这就是"同一个器件换个偏置，主导噪声机制就变了"的原因。</p></div>
+
+  <h3>性质与场景</h3>
+
+  <ul><li>谱相对平坦，不像 1/f 那样随频率变化。</li><li>比热噪声更普遍：所有 I–V 不服从欧姆定律的器件（FET 饱和区、强场器件）都由它主导。</li></ul>
+
+  <div class="box eng"><span class="t">对电路设计的意义</span><p>数据手册的噪声系数只在指定偏置下有效；换偏置点，主导机制就变了。</p></div>
+
+  <!-- ============================================ 3.4 -->
+  <h2 id="s34"><span class="h2-num">3.4</span>散粒噪声 Shot Noise</h2>
+
+  <h3>起源：电荷的离散性 + 势垒</h3>
+
+  <p>电流不是连续流体，而是一个个电子越过势垒形成的。每个电子越过与否是一次独立随机事件，于是电流上叠加了一个随机涨落。</p>
+
+  <p>课件用真空管举例：A 极发射、B 极收集。发射速率的随机性、单个电子速度分布的随机性，共同导致穿越某一平面的电子数逐时段不同。</p>
+
+  <div class="box warn"><span class="t">隐含条件：飞行途中无相互作用</span><p>推导假设载流子彼此独立：密度低、外电场高、渡越时间内几乎不与晶格碰撞。所以散粒噪声在真空器件最典型；半导体中只在强场（反偏结）才显现。</p></div>
+
+  <h3>分析：从脉冲序列到 \(2qI\)</h3>
+
+  <p>把"一个电子到达集电极"作为基本事件，忽略渡越时间，瞬时电流就是一列权重为 \(q\) 的狄拉克脉冲：</p>
+
+  <div class="eq">
+    <div class="body">\[ I(t)=q\sum_i \delta(t-t_i),
+    \qquad
+    \bar{I}=\lambda q \]</div>
+    <div class="no">(3.7)</div>
+  </div>
+
+  <p>\(\lambda\) 是每秒平均到达的电子数。对脉冲序列求自相关，得到 \(R_I(\tau)=q\bar{I}\,\delta(\tau)\)；再作傅里叶变换，得<strong>单边</strong>电流谱密度：</p>
+
+  <div class="eq">
+    <div class="body">\[ S_I(f)=2q\bar{I}\qquad(f>0) \]</div>
+    <div class="no">(3.8)</div>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-shot.svg" alt="散粒噪声的脉冲序列与计数涨落">
+    </div>
+    <figcaption>(a) 电流由一列随机到达的电荷脉冲组成；(b) 把时间分箱计数，每箱计数在均值附近波动——这种泊松型涨落的功率谱是<strong>平坦</strong>的，即白噪声。</figcaption>
+  </figure>
+
+  <p>谱是白的，原因是 \(\delta(\tau)\) 的傅里叶变换是常数。<strong>但如果计入渡越时间</strong>，脉冲不再是 \(\delta\) 函数而有了宽度，高频分量被削弱，谱在</p>
+
+  <div class="eq">
+    <div class="body">\[ f_c\approx\frac{3.5}{T_{\mathrm{tr}}} \]</div>
+    <div class="no">(3.9)</div>
+  </div>
+
+  <p>附近开始滚降。这里 \(T_{\mathrm{tr}}\) 是<strong>渡越时间</strong>（载流子穿过器件所需时间），<em>不是绝对温度</em>。这个符号冲突在课堂记录里极易出错，务必注意。</p>
+
+  <div class="box key">
+    <span class="t">模型与均方值</span>
+    <p>散粒噪声被建模为一个噪声电流源，其均方值为</p>
+    <p>\[ \overline{i_n^2}=2qI_0\,\Delta f \]</p>
+    <p>\(I_0\) 是平均电流。注意它与热噪声的结构差异：<strong>热噪声看 \(T\) 和 \(R\)，散粒噪声看直流电流 \(I_0\)</strong>。</p>
+  </div>
+
+  <h3>应用：PN 结中的散粒噪声</h3>
+
+  <p>PN 结电流为 \(I=I_s\left(e^{qV/kT}-1\right)\)，其中 \(I_s\) 是反向饱和电流。把它拆成两个方向相反的电流分量：</p>
+
+  <div class="eq">
+    <div class="body">\[ I=\underbrace{I_s e^{qV/kT}}_{\text{正向注入}}-\underbrace{I_s}_{\text{反向饱和}} \]</div>
+    <div class="no">(3.10)</div>
+  </div>
+
+  <p>两个分量各自独立涨落，均方值相加：</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{i_{n,\mathrm{tot}}^2}=\left(2qI_s e^{qV/kT}+2qI_s\right)\Delta f=2q\left(I+2I_s\right)\Delta f \]</div>
+    <div class="no">(3.11)</div>
+  </div>
+
+  <p>正偏且 \(I\gg I_s\) 时，低频小信号电导 \(g_m=\mathrm{d}I/\mathrm{d}V=qI/kT\)，于是</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{i_{n,\mathrm{tot}}^2}=2qI\,\Delta f=2kT\,g_m\,\Delta f \]</div>
+    <div class="no">(3.12)</div>
+  </div>
+
+  <div class="box intuition"><span class="t">一个值得记住的结论</span><p>阻值 \(1/g_m\) 的电阻，热噪声是 \(4kTg_m\Delta f\)；正偏结的散粒噪声是 \(2kTg_m\Delta f\)——<strong>正好一半</strong>。这是"正偏结的噪声比同阻值电阻小 3 dB"的来源。</p></div>
+
+  <h3>性质与场景</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:22%">性质</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>温度依赖</td><td><strong>不依赖温度</strong>（与热噪声正相反）</td></tr>
+      <tr><td>电流依赖</td><td>只取决于流过器件的<strong>直流电流</strong> → 调偏置即可控噪</td></tr>
+      <tr><td>偏置范围</td><td>正偏、反偏都适用；结型二极管始终有散粒噪声</td></tr>
+      <tr><td>频谱</td><td>均匀（白），直到接近渡越时间倒数的频率</td></tr>
+      <tr><td>分布</td><td>载流子数少时服从<strong>泊松分布</strong>；数大时趋近<strong>高斯分布</strong></td></tr>
+      <tr><td>降噪思路</td><td>增加到达集电极的电子数，可降低"涨落/平均电流"之比</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>哪些器件里最显著</strong>：光电倍增管、所有真空器件、结型二极管。在<strong>反偏二极管</strong>（或电流极低的正偏结）中散粒噪声效应更明显——因为此时 \(I_s\) 项不可忽略，(3.11) 中的 \(2I_s\) 抬高了噪声。</p>
+
+  <!-- ============================================ 3.5 -->
+  <h2 id="s35"><span class="h2-num">3.5</span>量子噪声 Quantum Noise</h2>
+
+  <h3>起源：电磁辐射的量子化</h3>
+
+  <p>电磁能量以光子为最小单位，单光子能量 \(E=hf\)。这一点本身就是量子化的<strong>离散性</strong>：探测器与环境之间每秒交换的光子数是随机的，涨落即量子噪声。</p>
+
+  
+
+  <div class="box intuition"><span class="t">什么时候才轮得到它</span><p>只有当常规噪声都被压下去之后它才显现，所以它只在两类场景重要：极高频（\(f>10^{15}\ \mathrm{Hz}\)）与极低噪声的量子极限测量。</p></div>
+
+  <h3>放大器模型：Oliver 的结论</h3>
+
+  <p>量子噪声是不确定性原理（海森堡原理）的结果。Oliver 证明：即使最理想的放大器，也必须附加一个高斯噪声，其功率谱密度为</p>
+
+  <div class="eq">
+    <div class="body">\[ S_a(f)=hf\quad[\mathrm{W/Hz}] \]</div>
+    <div class="no">(3.13)</div>
+  </div>
+
+  <p>这是"相位与光子数不能同时精确已知"的直接代价——想放大信号，就必须往系统里注入至少这么多的真空涨落。</p>
+
+  <h3>重要场景</h3>
+
+  <ul><li>只在极高频率（\(f>10^{15}\ \mathrm{Hz}\)，紫外以上）才重要——正好是热噪声谱开始量子滚降之后。</li><li>它给出任何放大器的<strong>噪声极限</strong>：想测更小的信号，光靠降温和屏蔽没用，得换量子手段（压缩态、参量放大）。</li><li>本课只需记住量级与物理来源，不需要定量计算。</li></ul>
+
+  <div class="box warn">
+    <span class="t">不要泛化</span>
+    <p>课件明确指出：探针显微镜中探针位置的量子不确定性<strong>可能</strong>会带来量子噪声，但它<em>不是</em>决定该类仪器分辨率的主要机制。看到"量子"两个字就归因于量子噪声，是常见的过度解释。</p>
+  </div>
+
+  <!-- ============================================ 3.6 -->
+  <h2 id="s36"><span class="h2-num">3.6</span>产生–复合噪声 G-R Noise</h2>
+
+  <h3>起源：载流子数目在涨落</h3>
+
+  <p>前几种噪声都是"载流子怎么走"的问题，G-R 噪声是"<strong>有多少载流子</strong>"的问题。载流子数目 \(N\) 随机涨落 → 材料电导率涨落 → 电流涨落。</p>
+
+  <p>\(N\) 的涨落来自四种随机过程：</p>
+
+  <div class="cards"><div class="card"><span class="k">①产生</span><div class="t">生成电子–空穴对</div>需要少量额外能量（热激发或光照）；光子能量量子化，所以产生时刻随机。</div><div class="card"><span class="k">②复合</span><div class="t">电子与空穴相遇湮灭</div>复合需要同时满足位置与能量条件，时刻也随机。</div><div class="card"><span class="k">③俘获</span><div class="t">被缺陷/陷阱暂扣</div>载流子被界面态、杂质能级捕获再释放，造成数目起伏。</div><div class="card"><span class="k">④释放</span><div class="t">陷阱把载流子放回</div>与俘获一起构成"随机扣留"，是 1/f 噪声的物理来源之一。</div></div>
+
+  <h3>van der Ziel 的三步推导</h3>
+
+  <ol class="steps">
+    <li>
+      <strong>写速率方程并线性化</strong><br>
+      设产生率 \(g(N)\)、复合率 \(r(N)\)，则
+      \[ \frac{\mathrm{d}N}{\mathrm{d}t}=g(N)-r(N) \]
+      令 \(N=N_0+\Delta N\)，在 \(N_0\) 处泰勒展开（平衡时 \(g(N_0)=r(N_0)\)）：
+      \[ \frac{\mathrm{d}\Delta N}{\mathrm{d}t}=-\left(\frac{\mathrm{d}r}{\mathrm{d}N}-\frac{\mathrm{d}g}{\mathrm{d}N}\right)_{N_0}\Delta N+\Delta g(t)-\Delta r(t) \]
+      定义时间常数
+      \[ \frac{1}{\tau}=\left(\frac{\mathrm{d}r}{\mathrm{d}N}-\frac{\mathrm{d}g}{\mathrm{d}N}\right)_{N_0} \]
+      \(\Delta g\)、\(\Delta r\) 是白随机源（产生与复合本身是泊松过程）。
+    </li>
+    <li>
+      <strong>傅里叶展开，逐项比较</strong><br>
+      把 \(\Delta N\)、\(\Delta g\)、\(\Delta r\) 展成傅里叶级数，比较 \(e^{j\omega_m t}\) 的系数：
+      \[ a_m=\frac{\tau}{1+j\omega_m\tau}\left(b_m-c_m\right) \]
+    </li>
+    <li>
+      <strong>取模平方得功率谱</strong><br>
+      \[ S_N(f)=4\,\overline{\Delta N^2}\,\frac{\tau}{1+\omega^2\tau^2} \]
+      因为 G-R 服从泊松统计，\(\Delta g\)、\(\Delta r\) 是散粒噪声源，\(S_g=S_r=2\bar{g}(N_0)=2\bar{r}(N_0)\)，最终得到上式。
+    </li>
+  </ol>
+
+  <div class="box warn">
+    <span class="t">易错：分子上是 \(\tau\) 的一次方</span>
+    <p>谱的分子是 \(4\overline{\Delta N^2}\,\tau\)，分母是 \(1+\omega^2\tau^2\)——<strong>分子只有一次方</strong>。写成 \(\tau^2\) 会让低频平台随 \(\tau^2\) 变化，量纲也变成 \(\mathrm{s^2}\) 而不是谱密度要求的 \(\mathrm{s}\)。课堂记录在这里缺项，以课件为准。</p>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-lorentz.svg" alt="洛伦兹型谱">
+    </div>
+    <figcaption>洛伦兹型谱：低频近似平坦（\(S\propto\tau\)），拐点 \(f=1/(2\pi\tau)\)，高频按 \(f^{-2}\) 下降。\(\tau\) 越大，平台越高、拐点越低——这就是"慢过程产生低频噪声"的数学表达。</figcaption>
+  </figure>
+
+  <div class="box key">
+    <span class="t">为什么它是"低频噪声"</span>
+    <p>高频时 \(S\propto f^{-2}\)，衰减比 1/f 还快，所以 G-R 噪声只在 \(f\lesssim1/(2\pi\tau)\) 的频段显著。载流子寿命 \(\tau\) 通常在 µs~ms 量级，对应拐点在几百 Hz 到几百 kHz。</p>
+  </div>
+
+  <h3>性质与场景</h3>
+
+  <ul><li>没有直流电流就没有 G-R 噪声；但它由载流子数涨落产生，不是由直流电流产生。</li><li>半导体中最典型，尤其是轻掺杂、长寿命的材料。</li></ul>
+
+  <!-- ============================================ 3.7 -->
+  <h2 id="s37"><span class="h2-num">3.7</span>1/f 噪声</h2>
+
+  <h3>一个至今没有定论的现象</h3>
+
+  <p>1/f 噪声（闪烁噪声、粉红噪声）在电学与非电学现象中普遍存在：从电阻涨落到地球自转速率、银河辐射背景，谱形都近似 \(1/f\)。</p>
+
+  <p>它的共同特征是谱随频率降低而增大，有时可以延伸到低至 \(10^{-4}\ \mathrm{Hz}\)，属于<strong>非平衡系统</strong>中的普遍过程。</p>
+
+  <h3>模型</h3>
+
+  <div class="eq">
+    <div class="body">\[ \overline{i_n^2}=\frac{KI^{\alpha}}{f^{n}}\,\Delta f \]</div>
+    <div class="no">(3.14)</div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:18%">参数</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>\(K\)</td><td>器件相关常数（与工艺、材料、几何有关）</td></tr>
+      <tr><td>\(\alpha\)</td><td>电流指数，典型范围 0.5–2</td></tr>
+      <tr><td>\(I\)</td><td>直流电流</td></tr>
+      <tr><td>\(n\)</td><td>频率指数：\(n=1\) 为粉红噪声；\(n=2\) 对应地球自转速率；\(n=2.7\) 对应银河辐射</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>注意 \(\alpha\) 的存在：<strong>1/f 噪声随电流增大而增大</strong>。这与热噪声（与电流无关）形成鲜明对比，也是"偏置电流要省着用"的另一个理由。</p>
+
+  <p>对均匀半导体，还有另一种写法，用无量纲参数 \(\alpha\) 描述单个电子对相对噪声的贡献：</p>
+
+  <div class="eq">
+    <div class="body">\[ S_R=\frac{\alpha R^2}{fN} \]</div>
+    <div class="no">(3.15)</div>
+  </div>
+
+  <p>\(R\) 是电阻，\(N\) 是自由载流子总数。\(\alpha\) 的经验平均值约 \(0.002\)；在完美晶体中可以低两到三个数量级——<strong>所以 1/f 噪声直接反映材料质量</strong>。</p>
+
+  <h3>性质</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:26%">性质</th><th>说明与工程含义</th></tr></thead>
+    <tbody>
+      <tr><td>幅度 PDF <strong>不是</strong>高斯</td><td>不能用 \(\pm3\sigma\) 估计峰值；也说明它不是"大量独立事件叠加"的产物</td></tr>
+      <tr><td>谱与频率相关</td><td>功率密度每倍频程下降 3 dB（每十倍频程 10 dB）</td></tr>
+      <tr><td>少数载流子承担电流时更显著</td><td>纳米器件、小尺寸 MOSFET、低电流工作点尤其严重</td></tr>
+      <tr><td>反映器件质量</td><td>1/f 噪声高 = 质量差、可靠性低，是工艺的"体检指标"</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>什么时候重要</h3>
+
+  <ol>
+    <li>结构越<strong>不均匀</strong>（缺陷、杂质、界面态、接触不良），1/f 噪声越高。</li>
+    <li>结构<strong>均质</strong>、材料体积大的器件中较低。</li>
+    <li>反直觉的一条：<strong>1/f 噪声的影响不限于低频</strong>——它可以被非线性<em>上变频</em>（有源混频器、分频器、压控振荡器），把低频噪声搬到载波附近，变成相位噪声。</li>
+  </ol>
+
+  <div class="box eng"><span class="t">对本课题（微针电化学）的意义</span><p>电化学界面正是"结构不均 + 有直流电流 + 界面态多"的系统，所以低频段几乎被 1/f 噪声主导。对策只有三条：减小电极面积带来的界面不均、用差分/参比通道抵消共模漂移、把工作频率搬到 1/f 拐点以上（这也是电化学阻抗谱、脉冲法比直流测量更稳的原因）。</p></div>
+
+  <!-- ============================================ 3.9 -->
+  <h2 id="s39"><span class="h2-num">3.9</span>雪崩噪声 Avalanche Noise</h2>
+
+  <p class="box-note" style="font-size:13.5px;color:#7d858c;margin:-6px 0 14px">注：课件编号从 3.7 直接跳到 3.9，缺 3.8，此处照录原编号。</p>
+
+  <h3>起源：碰撞电离导致的载流子倍增</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:10%">步骤</th><th>发生什么</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>反偏电压升高 → 耗尽层变厚、电场增强</td></tr>
+      <tr><td>②</td><td>少子（N 区的空穴、P 区的电子）在强场中获得更高能量</td></tr>
+      <tr><td>③</td><td>它们与中性原子碰撞，撞出一个或多个电子–空穴对（<strong>碰撞电离</strong>）</td></tr>
+      <tr><td>④</td><td>新产生的载流子继续被加速、继续碰撞 → 链式倍增</td></tr>
+      <tr><td>⑤</td><td>若过程失控 → 击穿（breakdown）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure>
+    <div class="fig-card">
+      <img src="assets/img/fig-avalanche.svg" alt="雪崩倍增过程">
+    </div>
+    <figcaption>倍增链：1 → 2 → 4 → …。每一代的倍增次数都随机，因此总倍增因子 \(M\) 是<strong>时间与空间的随机变量</strong>——这正是额外噪声的来源。</figcaption>
+  </figure>
+
+  <h3>为什么比反偏散粒噪声复杂</h3>
+
+  <p>三点原因：① 载流子被因子 \(M\) 倍增，而 \(M\) 本身随空间与时间随机；② 电子与空穴都能碰撞电离，形成反馈式倍增链；③ 每次倍增的随机性使噪声远比单纯 \(2qI_0\) 大。所以公式里出现的是 \(\overline{M^2}\) 而不是 \(M\)。</p>
+
+  <div class="eq">
+    <div class="body">\[ \overline{i_n^2}=2qI_0\,\overline{M^2}\,\Delta f,
+    \qquad
+    S(I)=2qI_0\,\overline{M^2} \]</div>
+    <div class="no">(3.16)</div>
+  </div>
+
+  <p>其中总电流由三部分组成：</p>
+
+  <div class="eq">
+    <div class="body">\[ I_0=I_p(0)+I_n(w)+qA\int\limits_0^w g(x)\,\mathrm{d}x \]</div>
+    <div class="no">(3.17)</div>
+  </div>
+
+  <p>\(I_p(0)\) 是 \(x=0\) 处的空穴电流，\(I_n(w)\) 是 \(x=w\) 处的电子电流，\(g(x)\) 是坐标 \(x\) 处单位体积每秒产生的电子–空穴对数，\(A\) 是结面积。</p>
+
+  <div class="box warn"><span class="t">与散粒噪声的差别只在 \(\overline{M^2}\)</span><p>普通散粒噪声是 \(2qI_0\)；雪崩噪声是 \(2qI_0\overline{M^2}\)。倍增因子越接近 1，两者越接近；\(M\) 越大，雪崩噪声越占优（这限制了 APD 的可用增益）。</p></div>
+
+  <h3>适用条件与场景</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:26%">反偏电压</th><th>主导机制</th></tr></thead>
+    <tbody>
+      <tr><td>\(>8\ \mathrm{V}\)</td><td><strong>雪崩击穿</strong>，本节公式适用</td></tr>
+      <tr><td>\(5\sim8\ \mathrm{V}\)</td><td>隧道效应与碰撞电离并存（过渡区）</td></tr>
+      <tr><td>\(V_R\lt5\ \mathrm{V}\)</td><td><strong>齐纳击穿</strong>（隧穿为主）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <ul><li>谱在简化假设下是白的，波形是"多电平快速随机跳变"。</li><li>除 APD 外，齐纳击穿、雪崩击穿附近也要考虑。</li></ul>
+
+  <!-- ============================================ 3.10 -->
+  <h2 id="s310"><span class="h2-num">3.10</span>全景：七类噪声一张表</h2>
+
+  <div class="tw">
+  <table class="wide">
+    <thead><tr><th style="width:13%">噪声</th><th style="width:22%">物理起源</th><th style="width:24%">谱密度</th><th style="width:17%">关键依赖</th><th>典型场景</th></tr></thead>
+    <tbody>
+      <tr><td data-l="噪声"><strong>热噪声</strong></td><td data-l="物理起源">自由电子热运动（耗散的逆过程）</td><td data-l="谱密度">\(4kTR\)（白，至 THz）</td><td data-l="关键依赖">\(T\)、\(R\)、\(\Delta f\)；<strong>与电流无关</strong></td><td data-l="典型场景">所有电阻、轻掺杂层</td></tr>
+      <tr><td data-l="噪声"><strong>扩散噪声</strong></td><td data-l="物理起源">碰撞导致载流子速度涨落</td><td data-l="谱密度">\(4q^2D_n n(x)\dfrac{\Delta y\Delta z}{\Delta x}\)（较平坦）</td><td data-l="关键依赖">浓度梯度、\(D_n\)</td><td data-l="典型场景">I–V 非欧姆器件；FET 饱和区</td></tr>
+      <tr><td data-l="噪声"><strong>散粒噪声</strong></td><td data-l="物理起源">电荷离散性 + 越过势垒的独立随机事件</td><td data-l="谱密度">\(2qI_0\)（白，至 \(3.5/T_{\mathrm{tr}}\)）</td><td data-l="关键依赖"><strong>直流电流</strong>；与温度无关</td><td data-l="典型场景">光电倍增管、真空器件、结型二极管</td></tr>
+      <tr><td data-l="噪声"><strong>量子噪声</strong></td><td data-l="物理起源">电磁辐射量子化（光子数涨落）</td><td data-l="谱密度">\(hf\)（放大器最佳情形）</td><td data-l="关键依赖"><strong>频率</strong></td><td data-l="典型场景">\(f>10^{15}\ \mathrm{Hz}\)、激光、量子测量</td></tr>
+      <tr><td data-l="噪声"><strong>G-R 噪声</strong></td><td data-l="物理起源">载流子数涨落（产生/复合/俘获/释放）</td><td data-l="谱密度">\(4\overline{\Delta N^2}\dfrac{\tau}{1+\omega^2\tau^2}\)（洛伦兹型）</td><td data-l="关键依赖">载流子数、寿命 \(\tau\)</td><td data-l="典型场景">轻掺杂半导体</td></tr>
+      <tr><td data-l="噪声"><strong>1/f 噪声</strong></td><td data-l="物理起源">界面态、缺陷、接触不良（无统一理论）</td><td data-l="谱密度">\(KI^{\alpha}\Delta f/f^{n}\)</td><td data-l="关键依赖">\(I\)、频率、器件质量</td><td data-l="典型场景">所有器件的低频段</td></tr>
+      <tr><td data-l="噪声"><strong>雪崩噪声</strong></td><td data-l="物理起源">反偏结碰撞电离引起的倍增</td><td data-l="谱密度">\(2qI_0\overline{M^2}\)（白）</td><td data-l="关键依赖">\(M\)（随机）</td><td data-l="典型场景">反偏 &gt; 8 V 的二极管、APD</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>课件总结的四条</h3>
+  <ol>
+    <li>每个电阻都产生热噪声；<strong>纯电抗器件没有热噪声</strong>。</li>
+    <li>噪声计算中温度<strong>一律用开尔文</strong>。</li>
+    <li>热噪声取决于温度、电阻和带宽，<strong>与电流无关</strong>。</li>
+    <li>散粒噪声与<strong>越过势垒的电流</strong>有关，取决于直流电流，<strong>与温度无关</strong>。</li>
+  </ol>
+
+  <div class="box key"><span class="t">一句话分清谁说了算</span><p>温度 → 热噪声；电流 → 散粒噪声；欧姆定律是否成立 → 扩散噪声；频率 → 量子噪声；载流子数与寿命 → G-R；结构与界面 → 1/f；倍增 → 雪崩。</p></div>
+
+  <!-- ============================================ 3.11 -->
+  <h2 id="s311"><span class="h2-num">3.11</span>讨论、自测与速算</h2>
+
+  <h3>课堂讨论（课件原题）</h3>
+  <ol>
+    <li>如何从能量流动的角度理解耗散与噪声？</li>
+    <li>写出推导奈奎斯特定理的主要步骤。</li>
+    <li>如何理解热噪声功率谱中的量子修正？</li>
+    <li>写出热噪声的另外两个名称。</li>
+    <li>在给定情形下，扩散噪声、量子噪声、散粒噪声、G-R 噪声分别在什么条件下才需要考虑？</li>
+    <li>极低温下还存在噪声吗？为什么？</li>
+  </ol>
+
+  <h3>速算：把数字代进去</h3>
+
+  <div class="calc" id="calc">
+    <h4 style="margin-top:0">噪声估算器（热噪声 + 散粒噪声）</h4>
+    <div class="calc-grid">
+      <div><label for="in-R">电阻 R（kΩ）</label><input id="in-R" type="number" value="10" step="0.1" min="0.001"></div>
+      <div><label for="in-T">温度 T（K）</label><input id="in-T" type="number" value="300" step="1" min="1"></div>
+      <div><label for="in-B">带宽 B（Hz）</label><input id="in-B" type="number" value="100000" step="1000" min="1"></div>
+      <div><label for="in-I">直流电流 I（nA）</label><input id="in-I" type="number" value="100" step="10" min="0"></div>
+    </div>
+    <div class="calc-out">
+      <div class="o"><div class="l">热噪声电压（带内 RMS）</div><div class="v" id="out-vn">—</div></div>
+      <div class="o"><div class="l">散粒噪声电流（带内 RMS）</div><div class="v" id="out-in">—</div></div>
+      <div class="o"><div class="l">热噪声电压密度（V/√Hz）</div><div class="v" id="out-sn">—</div></div>
+    </div>
+    <p style="font-size:12.5px;color:#7d858d;margin:12px 0 0">用 \(v_n=\sqrt{4kTRB}\)、\(i_n=\sqrt{2qIB}\)、密度 \(\sqrt{4kTR}\) 计算。默认值 10 kΩ / 300 K / 100 kHz 对应约 4 µV 的带内噪声——这也是为什么前端带宽和源阻抗是降噪的第一抓手。</p>
+  </div>
+
+  <h3>自测</h3>
+
+  <details>
+    <summary>1. 为什么纯电容不产生热噪声？</summary>
+    <div class="inner"><p>热噪声与耗散同源：热噪声是"热自由度 → 宏观自由度"的能量回流，只有能吸收能量（耗散）的元件才有这条通道。理想电容只存储不耗散，因此没有热噪声。实际电容的引线电阻、介质损耗会带来噪声，但那来自这些损耗机制，不来自"电容"本身。</p></div>
+  </details>
+
+  <details>
+    <summary>2. 一个正偏二极管，温度从 300 K 降到 77 K，散粒噪声变不变？热噪声呢？</summary>
+    <div class="inner"><p>散粒噪声 \(2qI\Delta f\) <strong>基本不变</strong>（只依赖直流电流，与温度无关）——但注意 \(I\) 本身会随温度变化（\(I_s\) 强烈依赖温度），所以实际电路里间接会变。热噪声 \(4kTR\Delta f\) <strong>按比例下降</strong>到约 1/4。降温对压制热噪声有效，对散粒噪声无效。</p></div>
+  </details>
+
+  <details>
+    <summary>3. 为什么说"扩散噪声比热噪声更普遍"？</summary>
+    <div class="inner"><p>热噪声对应欧姆定律成立的平衡情形；一旦器件工作在强场、速度饱和、非欧姆区（绝大多数有源器件的工作状态），载流子速度涨落就不再由简单热平衡描述，必须用扩散噪声。所以凡 I–V 不服从欧姆定律的器件，主导项都是扩散噪声。</p></div>
+  </details>
+
+  <details>
+    <summary>4. 极低温下还有噪声吗？</summary>
+    <div class="inner"><p>有。热噪声随 \(T\) 下降但不会为零（量子零点涨落仍在），而<strong>散粒噪声、G-R 噪声、1/f 噪声、雪崩噪声都不依赖温度或依赖很弱</strong>。温度趋近 0 K 时，热噪声退场，量子噪声（\(S_a=hf\)）成为新的下限——这正是量子极限测量的起点。</p></div>
+  </details>
+
+  <div class="box key">
+    <span class="t">速记卡</span>
+    <p><strong>热</strong>：\(4kTR\)，看 \(T\)、\(R\)；白；高斯；只依赖耗散。<br>
+    <strong>扩散</strong>：碰撞致速度涨落；欧姆定律失效时主导。<br>
+    <strong>散粒</strong>：\(2qI\)，看直流电流；与温度无关；正偏结 = 同阻值热噪声的 1/2。<br>
+    <strong>量子</strong>：\(hf\)，看频率；\(10^{15}\ \mathrm{Hz}\) 以上或极低温。<br>
+    <strong>G-R</strong>：洛伦兹型 \(\dfrac{4\overline{\Delta N^2}\tau}{1+\omega^2\tau^2}\)；无直流电流则无。<br>
+    <strong>1/f</strong>：\(KI^{\alpha}/f^{n}\)；非高斯；反映器件质量；可被上变频。<br>
+    <strong>雪崩</strong>：\(2qI_0\overline{M^2}\)；反偏 &gt; 8 V；白。</p>
+  </div>
+
+  <nav class="chapnav">
+    <a href="ch2.html"><span class="k">PREV</span><div class="v">第二章 · 噪声的基本概念</div></a>
+    <a class="next" href="index.html"><span class="k">BACK</span><div class="v">课程首页</div></a>
+  </nav>
+
+  <div class="foot">
+    依据课件《第三章 物理噪声源》（96 页）整理 · 3.10 总结与 3.7/3.9 节均按课件原文编号 · 图为按课件结论重绘或数值计算，量级仅示意 · 公式排版 KaTeX
+  </div>
+</div>
+</main>
+
+<script src="assets/vendor/katex/katex.min.js"></script>
+<script src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
